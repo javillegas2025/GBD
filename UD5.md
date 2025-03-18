@@ -466,7 +466,7 @@ Mostrar todos los campos de pedidos realizados en enero del 2009.
 ```sql
 SELECT *
 FROM pedidos
-WHERE YEAR(FechaPedido)='2009' AND MONTH(FechaPedido)='01';
+WHERE YEAR(FechaPedido) = 2009 AND MONTH(FechaPedido) = 1;
 ```
 
 **Ejemplo E52815 – Ejemplo con funciones**
@@ -475,7 +475,7 @@ Mostrar todos los campos de pedidos realziados en lunes.
 ```sql
 SELECT *
 FROM pedidos
-WHERE DAYOFWEEK(FechaEntrega)=2;
+WHERE DAYOFWEEK(FechaEntrega) = 2;
 ```
 
 **<u>Ejemplos de funciones numéricas con varios registros</u>**
