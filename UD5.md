@@ -503,3 +503,335 @@ Mostrar el importe del pago más pequeño y el importe de pago más grande recib
 SELECT MIN(Cantidad), MAX(Cantidad)
 FROM pagos;
 ```
+
+## Consultas SELECT de AGRUPACIÓN
+#### Consultas de agrupación
+Cuando necesitamos agrupar varios registros para realizar operaciones para sumar, contar, o calcular la media, el mínimo o el máximo, necesitaremos realizar una instrucción SELECT indicando qué registros agrupamos, es decir, qué campos mostramos de los registros comunes y sobre qué campos realizamos la operación.
+La sintaxis para realizar una consulta agrupada a una tabla es:
+
+```sql
+SELECT [DISTINCT] campos
+[FROM table_references
+[WHERE where_definition]
+[GROUP BY {col_name | expr | position} [ASC | DESC], ... ]
+[HAVING where_definition]
+[ORDER BY {col_name | expr | position} [ASC | DESC] , ...]
+[LIMIT [offset,] row_count]
+```
+Es importante conocer el orden de las cláusulas:
+
+```sql
+SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER … LIMIT
+```
+
+
+#### Ejemplos de las primeras consultas agrupadas
+Con XAMPP-MySQL importar la BD de jardinería que facilitará el profesor.
+
+**Ejemplo E43201 - Contar**
+Mostrar el número de clientes (nombrar el nuevo campo NumClientes) que tenemos en cada ciudad.
+
+```sql
+SELECT Ciudad, COUNT(*) AS NumClientes
+FROM clientes
+GROUP BY Ciudad;
+```
+
+**Ejemplo E43202 – Sumar operaciones numéricas**
+Mostrar el pedido y el importe total (ImpTotal) de todas las líneas de cada pedido. En la tabla detallepedidos tenemos el CodigoPedido, y la Cantidad y PrecioUnidad de cada artículo del pedido. Deberemos sumar Cantidad * PrecioUnidad de cada línea y luego sumarlas todas.
+
+```sql
+-- Sin Agrupar
+SELECT CodigoPedido, Cantidad * PrecioUnidad AS ImpLinea
+FROM detallepedidos;
+```
+
+```sql
+-- Agrupando por Pedido
+SELECT CodigoPedido, SUM(Cantidad * PrecioUnidad) AS ImpTotal
+FROM detallepedidos
+GROUP BY CodigoPedido;
+```
+
+Podemos añadir también filtros que deban cumplir los registros mediante condiciones en la cláusula **WHERE**.
+
+**Ejemplo E43203 – Agrupaciones con condiciones WHERE**
+Mostrar el número de artículos (NumArticulos) de cada Gama cuyas PrecioVenta mayor que 20€.
+
+```sql
+SELECT Gama, COUNT(*) AS NumArticulos
+FROM productos
+WHERE PrecioVenta > 20
+GROUP BY Gama;
+```
+
+Pero puede ser que la condición a cumplir sea sobre los campos calculados. En estos casos, la condición irá en la cláusula **HAVING**.
+
+**Ejemplo E43204 – Agrupaciones con condiciones HAVING**
+Mostrar las Gamas de artículos que tengan más de 100 diferentes. Mostrar también el número de artículos (NumArticulos).
+S
+```sql
+ELECT Gama, COUNT(*) AS NumArticulos
+FROM productos
+GROUP BY Gama
+HAVING COUNT(*) > 100;
+```
+
+Incluso podemos tener consultas que combinen **WHERE y HAVING** simultáneamente.
+
+**Ejemplo E43205 – Agrupaciones con condiciones WHERE y HAVING**
+Mostrar los clientes que hayan realizado más de 1 pago de cantidad superior a los 3000€.
+
+```sql
+SELECT CodigoCLiente, COUNT(*) AS NumPagos
+FROM pagos
+WHERE Cantidad > 3000
+GROUP BY CodigoCliente
+HAVING COUNT(*) > 1;
+```
+
+## Consultas SELECT multitabla
+#### Consultas multitabla de cruce (relación 1-N)
+Las consultas multitabla nos van a permitir procesar información de varias tablas conjuntamente. La sintaxis es la misma que hemos visto anteriormente para la sintaxis SELECT, pero en la cláusula FROM tendremos varias tablas.
+
+**Ejemplo E44101 – SELECT mutitabla**
+Mostrar los valores de la tabla **pagos** añadiendo el campo **NombreCliente**.
+
+```sql
+SELECT clientes.NombreCliente, pagos.*
+FROM pagos, clientes
+WHERE pagos.CodigoCliente = clientes.CodigoCliente;
+```
+
+¿Cuántos registros tienen la tabla pagos?
+¿Cuántos registros tienen la tabla clientes?
+¿Cuántos registros devuelve la consulta anterior?
+Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
+
+**Ejemplo E44102 – SELECT mutitabla**
+Mostrar los valores de la tabla **pedidos** añadiendo el campo **NombreCliente**.
+
+```sql
+SELECT clientes.NombreCliente, pedidos.*
+FROM pedidos, clientes
+WHERE pedidos.CodigoCliente = clientes.CodigoCliente;
+```
+
+¿Cuántos registros tienen la tabla pedidos?
+¿Cuántos registros tienen la tabla clientes?
+¿Cuántos registros devuelve la consulta anterior?
+Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
+
+**Ejemplo E44103 – SELECT mutitabla**
+Mostrar los valores de la tabla **empleados** añadiendo los campos **Ciudad** y **Pais de la Oficina**.
+
+```sql
+SELECT oficinas.Ciudad, oficinas.Pais, empleados.*
+FROM oficinas, empleados
+WHERE oficinas.CodigoOficina = empleados.CodigoOficina;
+```
+
+¿Cuántos registros tienen la tabla oficinas?
+¿Cuántos registros tienen la tabla empleados?
+¿Cuántos registros devuelve la consulta anterior?
+Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
+
+En relaciones reflexivas, debemos cruzar una tabla consigo misma. Para poder hacer esto, tenemos que asignar un alias a cada tabla para diferenciarlas.
+Veamos un ejemplo.
+
+**Ejemplo E44104 – SELECT mutitabla**
+Mostrar los valores de la tabla **empleados** añadiendo los campos **Nombre y Apellido1 de su jefe**.
+
+```sql
+SELECT jefes.Nombre, jefes.Apellido1, trabajadores.*
+FROM empleados as trabajadores, empleados as jefes
+WHERE trabajadores.CodigoJefe = jefes.CodigoEmpleado;
+```
+
+¿Cuántos registros tienen la tabla empleados?
+¿Cuántos registros devuelve la consulta anterior?
+Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
+
+También podemos relacionar más de una tabla. Veamos un ejemplo.
+
+**Ejemplo E44105 – SELECT mutitabla**
+Mostrar los siguientes valores:
+* De pedidos: CodigoPedido y FechaPedido
+* De detallepedidos: CodigoProducto y Cantidad
+* De productos: Nombre y Gama
+
+```sql
+SELECT pedidos.CodigoPedido, pedidos.FechaPedido, detallepedidos.CodigoProducto, detallepedidos.Cantidad, productos.Nombre, productos.Gama
+FROM pedidos, detallepedidos, productos
+WHERE pedidos.CodigoPedido = detallepedidos.CodigoPedido AND detallepedidos.CodigoProducto = productos.CodigoProducto;
+```
+
+¿Cuántos registros tienen la tabla empleados?
+¿Cuántos registros devuelve la consulta anterior?
+Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
+
+Se puede observar que cuando se muestran datos de la tabla padre de relaciones con cardinalidad 1-N, estos se repiten ya que pueden tener muchos hijos. En el ejemplo anterior se puede ver claramente que los datos de la tabla pedidos se repiten tantas veces como líneas de detalle tengan.
+
+#### Consultas multitabla mediante INTERSECCIÓN
+Las consultas de intersección se pueden ejecutar con la cláusula
+**tabla1 INNER JOIN tabla2 ON condicion**
+El ejemplo anterior quedaría:
+
+**Ejemplo E44201 – SELECT mutitabla con INNER JOIN**
+Mostrar los valores de la tabla **pagos** añadiendo el campo **NombreCliente**.
+
+```sql
+SELECT clientes.NombreCliente, pagos.*
+FROM (pagos INNER JOIN clientes ON pagos.CodigoCliente = clientes.CodigoCliente);
+```
+
+Veamos otro ejemplo de consulta multitabla:
+
+**Ejemplo E44202 – SELECT mutitabla con INNER JOIN**
+Mostrar los valores de la tabla **detallepedidos** pero añadiendo el campo FechaPedido y Estado de la tabla pedidos. Comprueba que el resultado contiene el mismo número de registros que detallepedidos.
+
+```sql
+SELECT pedidos.FechaPedido, pedidos.Estado, detallepedidos.*
+FROM (detallepedidos INNER JOIN pedidos ON detallepedidos.CodigoPedido = pedidos.CodigoPedido);
+```
+
+En las consultas multitabla mediante intersección, es posible que haya registros que no se muestren por no haber cruce entre entre ellos. Por ejemplo, si queremos saber el número de pedidos realizados por cada cliente, podríamos pensar en realizar la siguiente consulta:
+
+**Ejemplo E44203 – SELECT mutitabla con INNER JOIN**
+
+```sql
+SELECT clientes.CodigoCliente, clientes.NombreCliente, COUNT(pedidos.CodigoPedido)
+FROM clientes INNER JOIN pedidos ON clientes.CodigoCliente = pedidos.CodigoCliente
+GROUP BY clientes.CodigoCliente, clientes.NombreCliente;
+```
+
+En la tabla de clientes hay 36 registros, pero el resultado de la consulta sólo muestra 19. Esto ocurre porque hay clientes que no han realizado todavía ningún pedido. Para evitar esto, se introduce un cambio en la consulta que permite incluir todos los registros de una tabla de la intersección, que en nuestro caso es clientes. Lo haremos con la cláusula **LEFT** de la relación **clientes-pedidos**:
+
+**Ejemplo E44204 – SELECT mutitabla con LEFT JOIN**
+
+```sql
+SELECT clientes.CodigoCliente, clientes.NombreCliente, COUNT(pedidos.CodigoPedido)
+FROM clientes LEFT JOIN pedidos ON clientes.CodigoCliente = pedidos.CodigoCliente
+GROUP BY clientes.CodigoCliente, clientes.NombreCliente;
+```
+
+Veamos otro ejemplo:
+
+**Ejemplo E44205 – SELECT mutitabla con LEFT JOIN**
+Mostrar el CodigoProducto y nombre de la tabla productos junto el la suma de la cantidad (SumCantidad) pedida en todos los pedidos existentes. (tabla detallepedidos).
+>Nota: Tened en cuenta que de los productos que no haya habido ningún pedido debe aparecer 0.
+
+```sql
+SELECT productos.CodigoProducto, productos.Nombre, SUM(detallepedidos.Cantidad) AS SumCantidad
+FROM productos LEFT JOIN detallepedidos ON productos.CodigoProducto = detallepedidos.CodigoProducto
+GROUP BY productos.CodigoProducto, productos.Nombre;
+```
+
+La cláusula **RIGHT** permitiría que se mostrarán los de la segunda tabla en la relación, en vez de **LEFT** que muestra la primera.
+
+#### Consultas multitabla mediante UNION
+En ocasiones necesitamos unir el resultado de dos consultas. Para ello el resultado debe mostrar los mismo campos y con los mismos tipos de datos.
+Por ejemplo, tenemos por un lado los clientes que han realizado pagos posteriores al 31/01/2009:
+
+```sql
+SELECT DISTINCT CodigoCliente 
+FROM pagos
+WHERE FechaPago > '2009-01-31';
+```
+
+Por otra parte, tenemos los clientes que han realizado pedidos posteriores al 31/03/2009:
+
+```sql
+SELECT DISTINCT CodigoCliente 
+FROM pedidos
+WHERE FechaPedido > '2009-03-31';
+```
+
+Los clientes que están en las dos consultas son 16, 23 y 27, pero hay clientes que han realizado pagos y no pedidos, y viceversa.
+
+**Ejemplo E44301 – SELECT mutitabla con UNION**
+Deseamos saber el CodigoCliente de los clientes que han realizado pagos posteriores al 31/03/2009 o pedidos posteriores al 31/03/2009.
+
+```sql
+SELECT DISTINCT CodigoCliente
+FROM pagos
+WHERE FechaPago > '2009-01-31'
+UNION
+SELECT DISTINCT CodigoCliente
+FROM pedidos
+WHERE FechaPedido > '2009-03-31';
+```
+
+#### Consultas multitabla mediante SUBCONSULTAS
+Una **subconsulta** es una instrucción SELECT que se usa dentro de otra instrucción SELECT.
+
+Una **subconsulta** será **correlacionada** si aparecen datos de la consulta, es decir, si no se puede ejecutar de forma independiente.
+
+Existen varias situaciones donde usaremos subconsultas. A continuación veremos algunos ejemplos.
+
+**<u>Subconsultas en WHERE con operador de comparación</u>**
+Para el siguiente ejemplo, primero buscamos la cantidad media que pagan los clientes.
+
+```sql
+SELECT AVG(Cantidad) AS CantidadMedia 
+FROM pagos;
+```
+
+**Ejemplo E44401 – Subconsulta en WHERE con operador de comparación**
+Mostrar los registros de pagos que tengan cantidades superiores a la media.
+
+```sql
+SELECT *
+FROM pagos
+WHERE Cantidad > (SELECT AVG(Cantidad) AS CantidadMedia FROM pagos);
+```
+
+**<u>Subconsultas en WHERE con operador IN</u>**
+El operador IN devuelve verdadero si el valor del campo de un registro está en el conjunto de valores devuelto por la subsonsulta.
+
+**Ejemplo E44402 – Subconsulta en WHERE con operador de IN**
+Mostrar la Gama de los productos que de los que se haya pedido más de 30 unidades.
+
+```sql
+SELECT DISTINCT Gama
+FROM productos
+WHERE CodigoProducto IN (SELECT CodigoProducto FROM detallepedidos WHERE Cantidad > 30);
+```
+
+También puede usarse de forma negativa con **NOT IN**
+
+**<u>Subconsultas en WHERE con operador EXISTS</u>**
+El operador EXISTS es verdadero si la subconsulta devuelve al menos un registro.
+
+**Ejemplo E44403 – Subconsulta en WHERE con operador de EXISTS**
+Utiliza una subconsulta correlacionada para obtener los datos de los empleados que tenga algún cliente asignado.
+
+```sql
+SELECT *
+FROM empleados
+WHERE EXISTS (SELECT * FROM Clientes WHERE CodigoEmpleadoRepVentas=empleados.CodigoEmpleado);
+```
+
+También puede usarse de forma negativa con **NOT EXISTS**
+
+**<u>Subconsultas en FROM</u>**
+Podemos utilizar subconsultas como tablas y colocarlas en la cláusula FROM.
+
+**Ejemplo E44404 – Subconsulta en FROM**
+Aunque la siguiente consulta se puede obtener mediante una consulta de intersección típica, usaremos una subconsulta para probar su funcionamiento en FROM de forma sencilla. Las subconsultas de FROM deben tener un alias que asignaremos con AS.
+Muestra los datos de los empleados que trabajen en oficinas de Madrid.
+
+```sql
+SELECT empleados.*
+FROM empleados, (SELECT * FROM oficinas WHERE Ciudad='Madrid') AS OficinasMadrid
+WHERE empleados.CodigoOficina = OficinasMadrid.CodigoOficina;
+```
+
+La consulta anterior sin usar subconsulta sería:
+
+```sql
+SELECT empleados.*
+FROM empleados, oficinas
+WHERE empleados.CodigoOficina = oficinas.CodigoOficina AND oficinas.Ciudad = 'Madrid';
+```
+
