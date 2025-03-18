@@ -12,8 +12,7 @@ datos que permite a los usuarios de la misma llevar a cabo las tareas de consult
 manipulación de los datos (inserción, borrado, actualización y consultas) basado en
 el modelo de datos adecuado.
 
-> MySQL Oficial – Sintaxis de las instrucciones DML<br>
-> http://dev.mysql.com/doc/refman/8.0/en/sql-syntax-data-manipulation.html
+!!!NOTE [MySQL Oficial – Sintaxis de las instrucciones DML](http://dev.mysql.com/doc/refman/8.0/en/sql-syntax-data-manipulation.html)
 
 Las **consultas** recuperan información de las tablas de una base de datos mediante la
 selección de campos, la realización de filtros y la transformación de los datos
@@ -29,9 +28,6 @@ descendente.
 * **Realizar cálculos.** Se pueden emplear las consultas para hacer cálculos con los
 datos de las tablas.
 
-```sql
-SELECT column1, column2 FROM table_name;
-```
 Además, en consultas más complejas se puede:
 * **Crear tablas.** Se puede generar otra tabla a partir de los datos combinados de
 una consulta. La tabla se genera a partir de la hoja de respuestas dinámica.
@@ -39,3 +35,40 @@ una consulta. La tabla se genera a partir de la hoja de respuestas dinámica.
 consultas (subconsulta). Se pueden crear consultas adicionales basadas en un
 conjunto de registros seleccionados por una consulta anterior.
 
+
+## Consultas SELECT básicas
+#### Consultas con operaciones numéricas y literales
+Comenzaremos por utilizar la instrucción SELECT como si fuera una calculadora. 
+Para ello utilizaremos los siguientes operadores aritméticos:
+|Operador |Función |
+|---------|--------|
+|\+ |Suma|
+|\- |Resta|
+|\* |Producto o Multiplicación|
+|/  |División|
+|DIV|División entera|
+|MOD o %| Resto división|
+
+**Ejemplos**
+Los siguientes ejemplos evaluan las expresiones que hay después de la cláusula SELECT y muestran el resultado por pantalla. El último ejemplo muestra tres columnas.
+```sql
+SELECT 20*150;
+```
+
+```sql
+SELECT ((5*4.5)/3)+7;
+```
+```sql
+SELECT 100/3, 100 DIV 3, 100 MOD 3;
+```
+!!!NOTE  Referencias: <br>[MySQL – Operadores aritméticos](http://mysql.conclase.net/curso/?cap=010b#OPE_ARITMETICOS)<br>[MySQL Oficial - Operadores](https://dev.mysql.com/doc/refman/8.0/en/non-typed-operators.html)
+
+Para el uso de literales o cadenas de caracteres basta con colocar unas comillas:
+
+```sql
+SELECT 'Felicidades';
+```
+
+```sql
+SELECT 'Precio', '25*1.21=', 25*1.21;
+```
