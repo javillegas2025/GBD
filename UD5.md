@@ -1,3 +1,37 @@
+---
+title:
+    Apuntes
+date: 16/06/2021
+export_on_save:
+    puppeteer: true
+    html: true
+puppeteer:
+    scale: 1
+    landscape: false
+    format: "A4"
+    printBackground: true
+    margin:
+        top: "1cm"
+        right: "1cm"
+        bottom: "2.5cm"
+        left: "1cm"
+    displayHeaderFooter: true
+    headerTemplate: "&nbsp;"
+    footerTemplate: "
+        <span style=\"font-size: 9pt; display: flex;\">
+            <span class=\"pageNumber\" style=\"margin-left: 1cm;\"></span>
+            /
+            <span class=\"totalPages\"></span>
+            <span class=\"title\" style=\"margin-left: 1cm;\"></span>
+            <span style=\"margin-left: 1cm;\">Xusa García y Juanjo Guarinos</span>
+        </span>
+                    "
+toc:
+    depth_from: 1
+    depth_to: 5
+    ordered: false
+---
+
 # Lenguaje SQL
 ## Contenidos
 1. Lenguaje de Manipulación de Datos
