@@ -75,14 +75,14 @@ Para ello utilizaremos los siguientes operadores aritméticos:
 **Ejemplos**
 Los siguientes ejemplos evaluan las expresiones que hay después de la cláusula SELECT y muestran el resultado por pantalla. El último ejemplo muestra tres columnas.
 ```sql
-SELECT 20*150;
+SELECT 20 * 150;
 ```
 
 ```sql
-SELECT ((5*4.5)/3)+7;
+SELECT ((5 * 4.5) / 3) + 7;
 ```
 ```sql
-SELECT 100/3, 100 DIV 3, 100 MOD 3;
+SELECT 100 / 3, 100 DIV 3, 100 MOD 3;
 ```
 !!!NOTE  <u>Referencias</u> <br>[MySQL – Operadores aritméticos](http://mysql.conclase.net/curso/?cap=010b#OPE_ARITMETICOS)<br>[MySQL Oficial - Operadores](https://dev.mysql.com/doc/refman/8.0/en/non-typed-operators.html)
 
@@ -93,7 +93,7 @@ SELECT 'Felicidades';
 ```
 
 ```sql
-SELECT 'Precio', '25*1.21=', 25*1.21;
+SELECT 'Precio', '25 * 1.21 =', 25 * 1.21;
 ```
 
 #### Consultas con funciones predefinidas de información
@@ -320,7 +320,7 @@ Mostrar codigo y nombre de los Productos que sean de la Gama 'Frutales' y Cantid
 ```sql
 SELECT CodigoProducto, Nombre, Gama,
 FROM productos
-WHERE Gama='Frutales' AND CantidadEnStock > 50);
+WHERE Gama = 'Frutales' AND CantidadEnStock > 50);
 ```
 
 **Ejemplo E52702 – Ejemplo con varias condiciones**
@@ -331,7 +331,7 @@ Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcel
 ```sql
 SELECT CodigoCliente, NombreCliente, Ciudad
 FROM clientes
-WHERE Ciudad='Madrid' OR Ciudad='Barcelona';
+WHERE Ciudad = 'Madrid' OR Ciudad = 'Barcelona';
 ```
 
 !!!NOTE  <u>Referencias</u> <br>[MySQL – Consultas y operadores de comparación](http://mysql.conclase.net/curso/?cap=010#OPE_LOGICOS)<br>[MySQL Oficial – Consultas y operadores de comparación](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html)
@@ -408,7 +408,7 @@ WHERE ROUND(PrecioVenta * 1.21, 2) > 100;
 Seleccionar de los empleados el nombre completo (NombreCompleto) concatenando el nombre y los dos apellidos.
 
 ```sql
-SELECT CONCAT(Nombre,' ',Apellido1,' ',Apellido2) AS NombreCompleto
+SELECT CONCAT(Nombre, ' ', Apellido1, ' ', Apellido2) AS NombreCompleto
 FROM empleados;
 ```
 
@@ -416,7 +416,7 @@ FROM empleados;
 Obtener la inicial del nombre de todos los empleados.
 
 ```sql
-SELECT LEFT(Nombre,1) AS inicial 
+SELECT LEFT(Nombre, 1) AS inicial 
 FROM empleados;
 ```
 
@@ -432,7 +432,7 @@ FROM empleados;
 Obtener el código de las oficinas pero sustituyendo el guión por la barra, es decir, el '-' por '/'.
 
 ```sql
-SELECT REPLACE(CodigoOficina,'-','/')
+SELECT REPLACE(CodigoOficina, '-', '/')
 FROM oficinas;
 ```
 
@@ -456,7 +456,7 @@ FROM productos;
 Obtener un gráfico de barras para el stock de cada producto. Utilizaremos el carácter '|' por cada unidad de stock.
 
 ```sql
-SELECT Codigoproducto,REPEAT('|',CantidadEnStock)
+SELECT Codigoproducto,REPEAT('|', CantidadEnStock)
 FROM productos;
 ```
 
@@ -464,7 +464,7 @@ FROM productos;
 Obtener el email de cada empleado teniendo en cuenta que el usuario es su nombre en minusculas y el dominio '@iesdoctorbalmis.com'
 
 ```sql
-SELECT CONCAT(LCASE(nombre),'@iesdoctorbalmis.com') AS email
+SELECT CONCAT(LCASE(nombre), '@iesdoctorbalmis.com') AS email
 FROM empleados;
 ```
 
@@ -472,7 +472,7 @@ FROM empleados;
 Obtener la abreviatura del nombre y primer apellidos de los empleados concatenando la inicial del nombre y la inicial del apellido1
 
 ```sql
-SELECT CONCAT(LEFT(Nombre,1),LEFT(Apellido1,1)) AS inicial
+SELECT CONCAT(LEFT(Nombre, 1), LEFT(Apellido1, 1)) AS inicial
 FROM empleados;
 ```
 
@@ -482,7 +482,7 @@ FROM empleados;
 Obtener un número aleatorio entre 0 y 9.
 
 ```sql
-SELECT FLOOR(RAND()*10);
+SELECT FLOOR(RAND() * 10);
 ```
 
 **<u>Ejemplos de funciones de fechas</u>**
@@ -843,7 +843,7 @@ Utiliza una subconsulta correlacionada para obtener los datos de los empleados q
 ```sql
 SELECT *
 FROM empleados
-WHERE EXISTS (SELECT * FROM Clientes WHERE CodigoEmpleadoRepVentas=empleados.CodigoEmpleado);
+WHERE EXISTS (SELECT * FROM Clientes WHERE CodigoEmpleadoRepVentas = empleados.CodigoEmpleado);
 ```
 
 También puede usarse de forma negativa con **NOT EXISTS**
@@ -857,7 +857,7 @@ Muestra los datos de los empleados que trabajen en oficinas de Madrid.
 
 ```sql
 SELECT empleados.*
-FROM empleados, (SELECT * FROM oficinas WHERE Ciudad='Madrid') AS OficinasMadrid
+FROM empleados, (SELECT * FROM oficinas WHERE Ciudad = 'Madrid') AS OficinasMadrid
 WHERE empleados.CodigoOficina = OficinasMadrid.CodigoOficina;
 ```
 

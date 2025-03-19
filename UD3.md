@@ -383,8 +383,8 @@ Si hay campos en la tabla que no se especifican en la instrucción INSERT, se le
 
 ```sql
 INSERT INTO articulos (codigo, descripcion, precio) VALUES
-    ('0001','TECLADO INALÁMBRICO', 10.45),
-    ('0002','RATÓN INALÁMBRICO', 7.95);
+    ('0001', 'TECLADO INALÁMBRICO', 10.45),
+    ('0002', 'RATÓN INALÁMBRICO', 7.95);
 ```
 
 ## UPDATE
@@ -408,8 +408,8 @@ En la cláusula **SET** utilizaremos valor para indicar una cadena, número, fec
 
 ```sql
 UPDATE personas
-SET nombre='Juan López'
-WHERE dni='21555666';
+SET nombre = 'Juan López'
+WHERE dni = '21555666';
 ```
 
 Pero también puede ser una expresión.
@@ -418,8 +418,8 @@ Pero también puede ser una expresión.
 
 ```sql
 UPDATE personas
-SET edad=edad+1
-WHERE dni='21555666';
+SET edad = edad + 1
+WHERE dni = '21555666';
 ```
 
 **Ejemplo – Aumentar el precio de todos los artículos un 5%**
@@ -696,22 +696,22 @@ Si especifica una acción SET NULL, asegúrese de que no ha declarado las column
     * Al **borrar**, si en la tabla padre (provincias) se elimina un registro, se eliminarán también todos los registros de la tabla referenciada (localidades) que tenga este valor en su calve ajena.
     * Al **actualizar**, si en la tabla padre (provincias) se actualiza la clave de un registro, se actualizarán también todos los registros de la tabla referenciada (localidades) que tenga este valor en su clave ajena con el nuevo valor.
 
-Para indicar estas acciones añadiremos a la instrucción de FOREIGN KEY ALGUNA de las siguientes cláusulas:
-* ON DELETE RESTRICT
-* ON DELETE SET NULL
-* ON DELETE CASCADE
-* ON UPDATE RESTRICT
-* ON UPDATE SET NULL
-* ON UPDATE CASCADE
+    Para indicar estas acciones añadiremos a la instrucción de FOREIGN KEY ALGUNA de las siguientes cláusulas:
+    * ON DELETE RESTRICT
+    * ON DELETE SET NULL
+    * ON DELETE CASCADE
+    * ON UPDATE RESTRICT
+    * ON UPDATE SET NULL
+    * ON UPDATE CASCADE
 
-Si por ejemplo deseamos que al eliminar una provincia se eliminen todas las localidades dependientes, y que no permita cambiar el identificador de provincias si tiene localidades, la instrucción de creación de esa clave ajena sería:
+    Si por ejemplo deseamos que al eliminar una provincia se eliminen todas las localidades dependientes, y que no permita cambiar el identificador de provincias si tiene localidades, la instrucción de creación de esa clave ajena sería:
 
-```sql
-ALTER TABLE localidades ADD CONSTRAINT provincias_cod_prov
-FOREIGN KEY (cod_provincia) REFERENCES provincias (cod_prov)
-ON DELETE CASCADE
-ON UPDATE RESTRICT;
-```
+    ```sql
+    ALTER TABLE localidades ADD CONSTRAINT provincias_cod_prov
+    FOREIGN KEY (cod_provincia) REFERENCES provincias (cod_prov)
+    ON DELETE CASCADE
+    ON UPDATE RESTRICT;
+    ```
 
 * **SET DEFAULT**: <u>No disponible para MySQL con el motor de base de datos InnoDB</u>. Si en la tabla padre (provincias) se elimina un registro o se actualiza su clave, si hay algún valor de clave externa relacionado en la tabla referenciada (localidades) se actualizará el valor por defecto de la clave ajena.
 
@@ -925,7 +925,7 @@ Por ejemplo, si queremos una vista de la tabla personas que sean de la provincia
 
 ```sql
 CREATE VIEW personas1 AS
-SELECT * FROM personas WHERE cod_provincia='1';
+SELECT * FROM personas WHERE cod_provincia = '1';
 ```
 
 #### Vistas para aplicar restricciones

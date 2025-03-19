@@ -1,0 +1,852 @@
+<!DOCTYPE html><html><head>
+      <title>Apuntes</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.21/dist/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:local("Material Icons"),local("MaterialIcons-Regular"),url("data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAfIAAsAAAAADDAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7kosY21hcAAAAYAAAADTAAACjtP6ytBnbHlmAAACVAAAAxgAAAQ4zRtvlGhlYWQAAAVsAAAALwAAADYRwZsnaGhlYQAABZwAAAAcAAAAJAeKAzxobXR4AAAFuAAAABIAAAA8OGQAAGxvY2EAAAXMAAAAIAAAACAG5AfwbWF4cAAABewAAAAfAAAAIAEfAERuYW1lAAAGDAAAAVcAAAKFkAhoC3Bvc3QAAAdkAAAAYgAAAK2vz7wkeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2BkPsQ4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVLy4xKzzX4chhrmK4QpQmBEkBwAZygyweJzFkr0NwjAQhZ+TEP6CRUfHBEwRUWaQTICyQbpMwRCskA5RUIONxG0RnnNpKAIV4qzPku/8c353ACYAYrIjCWCuMAh2ptf0/hiL3p/gyPUWa3osqlt0L1zu9r71z8dGrJRykFoauXQd932Lj5vhG+MjxGeYI8MKETObMpslf5EyP8tg+vHun5r539PvlvXzaVhRFVQDTPEWKVQR90KhnnC5Ek67vUKN4VuFasM/ldARj43CCkCsEjpJSoVVgRyU0GVSK6wUpFFCx8lFgX0BiXpRPQB4nE2TTWjcRhTH3xttpDhxN7uxPlp3u/FK7moRPixafRijNosxSw/LUsIwNcaEHPZggo/FmEKMCKWU4kNOOftQSlhE8alnH0Ix9BqWnHooPRrTQ0+mnu2bXTu2pPdGM9LM/6c3fwECTM4gBBMYQNqxzLrZAjqYSlqu2TAHZQA0/DQJH6FtzqGDnvbt4Ggwvzw/nL8EfH8kW0fsuRqhgWXZnY7M1picaUL7Du5BHeDzMIl83dAt016wH1qmvtSMo5R6YRJHTR//FXsff/nj/tc/5K9P5d+nP22+fFK5u7v3K39SW3y+OtDKO3L85vD09PD9z5X17a2N1g4tqk01RlqX7gyoEmnsWQtVr4rtZMmukEaFBZxzefkCn11cyKMLZgshRwgTYNoLNXCBz2ja7HvZG7hDpPSNfoo5vs0knK/9hb+rNpu+8kHPgk/Ao4kK3tWtTpSEtvkA9c+wE6UaUdwieNkaHg55tBEtRiEPw1s0+FtrtTcc9two2lhMknV7PZF/cs6+uUFTmpTGbEx7sQCPSLOttHS3GRltqp7SNzVSKzl6aWnZT/CX5k6/v9N3Hh8fHBwffJVjhrC6OgH5dkIt/tPsq+d/PD5Qz7G7efzq1THFjdZVPe/N6ulQ3JnDWSE5junsFsVIiFwL/htf1S5gJ3BfOcUxfHKLnzqpFpyfZ9cX+/5WB6a+Y0pHpzkNrYNVDwMsikK+y7WuLCRg/oFHkA8VT3rDg5ZnU6ktzzINymV0m74Xd5pfIGXyFeVEQSShkzqG7TBBa2OxVRKitLXv7h3uuftXnXq7lz2tZ/WnWa9dx9dCjDhHzmuVQATlmljr9dZErUydSo2Hbi/b1vXtrOeGCk2/8s3ZlO8+ueJT8BVlw5pGw2oYccdSiHHqx0RlabHqdNR9jAETl6PreJcPBnnfpTLnOQ8C3OV8AmQGzouV1iZdeb5SSIoVc8W8/kcDtksUH5FrU6/aqBqNWcMEzxG4DAQ14qRQhi9mWU0rzepKezbjfgCwQKxVYq5ajRgpRqy45CqwkJydcEkbTkvRz8P5/2ZpDTN4nGNgZGBgAOKb6v+/xvPbfGXgZmEAgeuB2kkI+v8bFgbmKiCXg4EJJAoAPyAKhQB4nGNgZGBg1vmvwxDDwgACQJKRARXwAwAzZQHQeJxjYQCCFAYGFgbSMQAcWACdAAAAAAAAAAwALgBgAIQAmADSAQgBIgE8AVABoAHeAfwCHHicY2BkYGDgZ7BgYGMAASYg5gJCBob/YD4DAA/hAWQAeJxlkbtuwkAURMc88gApQomUJoq0TdIQzEOpUDokKCNR0BuzBiO/tF6QSJcPyHflE9Klyyekz2CuG8cr7547M3d9JQO4xjccnJ57vid2cMHqxDWc40G4Tv1JuEF+Fm6ijRfhM+oz4Ra6eBVu4wZvvMFpXLIa40PYQQefwjVc4Uu4Tv1HuEH+FW7i1mkKn6Hj3Am3sHC6wm08Ou8tpSZGe1av1PKggjSxPd8zJtSGTuinyVGa6/Uu8kxZludCmzxMEzV0B6U004k25W35fj2yNlCBSWM1paujKFWZSbfat+7G2mzc7weiu34aczzFNYGBhgfLfcV6iQP3ACkSaj349AxXSN9IT0j16JepOb01doiKbNWt1ovippz6sVYYwsXgX2rGVFIkq7Pl2PNrI6qW6eOshj0xaSq9mpNEZIWs8LZUfOouNkVXxp/d5woqebeYIf4D2J1ywQB4nG3LOw6AIBAE0B384B+PAkgEa+QwNnYmHt+EpXSal5lkSBBnoP8oCFSo0aCFRIceA0ZMmLFAYSW88rmvtMUjG3RiQ9HvpfusM6zWNmtc5H/iPewha50tOt5PS/QBx2IeSwAA") format("woff")}.admonition{box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.2);position:relative;margin:1.5625em 0;padding:0 1.2rem;border-left:.4rem solid rgba(68,138,255,.8);border-radius:.2rem;background-color:rgba(255,255,255,.05);overflow:auto}.admonition>p{margin-top:.8rem}.admonition>.admonition-title{margin:0 -1.2rem;padding:.8rem 1.2rem .8rem 3.6rem;border-bottom:1px solid rgba(68,138,255,.2);background-color:rgba(68,138,255,.1);font-weight:700}.admonition>.admonition-title:before{position:absolute;left:1.2rem;font-size:1.5rem;color:rgba(68,138,255,.8);content:"\E3C9"}.admonition>.admonition-title:before{font-family:Material Icons;font-style:normal;font-variant:normal;font-weight:400;line-height:2rem;text-transform:none;white-space:nowrap;speak:none;word-wrap:normal;direction:ltr}.admonition.abstract,.admonition.summary,.admonition.tldr{border-left-color:rgba(0,176,255,.8)}.admonition.abstract>.admonition-title,.admonition.summary>.admonition-title,.admonition.tldr>.admonition-title{background-color:rgba(0,176,255,.1);border-bottom-color:rgba(0,176,255,.2)}.admonition.abstract>.admonition-title:before,.admonition.summary>.admonition-title:before,.admonition.tldr>.admonition-title:before{color:#00b0ff;content:"\E8D2"}.admonition.hint,.admonition.tip{border-left-color:rgba(0,191,165,.8)}.admonition.hint>.admonition-title,.admonition.tip>.admonition-title{background-color:rgba(0,191,165,.1);border-bottom-color:rgba(0,191,165,.2)}.admonition.hint>.admonition-title:before,.admonition.tip>.admonition-title:before{color:#00bfa5;content:"\E80E"}.admonition.info,.admonition.todo{border-left-color:rgba(0,184,212,.8)}.admonition.info>.admonition-title,.admonition.todo>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.info>.admonition-title:before,.admonition.todo>.admonition-title:before{color:#00b8d4;content:"\E88E"}.admonition.check,.admonition.done,.admonition.success{border-left-color:rgba(0,200,83,.8)}.admonition.check>.admonition-title,.admonition.done>.admonition-title,.admonition.success>.admonition-title{background-color:rgba(0,200,83,.1);border-bottom-color:rgba(0,200,83,.2)}.admonition.check>.admonition-title:before,.admonition.done>.admonition-title:before,.admonition.success>.admonition-title:before{color:#00c853;content:"\E876"}.admonition.faq,.admonition.help,.admonition.question{border-left-color:rgba(100,221,23,.8)}.admonition.faq>.admonition-title,.admonition.help>.admonition-title,.admonition.question>.admonition-title{background-color:rgba(100,221,23,.1);border-bottom-color:rgba(100,221,23,.2)}.admonition.faq>.admonition-title:before,.admonition.help>.admonition-title:before,.admonition.question>.admonition-title:before{color:#64dd17;content:"\E887"}.admonition.attention,.admonition.caution,.admonition.warning{border-left-color:rgba(255,145,0,.8)}.admonition.attention>.admonition-title,.admonition.caution>.admonition-title,.admonition.warning>.admonition-title{background-color:rgba(255,145,0,.1);border-bottom-color:rgba(255,145,0,.2)}.admonition.attention>.admonition-title:before{color:#ff9100;content:"\E417"}.admonition.caution>.admonition-title:before,.admonition.warning>.admonition-title:before{color:#ff9100;content:"\E002"}.admonition.fail,.admonition.failure,.admonition.missing{border-left-color:rgba(255,82,82,.8)}.admonition.fail>.admonition-title,.admonition.failure>.admonition-title,.admonition.missing>.admonition-title{background-color:rgba(255,82,82,.1);border-bottom-color:rgba(255,82,82,.2)}.admonition.fail>.admonition-title:before,.admonition.failure>.admonition-title:before,.admonition.missing>.admonition-title:before{color:#ff5252;content:"\E14C"}.admonition.bug,.admonition.danger,.admonition.error{border-left-color:rgba(255,23,68,.8)}.admonition.bug>.admonition-title,.admonition.danger>.admonition-title,.admonition.error>.admonition-title{background-color:rgba(255,23,68,.1);border-bottom-color:rgba(255,23,68,.2)}.admonition.danger>.admonition-title:before{color:#ff1744;content:"\E3E7"}.admonition.error>.admonition-title:before{color:#ff1744;content:"\E14C"}.admonition.bug>.admonition-title:before{color:#ff1744;content:"\E868"}.admonition.example,.admonition.snippet{border-left-color:rgba(0,184,212,.8)}.admonition.example>.admonition-title,.admonition.snippet>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.example>.admonition-title:before,.admonition.snippet>.admonition-title:before{color:#00b8d4;content:"\E242"}.admonition.cite,.admonition.quote{border-left-color:rgba(158,158,158,.8)}.admonition.cite>.admonition-title,.admonition.quote>.admonition-title{background-color:rgba(158,158,158,.1);border-bottom-color:rgba(158,158,158,.2)}.admonition.cite>.admonition-title:before,.admonition.quote>.admonition-title:before{color:#9e9e9e;content:"\E244"}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.markdown-preview.markdown-preview .caso_estudio {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .ejercicio {
+  background-color: #f5faf5;
+  border: 2px solid #969b96;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.markdown-preview.markdown-preview .fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.markdown-preview.markdown-preview .cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.markdown-preview.markdown-preview .abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.markdown-preview.markdown-preview .cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.markdown-preview.markdown-preview .autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+.markdown-preview.markdown-preview .flotante {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: center;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: row;
+  }
+}
+.markdown-preview.markdown-preview .flotante_izq {
+  margin-right: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: auto;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: auto;
+  }
+}
+.markdown-preview.markdown-preview .galeria_imagenes {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: row;
+  }
+}
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<h1 id="lenguaje-sql">Lenguaje SQL </h1>
+<h2 id="contenidos">Contenidos </h2>
+<ol>
+<li>Del diseño lógico al diseño físico</li>
+<li>Crear Base de Datos</li>
+<li>Tablas y campos</li>
+<li>Añadir y editar registros</li>
+<li>Índices</li>
+<li>Restricciones</li>
+<li>Tablas a partir de consultas</li>
+<li>Vistas</li>
+</ol>
+<h2 id="del-diseño-lógico-al-diseño-físico">Del diseño lógico al diseño físico </h2>
+<p>El <strong>diseño físico</strong> es el proceso de producir la descripción de la implementación de la base de datos en memoria secundaria: estructuras de almacenamiento y métodos de acceso que garanticen un acceso eficiente a los datos.</p>
+<p>Para llevar a cabo esta etapa, se debe haber decidido cuál es el SGBD que se va a utilizar, ya que el esquema físico se adapta a él.</p>
+<p>En nuestro caso utilizaremos MySQL, y como su sintaxis se adapta en gran medida a SQL ANSI, los comandos que usaremos serán muy similares en el resto de SGBD relacionales.</p>
+<p>Cuando llegamos a este punto disponemos de:</p>
+<ul>
+<li>descripción del sistema de información</li>
+<li>el esquema conceptual del modelo entidad-relación</li>
+<li>el esquema del diccionario de datos</li>
+<li>el esquema relacional del modelo relacional</li>
+</ul>
+<p>Mientras que en el diseño lógico se especifica qué se guarda, en el diseño físico se especifica cómo se guarda. Para ello, el diseñador debe conocer muy bien toda la funcionalidad del SGBD concreto que se vaya a utilizar y también el sistema informático sobre el que éste va a trabajar.</p>
+<p>El diseño físico no es una etapa aislada, ya que algunas decisiones que se tomen durante su desarrollo, por ejemplo para mejorar las prestaciones, pueden provocar una reestructuración del esquema lógico.</p>
+<p>El objetivo de esta etapa es producir una descripción de la implementación de la base de datos en memoria secundaria. Esta descripción incluye las estructuras de almacenamiento y los métodos de acceso que se utilizarán para conseguir un acceso eficiente a los datos.</p>
+<p>El objetivo por tanto es:</p>
+<ul>
+<li>Conocer las <strong>utilidades o herramientas</strong> para la definición de información en un SGBD.</li>
+<li>Conocer las <strong>órdenes SQL</strong> para la definición de datos.</li>
+<li>Elegir <strong>el tipo de dato</strong> más adecuado para cada tipo de información.</li>
+<li>Definir las <strong>estructuras físicas</strong> de almacenamiento e implantar todas las <strong>restricciones</strong> reflejadas en el diseño lógico (clave primaria, clave alternativa, clave ajena…).</li>
+</ul>
+<p>En esta unidad didáctica estudiaremos las instrucciones o comandos SQL del lenguaje de definición de datos (LDD) que permiten la creación de nuestra base de datos y que incluirá las tablas con sus campos e índices.</p>
+<p>La primera fase del diseño lógico consiste en traducir el esquema lógico global en un esquema que se pueda implementar en el SGBD escogido. Para ello, es necesario conocer toda la funcionalidad que éste ofrece. Por ejemplo, el diseñador deberá saber:</p>
+<ul>
+<li>Si el sistema soporta la definición de claves primarias, claves ajenas y claves alternativas.</li>
+<li>Si el sistema soporta la definición de datos requeridos (es decir, si se pueden definir atributos como no nulos).</li>
+<li>Si el sistema soporta la definición de dominios.</li>
+<li>Si el sistema soporta la definición de reglas de negocio (es decir, restricciones de cardinalidad o de cálculo)</li>
+<li>Cómo se crean las tablas base</li>
+</ul>
+<p>SINTAXIS<br>
+Utilizaremos:</p>
+<ul>
+<li>palabras en mayúsculas para las reservadas de MySQL</li>
+<li>palabras en minúsculas para los nombres de nuestros elementos (tablas, campos, índices, …)</li>
+<li>corchetes para indicar un contenido opcional</li>
+</ul>
+<p>Para poder conectar a la BD de MySQL vamos a utilizar dos herramientas:</p>
+<ul>
+<li><strong>Por línea de comandos: <code>mysql.exe</code></strong></li>
+<li><strong>Mediante la aplicación web (AW) <code>phpMyAdmin</code></strong></li>
+</ul>
+<p>Las instrucciones que vamos a ejecutar funcionan en las dos herramientas, aunque <strong>phpMyAdmin</strong> proporciona mucha más información de forma gráfica.</p>
+<p>Una vez instalado <a href="https://www.apachefriends.org/es/download.html">xampp</a> abriremos el programa <strong><code>c:\xampp\xampp-control.exe</code></strong>.</p>
+<p>Desde esta herramienta pondremos en marcha el servidor MySQL. Además, si vamos a usar <strong>phpMyAdmin</strong> tendremos que arrancar también el servicio web de <strong>Apache</strong>.</p>
+<p>Abriremos las dos herramientas a la vez y comprobaremos que al ejecutar las instrucciones en una de ellas, su resultado se puede ver en las dos.</p>
+<p><img src=".img/3.1.png" alt="Panel de control de XAMPP"></p>
+<p>Para poder conectar con <code>mysql.exe</code> abriremos una ventana de comandos (CMD) y nos desplazaremos hasta la carpeta donde tenemos la herramienta. Para conectar debemos indicar que conectamos con el usuario root que no tiene contraseña:</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>C:\&gt; cd \xampp\mysql\bin
+C:\xampp\mysql\bin&gt; mysql -u root
+
+</code></pre><p>Para conectar con la Aplicación web phpMyAdmin abriremos un navegador e introduciremos la URL:</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>http://localhost/phpmyadmin
+</code></pre><p>Para ejecutar instrucciones usaremos la pestaña SQL.</p>
+<h2 id="crear-base-de-datos">Crear Base de Datos </h2>
+<p>Lo primero que debemos hacer es crear una base de datos.<br>
+MySQL permite disponer de varias bases de datos en cada instancia que estemos ejecutado. Cuando conectamos a MySQl podemos conocer las bases de datos que hay creadas con el comando:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SHOW">SHOW</span> <span class="token keyword keyword-DATABASES">DATABASES</span><span class="token punctuation">;</span>
+</code></pre><p>Para crear una base de datos nueva utilizaremos el comando:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-DATABASE">DATABASE</span> NombreBD<span class="token punctuation">;</span>
+</code></pre><p>Podemos añadir otros parámetros por si no son los que MySQL tiene por defecto:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-DATABASE">DATABASE</span> NombreBD
+<span class="token keyword keyword-DEFAULT">DEFAULT</span> <span class="token keyword keyword-CHARACTER">CHARACTER</span> <span class="token keyword keyword-SET">SET</span> utf8
+<span class="token keyword keyword-DEFAULT">DEFAULT</span> <span class="token keyword keyword-COLLATE">COLLATE</span> utf8_general_ci<span class="token punctuation">;</span>
+</code></pre><p>En my.ini se puede indicar en una variable el ENGINE por defecto.</p>
+<pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>[mysqld]
+default-storage-engine = InnoDB
+</code></pre><p>Por defecto ya tiene este valor y podemos comprobarlo en phpMyAdmin en la pestaña “Variables”.</p>
+<p>Para eliminar una base de datos nueva utilizaremos el comando:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-DATABASE">DATABASE</span> NombreBD<span class="token punctuation">;</span>
+</code></pre><h2 id="tablas-y-campos">Tablas y campos </h2>
+<p>Para crear una tabla en el DF (Diseño Físico) partiremos del esquema relacional, el diccionario de datos y la documentación de restricciones.</p>
+<p>Debemos buscar la información de restricciones de algunos campos:</p>
+<ul>
+<li>
+<p><strong>Restricciones por valor</strong><br>
+Se definen en el diccionario de datos. Estas restricciones pueden estar referidas al:</p>
+<ul>
+<li>Tipo de dato</li>
+<li>Longitud</li>
+<li>Dominio de valores</li>
+<li>Posibilidad de estar vacío (valor nulo) o no</li>
+<li>Valor único (no repetido)</li>
+</ul>
+</li>
+<li>
+<p><strong>Restricciones de existencia</strong><br>
+Se definen en el esquema lógico y se detallan en el diccionario de datos Un campo que es clave ajena de una tabla en la relación puede ser opcional (tener valores nulos) o no.</p>
+</li>
+<li>
+<p><strong>Restricciones de cardinalidad</strong><br>
+Se definen en la documentación de restricciones.</p>
+</li>
+</ul>
+<p>Ejemplo: Cardinalidad máxima definida = Un empleado en una empresa pertenece a varios departamentos, pero como máximo a 4.</p>
+<ul>
+<li><strong>Restricciones por campos calculados</strong><br>
+Se definen en el diccionario de datos El valor de un campo vendrá dado por una fórmula.</li>
+</ul>
+<p>Las restricciones por valor y de existencia tendrán efecto en la propia creación de la tabla, pero las restricciones de cardinalidad y por campos calculados serán definidos por <strong>disparadores (triggers)</strong> que comprueben o calculen los datos y así, garanticen su integridad.</p>
+<p>El esquema relacional (modelo lógico) consta de un conjunto de relaciones (tablas) y, para cada una de ellas, se tiene:</p>
+<ul>
+<li>El nombre de la relación (que se convierte en el DF en un tabla)</li>
+<li>La lista de atributos entre paréntesis (que se convierten en el DF en campos)</li>
+<li>La clave primaria y las claves ajenas, si las tiene.</li>
+<li>Las reglas de integridad de las claves ajenas (valor obligatorio o no)</li>
+</ul>
+<p>En el diccionario de datos se describen los atributos y, para cada uno de ellos, se tiene:</p>
+<ul>
+<li>Su dominio: tipo de datos, longitud y restricciones de dominio.</li>
+<li>Si puede ser vacío (es decir, si admite valores nulos).</li>
+<li>Si debe tener valor único para cada registro</li>
+<li>El valor por defecto (que es opcional).</li>
+<li>Si es calculado, cómo se calcula su valor.</li>
+<li>Si es enumerado, los valores que puede tener (por ejemplo, SI y NO)</li>
+</ul>
+<p>Antes de comenzar necesitaremos conocer algunos tipos de datos de MySQL que utilizaremos:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Tipo de Dato</th>
+<th style="text-align:left">Valores</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>VARCHAR</strong></td>
+<td style="text-align:left">Cadena de caracteres</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>INT</strong></td>
+<td style="text-align:left">Número entero</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>DECIMAL</strong></td>
+<td style="text-align:left">Números decimales</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>DATE</strong></td>
+<td style="text-align:left">Fecha</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>DATETIME o TIMESTAMP</strong></td>
+<td style="text-align:left">Fecha y hora</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>ENUM</strong></td>
+<td style="text-align:left">Conjunto de valores</td>
+</tr>
+</tbody>
+</table>
+<div class="admonition note">
+<p class="admonition-title"><strong><u>Referencias</u></strong><br><a href="https://dev.mysql.com/doc/refman/8.0/en/data-types.html">Tipos de datos en MySQL – Documentación oficial</a></p>
+</div>
+<p>Para crear una tabla utilizaremos el comando sql <strong>CREATE TABLE</strong> reducido:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> NombreTabla <span class="token punctuation">(</span>
+    Campo1<span class="token punctuation">,</span>
+    Campo2<span class="token punctuation">,</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    CampoN
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>La sintaxis para definir un “campo” en la instrucción anterior es:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code>nombre_col TIPO
+<span class="token punctuation">[</span><span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token operator">|</span> <span class="token boolean">NULL</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token keyword keyword-DEFAULT">DEFAULT</span> valor_por_defecto<span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token keyword keyword-AUTO_INCREMENT">AUTO_INCREMENT</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token keyword keyword-PRIMARY">PRIMARY</span><span class="token punctuation">]</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token keyword keyword-UNIQUE">UNIQUE</span><span class="token punctuation">]</span>
+<span class="token punctuation">[</span><span class="token keyword keyword-COMMENT">COMMENT</span> <span class="token string">'string'</span><span class="token punctuation">]</span>
+</code></pre><div class="admonition note">
+<p class="admonition-title"><strong><u>Referencias</u></strong><br><a href="https://dev.mysql.com/doc/refman/8.0/en/create-table.html">CREATE TABLE en MySQL – Documentación oficial</a></p>
+</div>
+<p><strong>Ejercicio 3.1</strong></p>
+<pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>Partiendo del esquema lógico, crea la tabla de proveedores de nuestra comunidad autónoma siguiente:
+proveedores ( cod_prov, localidad, nombre,provincia)
+El diccionario de datos (sólo con restricciones de valor) es:
+</code></pre><table>
+<thead>
+<tr>
+<th style="text-align:left">CAMPO</th>
+<th style="text-align:left">TIPO</th>
+<th style="text-align:left">LONGITUD</th>
+<th style="text-align:left">CARACTERÍSTICAS</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>cod_prov</strong></td>
+<td style="text-align:left">Cadena</td>
+<td style="text-align:left">3</td>
+<td style="text-align:left">Clave Primaria<br>No Nulo</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>localidad</strong></td>
+<td style="text-align:left">Cadena</td>
+<td style="text-align:left">100</td>
+<td style="text-align:left">Nulo</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>nombre</strong></td>
+<td style="text-align:left">Cadena</td>
+<td style="text-align:left">100</td>
+<td style="text-align:left">No nulo<br>Único<br>Clave Alternativa</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>provincia</strong></td>
+<td style="text-align:left">Enumerado</td>
+<td style="text-align:left"></td>
+<td style="text-align:left">'Alicante', 'Valencia', 'Castellón'</td>
+</tr>
+</tbody>
+</table>
+<p><strong><u>Solución:</u></strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> proveedores <span class="token punctuation">(</span>
+    cod_prov    <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+    localidad   <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token keyword keyword-DEFAULT">DEFAULT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+    nombre      <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword keyword-UNIQUE">UNIQUE</span><span class="token punctuation">,</span>
+    provincia   <span class="token keyword keyword-ENUM">ENUM</span><span class="token punctuation">(</span><span class="token string">'Alicante'</span><span class="token punctuation">,</span><span class="token string">'Valencia'</span><span class="token punctuation">,</span><span class="token string">'Castellón'</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p><strong>Ejercicio 3.2</strong></p>
+<pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>En XAMPP-MySQL mediante la utilidad mysql.exe ejecuta las instrucciones anteriores.
+
+Entra a phpMyAdmin y comprueba con el asistente visual la estructura de la tabla y crea otra llamada proveedores2 con la misma información con la herramienta gráfica.
+Pulsando en la pestaña Insertar, añade registros a la tabla proveedores.
+
+Comprueba con el botón Examinar los datos introducidos. Comprobarás que aparece un botón Editar y otro Borrar que afecta a cada registro.
+</code></pre><p>Con el comando DROP TABLE podemos eliminar una tabla:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-TABLE">TABLE</span> proveedores<span class="token punctuation">;</span>
+</code></pre><p>Con el comando RENAME TABLE podemos cambiar su nombre:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-RENAME">RENAME</span> <span class="token keyword keyword-TABLE">TABLE</span> proveedores <span class="token keyword keyword-TO">TO</span> distribuidores<span class="token punctuation">;</span>
+</code></pre><p>Comenzaremos por crear una tabla de artículos con los siguientes campos:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
+    codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p><strong><u>Añadir un campo a una tabla existente</u></strong><br>
+Una vez creada una tabla, es posible que necesitemos añadir, modificar o eliminar algún campo existente. Para ello utilizaremos las siguientes instrucciones SQL.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos
+<span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-COLUMN">COLUMN</span> descuento <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
+<span class="token keyword keyword-AFTER">AFTER</span> precio<span class="token punctuation">;</span>
+</code></pre><p><strong><u>Modificar un campo a una tabla existente</u></strong></p>
+<p>A continuación mostramos dos formas de cambiar un campo</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos
+<span class="token keyword keyword-MODIFY">MODIFY</span> <span class="token keyword keyword-COLUMN">COLUMN</span> descuento <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
+</code></pre><pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos
+CHANGE descuento dto <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
+</code></pre><p>Con la segunda forma podemos cambiar también el nombre del campo de 'descuento' a 'dto' sin perder los valores existentes.</p>
+<p><strong><u>Eliminar un campo de una tabla existente</u></strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos
+<span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-COLUMN">COLUMN</span> dto<span class="token punctuation">;</span>
+</code></pre><p><strong>Ejercicio 3.3</strong></p>
+<pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>En XAMPP-MySQL mediante la utilidad mysql.exe ejecuta las instrucciones anteriores.
+
+Entra a phpMyAdmin y comprueba con el asistente visual la estructura de la tabla articulos.
+Inserta registros y comprueba si puedes editar la información.
+¿Por qué al Examinar no aparecen los botones Editar y Borrar?
+</code></pre><h2 id="añadir-y-editar-registros">Añadir y editar registros </h2>
+<h4 id="insert">INSERT </h4>
+<p><strong>INSERT</strong> inserta nuevas filas en una tabla existente.</p>
+<p>El formato <strong>INSERT ... VALUES</strong> inserta filas basándose en los valores especificados explícitamente.<br>
+El formato <strong>INSERT ... SELECT</strong> inserta filas seleccionadas de otra tabla o tablas.<br>
+La sintaxis para insertar un registro es la siguiente:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-INTO">INTO</span> nombreTabla <span class="token punctuation">(</span>col_name1<span class="token punctuation">,</span> col_name2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-VALUES">VALUES</span> <span class="token punctuation">(</span>valor_col1<span class="token punctuation">,</span> valor_col2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>La sintaxis para insertar varios registros es la siguiente:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-INTO">INTO</span> nombreTabla <span class="token punctuation">(</span>col_name1<span class="token punctuation">,</span> colname2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-VALUES">VALUES</span>
+    <span class="token punctuation">(</span>valor1_col1<span class="token punctuation">,</span> valor1_col2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span>valor2_col1<span class="token punctuation">,</span> valor2_col2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    <span class="token punctuation">(</span>valorn_col1<span class="token punctuation">,</span> valorn_col2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span> <span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>La sintaxis para consultar los registros de una tabla es:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> col_name1<span class="token punctuation">,</span> col_name2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+<span class="token keyword keyword-FROM">FROM</span> nombreTabla
+<span class="token punctuation">[</span><span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre><p>La sintaxis para insertar registros desde una consulta SELECT es la siguiente:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-INTO">INTO</span> nombreTabla2 <span class="token punctuation">(</span>col_name1<span class="token punctuation">,</span> col_name2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-SELECT">SELECT</span> col_name1<span class="token punctuation">,</span> col_name2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
+<span class="token keyword keyword-FROM">FROM</span> nombreTabla1
+<span class="token punctuation">[</span><span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre><p>Si hay campos en la tabla que no se especifican en la instrucción INSERT, se le asignará el valor que se haya indicado en su creación por defecto (DEFAULT) y en caso contrario será NULL.</p>
+<p><strong>Ejemplo</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-INTO">INTO</span> articulos <span class="token punctuation">(</span>codigo<span class="token punctuation">,</span> descripcion<span class="token punctuation">,</span> precio<span class="token punctuation">)</span> <span class="token keyword keyword-VALUES">VALUES</span>
+    <span class="token punctuation">(</span><span class="token string">'0001'</span><span class="token punctuation">,</span> <span class="token string">'TECLADO INALÁMBRICO'</span><span class="token punctuation">,</span> <span class="token number">10.45</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token punctuation">(</span><span class="token string">'0002'</span><span class="token punctuation">,</span> <span class="token string">'RATÓN INALÁMBRICO'</span><span class="token punctuation">,</span> <span class="token number">7.95</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><h2 id="update">UPDATE </h2>
+<p><strong>UPDATE</strong> actualiza columnas de filas existentes de una tabla con nuevos valores.</p>
+<p>La cláusula <strong>SET</strong> indica las columnas a modificar y los valores que deben tomar.</p>
+<p>La cláusula <strong>WHERE</strong>, si se proporciona, especifica qué filas deben ser actualizadas. Si no se especifica, serán actualizadas todas ellas.</p>
+<p>La sintaxis para actualizar registros es:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-UPDATE">UPDATE</span> nombreTabla
+<span class="token keyword keyword-SET">SET</span> campo <span class="token operator">=</span> valor
+<span class="token punctuation">[</span><span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre><p>En la cláusula <strong>SET</strong> utilizaremos valor para indicar una cadena, número, fecha, …</p>
+<p><strong>Ejemplo – Actualizar el nombre a una persona</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-UPDATE">UPDATE</span> personas
+<span class="token keyword keyword-SET">SET</span> nombre <span class="token operator">=</span> <span class="token string">'Juan López'</span>
+<span class="token keyword keyword-WHERE">WHERE</span> dni <span class="token operator">=</span> <span class="token string">'21555666'</span><span class="token punctuation">;</span>
+</code></pre><p>Pero también puede ser una expresión.</p>
+<p><strong>Ejemplo – Aumentar la edad de una persona por su cumpleaños</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-UPDATE">UPDATE</span> personas
+<span class="token keyword keyword-SET">SET</span> edad <span class="token operator">=</span> edad <span class="token operator">+</span> <span class="token number">1</span>
+<span class="token keyword keyword-WHERE">WHERE</span> dni <span class="token operator">=</span> <span class="token string">'21555666'</span><span class="token punctuation">;</span>
+</code></pre><p><strong>Ejemplo – Aumentar el precio de todos los artículos un 5%</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-UPDATE">UPDATE</span> articulos
+<span class="token keyword keyword-SET">SET</span> precio <span class="token operator">=</span> precio <span class="token operator">+</span> precio <span class="token operator">*</span> <span class="token number">5</span> <span class="token operator">/</span> <span class="token number">100</span><span class="token punctuation">;</span>
+</code></pre><h2 id="delete">DELETE </h2>
+<p><strong>DELETE</strong> elimina las columnas de una tabla que cumplan la condición dada por la cláusula, y devuelve el número de registros borrados. Sin cláusula <strong>WHERE</strong> elimina todos los registros.</p>
+<p>La sintaxis para eliminar registros es:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DELETE">DELETE</span> <span class="token keyword keyword-FROM">FROM</span> nombreTabla
+<span class="token punctuation">[</span><span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre><h2 id="índices">Índices </h2>
+<p>Los indices son estructuras que se crean en las Bases de Daros para poder controlar la integridad y realizar búsquedas de manera más eficiente.</p>
+<p>Al crear una tabla podemos crear varios índices con las siguientes palabras reservadas:</p>
+<ul>
+<li><strong>KEY o PRIMARY KEY</strong>: un índice único para el campo de clave primaria.</li>
+<li><strong>UNIQUE</strong>: un índice único para un campo que sea clave alternativa.</li>
+<li><strong>INDEX</strong>: un índice con valores repetidos para optimizar búsquedas sobre un campo.</li>
+</ul>
+<p><strong>Ejemplo</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
+    codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+    descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token keyword keyword-UNIQUE">UNIQUE</span><span class="token punctuation">,</span>
+    categoria <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-INDEX">INDEX</span> <span class="token punctuation">[</span>nombreIndice<span class="token punctuation">]</span> <span class="token punctuation">(</span>categoria<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Como aparece en el ejemplo anterior, <strong>nombreIndice</strong> se puede especificar o no. Si no se hace tomará el nombre del campo.</p>
+<p><strong><u>Añadir índices</u></strong><br>
+Si deseáramos crear un índice con valores repetidos cuando la tabla ya existe, utilizaríamos el comando siguiente:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-INDEX">INDEX</span> index_name <span class="token keyword keyword-ON">ON</span> nombreTabla <span class="token punctuation">(</span>col_name1<span class="token punctuation">,</span>…<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Si deseáramos crear un índice cuando con valores únicos cuando la tabla ya existe, utilizaríamos el comando siguiente:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-UNIQUE">UNIQUE</span> <span class="token keyword keyword-INDEX">INDEX</span> index_name <span class="token keyword keyword-ON">ON</span> nombreTabla <span class="token punctuation">(</span>col_name1<span class="token punctuation">,</span>…<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Para añadir una clave primaria a una tabla que no tiene:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> nombreTabla
+<span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>col_name1<span class="token punctuation">,</span>…<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p><strong><u>Eliminar índices</u></strong></p>
+<p>Para eliminar un índice deberemos saber su nombre:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-INDEX">INDEX</span> index_name <span class="token keyword keyword-ON">ON</span> nombreTabla<span class="token punctuation">;</span>
+</code></pre><p>Para eliminar el índice de clave primaria:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> nombreTabla
+<span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">;</span>
+</code></pre><h2 id="restricciones">Restricciones </h2>
+<h4 id="restricción-de-campo-clave">Restricción de campo clave </h4>
+<p>La necesidad de identificar un registro unívocamente nos obliga a crear una restricción por el campo clave, ya que este no podrá ser nulo ni tener valores duplicados.</p>
+<p>De hecho no se pueden editar los datos de una tabla que no tenga clave primaria, aunque sí se pueden insertar registros.</p>
+<p><strong><u>Crear campo clave al crear la tabla</u></strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
+    codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+    descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">,</span>
+    precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p><strong><u>Eliminar la clave primaria</u></strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">;</span>
+</code></pre><p><strong><u>Añadir la clave primaria a una tabla existente</u></strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">(</span>codigo<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p><strong><u>Claves compuestas</u></strong><br>
+En ocasiones la clave está compuesta por varios campos. Por ejemplo en una tabla donde se guardan las revisiones de ITV de vehículos la clave está formada por la fecha y la matrícula del vehículo. Lo podríamos indicar de la siguiente forma:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> revision_itv <span class="token punctuation">(</span>
+    matricula <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    fecha <span class="token keyword keyword-DATE">DATE</span><span class="token punctuation">,</span>
+    estado <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>matricula<span class="token punctuation">,</span> fecha<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>o bien:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> revision_itv <span class="token punctuation">(</span>
+    matricula <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    fecha <span class="token keyword keyword-DATE">DATE</span><span class="token punctuation">,</span>
+    estado <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> revision_itv <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>matricula<span class="token punctuation">,</span> fecha<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><h4 id="restricción-de-campo-obligatorio">Restricción de campo obligatorio </h4>
+<p>Cuando un campo no puede tener valores nulos, decimos que es un campo obligatorio.<br>
+En nuestro ejemplo indicaremos la descripción como campo obligatorio par que ningún artículo tenga la descripción vacía.</p>
+<p><strong><u>Crear campo obligatorio al crear la tabla</u></strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
+codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p><strong><u>Eliminar la restricción de campo obligatorio</u></strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos CHANGE descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
+</code></pre><p><strong><u>Añadir la restricción de campo obligatorio en una tabla que ya existe</u></strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos CHANGE descripcion descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
+</code></pre><h4 id="restricción-de-campo-con-valores-únicos">Restricción de campo con valores únicos </h4>
+<p>Cuando un campo no puede tener valores repetidos, decimos que es un campo único.<br>
+Lo que hace realmente la base de datos es crear un índice con valores únicos.</p>
+<p><strong><u>Crear campo obligatorio al crear la tabla</u></strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
+    codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+    descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword keyword-UNIQUE">UNIQUE</span><span class="token punctuation">,</span>
+    precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p><strong><u>Eliminar la restricción de campo obligatorio</u></strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-INDEX">INDEX</span> descripcion<span class="token punctuation">;</span>
+</code></pre><p><strong><u>Añadir la restricción de campo obligatorio en una tabla que ya existe</u></strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-UNIQUE">UNIQUE</span><span class="token punctuation">(</span>descripcion<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><h4 id="restricción-de-campo-por-clave-ajena">Restricción de campo por clave ajena </h4>
+<p>Como ya hemos visto en los esquemas lógicos relacionales obtenidos de los esquemas conceptuales, existen claves ajenas o extranjeras que contienen valores de la clave primaria de otra tabla con la que se relacionan.</p>
+<p>En un esquema que tiene localidades y provincias, donde indicamos en cada localidad de qué provincia es, podríamos tener las siguientes tablas:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> provincias <span class="token punctuation">(</span>
+        cod_prov <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+        provincia <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">40</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token punctuation">(</span>
+    cod_loc <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+    localidad <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    cod_provincia <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p><strong><u>Crear clave ajena al crear la tabla</u></strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token punctuation">(</span>
+    cod_loc <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+    localidad <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    cod_provincia <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>cod_provincia<span class="token punctuation">)</span> <span class="token keyword keyword-REFERENCES">REFERENCES</span> provincias <span class="token punctuation">(</span>cod_prov<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Cuando creamos una relación, y por lo tanto una clave ajena, se crean dos elementos en la BD.</p>
+<ul>
+<li><strong>Índice</strong>: un índice (en nuestro ejemplo INDEX (cod_provincia)) con el nombre del campo para la clave ajena con valores repetidos, ya que puede ser una relación 1 → N y por lo tanto tendrá que repetir valores. En nuestro ejemplo, varias localidades tendrán la misma provincia.</li>
+<li><strong>Relación</strong>: se asigna a la relación un nombre por defecto formado por el nombre de la tabla, 'ibfk' y un numero. En el caso anterior será: localidades_ibfk1.</li>
+</ul>
+<p>Si queremos darle un nombre nosotros utilizaremos <strong>CONSTRAINT</strong>:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token punctuation">(</span>
+    cod_loc <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+    localidad <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    cod_provincia <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> provincias_cod_prov <span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>cod_provincia<span class="token punctuation">)</span> <span class="token keyword keyword-REFERENCES">REFERENCES</span> provincias <span class="token punctuation">(</span>cod_prov<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>De esta forma se utilizará el valor de CONSTRAINT tanto para el índice como para la relación.</p>
+<p><strong><u>Eliminar la restricción de clave ajena</u></strong><br>
+Si tenemos el <strong>CONSTRAINT</strong> lo utilizaremos:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> provincias_cod_prov<span class="token punctuation">;</span>
+</code></pre><p>En caso contrario eliminaremos el que crea por defecto:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> localidades_ibkf_1<span class="token punctuation">;</span>
+</code></pre><p>También tendremos que decidir si deseamos eliminar el índice existente o no. En caso de desear eliminarlo deberemos indicarlo con la instrucción correspondiente según hayamos indicado CONSTRAINT o no:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-INDEX">INDEX</span> provincias_cod_prov<span class="token punctuation">;</span>
+<span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-INDEX">INDEX</span> cod_provincia<span class="token punctuation">;</span>
+</code></pre><p><strong><u>Añadir la restricción de clave ajena a una tabla existente</u></strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-ADD">ADD</span> 
+<span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>cod_provincia<span class="token punctuation">)</span> <span class="token keyword keyword-REFERENCES">REFERENCES</span> provincias <span class="token punctuation">(</span>cod_prov<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>o con CONSTRAINT:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> provincias_cod_prov
+<span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>cod_provincia<span class="token punctuation">)</span> <span class="token keyword keyword-REFERENCES">REFERENCES</span> provincias <span class="token punctuation">(</span>cod_prov<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><h4 id="restricción-por-borrado-o-actualización-de-una-clave-ajena">Restricción por borrado o actualización de una clave ajena </h4>
+<p>Una de las acciones más importantes para mantener la integridad en una base de datos es identificar correctamente la acción a realizar cuando eliminamos o actualizamos el valor de la clave ajena de un registro.</p>
+<p>En el caso de vaciar el campo <strong>localidades.cod_provincia</strong> podemos hacer varias acciones:</p>
+<ul>
+<li>
+<p><strong>RESTRICT</strong>: Es el valor por defecto. El servidor MySQL rechazará la operación de eliminación o actualización para la tabla padre (provincias) si hay un valor de clave externa relacionado en la tabla referenciada (localidades), es decir, no se puede en provincias eliminar un registro o cambiar su clave, si existen localidades de esa provincia.</p>
+</li>
+<li>
+<p><strong>NO ACTION</strong>: Pertenece al SQL estándar. En MySQL es equivalente a RESTRICT. Algunos sistemas de base de datos tienen verificaciones diferidas, y NO ACTION es un cheque diferido. En MySQL, las restricciones de clave externa se verifican inmediatamente, por lo que NO ACCIÓN es lo mismo que RESTRICT.</p>
+</li>
+<li>
+<p><strong>SET NULL</strong>: Si en la tabla padre (provincias) se elimina un registro o se actualiza su clave, si hay algún valor de clave externa relacionado en la tabla referenciada (localidades) se actualizará el valor a NULL.<br>
+Si especifica una acción SET NULL, asegúrese de que no ha declarado las columnas en la tabla secundaria como NOT NULL.</p>
+</li>
+<li>
+<p><strong>CASCADE</strong>:</p>
+<ul>
+<li>Al <strong>borrar</strong>, si en la tabla padre (provincias) se elimina un registro, se eliminarán también todos los registros de la tabla referenciada (localidades) que tenga este valor en su calve ajena.</li>
+<li>Al <strong>actualizar</strong>, si en la tabla padre (provincias) se actualiza la clave de un registro, se actualizarán también todos los registros de la tabla referenciada (localidades) que tenga este valor en su clave ajena con el nuevo valor.</li>
+</ul>
+<p>Para indicar estas acciones añadiremos a la instrucción de FOREIGN KEY ALGUNA de las siguientes cláusulas:</p>
+<ul>
+<li>ON DELETE RESTRICT</li>
+<li>ON DELETE SET NULL</li>
+<li>ON DELETE CASCADE</li>
+<li>ON UPDATE RESTRICT</li>
+<li>ON UPDATE SET NULL</li>
+<li>ON UPDATE CASCADE</li>
+</ul>
+<p>Si por ejemplo deseamos que al eliminar una provincia se eliminen todas las localidades dependientes, y que no permita cambiar el identificador de provincias si tiene localidades, la instrucción de creación de esa clave ajena sería:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> provincias_cod_prov
+<span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>cod_provincia<span class="token punctuation">)</span> <span class="token keyword keyword-REFERENCES">REFERENCES</span> provincias <span class="token punctuation">(</span>cod_prov<span class="token punctuation">)</span>
+<span class="token keyword keyword-ON">ON</span> <span class="token keyword keyword-DELETE">DELETE</span> <span class="token keyword keyword-CASCADE">CASCADE</span>
+<span class="token keyword keyword-ON">ON</span> <span class="token keyword keyword-UPDATE">UPDATE</span> <span class="token keyword keyword-RESTRICT">RESTRICT</span><span class="token punctuation">;</span>
+</code></pre></li>
+<li>
+<p><strong>SET DEFAULT</strong>: <u>No disponible para MySQL con el motor de base de datos InnoDB</u>. Si en la tabla padre (provincias) se elimina un registro o se actualiza su clave, si hay algún valor de clave externa relacionado en la tabla referenciada (localidades) se actualizará el valor por defecto de la clave ajena.</p>
+</li>
+</ul>
+<h4 id="otras-restricciones-y-valores-por-defecto">Otras restricciones y valores por defecto </h4>
+<p><strong><u>Enteros positivos</u></strong><br>
+Al definir un campo podemos indicar que sólo se aceptarán números positivos con la palabra reservada <strong>UNSIGNED</strong>:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
+    codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+    descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+    precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword keyword-UNSIGNED">UNSIGNED</span> <span class="token keyword keyword-DEFAULT">DEFAULT</span> <span class="token number">0</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p><strong><u>Fecha de alta y de modificación</u></strong><br>
+Cuando deseamos tener en una tabla la fecha de alta y modificación podemos utilizar campos que se creen y actualicen automáticamente.</p>
+<ul>
+<li>
+<p>Con <strong>DEFAULT CURRENT_TIMESTAMP</strong> un campo obtendrá por defecto el valor de la fecha y hora del sistema.</p>
+</li>
+<li>
+<p>Con <strong>ON UPDATE CURRENT_TIMESTAMP</strong> un campo actualizará el valor con la fecha y hora del sistema cada vez que se actualice el registro.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> ejemplo <span class="token punctuation">(</span>
+    codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+    fecha_alta <span class="token keyword keyword-DATETIME">DATETIME</span> <span class="token keyword keyword-DEFAULT">DEFAULT</span> <span class="token keyword keyword-CURRENT_TIMESTAMP">CURRENT_TIMESTAMP</span><span class="token punctuation">,</span>
+    fecha_modificacion <span class="token keyword keyword-DATETIME">DATETIME</span> <span class="token keyword keyword-ON">ON</span> <span class="token keyword keyword-UPDATE">UPDATE</span> <span class="token keyword keyword-CURRENT_TIMESTAMP">CURRENT_TIMESTAMP</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></li>
+</ul>
+<p><strong><u>Rellenado a ceros</u></strong><br>
+Cuando deseemos rellenar con ceros a la izquierda un campo codigo para que estén ordenados utilizaremos la palabra reservada <strong>ZEROFILL</strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> ejemplo <span class="token punctuation">(</span>
+    codigo <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> ZEROFILL <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+    descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-INTO">INTO</span> ejemplo <span class="token punctuation">(</span>codigo<span class="token punctuation">,</span> descripcion<span class="token punctuation">)</span> <span class="token keyword keyword-VALUES">VALUES</span> <span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">,</span><span class="token string">'registro uno'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p><strong><u>Clave primaria automática - Autoincremento</u></strong><br>
+Cuando tenemos una entidad donde almacenamos registros pero en el esquema conceptual del modelo entidad-relación no teníamos una clave primaria, tenemos que añadir un atributo <strong>codigo</strong> para disponer de una clave primaria.</p>
+<p>Lo normal es que esta información no se la pidamos al usuario, ya que en el sistema a analizar no aparecía esta información, por lo que se suele dejar que sea el sistema el que genere este codigo automáticamente con la palabra reservada <strong>AUTO_INCREMENT</strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> ejemplo <span class="token punctuation">(</span>
+    codigo <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-AUTO_INCREMENT">AUTO_INCREMENT</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+    descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+I
+<span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-INTO">INTO</span> ejemplo <span class="token punctuation">(</span>descripcion<span class="token punctuation">)</span> <span class="token keyword keyword-VALUES">VALUES</span> <span class="token punctuation">(</span><span class="token string">'registro uno'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>En phpMyAdmin, seleccionando la tabla y luego pulsando en la pestaña operaciones, podemos ver y cambiar el valor siguiente de AUTO_INCREMENT.</p>
+<h4 id="restricciones-avanzadas">Restricciones avanzadas </h4>
+<p><strong><u>Campos calculados</u></strong><br>
+Una solución para los campos calculados es no crearlos en las tablas sino en las consultas con funciones de MySQL.</p>
+<p>Este tipo de cálculos y funciones los veremos en la siguiente UD4 donde trabajaremos el lenguaje de consultas SQL con las instrucciones SELECT.</p>
+<p>De todas formas, para aquellos que deseen ir practicando, puedes consultar las funciones disponibles en:<br>
+<a href="https://dev.mysql.com/doc/refman/8.0/en/func-op-summary-ref.html">https://dev.mysql.com/doc/refman/8.0/en/func-op-summary-ref.html</a>.</p>
+<p><strong><u>Filtro de valores válidos</u></strong><br>
+En el lenguaje de SQL existe la palabra reservada <strong>CHECK</strong> para indicar la condición que debe cumplir un valor para ser válido.</p>
+<p>Por ejemplo: La nota de un alumno debe estar comprendida entre 0 y 10.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> notas <span class="token punctuation">(</span>
+    nia <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    asignatura <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    nota <span class="token keyword keyword-DECIMAL">DECIMAL</span> <span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> check_nota <span class="token keyword keyword-CHECK">CHECK</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>nota <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">and</span> <span class="token punctuation">(</span>nota <span class="token operator">&lt;=</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Estas condiciones funcionan perfectamente en muchos SGBD, pero en MySQL, aunque no dan error no se tienen en cuenta.</p>
+<p>Por lo tanto, si deseamos controlar estas restricciones deberemos hacer uso de <strong>disparadores o triggers</strong>. En la unidad UD5 profundizaremos en los disparadores (triggers en inglés) pero ahora introduciremos su uso.</p>
+<p>Para crear un disparador para controlar valores de un campo al insertar usaremos la siguiente sintaxis:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Crear el disparador */</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
+<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TRIGGER">TRIGGER</span> nombretabla_before_insert BEFORE <span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-ON">ON</span> nombretabla
+<span class="token keyword keyword-BEGIN">BEGIN</span>
+    <span class="token keyword keyword-FOR EACH ROW">FOR EACH ROW</span> <span class="token keyword keyword-BEGIN">BEGIN</span>
+        <span class="token keyword keyword-IF">IF</span> <span class="token punctuation">(</span>condicion error<span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
+            SIGNAL SQLSTATE <span class="token string">'45000'</span><span class="token punctuation">;</span>
+            <span class="token keyword keyword-SET">SET</span> MESSAGE_TEXT <span class="token operator">=</span> <span class="token string">'nuevo mensaje de error'</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-END">END</span> <span class="token keyword keyword-IF">IF</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-END">END</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-END">END</span> <span class="token comment">//</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
+</code></pre><p>El ejemplo de la nota anterior quedaría:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Crear el disparador */</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
+<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TRIGGER">TRIGGER</span> notas_before_insert BEFORE <span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-ON">ON</span> notas
+<span class="token keyword keyword-BEGIN">BEGIN</span>
+    <span class="token keyword keyword-FOR EACH ROW">FOR EACH ROW</span> <span class="token keyword keyword-BEGIN">BEGIN</span>
+        <span class="token keyword keyword-IF">IF</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>NEW<span class="token punctuation">.</span>nota <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">OR</span> <span class="token punctuation">(</span>NEW<span class="token punctuation">.</span>nota <span class="token operator">&gt;</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
+            SIGNAL SQLSTATE <span class="token string">'45000'</span><span class="token punctuation">;</span>
+            <span class="token keyword keyword-SET">SET</span> MESSAGE_TEXT <span class="token operator">=</span> <span class="token string">'Compruebe el valor del campo nota que debe estar comprendido entre 0 y 10 puntos'</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-END">END</span> <span class="token keyword keyword-IF">IF</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-END">END</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-END">END</span> <span class="token comment">//</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
+</code></pre><p><strong><u>Transformaciones antes de grabar</u></strong><br>
+Al igual que en el apartado anterior CHECK nos permite realizar estos cambios.</p>
+<p>Por ejemplo, si queremos que un campo de tipo carácter sólo almacene caracteres en mayúsculas, lo haríamos con la función UPPER() dentro de una restricción CHECK.</p>
+<p>Por ejemplo: La asignatura de un alumno debe estar en mayúsculas.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> notas <span class="token punctuation">(</span>
+    nia <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    asignatura <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    nota <span class="token keyword keyword-DECIMAL">DECIMAL</span> <span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> check_asignatura <span class="token keyword keyword-CHECK">CHECK</span> <span class="token punctuation">(</span>asignatura <span class="token operator">=</span> UPPER<span class="token punctuation">(</span>asignatura<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>En MySQL, al no disponer de CHECK utilizaremos el disparador <strong>BEFORE INSERT</strong> como en el apartado anterior.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Crear el disparador */</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
+<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TRIGGER">TRIGGER</span> notas_before_insert BEFORE <span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-ON">ON</span> notas
+    <span class="token keyword keyword-BEGIN">BEGIN</span>
+        <span class="token keyword keyword-FOR EACH ROW">FOR EACH ROW</span> <span class="token keyword keyword-BEGIN">BEGIN</span>
+            <span class="token keyword keyword-SET">SET</span> NEW<span class="token punctuation">.</span>asignatura <span class="token operator">=</span> UPPER<span class="token punctuation">(</span>NEW<span class="token punctuation">.</span>asignatura<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword keyword-END">END</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-END">END</span> <span class="token comment">//</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
+</code></pre><p>Para eliminar una restricción de TRIGGER disponemos de la instrucción <strong>DROP</strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-TRIGGER">TRIGGER</span> notas_before_insert<span class="token punctuation">;</span>
+</code></pre><h2 id="tablas-a-partir-de-consultas">Tablas a partir de consultas </h2>
+<p>Existe la posibilidad de crear tablas a partir de consultas de otras tablas.</p>
+<p>La sintaxis es muy sencilla, pues si tenemos una consulta de tipo:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> campo1<span class="token punctuation">,</span> campo2
+<span class="token keyword keyword-FROM">FROM</span> nombretabla
+<span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">;</span>
+</code></pre><p>Podríamos obtener una tabla con la siguiente instrucción SQL:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> nuevatabla
+<span class="token keyword keyword-SELECT">SELECT</span> campo1<span class="token punctuation">,</span> campo2 <span class="token keyword keyword-FROM">FROM</span> nombretabla <span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">;</span>
+</code></pre><p>Pero eso sí, la crea sin clave primaria, ni restricciones ni índices.</p>
+<p>Por ejemplo, si queremos una copia completa de la tabla provincias en provincias2:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> provincias2
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> provincias<span class="token punctuation">;</span>
+</code></pre><h2 id="vistas">Vistas </h2>
+<p>Una <strong>vista</strong> es una consulta que se presenta como una tabla (virtual) a partir de un conjunto de tablas en una base de datos relacional.</p>
+<p>Las vistas tienen la misma estructura que una tabla: filas y columnas. La única diferencia es que sólo se almacena de ellas la definición, no los datos. Los datos que se recuperan mediante una consulta a una vista se presentarán igual que los de una tabla. De hecho, si no se sabe que se está trabajando con una vista, nada hace suponer que es así. Al igual que sucede con una tabla, se pueden insertar, actualizar, borrar y seleccionar datos en una vista. Aunque siempre es posible seleccionar datos de una vista, en algunas condiciones existen restricciones para realizar el resto de las operaciones sobre vistas.</p>
+<p>Una vista se especifica a través de una expresión de consulta (una sentencia SELECT) que la calcula y que puede realizarse sobre una o más tablas. Sobre un conjunto de tablas relacionales se puede trabajar con un número cualquiera de vistas.</p>
+<p>La mayoría de los SGBD soportan la creación y manipulación de vistas. Las vistas se crean cuando se necesitan hacer varias sentencias para devolver una tabla final.</p>
+<p>La sintaxis es muy sencilla, pues si tenemos una consulta de tipo:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> campo1<span class="token punctuation">,</span> campo2
+<span class="token keyword keyword-FROM">FROM</span> nombretabla
+<span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">;</span>
+</code></pre><p>Podríamos obtener una tabla con la siguiente instrucción SQL:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-VIEW">VIEW</span> nuevaVista <span class="token keyword keyword-AS">AS</span>
+<span class="token keyword keyword-SELECT">SELECT</span> campo1<span class="token punctuation">,</span> campo2
+<span class="token keyword keyword-FROM">FROM</span> nombretabla
+<span class="token punctuation">[</span><span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre><p>Por ejemplo, si queremos una vista de la tabla personas que sean de la provincia = '1':</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-VIEW">VIEW</span> personas1 <span class="token keyword keyword-AS">AS</span>
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> personas <span class="token keyword keyword-WHERE">WHERE</span> cod_provincia <span class="token operator">=</span> <span class="token string">'1'</span><span class="token punctuation">;</span>
+</code></pre><h4 id="vistas-para-aplicar-restricciones">Vistas para aplicar restricciones </h4>
+<p>A estas consultas podemos añadir restricciones con la cláusula WHERE para filtrar valores válidos simplemente añadiendo <strong>WITH CHECK OPTION</strong>:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-VIEW">VIEW</span> nuevatabla <span class="token keyword keyword-AS">AS</span>
+<span class="token keyword keyword-SELECT">SELECT</span> campo1<span class="token punctuation">,</span> campo2
+<span class="token keyword keyword-FROM">FROM</span> nombretabla
+<span class="token keyword keyword-WHERE">WHERE</span> condicion
+<span class="token keyword keyword-WITH">WITH</span> <span class="token keyword keyword-CHECK">CHECK</span> <span class="token keyword keyword-OPTION">OPTION</span><span class="token punctuation">;</span>
+</code></pre><p>Por ejemplo si tenemos una tabla denominada notas_data</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> notas_data <span class="token punctuation">(</span>
+    nia <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    asignatura <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    nota <span class="token keyword keyword-DECIMAL">DECIMAL</span> <span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Podríamos crear una vista para utilizarla como tabla con la restricción de valor de nota entre 0 y 10:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-VIEW">VIEW</span> notas <span class="token keyword keyword-AS">AS</span>
+<span class="token keyword keyword-SELECT">SELECT</span> nia<span class="token punctuation">,</span> asignatura<span class="token punctuation">,</span> nota <span class="token keyword keyword-FROM">FROM</span> notas_data <span class="token keyword keyword-WHERE">WHERE</span> <span class="token punctuation">(</span>nota <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">and</span> <span class="token punctuation">(</span>nota <span class="token operator">&lt;=</span> <span class="token number">10</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-WITH">WITH</span> <span class="token keyword keyword-CHECK">CHECK</span> <span class="token keyword keyword-OPTION">OPTION</span><span class="token punctuation">;</span>
+</code></pre><p>De esta forma nos evitamos tener que crear un trigger, ya que esta vista sería actualizable por disponer de los campos de la tabla directamente.</p>
+<h4 id="vistas-para-aplicar-transformaciones-o-mostrar-campos-calculados">Vistas para aplicar transformaciones o mostrar campos calculados </h4>
+<p>Por ejemplo si tenemos una tabla denominada notas_data</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> notas <span class="token punctuation">(</span>
+    nia <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    asignatura <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    nota1 <span class="token keyword keyword-DECIMAL">DECIMAL</span> <span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    nota2 <span class="token keyword keyword-DECIMAL">DECIMAL</span> <span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>También podríamos crear una transformación sobre un campo para su correcta visualización en mayúsculas con UPPER o calcular el promedio de dos campos con un decimal:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-VIEW">VIEW</span> notas_view <span class="token keyword keyword-AS">AS</span>
+<span class="token keyword keyword-SELECT">SELECT</span> nia<span class="token punctuation">,</span> UPPER<span class="token punctuation">(</span>asignatura<span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> asignatura_upper<span class="token punctuation">,</span> nota1<span class="token punctuation">,</span> nota2<span class="token punctuation">,</span> <span class="token function">round</span><span class="token punctuation">(</span><span class="token punctuation">(</span>nota1<span class="token operator">+</span>nota2<span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> promedio <span class="token keyword keyword-FROM">FROM</span> notas<span class="token punctuation">;</span>
+</code></pre><p>Este sistema nos obligaría a editar los datos en la tabla <strong>notas</strong> pero visualizar el resultado con la vista <strong>notas_view</strong>.</p>
+<h4 id="vistas-con-phpmyadmin">Vistas con phpMyAdmin </h4>
+<p>Una vez hemos creado una vista, podremos editarla si lo deseamos. Para ello, si utilizamos phpMyAdmin, pulsaremos sobre la vista, luego en <strong>Estructura</strong> y posteriormente en <strong>Editar vista</strong>:<br>
+<img src=".img/3.2.png" alt="Edición vista"></p>
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
