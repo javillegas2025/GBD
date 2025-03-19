@@ -335,855 +335,657 @@ Inserta registros y comprueba si puedes editar la información.
 ¿Por qué al Examinar no aparecen los botones Editar y Borrar?
 ```
 
+## Añadir y editar registros
+#### INSERT
 
+**INSERT** inserta nuevas filas en una tabla existente.
 
-
-
-
-
-
-
-
-
-
-
-El **Lenguaje de Manipulación de Datos** (LMD, en inglés Data Manipulation Language, DML) es un lenguaje proporcionado por el sistema de gestión de base de datos que permite a los usuarios de la misma llevar a cabo las tareas de consulta o manipulación de los datos (inserción, borrado, actualización y consultas) basado en el modelo de datos adecuado.
-
-!!!NOTE [MySQL Oficial – Sintaxis de las instrucciones DML](http://dev.mysql.com/doc/refman/8.0/en/sql-syntax-data-manipulation.html)
-
-Las **consultas** recuperan información de las tablas de una base de datos mediante la selección de campos, la realización de filtros y la transformación de los datos recuperados.
-
-El uso de consultas permite:
-* **Elegir tablas.** Se puede obtener información de una sola tabla o de varias.
-* **Elegir campos.** Se pueden especificar los campos a visualizar de cada tabla.
-* **Elegir registros.** Se pueden seleccionar los registros a mostrar en la hoja de respuestas dinámica, especificando un criterio.
-* **Ordenar registros.** Se puede ordenar la información en forma ascendente o
-descendente.
-* **Realizar cálculos.** Se pueden emplear las consultas para hacer cálculos con los datos de las tablas.
-
-Además, en consultas más complejas se puede:
-* **Crear tablas.** Se puede generar otra tabla a partir de los datos combinados de una consulta. La tabla se genera a partir de la hoja de respuestas dinámica.
-* **Consultas encadenadas.** Utilizar una consulta como origen de datos para otras consultas (subconsulta). Se pueden crear consultas adicionales basadas en un conjunto de registros seleccionados por una consulta anterior.
-
-
-## Consultas SELECT básicas
-#### Consultas con operaciones numéricas y literales
-Comenzaremos por utilizar la instrucción SELECT como si fuera una calculadora. 
-Para ello utilizaremos los siguientes operadores aritméticos:
-|Operador |Función |
-|:---------|:--------|
-|**\+** |Suma|
-|**\-** |Resta|
-|**\*** |Producto o Multiplicación|
-|**/**  |División|
-|**DIV**|División entera|
-|**MOD** o **%**| Resto división|
-
-**Ejemplos**
-Los siguientes ejemplos evaluan las expresiones que hay después de la cláusula SELECT y muestran el resultado por pantalla. El último ejemplo muestra tres columnas.
-```sql
-SELECT 20*150;
-```
+El formato **INSERT ... VALUES** inserta filas basándose en los valores especificados explícitamente.
+El formato **INSERT ... SELECT** inserta filas seleccionadas de otra tabla o tablas.
+La sintaxis para insertar un registro es la siguiente:
 
 ```sql
-SELECT ((5*4.5)/3)+7;
+INSERT INTO nombreTabla (col_name1, col_name2, ...)
+VALUES (valor_col1, valor_col2, ... );
 ```
-```sqlCREATE TABLE proveedores (
-cod_prov
-VARCHAR(3)
-PRIMARY KEY,
-localidad
-VARCHAR(100)
-DEFAULT NULL,
-nombre
-VARCHAR(100)
-NOT NULL UNIQUE,
-provincia
-ENUM('Alicante','Valencia','Castellón')
+
+La sintaxis para insertar varios registros es la siguiente:
+
+```sql
+INSERT INTO nombreTabla (col_name1, colname2, ...)
+VALUES
+    (valor1_col1, valor1_col2, ... ),
+    (valor2_col1, valor2_col2, ... ),
+    ...
+    (valorn_col1, valorn_col2, ... );
+```
+
+La sintaxis para consultar los registros de una tabla es:
+
+```sql
+SELECT col_name1, col_name2, ...
+FROM nombreTabla
+[WHERE condicion];
+```
+
+La sintaxis para insertar registros desde una consulta SELECT es la siguiente:
+
+```sql
+INSERT INTO nombreTabla2 (col_name1, col_name2, ...)
+SELECT col_name1, col_name2, ...]
+FROM nombreTabla1
+[WHERE condicion];
+```
+
+Si hay campos en la tabla que no se especifican en la instrucción INSERT, se le asignará el valor que se haya indicado en su creación por defecto (DEFAULT) y en caso contrario será NULL.
+
+**Ejemplo**
+
+```sql
+INSERT INTO articulos (codigo, descripcion, precio) VALUES
+    ('0001','TECLADO INALÁMBRICO', 10.45),
+    ('0002','RATÓN INALÁMBRICO', 7.95);
+```
+
+## UPDATE
+**UPDATE** actualiza columnas de filas existentes de una tabla con nuevos valores.
+
+La cláusula **SET** indica las columnas a modificar y los valores que deben tomar.
+
+La cláusula **WHERE**, si se proporciona, especifica qué filas deben ser actualizadas. Si no se especifica, serán actualizadas todas ellas.
+
+La sintaxis para actualizar registros es:
+
+```sql
+UPDATE nombreTabla
+SET campo = valor
+[WHERE condicion];
+```
+
+En la cláusula **SET** utilizaremos valor para indicar una cadena, número, fecha, …
+
+**Ejemplo – Actualizar el nombre a una persona**
+
+```sql
+UPDATE personas
+SET nombre='Juan López'
+WHERE dni='21555666';
+```
+
+Pero también puede ser una expresión.
+
+**Ejemplo – Aumentar la edad de una persona por su cumpleaños**
+
+```sql
+UPDATE personas
+SET edad=edad+1
+WHERE dni='21555666';
+```
+
+**Ejemplo – Aumentar el precio de todos los artículos un 5%**
+
+```sql
+UPDATE articulos
+SET precio = precio + precio * 5 / 100;
+```
+
+## DELETE
+**DELETE** elimina las columnas de una tabla que cumplan la condición dada por la cláusula, y devuelve el número de registros borrados. Sin cláusula **WHERE** elimina todos los registros.
+
+La sintaxis para eliminar registros es:
+
+```sql
+DELETE FROM nombreTabla
+[WHERE condicion];
+```
+
+## Índices
+Los indices son estructuras que se crean en las Bases de Daros para poder controlar la integridad y realizar búsquedas de manera más eficiente.
+
+Al crear una tabla podemos crear varios índices con las siguientes palabras reservadas:
+
+* **KEY o PRIMARY KEY**: un índice único para el campo de clave primaria.
+* **UNIQUE**: un índice único para un campo que sea clave alternativa.
+* **INDEX**: un índice con valores repetidos para optimizar búsquedas sobre un campo.
+
+
+**Ejemplo**
+
+```sql
+CREATE TABLE articulos (
+    codigo VARCHAR(4) PRIMARY KEY,
+    descripcion VARCHAR(100) UNIQUE,
+    categoria VARCHAR(20),
+    precio DECIMAL(10,2),
+    INDEX [nombreIndice] (categoria)
 );
-SELECT 100/3, 100 DIV 3, 100 MOD 3;
 ```
-!!!NOTE  <u>Referencias</u> <br>[MySQL – Operadores aritméticos](http://mysql.conclase.net/curso/?cap=010b#OPE_ARITMETICOS)<br>[MySQL Oficial - Operadores](https://dev.mysql.com/doc/refman/8.0/en/non-typed-operators.html)
 
-Para el uso de literales o cadenas de caracteres basta con colocar unas comillas:
+Como aparece en el ejemplo anterior, **nombreIndice** se puede especificar o no. Si no se hace tomará el nombre del campo.
 
-```sql
-SELECT 'Felicidades';
-```
+**<u>Añadir índices</u>**
+Si deseáramos crear un índice con valores repetidos cuando la tabla ya existe, utilizaríamos el comando siguiente:
 
 ```sql
-SELECT 'Precio', '25*1.21=', 25*1.21;
+CREATE INDEX index_name ON nombreTabla (col_name1,…);
 ```
-
-#### Consultas con funciones predefinidas de información
-A través de funciones ya predefinidas en el MySQL podemos obtener información sobre diferentes aspectos del  estado de nuestra conexión y del sistema. Algunos ejemplos son:
 
-La versión de MySQL y nuestro identificador (ID) de conexión.
-```sql
-SELECT version(), connection_id();
-```
-El usuario actual con el que estamos conectados y la base de datos seleccionada.
-```sql
-SELECT user(), database();
-```
-Para saber la fecha y hora (now()) o sólo la fecha current_date()) del sistema.
-```sql
-SELECT now(), current_date();
-```
-!!!NOTE  <u>Referencias</u> <br>[MySQL – Funciones de información](https://conclase.net/mysql/curso/sqlfun/CURRENT_USER)<br>[MySQL Oficial – Funciones de información](https://dev.mysql.com/doc/refman/8.0/en/information-functions.html)
+Si deseáramos crear un índice cuando con valores únicos cuando la tabla ya existe, utilizaríamos el comando siguiente:
 
-#### Consultas básicas a tablas
 ```sql
-SELECT [DISTINCT] campos
-[FROM table_references
-[WHERE where_definition]
-[ORDER BY {col_name | expr | position} [ASC | DESC] , ...]
-[LIMIT [offset,] row_count]
-```
-Es importante conocer el orden de las cláusulas:
-```txt
-SELECT … FROM … WHERE … ORDER … LIMIT
-```
-#### Utilidad de captura
-En muchas ocasiones nos interesaría llevar un registro de las instrucciones SQL ejecutadas y su resultrado. Conectados con la utilidad `mysql.exe` a MySQL podemos grabar toda la salida a un archivo a través de un comando:
-
-
-```text
-mysql> tee archivo.txt
-mysql> … instrucciones SQL …
-```
-
-Para terminar la salida:
-
-```text
-mysql> notee
+CREATE UNIQUE INDEX index_name ON nombreTabla (col_name1,…);
 ```
 
-#### Ejemplos de las primeras consultas
-Con XAMPP-MySQL importar la BD de jardinería que facilitará el profesor.
+Para añadir una clave primaria a una tabla que no tiene:
 
-**Ejemplo E52501 - Tablas completas**
-Mostrar todos los campos de todos los clientes.
 ```sql
-SELECT *
-FROM clientes;
+ALTER TABLE nombreTabla
+ADD PRIMARY KEY (col_name1,…);
 ```
 
-**Ejemplo E52502 - Seleccionar campos a mostrar**
-Mostrar los campos CodigoCliente, NombreCliente, Telefono, Ciudad, Region, Pais de todos los clientes.
-```sql
-SELECT CodigoCliente, NombreCliente, Telefono, Ciudad, Region, Pais
-FROM clientes;
-```
+**<u>Eliminar índices</u>**
 
-**Ejemplo E52503 – Campos calculados**
-Mostrar los campos CodigoCliente, NombreCliente, LimiteCredito de todos los clientes añadiendo un campo calculado que se el LimiteCreditoMensual como LimiteCredito/12. Haced la division entera para evitar decimales. Utilizaremos el **alias de campo** con la palabra reservada **AS**.
+Para eliminar un índice deberemos saber su nombre:
 
 ```sql
-SELECT CodigoCliente, NombreCliente, LimiteCredito, LimiteCredito DIV 12 AS LimiteCreditoMensual
-FROM clientes;
+DROP INDEX index_name ON nombreTabla;
 ```
 
-**Ejemplo E52504 – No mostrar repetidos**
-Mostrar las regiones (campo Region) todos los clientes evitando resultandos repetidos.
+Para eliminar el índice de clave primaria:
 
 ```sql
-SELECT DISTINCT Region
-FROM clientes;
+ALTER TABLE nombreTabla
+DROP PRIMARY KEY;
 ```
 
-**Ejemplo E52506 – Ordenar registros**
-Mostrar todos los campos de todos los clientes ordenados por LimiteCredito ordenado descendentemente.
+## Restricciones
+#### Restricción de campo clave
+La necesidad de identificar un registro unívocamente nos obliga a crear una restricción por el campo clave, ya que este no podrá ser nulo ni tener valores duplicados.
 
-```sql
-SELECT * FROM clientes
-ORDER BY LimiteCredito DESC;
-```
-
-**Ejemplo E52507 – Limitar el número de registros a mostrar del resultado**
-Utilizando la consulta del ejercicio anterior E5106 mostrar:
-* Sólo los 5 primeros registros
-* Empezando en el tercer registro, mostrar 10 registros
+De hecho no se pueden editar los datos de una tabla que no tenga clave primaria, aunque sí se pueden insertar registros.
 
-```sql
-SELECT * 
-FROM clientes
-ORDER BY LimiteCredito DESC
-LIMIT 5;
-```
+**<u>Crear campo clave al crear la tabla**</u>
 
 ```sql
-SELECT *
-FROM clientes
-ORDER BY LimiteCredito DESC
-LIMIT 2,10;
+CREATE TABLE articulos (
+    codigo VARCHAR(4) PRIMARY KEY,
+    descripcion VARCHAR(100) ,
+    precio DECIMAL(10,2)
+);
 ```
-
-#### Consultas con selección de registros
-Para poder seleccionar registros es necesario indicar la condición que deben cumplir los campos de un registro para ser mostrado. Para ello se utiliza la sección **WHERE** de la instrucción SQL.
-Los operadores relacionales que nos permiten comparar el valor de los campos son:
-
-|Operador              | Función                                 |
-|:----------------------|:-----------------------------------------|
-| **=**                    | Igual a                                 |
-| **<**                   | Menor que                               |
-| **>**                    | Mayor que                               |
-| **<=**                   | Menor o igual                           |
-| **>=**                   | Mayor ou igual                          |
-| **LIKE**                 | Patrón que debe cumprir un campo cadena |
-| **BETWEEN**              | Intervalo de valores                    |
-| **IN**                   | Conjunto de valores                     |
-| **IS NULL**              | Es nulo                                  |
-| **IS NOT NULL**         | No es nulo                              |
 
-Veamos unos cuantos ejemplos:
+**<u>Eliminar la clave primaria**</u>
 
-**Ejemplo E52601 – Buscar un registro por el valor de su clave**
-Mostrar todos los campos del cliente con código igual a 12.
->**Nota:** Al ser el campo clave, el resultado sólo mostrará un registro.
-
 ```sql
-SELECT *
-FROM clientes
-WHERE CodigoCliente = 12;
+ALTER TABLE articulos DROP PRIMARY KEY;
 ```
 
-**Ejemplo E52602 – Buscar registros por el valor de un campo**
-Mostrar todos los campos de los clientes de la Región Madrid.
->**Nota:** Al no ser un campo clave, el resultado puede mostrar más de un registro.
+**<u>Añadir la clave primaria a una tabla existente**</u>
 
 ```sql
-SELECT *
-FROM clientes
-WHERE Region = 'Madrid';
+ALTER TABLE articulos ADD PRIMARY KEY(codigo);
 ```
 
-**Ejemplo E52603 – Buscar registros por comparación del valor de un campo**
-Mostrar todos los campos de los clientes con Límite de Crédito mayor de 50000€.
+**<u>Claves compuestas**</u>**
+En ocasiones la clave está compuesta por varios campos. Por ejemplo en una tabla donde se guardan las revisiones de ITV de vehículos la clave está formada por la fecha y la matrícula del vehículo. Lo podríamos indicar de la siguiente forma:
 
 ```sql
-SELECT *
-FROM clientes
-WHERE LimiteCredito > 50000;
+CREATE TABLE revision_itv (
+    matricula VARCHAR(10),
+    fecha DATE,
+    estado VARCHAR(100),
+    PRIMARY KEY (matricula, fecha)
+);
 ```
 
-**Ejemplo E52604 – Buscar registros por comparación del valor de un campo**
-Mostrar todos los campos de los clientes con Límite de Crédito entre 10000€ y 60000€.
+o bien:
 
 ```sql
-SELECT *
-FROM clientes
-WHERE LimiteCredito BETWEEN 10000 AND 60000;
-```
-
-**Ejemplo E52605 – Buscar registros por comparación del valor de un campo**
-Mostrar todos los campos de los clientes con la Región nula.
+CREATE TABLE revision_itv (
+    matricula VARCHAR(10),
+    fecha DATE,
+    estado VARCHAR(100)
+);
 
-```sql
-SELECT *
-FROM clientes
-WHERE Region IS NULL;
+ALTER TABLE revision_itv ADD PRIMARY KEY (matricula, fecha);
 ```
 
-**Ejemplo E52606 – Ejemplo combinando con el apartado anterior**
-Mostrar los Países de los clientes con la Región nula, sin repetir valores.
-
-```sql
-SELECT DISTINCT Pais 
-FROM clientes
-WHERE Region IS NULL;
-```
+#### Restricción de campo obligatorio
+Cuando un campo no puede tener valores nulos, decimos que es un campo obligatorio.
+En nuestro ejemplo indicaremos la descripción como campo obligatorio par que ningún artículo tenga la descripción vacía.
 
-**Ejemplo E52607 – Ejemplo con LIKE**
-Mostrar los Empleados cuyo email contenga "jardin".
+**<u>Crear campo obligatorio al crear la tabla</u>**
 
 ```sql
-SELECT *
-FROM Empleados
-WHERE Email LIKE '%jardin%';
+CREATE TABLE articulos (
+codigo VARCHAR(4) PRIMARY KEY,
+descripcion VARCHAR(100) NOT NULL,
+precio DECIMAL(10,2)
+);
 ```
-<table>
-<tr><td><b>%</b></td><td>es una cadena de caracteres cualquiera</td></tr>
-<tr><td><b>_</b></td><td>es un sólo carácter cualquiera</td></tr>
-</table>
 
-**Ejemplo E52608 –Ejemplo con IN**
-Mostrar los productos de las gamas 'Aromáticas', 'Herramientas' y Ornamentales'.
+**<u>Eliminar la restricción de campo obligatorio</u>**
 
 ```sql
-SELECT *
-FROM productos
-WHERE Gama IN ('Aromáticas', 'Herramientas', 'Ornamentales');
+ALTER TABLE articulos CHANGE descripcion VARCHAR(100) NULL;
 ```
-
-!!!NOTE  <u>Referencias</u> <br>[MySQL – Consultas](http://mysql.conclase.net/curso/?cap=009)<br>[MySQL – Operadores de comparación](http://mysql.conclase.net/curso/?cap=010a#OPE_COMPARACION)<br>[MySQL Oficial – Operadores de comparación](https://dev.mysql.com/doc/refman/8.0/en/comparison-operators.html)
-
-
-#### Consultas con varias condiciones
-Para poder realizar varias varias condiciones necesitamos combinarlas con operadores lógicos, que en MySQL son:
-
-|Operador|Función|
-|:--------:|:-------:|
-|**AND**|Y|
-|**OR**|O|
-|**NOT**|No|
-
-Veamos unos cuantos ejemplos:
 
+**<u>Añadir la restricción de campo obligatorio en una tabla que ya existe</u>**
 
-**Ejemplo E52701 – Ejemplo con varias condiciones**
-Mostrar codigo y nombre de los Productos que sean de la Gama 'Frutales' y CantidadEnSock sea mayor que 50 unidades.
-
->**Nota:** Mostremos también los campos implicados en las condiciones para comprobar el resultado.
-
 ```sql
-SELECT CodigoProducto, Nombre, Gama,
-FROM productos
-WHERE Gama='Frutales' AND CantidadEnStock > 50);
+ALTER TABLE articulos CHANGE descripcion descripcion VARCHAR(100) NOT NULL;
 ```
 
-**Ejemplo E52702 – Ejemplo con varias condiciones**
-Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcelona'.
+#### Restricción de campo con valores únicos
+Cuando un campo no puede tener valores repetidos, decimos que es un campo único.
+Lo que hace realmente la base de datos es crear un índice con valores únicos.
 
->**Nota:** Mostremos también los campos implicados en las condiciones para comprobar el resultado.
+**<u>Crear campo obligatorio al crear la tabla</u>**
 
 ```sql
-SELECT CodigoCliente, NombreCliente, Ciudad
-FROM clientes
-WHERE Ciudad='Madrid' OR Ciudad='Barcelona';
+CREATE TABLE articulos (
+    codigo VARCHAR(4) PRIMARY KEY,
+    descripcion VARCHAR(100) NOT NULL UNIQUE,
+    precio DECIMAL(10,2)
+);
 ```
-
-!!!NOTE  <u>Referencias</u> <br>[MySQL – Consultas y operadores de comparación](http://mysql.conclase.net/curso/?cap=010#OPE_LOGICOS)<br>[MySQL Oficial – Consultas y operadores de comparación](https://dev.mysql.com/doc/refman/8.0/en/logical-operators.html)
-
-
-#### Consultas con funciones
-Las funciones nos permiten realizar transformaciones de los datos para obtener información. Existen multitud de funciones que procesan diferentes tipos de datos.
-
-***<u>Algunas funciones con cadenas de caracteres</u>***
-| Función                     | Descripción                                                    |
-|:-----------------------------|:---------------------------------------------------------------|
-| **CONCAT(cad1, cad2, ...)**   | Concatena cadenas                                             |
-| **UPPER(cad)**                 | Pasa a mayúsculas una cadena                                  |
-| **LOWER(cad)**                 | Pasa a minúsculas una cadena                                  |
-| **LTRIM(cad)**                | Elimina de la cadena los espacios iniciales y finales         |
-| **LEFT(cad, X)**              | Obtiene los X primeros caracteres de la cadena                |
-| **RIGHT(cad, X)**           | Obtiene los X últimos caracteres de la cadena                 |
-| **LENGTH(cad)**               | Longitud de una cadena                                        |
-| **REPLACE(cad, ant, pos)**     | Obtiene una cadena tomando **cad** como origen y cambiando **ant** por **pos**|
-
-***<u>Algunas funciones numéricas de un campo</u>***
-| Función          | Descripción                                     |
-|:------------------|:------------------------------------------------|
-| **RAND()**           | Número aleatorio entre 0 y 1                   |
-| **POW(num, exp)**    | Obtiene la potencia de num^exp                  |
-| **FLOOR(num)**       | Obtiene la parte entera de un número decimal    |
-| **ROUND(num, X)**    | Redondea un número a X decimales                |
-| **SIGN(num)**        | Devuelve 1 para positivo, 0 para 0 y -1 para negativo |
-| **ABS(num)**         | Obtiene el valor absoluto de un número          |
-
-***<u>Algunas funciones de fechas de un campo*</u>**
-| Función                  | Descripción                                      |
-|:-------------------------|:-------------------------------------------------|
-| **YEAR(campo)**            | Muestra el año del valor de un campo de tipo fecha |
-| **MONTH(campo)**           | Muestra el mes del valor de un campo de tipo fecha |
-| **DAY(campo)**             | Muestra el día del valor de un campo de tipo fecha |
-| **DAYNAME(campo)**         | Muestra el nombre del día de la semana del campo   |
-| **DAYOFWEEK(campo)**       | Devuelve un número indicando el día de la semana de un campo fecha: <br>**Nota:** 1=Domingo, 2=Lunes, 3=Martes, 4=Miércoles, 5=Jueves, 6=Viernes, 7=Sábado. |
-
-***<u>Algunas funciones numéricas con varios registros</u>***
-| Función       | Descripción                                      |
-|:--------------|:-------------------------------------------------|
-| **COUNT(*)**     | Cuenta los registros seleccionados               |
-| **MIN(campo)**   | Valor mínimo del campo de los registros seleccionados |
-| **MAX(campo)**   | Valor máximo del campo de los registros seleccionados |
-| **SUM(campo)**   | Suma de los valores del campo                    |
-| **AVG(campo)**   | Media de los valores del campo                   |
-
-!!!Note <u>Referencias</u><br>[MySQL w3schools – Funciones de MySQL](https://www.w3schools.com/sql/sql_ref_mysql.asp)<br>[MySQL Oficial – Funciones](https://dev.mysql.com/doc/refman/8.0/en/functions.htm)
-
-
-**<u>Ejemplos de funciones para campos calculados y para condiciones</u>**
-
-**Ejemplo E52801 – Ejemplo con funciones**
-Mostrar código, nombre y "precio de venta al público" de los productos, pero ese precio debe ser con IVA incluido, es decir, agregarle al PrecioVenta el 21% multiplicándolo por 1.21. Asignar el alias **pvp** al nuevo campo calculado.
 
+**<u>Eliminar la restricción de campo obligatorio</u>**
 ```sql
-SELECT CodigoProducto, Nombre, PrecioVenta, ROUND(PrecioVenta * 1.21, 2) AS pvp
-FROM Productos;
+ALTER TABLE articulos DROP INDEX descripcion;
 ```
 
-**Ejemplo E52802 – Ejemplo con funciones en las condiciones**
-Seleccionar en la consulta anterior los productos que tengan el nuevo campo pvp mayor de 100€
+**<u>Añadir la restricción de campo obligatorio en una tabla que ya existe</u>**
 
 ```sql
-SELECT CodigoProducto, Nombre, PrecioVenta, ROUND(PrecioVenta * 1.21, 2) AS pvp
-FROM Productos
-WHERE ROUND(PrecioVenta * 1.21, 2) > 100;
+ALTER TABLE articulos ADD UNIQUE(descripcion);
 ```
 
-**<u>Ejemplos de funciones con cadenas de caracteres</u>**
+#### Restricción de campo por clave ajena
+Como ya hemos visto en los esquemas lógicos relacionales obtenidos de los esquemas conceptuales, existen claves ajenas o extranjeras que contienen valores de la clave primaria de otra tabla con la que se relacionan.
 
-**Ejemplo E52803 – Ejemplo con funciones**
-Seleccionar de los empleados el nombre completo (NombreCompleto) concatenando el nombre y los dos apellidos.
+En un esquema que tiene localidades y provincias, donde indicamos en cada localidad de qué provincia es, podríamos tener las siguientes tablas:
 
 ```sql
-SELECT CONCAT(Nombre,' ',Apellido1,' ',Apellido2) AS NombreCompleto
-FROM empleados;
-```
-
-**Ejemplo E52804 – Ejemplo con funciones**
-Obtener la inicial del nombre de todos los empleados.
-
-```sql
-SELECT LEFT(Nombre,1) AS inicial 
-FROM empleados;
-```
-
-**Ejemplo E52805 – Ejemplo con funciones**
-Obtener el nombre de los empleados todo en mayúsculas.
+CREATE TABLE provincias (
+        cod_prov INT(2) PRIMARY KEY,
+        provincia VARCHAR(40)
+);
 
-```sql
-SELECT UCASE(Nombre)
-FROM empleados;
+CREATE TABLE localidades (
+    cod_loc INT(5) PRIMARY KEY,
+    localidad VARCHAR(100),
+    cod_provincia INT(2)
+);
 ```
 
-**Ejemplo E52806 – Ejemplo con funciones**
-Obtener el código de las oficinas pero sustituyendo el guión por la barra, es decir, el '-' por '/'.
+**<u>Crear clave ajena al crear la tabla</u>**
 
 ```sql
-SELECT REPLACE(CodigoOficina,'-','/')
-FROM oficinas;
+CREATE TABLE localidades (
+    cod_loc INT(5) PRIMARY KEY,
+    localidad VARCHAR(100),
+    cod_provincia INT(2),
+    FOREIGN KEY (cod_provincia) REFERENCES provincias (cod_prov)
+);
 ```
 
-**Ejemplo E52807 – Ejemplo con funciones**
-Obtener la primera palabra del nombre del proveedor de todos los productos.
+Cuando creamos una relación, y por lo tanto una clave ajena, se crean dos elementos en la BD.
+* Índice: un índice (en nuestro ejemplo INDEX (cod_provincia)) con el nombre del campo para la clave ajena con valores repetidos, ya que puede ser una relación 1 → N y por lo tanto tendrá que repetir valores. En nuestro ejemplo, varias localidades tendrán la misma provincia.
+* Relación: se asigna a la relación un nombre por defecto formado por el nombre de la tabla, 'ibfk' y un numero. En el caso anterior será: localidades_ibfk1.
 
-```sql
-SELECT SUBSTRING_INDEX(Proveedor, ' ', 1)
-FROM productos;
-```
 
-**Ejemplo E52808 – Ejemplo con funciones**
-Obtener el código de los productos pero conel orden de los caracteres invertido.
+Si queremos darle un nombre nosotros utilizaremos **CONSTRAINT**:
 
 ```sql
-SELECT CodigoProducto, REVERSE(CodigoProducto)
-FROM productos;
+CREATE TABLE localidades (
+    cod_loc INT(5) PRIMARY KEY,
+    localidad VARCHAR(100),
+    cod_provincia INT(2),
+    CONSTRAINT provincias_cod_prov FOREIGN KEY (cod_provincia) REFERENCES provincias (cod_prov)
+);
 ```
 
-**Ejemplo E52809 – Ejemplo con funciones**
-Obtener un gráfico de barras para el stock de cada producto. Utilizaremos el carácter '|' por cada unidad de stock.
-
-```sql
-SELECT Codigoproducto,REPEAT('|',CantidadEnStock)
-FROM productos;
-```
+De esta forma se utilizará el valor de CONSTRAINT tanto para el índice como para la relación.
 
-**Ejemplo E52810 – Ejemplo con funciones**
-Obtener el email de cada empleado teniendo en cuenta que el usuario es su nombre en minusculas y el dominio '@iesdoctorbalmis.com'
+**<u>Eliminar la restricción de clave ajena</u>**
+Si tenemos el **CONSTRAINT** lo utilizaremos:
 
 ```sql
-SELECT CONCAT(LCASE(nombre),'@iesdoctorbalmis.com') AS email
-FROM empleados;
+ALTER TABLE localidades DROP FOREIGN KEY provincias_cod_prov;
 ```
 
-**Ejemplo E52811 – Ejemplo con funciones**
-Obtener la abreviatura del nombre y primer apellidos de los empleados concatenando la inicial del nombre y la inicial del apellido1
+En caso contrario eliminaremos el que crea por defecto:
 
 ```sql
-SELECT CONCAT(LEFT(Nombre,1),LEFT(Apellido1,1)) AS inicial
-FROM empleados;
+ALTER TABLE localidades DROP FOREIGN KEY localidades_ibkf_1;
 ```
 
-**<u>Ejemplos de funciones numéricas</u>**
+También tendremos que decidir si deseamos eliminar el índice existente o no. En caso de desear eliminarlo deberemos indicarlo con la instrucción correspondiente según hayamos indicado CONSTRAINT o no:
 
-**Ejemplo E52812 – Ejemplo con funciones**
-Obtener un número aleatorio entre 0 y 9.
-
 ```sql
-SELECT FLOOR(RAND()*10);
+ALTER TABLE localidades DROP INDEX provincias_cod_prov;
+ALTER TABLE localidades DROP INDEX cod_provincia;
 ```
 
-**<u>Ejemplos de funciones de fechas</u>**
-**Ejemplo E52813 – Ejemplo con funciones**
-Mostrar en campos diferentes el año, el mes y el día de la fecha de los pedido.
+**<u>Añadir la restricción de clave ajena a una tabla existente</u>**
 
 ```sql
-SELECT YEAR(FechaPedido), MONTH(FechaPedido), DAY(FechaPedido)
-FROM pedidos;
+ALTER TABLE localidades ADD 
+FOREIGN KEY (cod_provincia) REFERENCES provincias (cod_prov);
 ```
 
-**Ejemplo E52814 – Ejemplo con funciones**
-Mostrar todos los campos de pedidos realizados en enero del 2009.
+o con CONSTRAINT:
 
 ```sql
-SELECT *
-FROM pedidos
-WHERE YEAR(FechaPedido) = 2009 AND MONTH(FechaPedido) = 1;
+ALTER TABLE localidades ADD CONSTRAINT provincias_cod_prov
+FOREIGN KEY (cod_provincia) REFERENCES provincias (cod_prov);
 ```
 
-**Ejemplo E52815 – Ejemplo con funciones**
-Mostrar todos los campos de pedidos realziados en lunes.
+#### Restricción por borrado o actualización de una clave ajena
+Una de las acciones más importantes para mantener la integridad en una base de datos es identificar correctamente la acción a realizar cuando eliminamos o actualizamos el valor de la clave ajena de un registro.
 
-```sql
-SELECT *
-FROM pedidos
-WHERE DAYOFWEEK(FechaEntrega) = 2;
-```
+En el caso de vaciar el campo **localidades.cod_provincia** podemos hacer varias acciones:
 
-**<u>Ejemplos de funciones numéricas con varios registros</u>**
+* **RESTRICT**: Es el valor por defecto. El servidor MySQL rechazará la operación de eliminación o actualización para la tabla padre (provincias) si hay un valor de clave externa relacionado en la tabla referenciada (localidades), es decir, no se puede en provincias eliminar un registro o cambiar su clave, si existen localidades de esa provincia.
+* **NO ACTION**: Pertenece al SQL estándar. En MySQL es equivalente a RESTRICT. Algunos sistemas de base de datos tienen verificaciones diferidas, y NO ACTION es un cheque diferido. En MySQL, las restricciones de clave externa se verifican inmediatamente, por lo que NO ACCIÓN es lo mismo que RESTRICT.
+* **SET NULL**: Si en la tabla padre (provincias) se elimina un registro o se actualiza su clave, si hay algún valor de clave externa relacionado en la tabla referenciada (localidades) se actualizará el valor a NULL.
+Si especifica una acción SET NULL, asegúrese de que no ha declarado las columnas en la tabla secundaria como NOT NULL.
 
-**Ejemplo E52816 – Ejemplo con funciones**
-Mostrar el número total de pagos que se han recibido.
+* **CASCADE**:
+    * Al **borrar**, si en la tabla padre (provincias) se elimina un registro, se eliminarán también todos los registros de la tabla referenciada (localidades) que tenga este valor en su calve ajena.
+    * Al **actualizar**, si en la tabla padre (provincias) se actualiza la clave de un registro, se actualizarán también todos los registros de la tabla referenciada (localidades) que tenga este valor en su clave ajena con el nuevo valor.
 
-```sql
-SELECT COUNT(*)
-FROM pagos;
-```
+Para indicar estas acciones añadiremos a la instrucción de FOREIGN KEY ALGUNA de las siguientes cláusulas:
+* ON DELETE RESTRICT
+* ON DELETE SET NULL
+* ON DELETE CASCADE
+* ON UPDATE RESTRICT
+* ON UPDATE SET NULL
+* ON UPDATE CASCADE
 
-**Ejemplo E52817 – Ejemplo con funciones**
-Mostrar la cantidad en euros total que nos han ingresado.
+Si por ejemplo deseamos que al eliminar una provincia se eliminen todas las localidades dependientes, y que no permita cambiar el identificador de provincias si tiene localidades, la instrucción de creación de esa clave ajena sería:
 
 ```sql
-SELECT SUM(Cantidad)
-FROM pagos;
+ALTER TABLE localidades ADD CONSTRAINT provincias_cod_prov
+FOREIGN KEY (cod_provincia) REFERENCES provincias (cod_prov)
+ON DELETE CASCADE
+ON UPDATE RESTRICT;
 ```
 
-**Ejemplo E52818 – Ejemplo con funciones**
-Mostrar el importe del pago más pequeño y el importe de pago más grande recibido.
+* **SET DEFAULT**: <u>No disponible para MySQL con el motor de base de datos InnoDB</u>. Si en la tabla padre (provincias) se elimina un registro o se actualiza su clave, si hay algún valor de clave externa relacionado en la tabla referenciada (localidades) se actualizará el valor por defecto de la clave ajena.
 
-```sql
-SELECT MIN(Cantidad), MAX(Cantidad)
-FROM pagos;
-```
 
-## Consultas SELECT de AGRUPACIÓN
-#### Consultas de agrupación
-Cuando necesitamos agrupar varios registros para realizar operaciones para sumar, contar, o calcular la media, el mínimo o el máximo, necesitaremos realizar una instrucción SELECT indicando qué registros agrupamos, es decir, qué campos mostramos de los registros comunes y sobre qué campos realizamos la operación.
-La sintaxis para realizar una consulta agrupada a una tabla es:
+#### Otras restricciones y valores por defecto
 
-```sql
-SELECT [DISTINCT] campos
-[FROM table_references
-[WHERE where_definition]
-[GROUP BY {col_name | expr | position} [ASC | DESC], ... ]
-[HAVING where_definition]
-[ORDER BY {col_name | expr | position} [ASC | DESC] , ...]
-[LIMIT [offset,] row_count]
-```
-Es importante conocer el orden de las cláusulas:
+**<u>Enteros positivos</u>**
+Al definir un campo podemos indicar que sólo se aceptarán números positivos con la palabra reservada **UNSIGNED**:
 
 ```sql
-SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER … LIMIT
+CREATE TABLE articulos (
+    codigo VARCHAR(3) PRIMARY KEY,
+    descripcion VARCHAR(100) NOT NULL,
+    precio DECIMAL(10,2) UNSIGNED DEFAULT 0
+);
 ```
 
+**<u>Fecha de alta y de modificación</u>**
+Cuando deseamos tener en una tabla la fecha de alta y modificación podemos utilizar campos que se creen y actualicen automáticamente.
+Con **DEFAULT CURRENT_TIMESTAMP** un campo obtendrá por defecto el valor de la fecha y hora del sistema.
 
-#### Ejemplos de las primeras consultas agrupadas
-Con XAMPP-MySQL importar la BD de jardinería que facilitará el profesor.
+Con **ON UPDATE CURRENT_TIMESTAMP** un campo actualizará el valor con la fecha y hora del sistema cada vez que se actualice el registro.
 
-**Ejemplo E43201 - Contar**
-Mostrar el número de clientes (nombrar el nuevo campo NumClientes) que tenemos en cada ciudad.
-
 ```sql
-SELECT Ciudad, COUNT(*) AS NumClientes
-FROM clientes
-GROUP BY Ciudad;
+CREATE TABLE ejemplo (
+    codigo VARCHAR(2) PRIMARY KEY,
+    fecha_alta DATETIME DEFAULT CURRENT_TIMESTAMP,
+    fecha_modificacion DATETIME ON UPDATE CURRENT_TIMESTAMP
+);
 ```
 
-**Ejemplo E43202 – Sumar operaciones numéricas**
-Mostrar el pedido y el importe total (ImpTotal) de todas las líneas de cada pedido. En la tabla detallepedidos tenemos el CodigoPedido, y la Cantidad y PrecioUnidad de cada artículo del pedido. Deberemos sumar Cantidad * PrecioUnidad de cada línea y luego sumarlas todas.
+**<u>Rellenado a ceros</u>**
+Cuando deseemos rellenar con ceros a la izquierda un campo codigo para que estén ordenados utilizaremos la palabra reservada **ZEROFILL**.
 
 ```sql
--- Sin Agrupar
-SELECT CodigoPedido, Cantidad * PrecioUnidad AS ImpLinea
-FROM detallepedidos;
-```
+CREATE TABLE ejemplo (
+    codigo INT(4) ZEROFILL PRIMARY KEY,
+    descripcion VARCHAR(50) NOT NULL
+);
 
-```sql
--- Agrupando por Pedido
-SELECT CodigoPedido, SUM(Cantidad * PrecioUnidad) AS ImpTotal
-FROM detallepedidos
-GROUP BY CodigoPedido;
+INSERT INTO ejemplo (codigo, descripcion) VALUES ('1','registro uno');
 ```
 
-Podemos añadir también filtros que deban cumplir los registros mediante condiciones en la cláusula **WHERE**.
+**<u>Clave primaria automática - Autoincremento</u>**
+Cuando tenemos una entidad donde almacenamos registros pero en el esquema conceptual del modelo entidad-relación no teníamos una clave primaria, tenemos que añadir un atributo **codigo** para disponer de una clave primaria.
 
-**Ejemplo E43203 – Agrupaciones con condiciones WHERE**
-Mostrar el número de artículos (NumArticulos) de cada Gama cuyas PrecioVenta mayor que 20€.
+Lo normal es que esta información no se la pidamos al usuario, ya que en el sistema a analizar no aparecía esta información, por lo que se suele dejar que sea el sistema el que genere este codigo automáticamente con la palabra reservada **AUTO_INCREMENT**.
 
 ```sql
-SELECT Gama, COUNT(*) AS NumArticulos
-FROM productos
-WHERE PrecioVenta > 20
-GROUP BY Gama;
+CREATE TABLE ejemplo (
+    codigo INT(4) AUTO_INCREMENT PRIMARY KEY,
+    descripcion VARCHAR(50) NOT NULL
+);
+I
+INSERT INTO ejemplo (descripcion) VALUES ('registro uno');
 ```
-
-Pero puede ser que la condición a cumplir sea sobre los campos calculados. En estos casos, la condición irá en la cláusula **HAVING**.
 
-**Ejemplo E43204 – Agrupaciones con condiciones HAVING**
-Mostrar las Gamas de artículos que tengan más de 100 diferentes. Mostrar también el número de artículos (NumArticulos).
-S
-```sql
-ELECT Gama, COUNT(*) AS NumArticulos
-FROM productos
-GROUP BY Gama
-HAVING COUNT(*) > 100;
-```
+En phpMyAdmin, seleccionando la tabla y luego pulsando en la pestaña operaciones, podemos ver y cambiar el valor siguiente de AUTO_INCREMENT.
 
-Incluso podemos tener consultas que combinen **WHERE y HAVING** simultáneamente.
+#### Restricciones avanzadas
+**<u>Campos calculados</u>**
+Una solución para los campos calculados es no crearlos en las tablas sino en las consultas con funciones de MySQL.
 
-**Ejemplo E43205 – Agrupaciones con condiciones WHERE y HAVING**
-Mostrar los clientes que hayan realizado más de 1 pago de cantidad superior a los 3000€.
+Este tipo de cálculos y funciones los veremos en la siguiente UD4 donde trabajaremos el lenguaje de consultas SQL con las instrucciones SELECT.
 
-```sql
-SELECT CodigoCLiente, COUNT(*) AS NumPagos
-FROM pagos
-WHERE Cantidad > 3000
-GROUP BY CodigoCliente
-HAVING COUNT(*) > 1;
-```
+De todas formas, para aquellos que deseen ir practicando, puedes consultar las funciones disponibles en:
+[https://dev.mysql.com/doc/refman/8.0/en/func-op-summary-ref.html](https://dev.mysql.com/doc/refman/8.0/en/func-op-summary-ref.html).
 
-## Consultas SELECT multitabla
-#### Consultas multitabla de cruce (relación 1-N)
-Las consultas multitabla nos van a permitir procesar información de varias tablas conjuntamente. La sintaxis es la misma que hemos visto anteriormente para la sintaxis SELECT, pero en la cláusula FROM tendremos varias tablas.
+**<u>Filtro de valores válidos</u>**
+En el lenguaje de SQL existe la palabra reservada **CHECK** para indicar la condición que debe cumplir un valor para ser válido.
 
-**Ejemplo E44101 – SELECT mutitabla**
-Mostrar los valores de la tabla **pagos** añadiendo el campo **NombreCliente**.
+Por ejemplo: La nota de un alumno debe estar comprendida entre 0 y 10.
 
 ```sql
-SELECT clientes.NombreCliente, pagos.*
-FROM pagos, clientes
-WHERE pagos.CodigoCliente = clientes.CodigoCliente;
+CREATE TABLE notas (
+    nia VARCHAR(8),
+    asignatura VARCHAR(15),
+    nota DECIMAL (6,2),
+    CONSTRAINT check_nota CHECK ( (nota>=0) and (nota<=10) )
+);
 ```
 
-¿Cuántos registros tienen la tabla pagos?
-¿Cuántos registros tienen la tabla clientes?
-¿Cuántos registros devuelve la consulta anterior?
-Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
+Estas condiciones funcionan perfectamente en muchos SGBD, pero en MySQL, aunque no dan error no se tienen en cuenta.
 
-**Ejemplo E44102 – SELECT mutitabla**
-Mostrar los valores de la tabla **pedidos** añadiendo el campo **NombreCliente**.
+Por lo tanto, si deseamos controlar estas restricciones deberemos hacer uso de **disparadores o triggers**. En la unidad UD5 profundizaremos en los disparadores (triggers en inglés) pero ahora introduciremos su uso.
 
+Para crear un disparador para controlar valores de un campo al insertar usaremos la siguiente sintaxis:
+
 ```sql
-SELECT clientes.NombreCliente, pedidos.*
-FROM pedidos, clientes
-WHERE pedidos.CodigoCliente = clientes.CodigoCliente;
+/* Crear el disparador */
+DELIMITER //
+CREATE TRIGGER nombretabla_before_insert BEFORE INSERT ON nombretabla
+BEGIN
+    FOR EACH ROW BEGIN
+        IF (condicion error) THEN
+            SIGNAL SQLSTATE '45000';
+            SET MESSAGE_TEXT = 'nuevo mensaje de error';
+        END IF;
+    END;
+END //
+DELIMITER ;
 ```
-
-¿Cuántos registros tienen la tabla pedidos?
-¿Cuántos registros tienen la tabla clientes?
-¿Cuántos registros devuelve la consulta anterior?
-Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
 
-**Ejemplo E44103 – SELECT mutitabla**
-Mostrar los valores de la tabla **empleados** añadiendo los campos **Ciudad** y **Pais de la Oficina**.
+El ejemplo de la nota anterior quedaría:
 
 ```sql
-SELECT oficinas.Ciudad, oficinas.Pais, empleados.*
-FROM oficinas, empleados
-WHERE oficinas.CodigoOficina = empleados.CodigoOficina;
+/* Crear el disparador */
+DELIMITER //
+CREATE TRIGGER notas_before_insert BEFORE INSERT ON notas
+BEGIN
+    FOR EACH ROW BEGIN
+        IF ( (NEW.nota<0) or (NEW.nota>10) ) THEN
+            SIGNAL SQLSTATE '45000';
+            SET MESSAGE_TEXT = 'Compruebe el valor del campo nota que debe estar comprendido entre 0 y 10 puntos';
+        END IF;
+    END;
+END //
+DELIMITER ;
 ```
 
-¿Cuántos registros tienen la tabla oficinas?
-¿Cuántos registros tienen la tabla empleados?
-¿Cuántos registros devuelve la consulta anterior?
-Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
+**<u>Transformaciones antes de grabar</u>**
+Al igual que en el apartado anterior CHECK nos permite realizar estos cambios.
 
-En relaciones reflexivas, debemos cruzar una tabla consigo misma. Para poder hacer esto, tenemos que asignar un alias a cada tabla para diferenciarlas.
-Veamos un ejemplo.
+Por ejemplo, si queremos que un campo de tipo carácter sólo almacene caracteres en mayúsculas, lo haríamos con la función UPPER() dentro de una restricción CHECK.
 
-**Ejemplo E44104 – SELECT mutitabla**
-Mostrar los valores de la tabla **empleados** añadiendo los campos **Nombre y Apellido1 de su jefe**.
+Por ejemplo: La asignatura de un alumno debe estar en mayúsculas.
 
 ```sql
-SELECT jefes.Nombre, jefes.Apellido1, trabajadores.*
-FROM empleados as trabajadores, empleados as jefes
-WHERE trabajadores.CodigoJefe = jefes.CodigoEmpleado;
+CREATE TABLE notas (
+    nia VARCHAR(8),
+    asignatura VARCHAR(15),
+    nota DECIMAL (6,2),
+    CONSTRAINT check_asignatura CHECK (asignatura = UPPER(asignatura) )
+);
 ```
 
-¿Cuántos registros tienen la tabla empleados?
-¿Cuántos registros devuelve la consulta anterior?
-Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
+En MySQL, al no disponer de CHECK utilizaremos el disparador **BEFORE INSERT** como en el apartado anterior.
 
-También podemos relacionar más de una tabla. Veamos un ejemplo.
-
-**Ejemplo E44105 – SELECT mutitabla**
-Mostrar los siguientes valores:
-* De pedidos: CodigoPedido y FechaPedido
-* De detallepedidos: CodigoProducto y Cantidad
-* De productos: Nombre y Gama
-
 ```sql
-SELECT pedidos.CodigoPedido, pedidos.FechaPedido, detallepedidos.CodigoProducto, detallepedidos.Cantidad, productos.Nombre, productos.Gama
-FROM pedidos, detallepedidos, productos
-WHERE pedidos.CodigoPedido = detallepedidos.CodigoPedido AND detallepedidos.CodigoProducto = productos.CodigoProducto;
+/* Crear el disparador */
+DELIMITER //
+CREATE TRIGGER notas_before_insert BEFORE INSERT ON notas
+    BEGIN
+        FOR EACH ROW BEGIN
+            SET NEW.asignatura = UPPER(NEW.asignatura);
+        END;
+    END //
+DELIMITER ;
 ```
-
-¿Cuántos registros tienen la tabla empleados?
-¿Cuántos registros devuelve la consulta anterior?
-Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
 
-Se puede observar que cuando se muestran datos de la tabla padre de relaciones con cardinalidad 1-N, estos se repiten ya que pueden tener muchos hijos. En el ejemplo anterior se puede ver claramente que los datos de la tabla pedidos se repiten tantas veces como líneas de detalle tengan.
+Para eliminar una restricción de TRIGGER disponemos de la instrucción **DROP**.
 
-#### Consultas multitabla mediante INTERSECCIÓN
-Las consultas de intersección se pueden ejecutar con la cláusula
-**tabla1 INNER JOIN tabla2 ON condicion**
-El ejemplo anterior quedaría:
-
-**Ejemplo E44201 – SELECT mutitabla con INNER JOIN**
-Mostrar los valores de la tabla **pagos** añadiendo el campo **NombreCliente**.
-
 ```sql
-SELECT clientes.NombreCliente, pagos.*
-FROM (pagos INNER JOIN clientes ON pagos.CodigoCliente = clientes.CodigoCliente);
+DROP TRIGGER notas_before_insert;
 ```
 
-Veamos otro ejemplo de consulta multitabla:
+## Tablas a partir de consultas
+Existe la posibilidad de crear tablas a partir de consultas de otras tablas.
 
-**Ejemplo E44202 – SELECT mutitabla con INNER JOIN**
-Mostrar los valores de la tabla **detallepedidos** pero añadiendo el campo FechaPedido y Estado de la tabla pedidos. Comprueba que el resultado contiene el mismo número de registros que detallepedidos.
+La sintaxis es muy sencilla, pues si tenemos una consulta de tipo:
 
 ```sql
-SELECT pedidos.FechaPedido, pedidos.Estado, detallepedidos.*
-FROM (detallepedidos INNER JOIN pedidos ON detallepedidos.CodigoPedido = pedidos.CodigoPedido);
+SELECT campo1, campo2
+FROM nombretabla
+WHERE condicion;
 ```
 
-En las consultas multitabla mediante intersección, es posible que haya registros que no se muestren por no haber cruce entre entre ellos. Por ejemplo, si queremos saber el número de pedidos realizados por cada cliente, podríamos pensar en realizar la siguiente consulta:
+Podríamos obtener una tabla con la siguiente instrucción SQL:
 
-**Ejemplo E44203 – SELECT mutitabla con INNER JOIN**
-
 ```sql
-SELECT clientes.CodigoCliente, clientes.NombreCliente, COUNT(pedidos.CodigoPedido)
-FROM clientes INNER JOIN pedidos ON clientes.CodigoCliente = pedidos.CodigoCliente
-GROUP BY clientes.CodigoCliente, clientes.NombreCliente;
+CREATE TABLE nuevatabla
+SELECT campo1, campo2 FROM nombretabla WHERE condicion;
 ```
 
-En la tabla de clientes hay 36 registros, pero el resultado de la consulta sólo muestra 19. Esto ocurre porque hay clientes que no han realizado todavía ningún pedido. Para evitar esto, se introduce un cambio en la consulta que permite incluir todos los registros de una tabla de la intersección, que en nuestro caso es clientes. Lo haremos con la cláusula **LEFT** de la relación **clientes-pedidos**:
+Pero eso sí, la crea sin clave primaria, ni restricciones ni índices.
 
-**Ejemplo E44204 – SELECT mutitabla con LEFT JOIN**
+Por ejemplo, si queremos una copia completa de la tabla provincias en provincias2:
 
 ```sql
-SELECT clientes.CodigoCliente, clientes.NombreCliente, COUNT(pedidos.CodigoPedido)
-FROM clientes LEFT JOIN pedidos ON clientes.CodigoCliente = pedidos.CodigoCliente
-GROUP BY clientes.CodigoCliente, clientes.NombreCliente;
+CREATE TABLE provincias2
+SELECT * FROM provincias;
 ```
 
-Veamos otro ejemplo:
+## Vistas
+Una **vista** es una consulta que se presenta como una tabla (virtual) a partir de un conjunto de tablas en una base de datos relacional.
 
-**Ejemplo E44205 – SELECT mutitabla con LEFT JOIN**
-Mostrar el CodigoProducto y nombre de la tabla productos junto el la suma de la cantidad (SumCantidad) pedida en todos los pedidos existentes. (tabla detallepedidos).
->Nota: Tened en cuenta que de los productos que no haya habido ningún pedido debe aparecer 0.
+Las vistas tienen la misma estructura que una tabla: filas y columnas. La única diferencia es que sólo se almacena de ellas la definición, no los datos. Los datos que se recuperan mediante una consulta a una vista se presentarán igual que los de una tabla. De hecho, si no se sabe que se está trabajando con una vista, nada hace suponer que es así. Al igual que sucede con una tabla, se pueden insertar, actualizar, borrar y seleccionar datos en una vista. Aunque siempre es posible seleccionar datos de una vista, en algunas condiciones existen restricciones para realizar el resto de las operaciones sobre vistas.
 
-```sql
-SELECT productos.CodigoProducto, productos.Nombre, SUM(detallepedidos.Cantidad) AS SumCantidad
-FROM productos LEFT JOIN detallepedidos ON productos.CodigoProducto = detallepedidos.CodigoProducto
-GROUP BY productos.CodigoProducto, productos.Nombre;
-```
+Una vista se especifica a través de una expresión de consulta (una sentencia SELECT) que la calcula y que puede realizarse sobre una o más tablas. Sobre un conjunto de tablas relacionales se puede trabajar con un número cualquiera de vistas.
 
-La cláusula **RIGHT** permitiría que se mostrarán los de la segunda tabla en la relación, en vez de **LEFT** que muestra la primera.
+La mayoría de los SGBD soportan la creación y manipulación de vistas. Las vistas se crean cuando se necesitan hacer varias sentencias para devolver una tabla final.
 
-#### Consultas multitabla mediante UNION
-En ocasiones necesitamos unir el resultado de dos consultas. Para ello el resultado debe mostrar los mismo campos y con los mismos tipos de datos.
-Por ejemplo, tenemos por un lado los clientes que han realizado pagos posteriores al 31/01/2009:
+La sintaxis es muy sencilla, pues si tenemos una consulta de tipo:
 
 ```sql
-SELECT DISTINCT CodigoCliente 
-FROM pagos
-WHERE FechaPago > '2009-01-31';
+SELECT campo1, campo2
+FROM nombretabla
+WHERE condicion;
 ```
 
-Por otra parte, tenemos los clientes que han realizado pedidos posteriores al 31/03/2009:
+Podríamos obtener una tabla con la siguiente instrucción SQL:
 
 ```sql
-SELECT DISTINCT CodigoCliente 
-FROM pedidos
-WHERE FechaPedido > '2009-03-31';
+CREATE VIEW nuevaVista AS
+SELECT campo1, campo2
+FROM nombretabla
+[WHERE condicion];
 ```
 
-Los clientes que están en las dos consultas son 16, 23 y 27, pero hay clientes que han realizado pagos y no pedidos, y viceversa.
+Por ejemplo, si queremos una vista de la tabla personas que sean de la provincia = '1':
 
-**Ejemplo E44301 – SELECT mutitabla con UNION**
-Deseamos saber el CodigoCliente de los clientes que han realizado pagos posteriores al 31/03/2009 o pedidos posteriores al 31/03/2009.
-
 ```sql
-SELECT DISTINCT CodigoCliente
-FROM pagos
-WHERE FechaPago > '2009-01-31'
-UNION
-SELECT DISTINCT CodigoCliente
-FROM pedidos
-WHERE FechaPedido > '2009-03-31';
+CREATE VIEW personas1 AS
+SELECT * FROM personas WHERE cod_provincia='1';
 ```
-
-#### Consultas multitabla mediante SUBCONSULTAS
-Una **subconsulta** es una instrucción SELECT que se usa dentro de otra instrucción SELECT.
 
-Una **subconsulta** será **correlacionada** si aparecen datos de la consulta, es decir, si no se puede ejecutar de forma independiente.
+#### Vistas para aplicar restricciones
+A estas consultas podemos añadir restricciones con la cláusula WHERE para filtrar valores válidos simplemente añadiendo **WITH CHECK OPTION**:
 
-Existen varias situaciones donde usaremos subconsultas. A continuación veremos algunos ejemplos.
+```sql
+CREATE VIEW nuevatabla AS
+SELECT campo1, campo2
+FROM nombretabla
+WHERE condicion
+WITH CHECK OPTION;
+```
 
-**<u>Subconsultas en WHERE con operador de comparación</u>**
-Para el siguiente ejemplo, primero buscamos la cantidad media que pagan los clientes.
+Por ejemplo si tenemos una tabla denominada notas_data
 
 ```sql
-SELECT AVG(Cantidad) AS CantidadMedia 
-FROM pagos;
+CREATE TABLE notas_data (
+    nia VARCHAR(8),
+    asignatura VARCHAR(15),
+    nota DECIMAL (6,2)
+);
 ```
 
-**Ejemplo E44401 – Subconsulta en WHERE con operador de comparación**
-Mostrar los registros de pagos que tengan cantidades superiores a la media.
+Podríamos crear una vista para utilizarla como tabla con la restricción de valor de nota entre 0 y 10:
 
 ```sql
-SELECT *
-FROM pagos
-WHERE Cantidad > (SELECT AVG(Cantidad) AS CantidadMedia FROM pagos);
+CREATE VIEW notas AS
+SELECT nia, asignatura, nota FROM notas_data WHERE (nota >= 0) and (nota <= 10)
+WITH CHECK OPTION;
 ```
 
-**<u>Subconsultas en WHERE con operador IN</u>**
-El operador IN devuelve verdadero si el valor del campo de un registro está en el conjunto de valores devuelto por la subsonsulta.
+De esta forma nos evitamos tener que crear un trigger, ya que esta vista sería actualizable por disponer de los campos de la tabla directamente.
 
-**Ejemplo E44402 – Subconsulta en WHERE con operador de IN**
-Mostrar la Gama de los productos que de los que se haya pedido más de 30 unidades.
+#### Vistas para aplicar transformaciones o mostrar campos calculados
+Por ejemplo si tenemos una tabla denominada notas_data
 
 ```sql
-SELECT DISTINCT Gama
-FROM productos
-WHERE CodigoProducto IN (SELECT CodigoProducto FROM detallepedidos WHERE Cantidad > 30);
+CREATE TABLE notas (
+    nia VARCHAR(8),
+    asignatura VARCHAR(15),
+    nota1 DECIMAL (6,2),
+    nota2 DECIMAL (6,2)
+);
 ```
-
-También puede usarse de forma negativa con **NOT IN**
 
-**<u>Subconsultas en WHERE con operador EXISTS</u>**
-El operador EXISTS es verdadero si la subconsulta devuelve al menos un registro.
+También podríamos crear una transformación sobre un campo para su correcta visualización en mayúsculas con UPPER o calcular el promedio de dos campos con un decimal:
 
-**Ejemplo E44403 – Subconsulta en WHERE con operador de EXISTS**
-Utiliza una subconsulta correlacionada para obtener los datos de los empleados que tenga algún cliente asignado.
-
 ```sql
-SELECT *
-FROM empleados
-WHERE EXISTS (SELECT * FROM Clientes WHERE CodigoEmpleadoRepVentas=empleados.CodigoEmpleado);
+CREATE VIEW notas_view AS
+SELECT nia, UPPER(asignatura) as asignatura_upper, nota1, nota2, round((nota1+nota2)/2, 1) as promedio FROM notas;
 ```
 
-También puede usarse de forma negativa con **NOT EXISTS**
+Este sistema nos obligaría a editar los datos en la tabla **notas** pero visualizar el resultado con la vista **notas_view**.
 
-**<u>Subconsultas en FROM</u>**
-Podemos utilizar subconsultas como tablas y colocarlas en la cláusula FROM.
+#### Vistas con phpMyAdmin
+Una vez hemos creado una vista, podremos editarla si lo deseamos. Para ello, si utilizamos phpMyAdmin, pulsaremos sobre la vista, luego en **Estructura** y posteriormente en **Editar vista**:
+![Edición vista](.img/3.2.png)
 
-**Ejemplo E44404 – Subconsulta en FROM**
-Aunque la siguiente consulta se puede obtener mediante una consulta de intersección típica, usaremos una subconsulta para probar su funcionamiento en FROM de forma sencilla. Las subconsultas de FROM deben tener un alias que asignaremos con AS.
-Muestra los datos de los empleados que trabajen en oficinas de Madrid.
 
-```sql
-SELECT empleados.*
-FROM empleados, (SELECT * FROM oficinas WHERE Ciudad='Madrid') AS OficinasMadrid
-WHERE empleados.CodigoOficina = OficinasMadrid.CodigoOficina;
-```
 
-La consulta anterior sin usar subconsulta sería:
 
-```sql
-SELECT empleados.*
-FROM empleados, oficinas
-WHERE empleados.CodigoOficina = oficinas.CodigoOficina AND oficinas.Ciudad = 'Madrid';
-```
+
+
