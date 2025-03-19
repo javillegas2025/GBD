@@ -526,7 +526,7 @@ ALTER TABLE articulos DROP PRIMARY KEY;
 ALTER TABLE articulos ADD PRIMARY KEY(codigo);
 ```
 
-**<u>Claves compuestas**</u>**
+**<u>Claves compuestas</u>**
 En ocasiones la clave está compuesta por varios campos. Por ejemplo en una tabla donde se guardan las revisiones de ITV de vehículos la clave está formada por la fecha y la matrícula del vehículo. Lo podríamos indicar de la siguiente forma:
 
 ```sql
@@ -631,8 +631,8 @@ CREATE TABLE localidades (
 ```
 
 Cuando creamos una relación, y por lo tanto una clave ajena, se crean dos elementos en la BD.
-* Índice: un índice (en nuestro ejemplo INDEX (cod_provincia)) con el nombre del campo para la clave ajena con valores repetidos, ya que puede ser una relación 1 → N y por lo tanto tendrá que repetir valores. En nuestro ejemplo, varias localidades tendrán la misma provincia.
-* Relación: se asigna a la relación un nombre por defecto formado por el nombre de la tabla, 'ibfk' y un numero. En el caso anterior será: localidades_ibfk1.
+* **Índice**: un índice (en nuestro ejemplo INDEX (cod_provincia)) con el nombre del campo para la clave ajena con valores repetidos, ya que puede ser una relación 1 → N y por lo tanto tendrá que repetir valores. En nuestro ejemplo, varias localidades tendrán la misma provincia.
+* **Relación**: se asigna a la relación un nombre por defecto formado por el nombre de la tabla, 'ibfk' y un numero. En el caso anterior será: localidades_ibfk1.
 
 
 Si queremos darle un nombre nosotros utilizaremos **CONSTRAINT**:
@@ -731,17 +731,17 @@ CREATE TABLE articulos (
 
 **<u>Fecha de alta y de modificación</u>**
 Cuando deseamos tener en una tabla la fecha de alta y modificación podemos utilizar campos que se creen y actualicen automáticamente.
-Con **DEFAULT CURRENT_TIMESTAMP** un campo obtendrá por defecto el valor de la fecha y hora del sistema.
+* Con **DEFAULT CURRENT_TIMESTAMP** un campo obtendrá por defecto el valor de la fecha y hora del sistema.
 
-Con **ON UPDATE CURRENT_TIMESTAMP** un campo actualizará el valor con la fecha y hora del sistema cada vez que se actualice el registro.
+* Con **ON UPDATE CURRENT_TIMESTAMP** un campo actualizará el valor con la fecha y hora del sistema cada vez que se actualice el registro.
 
-```sql
-CREATE TABLE ejemplo (
-    codigo VARCHAR(2) PRIMARY KEY,
-    fecha_alta DATETIME DEFAULT CURRENT_TIMESTAMP,
-    fecha_modificacion DATETIME ON UPDATE CURRENT_TIMESTAMP
-);
-```
+    ```sql
+    CREATE TABLE ejemplo (
+        codigo VARCHAR(2) PRIMARY KEY,
+        fecha_alta DATETIME DEFAULT CURRENT_TIMESTAMP,
+        fecha_modificacion DATETIME ON UPDATE CURRENT_TIMESTAMP
+    );
+    ```
 
 **<u>Rellenado a ceros</u>**
 Cuando deseemos rellenar con ceros a la izquierda un campo codigo para que estén ordenados utilizaremos la palabra reservada **ZEROFILL**.
@@ -790,7 +790,7 @@ CREATE TABLE notas (
     nia VARCHAR(8),
     asignatura VARCHAR(15),
     nota DECIMAL (6,2),
-    CONSTRAINT check_nota CHECK ( (nota>=0) and (nota<=10) )
+    CONSTRAINT check_nota CHECK ( (nota >= 0) and (nota <= 10) )
 );
 ```
 
@@ -823,7 +823,7 @@ DELIMITER //
 CREATE TRIGGER notas_before_insert BEFORE INSERT ON notas
 BEGIN
     FOR EACH ROW BEGIN
-        IF ( (NEW.nota<0) or (NEW.nota>10) ) THEN
+        IF ( (NEW.nota < 0) OR (NEW.nota > 10) ) THEN
             SIGNAL SQLSTATE '45000';
             SET MESSAGE_TEXT = 'Compruebe el valor del campo nota que debe estar comprendido entre 0 y 10 puntos';
         END IF;
