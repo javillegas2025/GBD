@@ -34,12 +34,319 @@ toc:
 
 # Lenguaje SQL
 ## Contenidos
-1. Lenguaje de Manipulación de Datos
-2. Consultas SELECT básicas
-3. Consultas SELECT de AGRUPACIÓN
-4. Consultas SELECT multitabla
+1. Del diseño lógico al diseño físico
+2. Crear Base de Datos
+3. Tablas y campos
+4. Añadir y editar registros
+5. Índices
+6. Restricciones
+7. Tablas a partir de consultas
+8. Vistas
 
-## Lenguaje de Manipulación de Datos
+
+
+## Del diseño lógico al diseño físico
+El **diseño físico** es el proceso de producir la descripción de la implementación de la base de datos en memoria secundaria: estructuras de almacenamiento y métodos de acceso que garanticen un acceso eficiente a los datos.
+
+Para llevar a cabo esta etapa, se debe haber decidido cuál es el SGBD que se va a utilizar, ya que el esquema físico se adapta a él.
+
+En nuestro caso utilizaremos MySQL, y como su sintaxis se adapta en gran medida a SQL ANSI, los comandos que usaremos serán muy similares en el resto de SGBD relacionales.
+
+Cuando llegamos a este punto disponemos de:
+* descripción del sistema de información
+* el esquema conceptual del modelo entidad-relación
+* el esquema del diccionario de datos
+* el esquema relacional del modelo relacional
+
+Mientras que en el diseño lógico se especifica qué se guarda, en el diseño físico se especifica cómo se guarda. Para ello, el diseñador debe conocer muy bien toda la funcionalidad del SGBD concreto que se vaya a utilizar y también el sistema informático sobre el que éste va a trabajar.
+
+El diseño físico no es una etapa aislada, ya que algunas decisiones que se tomen durante su desarrollo, por ejemplo para mejorar las prestaciones, pueden provocar una reestructuración del esquema lógico.
+
+El objetivo de esta etapa es producir una descripción de la implementación de la base de datos en memoria secundaria. Esta descripción incluye las estructuras de almacenamiento y los métodos de acceso que se utilizarán para conseguir un acceso eficiente a los datos.
+
+El objetivo por tanto es:
+* Conocer las **utilidades o herramientas** para la definición de información en un SGBD.
+* Conocer las **órdenes SQL** para la definición de datos.
+* Elegir **el tipo de dato** más adecuado para cada tipo de información.
+* Definir las **estructuras físicas** de almacenamiento e implantar todas las **restricciones** reflejadas en el diseño lógico (clave primaria, clave alternativa, clave ajena…).
+
+En esta unidad didáctica estudiaremos las instrucciones o comandos SQL del lenguaje de definición de datos (LDD) que permiten la creación de nuestra base de datos y que incluirá las tablas con sus campos e índices.
+
+La primera fase del diseño lógico consiste en traducir el esquema lógico global en un esquema que se pueda implementar en el SGBD escogido. Para ello, es necesario conocer toda la funcionalidad que éste ofrece. Por ejemplo, el diseñador deberá saber:
+* Si el sistema soporta la definición de claves primarias, claves ajenas y claves alternativas.
+* Si el sistema soporta la definición de datos requeridos (es decir, si se pueden definir atributos como no nulos).
+* Si el sistema soporta la definición de dominios.
+* Si el sistema soporta la definición de reglas de negocio (es decir, restricciones de cardinalidad o de cálculo)
+* Cómo se crean las tablas base
+
+SINTAXIS
+Utilizaremos:
+* palabras en mayúsculas para las reservadas de MySQL
+* palabras en minúsculas para los nombres de nuestros elementos (tablas, campos, índices, …)
+* corchetes para indicar un contenido opcional
+
+Para poder conectar a la BD de MySQL vamos a utilizar dos herramientas:
+* **Por línea de comandos: `mysql.exe`**
+* **Mediante la aplicación web (AW) `phpMyAdmin`**
+
+Las instrucciones que vamos a ejecutar funcionan en las dos herramientas, aunque **phpMyAdmin** proporciona mucha más información de forma gráfica.
+
+Una vez instalado [xampp](https://www.apachefriends.org/es/download.html) abriremos el programa **`c:\xampp\xampp-control.exe`**.
+
+Desde esta herramienta pondremos en marcha el servidor MySQL. Además, si vamos a usar **phpMyAdmin** tendremos que arrancar también el servicio web de **Apache**.
+
+Abriremos las dos herramientas a la vez y comprobaremos que al ejecutar las instrucciones en una de ellas, su resultado se puede ver en las dos.
+
+![Panel de control de XAMPP](.img/3.1.png)
+
+Para poder conectar con `mysql.exe` abriremos una ventana de comandos (CMD) y nos desplazaremos hasta la carpeta donde tenemos la herramienta. Para conectar debemos indicar que conectamos con el usuario root que no tiene contraseña:
+
+```cmd
+C:\> cd \xampp\mysql\bin
+C:\xampp\mysql\bin> mysql -u root
+
+```
+Para conectar con la Aplicación web phpMyAdmin abriremos un navegador e introduciremos la URL:
+
+```cmd
+http://localhost/phpmyadmin
+```
+
+Para ejecutar instrucciones usaremos la pestaña SQL.
+
+
+## Crear Base de Datos
+Lo primero que debemos hacer es crear una base de datos.
+MySQL permite disponer de varias bases de datos en cada instancia que estemos ejecutado. Cuando conectamos a MySQl podemos conocer las bases de datos que hay creadas con el comando:
+
+```sql
+SHOW DATABASES;
+```
+Para crear una base de datos nueva utilizaremos el comando:
+
+```sql
+CREATE DATABASE NombreBD;
+```
+
+Podemos añadir otros parámetros por si no son los que MySQL tiene por defecto:
+
+
+```sql
+CREATE DATABASE NombreBD
+DEFAULT CHARACTER SET utf8
+DEFAULT COLLATE utf8_general_ci;
+```
+
+En my.ini se puede indicar en una variable el ENGINE por defecto.
+
+```txt
+[mysqld]
+default-storage-engine = InnoDB
+```
+
+
+Por defecto ya tiene este valor y podemos comprobarlo en phpMyAdmin en la pestaña “Variables”.
+
+Para eliminar una base de datos nueva utilizaremos el comando:
+
+```sql
+DROP DATABASE NombreBD;
+```
+
+## Tablas y campos
+Para crear una tabla en el DF (Diseño Físico) partiremos del esquema relacional, el diccionario de datos y la documentación de restricciones.
+
+Debemos buscar la información de restricciones de algunos campos:
+
+* **Restricciones por valor**
+  Se definen en el diccionario de datos. Estas restricciones pueden estar referidas al:
+    * Tipo de dato
+    * Longitud
+    * Dominio de valores
+    * Posibilidad de estar vacío (valor nulo) o no
+    * Valor único (no repetido)
+
+* **Restricciones de existencia**
+Se definen en el esquema lógico y se detallan en el diccionario de datos Un campo que es clave ajena de una tabla en la relación puede ser opcional (tener valores nulos) o no.  
+
+* **Restricciones de cardinalidad**
+Se definen en la documentación de restricciones.
+
+Ejemplo: Cardinalidad máxima definida = Un empleado en una empresa pertenece a varios departamentos, pero como máximo a 4.
+
+* **Restricciones por campos calculados**
+Se definen en el diccionario de datos El valor de un campo vendrá dado por una fórmula.
+
+Las restricciones por valor y de existencia tendrán efecto en la propia creación de la tabla, pero las restricciones de cardinalidad y por campos calculados serán definidos por **disparadores (triggers)** que comprueben o calculen los datos y así, garanticen su integridad.
+
+El esquema relacional (modelo lógico) consta de un conjunto de relaciones (tablas) y, para cada una de ellas, se tiene:
+
+* El nombre de la relación (que se convierte en el DF en un tabla)
+* La lista de atributos entre paréntesis (que se convierten en el DF en campos)
+* La clave primaria y las claves ajenas, si las tiene.
+* Las reglas de integridad de las claves ajenas (valor obligatorio o no)
+
+En el diccionario de datos se describen los atributos y, para cada uno de ellos, se tiene:
+
+* Su dominio: tipo de datos, longitud y restricciones de dominio.
+* Si puede ser vacío (es decir, si admite valores nulos).
+* Si debe tener valor único para cada registro
+* El valor por defecto (que es opcional).
+* Si es calculado, cómo se calcula su valor.
+* Si es enumerado, los valores que puede tener (por ejemplo, SI y NO)
+
+Antes de comenzar necesitaremos conocer algunos tipos de datos de MySQL que utilizaremos:
+
+|Tipo de Dato|Valores|
+|:------------|:-------|
+|**VARCHAR**| Cadena de caracteres|
+|**INT**|Número entero|
+|**DECIMAL**|Números decimales|
+|**DATE**|Fecha|
+|**DATETIME o TIMESTAMP**|Fecha y hora|
+|**ENUM**|Conjunto de valores|
+
+!!!NOTE **<u>Referencias</u>**<br>[Tipos de datos en MySQL – Documentación oficial](https://dev.mysql.com/doc/refman/8.0/en/data-types.html)
+
+Para crear una tabla utilizaremos el comando sql **CREATE TABLE** reducido:
+
+```sql
+CREATE TABLE NombreTabla (
+    Campo1,
+    Campo2,
+    ...
+    CampoN
+);
+```
+
+La sintaxis para definir un “campo” en la instrucción anterior es:
+
+
+```sql
+nombre_col TIPO
+[NOT NULL | NULL]
+[DEFAULT valor_por_defecto]
+[AUTO_INCREMENT]
+[[PRIMARY] KEY]
+[UNIQUE]
+[COMMENT 'string']
+```
+
+!!!NOTE **<u>Referencias</u>**<br>[CREATE TABLE en MySQL – Documentación oficial](https://dev.mysql.com/doc/refman/8.0/en/create-table.html)
+
+**Ejercicio 3.1**
+
+```txt
+Partiendo del esquema lógico, crea la tabla de proveedores de nuestra comunidad autónoma siguiente:
+proveedores ( cod_prov, localidad, nombre,provincia)
+El diccionario de datos (sólo con restricciones de valor) es:
+```
+
+|CAMPO|TIPO|LONGITUD|CARACTERÍSTICAS|
+|:-----|:----|:--------|:---------------|
+|**cod_prov**|Cadena|3|Clave Primaria<br>No Nulo|
+|**localidad**|Cadena|100|Nulo|
+|**nombre**|Cadena|100|No nulo<br>Único<br>Clave Alternativa|
+|**provincia**|Enumerado||'Alicante', 'Valencia', 'Castellón'|
+
+**<u>Solución:</u>**
+
+```sql
+CREATE TABLE proveedores (
+    cod_prov    VARCHAR(3) PRIMARY KEY,
+    localidad   VARCHAR(100) DEFAULT NULL,
+    nombre      VARCHAR(100) NOT NULL UNIQUE,
+    provincia   ENUM('Alicante','Valencia','Castellón')
+);
+```
+
+**Ejercicio 3.2**
+
+```txt
+En XAMPP-MySQL mediante la utilidad mysql.exe ejecuta las instrucciones anteriores.
+
+Entra a phpMyAdmin y comprueba con el asistente visual la estructura de la tabla y crea otra llamada proveedores2 con la misma información con la herramienta gráfica.
+Pulsando en la pestaña Insertar, añade registros a la tabla proveedores.
+
+Comprueba con el botón Examinar los datos introducidos. Comprobarás que aparece un botón Editar y otro Borrar que afecta a cada registro.
+```
+
+Con el comando DROP TABLE podemos eliminar una tabla:
+
+```sql
+DROP TABLE proveedores;
+```
+
+Con el comando RENAME TABLE podemos cambiar su nombre:
+
+```sql
+RENAME TABLE proveedores TO distribuidores;
+```
+
+Comenzaremos por crear una tabla de artículos con los siguientes campos:
+
+```sql
+CREATE TABLE articulos (
+    codigo VARCHAR(4),
+    descripcion VARCHAR(100),
+    precio DECIMAL(10,2)
+);
+```
+
+**<u>Añadir un campo a una tabla existente</u>**
+Una vez creada una tabla, es posible que necesitemos añadir, modificar o eliminar algún campo existente. Para ello utilizaremos las siguientes instrucciones SQL.
+
+```sql
+ALTER TABLE articulos
+ADD COLUMN descuento INT(3) NOT NULL
+AFTER precio;
+```
+
+**<u>Modificar un campo a una tabla existente</u>**
+
+A continuación mostramos dos formas de cambiar un campo
+
+```sql
+ALTER TABLE articulos
+MODIFY COLUMN descuento INT(4) NOT NULL;
+```
+
+```sql
+ALTER TABLE articulos
+CHANGE descuento dto INT(4) NOT NULL;
+```
+
+Con la segunda forma podemos cambiar también el nombre del campo de 'descuento' a 'dto' sin perder los valores existentes.
+
+**<u>Eliminar un campo de una tabla existente</u>**
+
+```sql
+ALTER TABLE articulos
+DROP COLUMN dto;
+```
+
+**Ejercicio 3.3**
+
+```txt
+En XAMPP-MySQL mediante la utilidad mysql.exe ejecuta las instrucciones anteriores.
+
+Entra a phpMyAdmin y comprueba con el asistente visual la estructura de la tabla articulos.
+Inserta registros y comprueba si puedes editar la información.
+¿Por qué al Examinar no aparecen los botones Editar y Borrar?
+```
+
+
+
+
+
+
+
+
+
+
+
+
+
 El **Lenguaje de Manipulación de Datos** (LMD, en inglés Data Manipulation Language, DML) es un lenguaje proporcionado por el sistema de gestión de base de datos que permite a los usuarios de la misma llevar a cabo las tareas de consulta o manipulación de los datos (inserción, borrado, actualización y consultas) basado en el modelo de datos adecuado.
 
 !!!NOTE [MySQL Oficial – Sintaxis de las instrucciones DML](http://dev.mysql.com/doc/refman/8.0/en/sql-syntax-data-manipulation.html)
@@ -81,7 +388,19 @@ SELECT 20*150;
 ```sql
 SELECT ((5*4.5)/3)+7;
 ```
-```sql
+```sqlCREATE TABLE proveedores (
+cod_prov
+VARCHAR(3)
+PRIMARY KEY,
+localidad
+VARCHAR(100)
+DEFAULT NULL,
+nombre
+VARCHAR(100)
+NOT NULL UNIQUE,
+provincia
+ENUM('Alicante','Valencia','Castellón')
+);
 SELECT 100/3, 100 DIV 3, 100 MOD 3;
 ```
 !!!NOTE  <u>Referencias</u> <br>[MySQL – Operadores aritméticos](http://mysql.conclase.net/curso/?cap=010b#OPE_ARITMETICOS)<br>[MySQL Oficial - Operadores](https://dev.mysql.com/doc/refman/8.0/en/non-typed-operators.html)
