@@ -117,7 +117,7 @@ Para ejecutar instrucciones usaremos la pestaña SQL.
 
 ## Crear Base de Datos
 Lo primero que debemos hacer es crear una base de datos.
-MySQL permite disponer de varias bases de datos en cada instancia que estemos ejecutado. Cuando conectamos a MySQl podemos conocer las bases de datos que hay creadas con el comando:
+**MySQL** permite disponer de varias bases de datos en cada instancia que estemos ejecutado. Cuando conectamos a MySQL podemos conocer las bases de datos que hay creadas con el comando:
 
 ```sql
 SHOW DATABASES;
@@ -137,7 +137,7 @@ DEFAULT CHARACTER SET utf8
 DEFAULT COLLATE utf8_general_ci;
 ```
 
-En my.ini se puede indicar en una variable el ENGINE por defecto.
+En **`my.ini`** se puede indicar en una variable el **ENGINE** por defecto.
 
 ```txt
 [mysqld]
@@ -234,7 +234,7 @@ nombre_col TIPO
 
 !!!NOTE **<u>Referencias</u>**<br>[CREATE TABLE en MySQL – Documentación oficial](https://dev.mysql.com/doc/refman/8.0/en/create-table.html)
 
-**Ejercicio 3.1**
+**Ejercicio 1**
 
 ```txt
 Partiendo del esquema lógico, crea la tabla de proveedores de nuestra comunidad autónoma siguiente:
@@ -260,7 +260,7 @@ CREATE TABLE proveedores (
 );
 ```
 
-**Ejercicio 3.2**
+**Ejercicio 2**
 
 ```txt
 En XAMPP-MySQL mediante la utilidad mysql.exe ejecuta las instrucciones anteriores.
@@ -271,13 +271,13 @@ Pulsando en la pestaña Insertar, añade registros a la tabla proveedores.
 Comprueba con el botón Examinar los datos introducidos. Comprobarás que aparece un botón Editar y otro Borrar que afecta a cada registro.
 ```
 
-Con el comando DROP TABLE podemos eliminar una tabla:
+Con el comando **DROP TABLE** podemos eliminar una tabla:
 
 ```sql
 DROP TABLE proveedores;
 ```
 
-Con el comando RENAME TABLE podemos cambiar su nombre:
+Con el comando **RENAME TABLE** podemos cambiar su nombre:
 
 ```sql
 RENAME TABLE proveedores TO distribuidores;
@@ -325,7 +325,7 @@ ALTER TABLE articulos
 DROP COLUMN dto;
 ```
 
-**Ejercicio 3.3**
+**Ejercicio 3**
 
 ```txt
 En XAMPP-MySQL mediante la utilidad mysql.exe ejecuta las instrucciones anteriores.
@@ -338,46 +338,50 @@ Inserta registros y comprueba si puedes editar la información.
 ## Añadir y editar registros
 #### INSERT
 
-**INSERT** inserta nuevas filas en una tabla existente.
+El comando **INSERT** inserta nuevas filas en una tabla existente. Existen dos maneras de insertar registrso en una tabla:
 
-El formato **INSERT ... VALUES** inserta filas basándose en los valores especificados explícitamente.
-El formato **INSERT ... SELECT** inserta filas seleccionadas de otra tabla o tablas.
-La sintaxis para insertar un registro es la siguiente:
+* **Con cláusula VALUES**
+  El formato del comando es **INSERT ... VALUES** e inserta filas basándose en los valores especificados explícitamente.
 
-```sql
-INSERT INTO nombreTabla (col_name1, col_name2, ...)
-VALUES (valor_col1, valor_col2, ... );
-```
+    * **Insertar un registro**: La sintaxis para insertar un registro es la siguiente:
 
-La sintaxis para insertar varios registros es la siguiente:
+        ```sql
+        INSERT INTO nombreTabla (col_name1, col_name2, ...)
+        VALUES (valor_col1, valor_col2, ... );
+        ```
 
-```sql
-INSERT INTO nombreTabla (col_name1, colname2, ...)
-VALUES
-    (valor1_col1, valor1_col2, ... ),
-    (valor2_col1, valor2_col2, ... ),
-    ...
-    (valorn_col1, valorn_col2, ... );
-```
+    * **Insertar varios registros**: La sintaxis para insertar varios registros es la siguiente:
 
+        ```sql
+        INSERT INTO nombreTabla (col_name1, colname2, ...)
+        VALUES
+            (valor1_col1, valor1_col2, ... ),
+            (valor2_col1, valor2_col2, ... ),
+            ...
+            (valorn_col1, valorn_col2, ... );
+        ```
+
+* **Con setencia SELECT**
+  El formato del comando es **INSERT ... SELECT** e inserta filas seleccionadas de otra tabla o tablas.
 La sintaxis para consultar los registros de una tabla es:
 
-```sql
-SELECT col_name1, col_name2, ...
-FROM nombreTabla
-[WHERE condicion];
-```
+    ```sql
+    SELECT col_name1, col_name2, ...
+    FROM nombreTabla
+    [WHERE condicion];
+    ```
 
-La sintaxis para insertar registros desde una consulta SELECT es la siguiente:
+    La sintaxis para **insertar registros desde una consulta SELECT** es la siguiente:
 
-```sql
-INSERT INTO nombreTabla2 (col_name1, col_name2, ...)
-SELECT col_name1, col_name2, ...]
-FROM nombreTabla1
-[WHERE condicion];
-```
+    ```sql
+    INSERT INTO nombreTabla2 (col_name1, col_name2, ...)
+    SELECT col_name1, col_name2, ...]
+    FROM nombreTabla1
+    [WHERE condicion];
+    ```
 
-Si hay campos en la tabla que no se especifican en la instrucción INSERT, se le asignará el valor que se haya indicado en su creación por defecto (DEFAULT) y en caso contrario será NULL.
+> :hand: **Importante**
+Si hay campos en la tabla que no se especifican en la instrucción **INSERT**, se le asignará el valor que se haya indicado en su creación por defecto (**DEFAULT**) y en caso contrario será **NULL**.
 
 **Ejemplo**
 
@@ -388,7 +392,7 @@ INSERT INTO articulos (codigo, descripcion, precio) VALUES
 ```
 
 ## UPDATE
-**UPDATE** actualiza columnas de filas existentes de una tabla con nuevos valores.
+La senetencia **UPDATE** actualiza columnas de filas existentes de una tabla con nuevos valores.
 
 La cláusula **SET** indica las columnas a modificar y los valores que deben tomar.
 
@@ -402,7 +406,7 @@ SET campo = valor
 [WHERE condicion];
 ```
 
-En la cláusula **SET** utilizaremos valor para indicar una cadena, número, fecha, …
+En la cláusula **SET** utilizaremos *valor* para indicar una cadena, número, fecha, …
 
 **Ejemplo – Actualizar el nombre a una persona**
 
@@ -430,7 +434,7 @@ SET precio = precio + precio * 5 / 100;
 ```
 
 ## DELETE
-**DELETE** elimina las columnas de una tabla que cumplan la condición dada por la cláusula, y devuelve el número de registros borrados. Sin cláusula **WHERE** elimina todos los registros.
+La sentencia **DELETE** elimina las columnas de una tabla que cumplan la condición dada por la cláusula, y devuelve el número de registros borrados. Sin cláusula **WHERE** elimina todos los registros.
 
 La sintaxis para eliminar registros es:
 
@@ -649,6 +653,7 @@ CREATE TABLE localidades (
 De esta forma se utilizará el valor de CONSTRAINT tanto para el índice como para la relación.
 
 **<u>Eliminar la restricción de clave ajena</u>**
+
 Si tenemos el **CONSTRAINT** lo utilizaremos:
 
 ```sql
@@ -696,7 +701,8 @@ Si especifica una acción SET NULL, asegúrese de que no ha declarado las column
     * Al **borrar**, si en la tabla padre (provincias) se elimina un registro, se eliminarán también todos los registros de la tabla referenciada (localidades) que tenga este valor en su calve ajena.
     * Al **actualizar**, si en la tabla padre (provincias) se actualiza la clave de un registro, se actualizarán también todos los registros de la tabla referenciada (localidades) que tenga este valor en su clave ajena con el nuevo valor.
 
-    Para indicar estas acciones añadiremos a la instrucción de FOREIGN KEY ALGUNA de las siguientes cláusulas:
+    Para indicar estas acciones ==añadiremos a la instrucción de **FOREIGN KEY** ALGUNA de las siguientes cláusulas==:
+
     * ON DELETE RESTRICT
     * ON DELETE SET NULL
     * ON DELETE CASCADE
@@ -713,7 +719,7 @@ Si especifica una acción SET NULL, asegúrese de que no ha declarado las column
     ON UPDATE RESTRICT;
     ```
 
-* **SET DEFAULT**: <u>No disponible para MySQL con el motor de base de datos InnoDB</u>. Si en la tabla padre (provincias) se elimina un registro o se actualiza su clave, si hay algún valor de clave externa relacionado en la tabla referenciada (localidades) se actualizará el valor por defecto de la clave ajena.
+* **SET DEFAULT**: ==No disponible para MySQL con el motor de base de datos **InnoDB**==. Si en la tabla padre (provincias) se elimina un registro o se actualiza su clave, si hay algún valor de clave externa relacionado en la tabla referenciada (localidades) se actualizará el valor por defecto de la clave ajena.
 
 
 #### Otras restricciones y valores por defecto
@@ -796,7 +802,7 @@ CREATE TABLE notas (
 
 Estas condiciones funcionan perfectamente en muchos SGBD, pero en MySQL, aunque no dan error no se tienen en cuenta.
 
-Por lo tanto, si deseamos controlar estas restricciones deberemos hacer uso de **disparadores o triggers**. En la unidad UD5 profundizaremos en los disparadores (triggers en inglés) pero ahora introduciremos su uso.
+Por lo tanto, si deseamos controlar estas restricciones deberemos hacer uso de disparadores o **triggers**. En la unidad UD5 profundizaremos en los disparadores (triggers en inglés) pero ahora introduciremos su uso.
 
 Para crear un disparador para controlar valores de un campo al insertar usaremos la siguiente sintaxis:
 
