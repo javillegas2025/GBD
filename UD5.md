@@ -284,8 +284,7 @@ FROM Empleados
 WHERE Email LIKE '%jardin%';
 ```
 
-> :pushpin: **Nota:** 
-> **%** es una cadena de caracteres cualquiera y **_** es un sólo carácter cualquiera.
+> :pushpin: **Nota**:  **%** es una cadena de caracteres cualquiera y **_** es un sólo carácter cualquiera.
 
 **Ejemplo 8 –Ejemplo con IN**
 Mostrar los productos de las gamas 'Aromáticas', 'Herramientas' y Ornamentales'.
