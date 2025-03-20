@@ -172,19 +172,19 @@ Se definen en el esquema lógico y se detallan en el diccionario de datos Un cam
 * **Restricciones de cardinalidad**
 Se definen en la documentación de restricciones.
 
-Ejemplo: Cardinalidad máxima definida = Un empleado en una empresa pertenece a varios departamentos, pero como máximo a 4.
+    Ejemplo: Cardinalidad máxima definida = Un empleado en una empresa pertenece a varios departamentos, pero como máximo a 4.
 
 * **Restricciones por campos calculados**
 Se definen en el diccionario de datos El valor de un campo vendrá dado por una fórmula.
 
 Las restricciones por valor y de existencia tendrán efecto en la propia creación de la tabla, pero las restricciones de cardinalidad y por campos calculados serán definidos por **disparadores (triggers)** que comprueben o calculen los datos y así, garanticen su integridad.
 
-El esquema relacional (modelo lógico) consta de un conjunto de relaciones (tablas) y, para cada una de ellas, se tiene:
+El ==esquema relacional (**modelo lógico)** consta de un conjunto de **relaciones** (tablas)== y, para cada una de ellas, se tiene:
 
-* El nombre de la relación (que se convierte en el DF en un tabla)
-* La lista de atributos entre paréntesis (que se convierten en el DF en campos)
-* La clave primaria y las claves ajenas, si las tiene.
-* Las reglas de integridad de las claves ajenas (valor obligatorio o no)
+* El **nombre de la relación** (que se convierte en el DF en un tabla)
+* La **lista de atributos** entre paréntesis (que se convierten en el DF en campos)
+* La **clave primaria y las claves ajenas**, si las tiene.
+* Las **reglas de integridad** de las claves ajenas (valor obligatorio o no)
 
 En el diccionario de datos se describen los atributos y, para cada uno de ellos, se tiene:
 

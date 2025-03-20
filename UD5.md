@@ -219,7 +219,6 @@ Veamos unos cuantos ejemplos:
 
 **Ejemplo 1 – Buscar un registro por el valor de su clave**
 Mostrar todos los campos del cliente con código igual a 12.
-> :pushpin: **Nota:** Al ser el campo clave, el resultado sólo mostrará un registro.
 
 ```sql
 SELECT *
@@ -227,15 +226,18 @@ FROM clientes
 WHERE CodigoCliente = 12;
 ```
 
+> :pushpin: **Nota:** Al ser el campo clave, el resultado sólo mostrará un registro.
+> 
 **Ejemplo 2 – Buscar registros por el valor de un campo**
 Mostrar todos los campos de los clientes de la Región Madrid.
->:pushpin: **Nota:** Al no ser un campo clave, el resultado puede mostrar más de un registro.
 
 ```sql
 SELECT *
 FROM clientes
 WHERE Region = 'Madrid';
 ```
+
+>:pushpin: **Nota:** Al NO ser un campo clave, el resultado puede mostrar más de un registro.
 
 **Ejemplo 3 – Buscar registros por comparación del valor de un campo**
 Mostrar todos los campos de los clientes con Límite de Crédito mayor de 50000€.
@@ -310,9 +312,7 @@ Veamos unos cuantos ejemplos:
 
 
 **Ejemplo 1 – Ejemplo con varias condiciones**
-Mostrar codigo y nombre de los Productos que sean de la Gama 'Frutales' y CantidadEnSock sea mayor que 50 unidades.
-
->:pushpin: **Nota:** Mostremos también los campos implicados en las condiciones para comprobar el resultado.
+Mostrar codigo y nombre de los Productos que sean de la Gama 'Frutales' y CantidadEnSock sea mayor que 50 unidades. Mostremos también los campos implicados en las condiciones para comprobar el resultado.
 
 ```sql
 SELECT CodigoProducto, Nombre, Gama,
@@ -321,9 +321,7 @@ WHERE Gama = 'Frutales' AND CantidadEnStock > 50);
 ```
 
 **Ejemplo 2 – Ejemplo con varias condiciones**
-Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcelona'.
-
->:pushpin: **Nota:** Mostremos también los campos implicados en las condiciones para comprobar el resultado.
+Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcelona'. Mostremos también los campos implicados en las condiciones para comprobar el resultado.
 
 ```sql
 SELECT CodigoCliente, NombreCliente, Ciudad
@@ -538,7 +536,7 @@ FROM pagos;
 
 ## Consultas SELECT de AGRUPACIÓN
 #### Consultas de agrupación
-Cuando necesitamos agrupar varios registros para realizar operaciones para sumar, contar, o calcular la media, el mínimo o el máximo, necesitaremos realizar una instrucción SELECT indicando qué registros agrupamos, es decir, qué campos mostramos de los registros comunes y sobre qué campos realizamos la operación.
+Cuando necesitamos agrupar varios registros para realizar operaciones para sumar, contar, o calcular la media, el mínimo o el máximo, necesitaremos realizar una instrucción SELECT indicando qué registros agrupamos, es decir, qué campos mostramos de los registros comunes y sobre qué campos realizamos la operación. La cáusula **GROUP BY** y, opcionalmente, la cláusula **HAVING** se utilizan en las consultas de agrupación.
 La sintaxis para realizar una consulta agrupada a una tabla es:
 
 ```sql
@@ -553,7 +551,7 @@ SELECT [DISTINCT] campos
 
 
 > :hand: **Importante**
-> El orden de las cláusulas obligatoriamente es:
+> El orden de las cláusulas, **obligatoriamente**, es:
 > **SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER … LIMIT**
 
 

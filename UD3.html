@@ -276,20 +276,20 @@ Se definen en el esquema lógico y se detallan en el diccionario de datos Un cam
 <li>
 <p><strong>Restricciones de cardinalidad</strong><br>
 Se definen en la documentación de restricciones.</p>
+<p>Ejemplo: Cardinalidad máxima definida = Un empleado en una empresa pertenece a varios departamentos, pero como máximo a 4.</p>
+</li>
+<li>
+<p><strong>Restricciones por campos calculados</strong><br>
+Se definen en el diccionario de datos El valor de un campo vendrá dado por una fórmula.</p>
 </li>
 </ul>
-<p>Ejemplo: Cardinalidad máxima definida = Un empleado en una empresa pertenece a varios departamentos, pero como máximo a 4.</p>
-<ul>
-<li><strong>Restricciones por campos calculados</strong><br>
-Se definen en el diccionario de datos El valor de un campo vendrá dado por una fórmula.</li>
-</ul>
 <p>Las restricciones por valor y de existencia tendrán efecto en la propia creación de la tabla, pero las restricciones de cardinalidad y por campos calculados serán definidos por <strong>disparadores (triggers)</strong> que comprueben o calculen los datos y así, garanticen su integridad.</p>
-<p>El esquema relacional (modelo lógico) consta de un conjunto de relaciones (tablas) y, para cada una de ellas, se tiene:</p>
+<p>El <mark>esquema relacional (<strong>modelo lógico)</strong> consta de un conjunto de <strong>relaciones</strong> (tablas)</mark> y, para cada una de ellas, se tiene:</p>
 <ul>
-<li>El nombre de la relación (que se convierte en el DF en un tabla)</li>
-<li>La lista de atributos entre paréntesis (que se convierten en el DF en campos)</li>
-<li>La clave primaria y las claves ajenas, si las tiene.</li>
-<li>Las reglas de integridad de las claves ajenas (valor obligatorio o no)</li>
+<li>El <strong>nombre de la relación</strong> (que se convierte en el DF en un tabla)</li>
+<li>La <strong>lista de atributos</strong> entre paréntesis (que se convierten en el DF en campos)</li>
+<li>La <strong>clave primaria y las claves ajenas</strong>, si las tiene.</li>
+<li>Las <strong>reglas de integridad</strong> de las claves ajenas (valor obligatorio o no)</li>
 </ul>
 <p>En el diccionario de datos se describen los atributos y, para cada uno de ellos, se tiene:</p>
 <ul>

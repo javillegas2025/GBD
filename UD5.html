@@ -366,21 +366,21 @@ Los operadores relacionales que nos permiten comparar el valor de los campos son
 <p>Veamos unos cuantos ejemplos:</p>
 <p><strong>Ejemplo 1 – Buscar un registro por el valor de su clave</strong><br>
 Mostrar todos los campos del cliente con código igual a 12.</p>
-<blockquote>
-<p>📌 <strong>Nota:</strong> Al ser el campo clave, el resultado sólo mostrará un registro.</p>
-</blockquote>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-WHERE">WHERE</span> CodigoCliente <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo 2 – Buscar registros por el valor de un campo</strong><br>
-Mostrar todos los campos de los clientes de la Región Madrid.</p>
-<blockquote>
-<p>📌 <strong>Nota:</strong> Al no ser un campo clave, el resultado puede mostrar más de un registro.</p>
+</code></pre><blockquote>
+<p>📌 <strong>Nota:</strong> Al ser el campo clave, el resultado sólo mostrará un registro.</p>
 </blockquote>
+<p><strong>Ejemplo 2 – Buscar registros por el valor de un campo</strong><br>
+Mostrar todos los campos de los clientes de la Región Madrid.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-WHERE">WHERE</span> Region <span class="token operator">=</span> <span class="token string">'Madrid'</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo 3 – Buscar registros por comparación del valor de un campo</strong><br>
+</code></pre><blockquote>
+<p>📌 <strong>Nota:</strong> Al NO ser un campo clave, el resultado puede mostrar más de un registro.</p>
+</blockquote>
+<p><strong>Ejemplo 3 – Buscar registros por comparación del valor de un campo</strong><br>
 Mostrar todos los campos de los clientes con Límite de Crédito mayor de 50000€.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> clientes
@@ -443,18 +443,12 @@ Mostrar los productos de las gamas 'Aromáticas', 'Herramientas' y Ornamentales'
 </table>
 <p>Veamos unos cuantos ejemplos:</p>
 <p><strong>Ejemplo 1 – Ejemplo con varias condiciones</strong><br>
-Mostrar codigo y nombre de los Productos que sean de la Gama 'Frutales' y CantidadEnSock sea mayor que 50 unidades.</p>
-<blockquote>
-<p>📌 <strong>Nota:</strong> Mostremos también los campos implicados en las condiciones para comprobar el resultado.</p>
-</blockquote>
+Mostrar codigo y nombre de los Productos que sean de la Gama 'Frutales' y CantidadEnSock sea mayor que 50 unidades. Mostremos también los campos implicados en las condiciones para comprobar el resultado.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoProducto<span class="token punctuation">,</span> Nombre<span class="token punctuation">,</span> Gama<span class="token punctuation">,</span>
 <span class="token keyword keyword-FROM">FROM</span> productos
 <span class="token keyword keyword-WHERE">WHERE</span> Gama <span class="token operator">=</span> <span class="token string">'Frutales'</span> <span class="token operator">AND</span> CantidadEnStock <span class="token operator">&gt;</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre><p><strong>Ejemplo 2 – Ejemplo con varias condiciones</strong><br>
-Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcelona'.</p>
-<blockquote>
-<p>📌 <strong>Nota:</strong> Mostremos también los campos implicados en las condiciones para comprobar el resultado.</p>
-</blockquote>
+Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcelona'. Mostremos también los campos implicados en las condiciones para comprobar el resultado.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoCliente<span class="token punctuation">,</span> NombreCliente<span class="token punctuation">,</span> Ciudad
 <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-WHERE">WHERE</span> Ciudad <span class="token operator">=</span> <span class="token string">'Madrid'</span> <span class="token operator">OR</span> Ciudad <span class="token operator">=</span> <span class="token string">'Barcelona'</span><span class="token punctuation">;</span>
@@ -687,7 +681,7 @@ Mostrar el importe del pago más pequeño y el importe de pago más grande recib
 <span class="token keyword keyword-FROM">FROM</span> pagos<span class="token punctuation">;</span>
 </code></pre><h2 id="consultas-select-de-agrupación">Consultas SELECT de AGRUPACIÓN </h2>
 <h4 id="consultas-de-agrupación">Consultas de agrupación </h4>
-<p>Cuando necesitamos agrupar varios registros para realizar operaciones para sumar, contar, o calcular la media, el mínimo o el máximo, necesitaremos realizar una instrucción SELECT indicando qué registros agrupamos, es decir, qué campos mostramos de los registros comunes y sobre qué campos realizamos la operación.<br>
+<p>Cuando necesitamos agrupar varios registros para realizar operaciones para sumar, contar, o calcular la media, el mínimo o el máximo, necesitaremos realizar una instrucción SELECT indicando qué registros agrupamos, es decir, qué campos mostramos de los registros comunes y sobre qué campos realizamos la operación. La cáusula <strong>GROUP BY</strong> y, opcionalmente, la cláusula <strong>HAVING</strong> se utilizan en las consultas de agrupación.<br>
 La sintaxis para realizar una consulta agrupada a una tabla es:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token punctuation">[</span><span class="token keyword keyword-DISTINCT">DISTINCT</span><span class="token punctuation">]</span> campos
 <span class="token punctuation">[</span><span class="token keyword keyword-FROM">FROM</span> table_references
@@ -698,7 +692,7 @@ La sintaxis para realizar una consulta agrupada a una tabla es:</p>
 <span class="token punctuation">[</span><span class="token keyword keyword-LIMIT">LIMIT</span> <span class="token punctuation">[</span><span class="token keyword keyword-offset">offset</span><span class="token punctuation">,</span><span class="token punctuation">]</span> row_count<span class="token punctuation">]</span>
 </code></pre><blockquote>
 <p>✋ <strong>Importante</strong><br>
-El orden de las cláusulas obligatoriamente es:<br>
+El orden de las cláusulas, <strong>obligatoriamente</strong>, es:<br>
 <strong>SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER … LIMIT</strong></p>
 </blockquote>
 <h4 id="ejemplos-de-las-primeras-consultas-agrupadas">Ejemplos de las primeras consultas agrupadas </h4>
