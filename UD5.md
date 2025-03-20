@@ -126,7 +126,7 @@ Es importante conocer el orden de las cláusulas:
 SELECT … FROM … WHERE … ORDER … LIMIT
 ```
 #### Utilidad de captura
-En muchas ocasiones nos interesaría llevar un registro de las instrucciones SQL ejecutadas y su resultrado. Conectados con la utilidad `mysql.exe` a MySQL podemos grabar toda la salida a un archivo a través de un comando:
+En muchas ocasiones nos interesaría llevar un registro de las instrucciones SQL ejecutadas y su resultrado. Conectados con la utilidad **`mysql.exe`** a MySQL podemos grabar toda la salida a un archivo a través de un comando:
 
 
 ```text
@@ -143,21 +143,21 @@ mysql> notee
 #### Ejemplos de las primeras consultas
 Con XAMPP-MySQL importar la BD de jardinería que facilitará el profesor.
 
-**Ejemplo E52501 - Tablas completas**
+**Ejemplo 1 - Tablas completas**
 Mostrar todos los campos de todos los clientes.
 ```sql
 SELECT *
 FROM clientes;
 ```
 
-**Ejemplo E52502 - Seleccionar campos a mostrar**
+**Ejemplo 2 - Seleccionar campos a mostrar**
 Mostrar los campos CodigoCliente, NombreCliente, Telefono, Ciudad, Region, Pais de todos los clientes.
 ```sql
 SELECT CodigoCliente, NombreCliente, Telefono, Ciudad, Region, Pais
 FROM clientes;
 ```
 
-**Ejemplo E52503 – Campos calculados**
+**Ejemplo 3 – Campos calculados**
 Mostrar los campos CodigoCliente, NombreCliente, LimiteCredito de todos los clientes añadiendo un campo calculado que se el LimiteCreditoMensual como LimiteCredito/12. Haced la division entera para evitar decimales. Utilizaremos el **alias de campo** con la palabra reservada **AS**.
 
 ```sql
@@ -165,7 +165,7 @@ SELECT CodigoCliente, NombreCliente, LimiteCredito, LimiteCredito DIV 12 AS Limi
 FROM clientes;
 ```
 
-**Ejemplo E52504 – No mostrar repetidos**
+**Ejemplo 4 – No mostrar repetidos**
 Mostrar las regiones (campo Region) todos los clientes evitando resultandos repetidos.
 
 ```sql
@@ -181,24 +181,22 @@ SELECT * FROM clientes
 ORDER BY LimiteCredito DESC;
 ```
 
-**Ejemplo E52507 – Limitar el número de registros a mostrar del resultado**
+**Ejemplo 5 – Limitar el número de registros a mostrar del resultado**
 Utilizando la consulta del ejercicio anterior E5106 mostrar:
 * Sólo los 5 primeros registros
+    ```sql
+    SELECT * 
+    FROM clientes
+    ORDER BY LimiteCredito DESC
+    LIMIT 5;
+    ```
 * Empezando en el tercer registro, mostrar 10 registros
-
-```sql
-SELECT * 
-FROM clientes
-ORDER BY LimiteCredito DESC
-LIMIT 5;
-```
-
-```sql
-SELECT *
-FROM clientes
-ORDER BY LimiteCredito DESC
-LIMIT 2,10;
-```
+    ```sql
+    SELECT *
+    FROM clientes
+    ORDER BY LimiteCredito DESC
+    LIMIT 2,10;
+    ```
 
 #### Consultas con selección de registros
 Para poder seleccionar registros es necesario indicar la condición que deben cumplir los campos de un registro para ser mostrado. Para ello se utiliza la sección **WHERE** de la instrucción SQL.
@@ -219,9 +217,9 @@ Los operadores relacionales que nos permiten comparar el valor de los campos son
 
 Veamos unos cuantos ejemplos:
 
-**Ejemplo E52601 – Buscar un registro por el valor de su clave**
+**Ejemplo 1 – Buscar un registro por el valor de su clave**
 Mostrar todos los campos del cliente con código igual a 12.
->**Nota:** Al ser el campo clave, el resultado sólo mostrará un registro.
+> :pushpin: **Nota:** Al ser el campo clave, el resultado sólo mostrará un registro.
 
 ```sql
 SELECT *
@@ -229,9 +227,9 @@ FROM clientes
 WHERE CodigoCliente = 12;
 ```
 
-**Ejemplo E52602 – Buscar registros por el valor de un campo**
+**Ejemplo 2 – Buscar registros por el valor de un campo**
 Mostrar todos los campos de los clientes de la Región Madrid.
->**Nota:** Al no ser un campo clave, el resultado puede mostrar más de un registro.
+>:pushpin: **Nota:** Al no ser un campo clave, el resultado puede mostrar más de un registro.
 
 ```sql
 SELECT *
@@ -239,7 +237,7 @@ FROM clientes
 WHERE Region = 'Madrid';
 ```
 
-**Ejemplo E52603 – Buscar registros por comparación del valor de un campo**
+**Ejemplo 3 – Buscar registros por comparación del valor de un campo**
 Mostrar todos los campos de los clientes con Límite de Crédito mayor de 50000€.
 
 ```sql
@@ -248,7 +246,7 @@ FROM clientes
 WHERE LimiteCredito > 50000;
 ```
 
-**Ejemplo E52604 – Buscar registros por comparación del valor de un campo**
+**Ejemplo 4 – Buscar registros por comparación del valor de un campo**
 Mostrar todos los campos de los clientes con Límite de Crédito entre 10000€ y 60000€.
 
 ```sql
@@ -257,7 +255,7 @@ FROM clientes
 WHERE LimiteCredito BETWEEN 10000 AND 60000;
 ```
 
-**Ejemplo E52605 – Buscar registros por comparación del valor de un campo**
+**Ejemplo 5 – Buscar registros por comparación del valor de un campo**
 Mostrar todos los campos de los clientes con la Región nula.
 
 ```sql
@@ -266,7 +264,7 @@ FROM clientes
 WHERE Region IS NULL;
 ```
 
-**Ejemplo E52606 – Ejemplo combinando con el apartado anterior**
+**Ejemplo 5 – Ejemplo combinando con el apartado anterior**
 Mostrar los Países de los clientes con la Región nula, sin repetir valores.
 
 ```sql
@@ -275,7 +273,7 @@ FROM clientes
 WHERE Region IS NULL;
 ```
 
-**Ejemplo E52607 – Ejemplo con LIKE**
+**Ejemplo 7 – Ejemplo con el operador LIKE**
 Mostrar los Empleados cuyo email contenga "jardin".
 
 ```sql
@@ -283,12 +281,11 @@ SELECT *
 FROM Empleados
 WHERE Email LIKE '%jardin%';
 ```
-<table>
-<tr><td><b>%</b></td><td>es una cadena de caracteres cualquiera</td></tr>
-<tr><td><b>_</b></td><td>es un sólo carácter cualquiera</td></tr>
-</table>
 
-**Ejemplo E52608 –Ejemplo con IN**
+> :pushpin: **Nota:** 
+> **%** es una cadena de caracteres cualquiera y **_** es un sólo carácter cualquiera.
+
+**Ejemplo 8 –Ejemplo con IN**
 Mostrar los productos de las gamas 'Aromáticas', 'Herramientas' y Ornamentales'.
 
 ```sql
@@ -312,10 +309,10 @@ Para poder realizar varias varias condiciones necesitamos combinarlas con operad
 Veamos unos cuantos ejemplos:
 
 
-**Ejemplo E52701 – Ejemplo con varias condiciones**
+**Ejemplo 1 – Ejemplo con varias condiciones**
 Mostrar codigo y nombre de los Productos que sean de la Gama 'Frutales' y CantidadEnSock sea mayor que 50 unidades.
 
->**Nota:** Mostremos también los campos implicados en las condiciones para comprobar el resultado.
+>:pushpin: **Nota:** Mostremos también los campos implicados en las condiciones para comprobar el resultado.
 
 ```sql
 SELECT CodigoProducto, Nombre, Gama,
@@ -323,10 +320,10 @@ FROM productos
 WHERE Gama = 'Frutales' AND CantidadEnStock > 50);
 ```
 
-**Ejemplo E52702 – Ejemplo con varias condiciones**
+**Ejemplo 2 – Ejemplo con varias condiciones**
 Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcelona'.
 
->**Nota:** Mostremos también los campos implicados en las condiciones para comprobar el resultado.
+>:pushpin: **Nota:** Mostremos también los campos implicados en las condiciones para comprobar el resultado.
 
 ```sql
 SELECT CodigoCliente, NombreCliente, Ciudad
@@ -340,7 +337,7 @@ WHERE Ciudad = 'Madrid' OR Ciudad = 'Barcelona';
 #### Consultas con funciones
 Las funciones nos permiten realizar transformaciones de los datos para obtener información. Existen multitud de funciones que procesan diferentes tipos de datos.
 
-***<u>Algunas funciones con cadenas de caracteres</u>***
+***Algunas funciones con cadenas de caracteres***
 | Función                     | Descripción                                                    |
 |:-----------------------------|:---------------------------------------------------------------|
 | **CONCAT(cad1, cad2, ...)**   | Concatena cadenas                                             |
@@ -352,7 +349,7 @@ Las funciones nos permiten realizar transformaciones de los datos para obtener i
 | **LENGTH(cad)**               | Longitud de una cadena                                        |
 | **REPLACE(cad, ant, pos)**     | Obtiene una cadena tomando **cad** como origen y cambiando **ant** por **pos**|
 
-***<u>Algunas funciones numéricas de un campo</u>***
+***Algunas funciones numéricas de un campo***
 | Función          | Descripción                                     |
 |:------------------|:------------------------------------------------|
 | **RAND()**           | Número aleatorio entre 0 y 1                   |
@@ -362,7 +359,7 @@ Las funciones nos permiten realizar transformaciones de los datos para obtener i
 | **SIGN(num)**        | Devuelve 1 para positivo, 0 para 0 y -1 para negativo |
 | **ABS(num)**         | Obtiene el valor absoluto de un número          |
 
-***<u>Algunas funciones de fechas de un campo*</u>**
+***Algunas funciones de fechas de un campo***
 | Función                  | Descripción                                      |
 |:-------------------------|:-------------------------------------------------|
 | **YEAR(campo)**            | Muestra el año del valor de un campo de tipo fecha |
@@ -371,7 +368,7 @@ Las funciones nos permiten realizar transformaciones de los datos para obtener i
 | **DAYNAME(campo)**         | Muestra el nombre del día de la semana del campo   |
 | **DAYOFWEEK(campo)**       | Devuelve un número indicando el día de la semana de un campo fecha: <br>**Nota:** 1=Domingo, 2=Lunes, 3=Martes, 4=Miércoles, 5=Jueves, 6=Viernes, 7=Sábado. |
 
-***<u>Algunas funciones numéricas con varios registros</u>***
+***<Algunas funciones numéricas con varios registros***
 | Función       | Descripción                                      |
 |:--------------|:-------------------------------------------------|
 | **COUNT(*)**     | Cuenta los registros seleccionados               |
@@ -385,7 +382,7 @@ Las funciones nos permiten realizar transformaciones de los datos para obtener i
 
 **<u>Ejemplos de funciones para campos calculados y para condiciones</u>**
 
-**Ejemplo E52801 – Ejemplo con funciones**
+**Ejemplo 1 – Ejemplo con funciones**
 Mostrar código, nombre y "precio de venta al público" de los productos, pero ese precio debe ser con IVA incluido, es decir, agregarle al PrecioVenta el 21% multiplicándolo por 1.21. Asignar el alias **pvp** al nuevo campo calculado.
 
 ```sql
@@ -393,7 +390,7 @@ SELECT CodigoProducto, Nombre, PrecioVenta, ROUND(PrecioVenta * 1.21, 2) AS pvp
 FROM Productos;
 ```
 
-**Ejemplo E52802 – Ejemplo con funciones en las condiciones**
+**Ejemplo 2 – Ejemplo con funciones en las condiciones**
 Seleccionar en la consulta anterior los productos que tengan el nuevo campo pvp mayor de 100€
 
 ```sql
@@ -404,7 +401,7 @@ WHERE ROUND(PrecioVenta * 1.21, 2) > 100;
 
 **<u>Ejemplos de funciones con cadenas de caracteres</u>**
 
-**Ejemplo E52803 – Ejemplo con funciones**
+**Ejemplo 3 – Ejemplo con funciones**
 Seleccionar de los empleados el nombre completo (NombreCompleto) concatenando el nombre y los dos apellidos.
 
 ```sql
@@ -412,7 +409,7 @@ SELECT CONCAT(Nombre, ' ', Apellido1, ' ', Apellido2) AS NombreCompleto
 FROM empleados;
 ```
 
-**Ejemplo E52804 – Ejemplo con funciones**
+**Ejemplo 4 – Ejemplo con funciones**
 Obtener la inicial del nombre de todos los empleados.
 
 ```sql
@@ -420,7 +417,7 @@ SELECT LEFT(Nombre, 1) AS inicial
 FROM empleados;
 ```
 
-**Ejemplo E52805 – Ejemplo con funciones**
+**Ejemplo 5 – Ejemplo con funciones**
 Obtener el nombre de los empleados todo en mayúsculas.
 
 ```sql
@@ -428,7 +425,7 @@ SELECT UCASE(Nombre)
 FROM empleados;
 ```
 
-**Ejemplo E52806 – Ejemplo con funciones**
+**Ejemplo 6 – Ejemplo con funciones**
 Obtener el código de las oficinas pero sustituyendo el guión por la barra, es decir, el '-' por '/'.
 
 ```sql
@@ -436,7 +433,7 @@ SELECT REPLACE(CodigoOficina, '-', '/')
 FROM oficinas;
 ```
 
-**Ejemplo E52807 – Ejemplo con funciones**
+**Ejemplo 7 – Ejemplo con funciones**
 Obtener la primera palabra del nombre del proveedor de todos los productos.
 
 ```sql
@@ -444,7 +441,7 @@ SELECT SUBSTRING_INDEX(Proveedor, ' ', 1)
 FROM productos;
 ```
 
-**Ejemplo E52808 – Ejemplo con funciones**
+**Ejemplo 8 – Ejemplo con funciones**
 Obtener el código de los productos pero conel orden de los caracteres invertido.
 
 ```sql
@@ -452,7 +449,7 @@ SELECT CodigoProducto, REVERSE(CodigoProducto)
 FROM productos;
 ```
 
-**Ejemplo E52809 – Ejemplo con funciones**
+**Ejemplo 9 – Ejemplo con funciones**
 Obtener un gráfico de barras para el stock de cada producto. Utilizaremos el carácter '|' por cada unidad de stock.
 
 ```sql
@@ -460,7 +457,7 @@ SELECT Codigoproducto,REPEAT('|', CantidadEnStock)
 FROM productos;
 ```
 
-**Ejemplo E52810 – Ejemplo con funciones**
+**Ejemplo 10 – Ejemplo con funciones**
 Obtener el email de cada empleado teniendo en cuenta que el usuario es su nombre en minusculas y el dominio '@iesdoctorbalmis.com'
 
 ```sql
@@ -468,7 +465,7 @@ SELECT CONCAT(LCASE(nombre), '@iesdoctorbalmis.com') AS email
 FROM empleados;
 ```
 
-**Ejemplo E52811 – Ejemplo con funciones**
+**Ejemplo 11 – Ejemplo con funciones**
 Obtener la abreviatura del nombre y primer apellidos de los empleados concatenando la inicial del nombre y la inicial del apellido1
 
 ```sql
@@ -478,7 +475,7 @@ FROM empleados;
 
 **<u>Ejemplos de funciones numéricas</u>**
 
-**Ejemplo E52812 – Ejemplo con funciones**
+**Ejemplo 12 – Ejemplo con funciones**
 Obtener un número aleatorio entre 0 y 9.
 
 ```sql
@@ -486,7 +483,8 @@ SELECT FLOOR(RAND() * 10);
 ```
 
 **<u>Ejemplos de funciones de fechas</u>**
-**Ejemplo E52813 – Ejemplo con funciones**
+
+**Ejemplo 13 – Ejemplo con funciones**
 Mostrar en campos diferentes el año, el mes y el día de la fecha de los pedido.
 
 ```sql
@@ -494,7 +492,7 @@ SELECT YEAR(FechaPedido), MONTH(FechaPedido), DAY(FechaPedido)
 FROM pedidos;
 ```
 
-**Ejemplo E52814 – Ejemplo con funciones**
+**Ejemplo 14 – Ejemplo con funciones**
 Mostrar todos los campos de pedidos realizados en enero del 2009.
 
 ```sql
@@ -503,7 +501,7 @@ FROM pedidos
 WHERE YEAR(FechaPedido) = 2009 AND MONTH(FechaPedido) = 1;
 ```
 
-**Ejemplo E52815 – Ejemplo con funciones**
+**Ejemplo 15 – Ejemplo con funciones**
 Mostrar todos los campos de pedidos realziados en lunes.
 
 ```sql
@@ -514,7 +512,7 @@ WHERE DAYOFWEEK(FechaEntrega) = 2;
 
 **<u>Ejemplos de funciones numéricas con varios registros</u>**
 
-**Ejemplo E52816 – Ejemplo con funciones**
+**Ejemplo 16 – Ejemplo con funciones**
 Mostrar el número total de pagos que se han recibido.
 
 ```sql
@@ -522,7 +520,7 @@ SELECT COUNT(*)
 FROM pagos;
 ```
 
-**Ejemplo E52817 – Ejemplo con funciones**
+**Ejemplo 17 – Ejemplo con funciones**
 Mostrar la cantidad en euros total que nos han ingresado.
 
 ```sql
@@ -530,7 +528,7 @@ SELECT SUM(Cantidad)
 FROM pagos;
 ```
 
-**Ejemplo E52818 – Ejemplo con funciones**
+**Ejemplo 18 – Ejemplo con funciones**
 Mostrar el importe del pago más pequeño y el importe de pago más grande recibido.
 
 ```sql
@@ -552,17 +550,17 @@ SELECT [DISTINCT] campos
 [ORDER BY {col_name | expr | position} [ASC | DESC] , ...]
 [LIMIT [offset,] row_count]
 ```
-Es importante conocer el orden de las cláusulas:
 
-```sql
-SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER … LIMIT
-```
+
+> :hand: **Importante**
+> El orden de las cláusulas obligatoriamente es:
+> **SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER … LIMIT**
 
 
 #### Ejemplos de las primeras consultas agrupadas
 Con XAMPP-MySQL importar la BD de jardinería que facilitará el profesor.
 
-**Ejemplo E43201 - Contar**
+**Ejemplo 1 - Contar**
 Mostrar el número de clientes (nombrar el nuevo campo NumClientes) que tenemos en cada ciudad.
 
 ```sql
@@ -571,7 +569,7 @@ FROM clientes
 GROUP BY Ciudad;
 ```
 
-**Ejemplo E43202 – Sumar operaciones numéricas**
+**Ejemplo 2 – Sumar operaciones numéricas**
 Mostrar el pedido y el importe total (ImpTotal) de todas las líneas de cada pedido. En la tabla detallepedidos tenemos el CodigoPedido, y la Cantidad y PrecioUnidad de cada artículo del pedido. Deberemos sumar Cantidad * PrecioUnidad de cada línea y luego sumarlas todas.
 
 ```sql
@@ -589,7 +587,7 @@ GROUP BY CodigoPedido;
 
 Podemos añadir también filtros que deban cumplir los registros mediante condiciones en la cláusula **WHERE**.
 
-**Ejemplo E43203 – Agrupaciones con condiciones WHERE**
+**Ejemplo 3 – Agrupaciones con condiciones WHERE**
 Mostrar el número de artículos (NumArticulos) de cada Gama cuyas PrecioVenta mayor que 20€.
 
 ```sql
@@ -601,7 +599,7 @@ GROUP BY Gama;
 
 Pero puede ser que la condición a cumplir sea sobre los campos calculados. En estos casos, la condición irá en la cláusula **HAVING**.
 
-**Ejemplo E43204 – Agrupaciones con condiciones HAVING**
+**Ejemplo 4 – Agrupaciones con condiciones HAVING**
 Mostrar las Gamas de artículos que tengan más de 100 diferentes. Mostrar también el número de artículos (NumArticulos).
 S
 ```sql
@@ -613,7 +611,7 @@ HAVING COUNT(*) > 100;
 
 Incluso podemos tener consultas que combinen **WHERE y HAVING** simultáneamente.
 
-**Ejemplo E43205 – Agrupaciones con condiciones WHERE y HAVING**
+**Ejemplo 5 – Agrupaciones con condiciones WHERE y HAVING**
 Mostrar los clientes que hayan realizado más de 1 pago de cantidad superior a los 3000€.
 
 ```sql
@@ -626,9 +624,9 @@ HAVING COUNT(*) > 1;
 
 ## Consultas SELECT multitabla
 #### Consultas multitabla de cruce (relación 1-N)
-Las consultas multitabla nos van a permitir procesar información de varias tablas conjuntamente. La sintaxis es la misma que hemos visto anteriormente para la sintaxis SELECT, pero en la cláusula FROM tendremos varias tablas.
+Las consultas multitabla nos van a permitir procesar información de varias tablas conjuntamente. La sintaxis es la misma que hemos visto anteriormente para la sintaxis SELECT, pero **en la cláusula FROM tendremos varias tablas**.
 
-**Ejemplo E44101 – SELECT mutitabla**
+**Ejemplo 1 – SELECT mutitabla**
 Mostrar los valores de la tabla **pagos** añadiendo el campo **NombreCliente**.
 
 ```sql
@@ -642,7 +640,7 @@ WHERE pagos.CodigoCliente = clientes.CodigoCliente;
 ¿Cuántos registros devuelve la consulta anterior?
 Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
 
-**Ejemplo E44102 – SELECT mutitabla**
+**Ejemplo 2 – SELECT mutitabla**
 Mostrar los valores de la tabla **pedidos** añadiendo el campo **NombreCliente**.
 
 ```sql
@@ -656,7 +654,7 @@ WHERE pedidos.CodigoCliente = clientes.CodigoCliente;
 ¿Cuántos registros devuelve la consulta anterior?
 Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
 
-**Ejemplo E44103 – SELECT mutitabla**
+**Ejemplo 3 – SELECT mutitabla**
 Mostrar los valores de la tabla **empleados** añadiendo los campos **Ciudad** y **Pais de la Oficina**.
 
 ```sql
@@ -670,10 +668,10 @@ WHERE oficinas.CodigoOficina = empleados.CodigoOficina;
 ¿Cuántos registros devuelve la consulta anterior?
 Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
 
-En relaciones reflexivas, debemos cruzar una tabla consigo misma. Para poder hacer esto, tenemos que asignar un alias a cada tabla para diferenciarlas.
+En **relaciones reflexivas**, debemos cruzar una tabla consigo misma. Para poder hacer esto, tenemos que asignar un **alias** a cada tabla para diferenciarlas.
 Veamos un ejemplo.
 
-**Ejemplo E44104 – SELECT mutitabla**
+**Ejemplo 4 – SELECT mutitabla**
 Mostrar los valores de la tabla **empleados** añadiendo los campos **Nombre y Apellido1 de su jefe**.
 
 ```sql
@@ -688,7 +686,7 @@ Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo
 
 También podemos relacionar más de una tabla. Veamos un ejemplo.
 
-**Ejemplo E44105 – SELECT mutitabla**
+**Ejemplo 5 – SELECT mutitabla**
 Mostrar los siguientes valores:
 * De pedidos: CodigoPedido y FechaPedido
 * De detallepedidos: CodigoProducto y Cantidad
@@ -708,10 +706,12 @@ Se puede observar que cuando se muestran datos de la tabla padre de relaciones c
 
 #### Consultas multitabla mediante INTERSECCIÓN
 Las consultas de intersección se pueden ejecutar con la cláusula
-**tabla1 INNER JOIN tabla2 ON condicion**
+```sql
+tabla1 INNER JOIN tabla2 ON condicion
+```
 El ejemplo anterior quedaría:
 
-**Ejemplo E44201 – SELECT mutitabla con INNER JOIN**
+**Ejemplo 1 – SELECT mutitabla con INNER JOIN**
 Mostrar los valores de la tabla **pagos** añadiendo el campo **NombreCliente**.
 
 ```sql
@@ -721,7 +721,7 @@ FROM (pagos INNER JOIN clientes ON pagos.CodigoCliente = clientes.CodigoCliente)
 
 Veamos otro ejemplo de consulta multitabla:
 
-**Ejemplo E44202 – SELECT mutitabla con INNER JOIN**
+**Ejemplo 2 – SELECT mutitabla con INNER JOIN**
 Mostrar los valores de la tabla **detallepedidos** pero añadiendo el campo FechaPedido y Estado de la tabla pedidos. Comprueba que el resultado contiene el mismo número de registros que detallepedidos.
 
 ```sql
@@ -729,9 +729,9 @@ SELECT pedidos.FechaPedido, pedidos.Estado, detallepedidos.*
 FROM (detallepedidos INNER JOIN pedidos ON detallepedidos.CodigoPedido = pedidos.CodigoPedido);
 ```
 
-En las consultas multitabla mediante intersección, es posible que haya registros que no se muestren por no haber cruce entre entre ellos. Por ejemplo, si queremos saber el número de pedidos realizados por cada cliente, podríamos pensar en realizar la siguiente consulta:
+En las **==consultas multitabla mediante intersección, es posible que haya registros que no se muestren por no haber cruce entre entre ellos==**. Por ejemplo, si queremos saber el número de pedidos realizados por cada cliente, podríamos pensar en realizar la siguiente consulta:
 
-**Ejemplo E44203 – SELECT mutitabla con INNER JOIN**
+**Ejemplo 3 – SELECT mutitabla con INNER JOIN**
 
 ```sql
 SELECT clientes.CodigoCliente, clientes.NombreCliente, COUNT(pedidos.CodigoPedido)
@@ -741,7 +741,7 @@ GROUP BY clientes.CodigoCliente, clientes.NombreCliente;
 
 En la tabla de clientes hay 36 registros, pero el resultado de la consulta sólo muestra 19. Esto ocurre porque hay clientes que no han realizado todavía ningún pedido. Para evitar esto, se introduce un cambio en la consulta que permite incluir todos los registros de una tabla de la intersección, que en nuestro caso es clientes. Lo haremos con la cláusula **LEFT** de la relación **clientes-pedidos**:
 
-**Ejemplo E44204 – SELECT mutitabla con LEFT JOIN**
+**Ejemplo 4 – SELECT mutitabla con LEFT JOIN**
 
 ```sql
 SELECT clientes.CodigoCliente, clientes.NombreCliente, COUNT(pedidos.CodigoPedido)
@@ -751,9 +751,10 @@ GROUP BY clientes.CodigoCliente, clientes.NombreCliente;
 
 Veamos otro ejemplo:
 
-**Ejemplo E44205 – SELECT mutitabla con LEFT JOIN**
+**Ejemplo 5 – SELECT mutitabla con LEFT JOIN**
 Mostrar el CodigoProducto y nombre de la tabla productos junto el la suma de la cantidad (SumCantidad) pedida en todos los pedidos existentes. (tabla detallepedidos).
->Nota: Tened en cuenta que de los productos que no haya habido ningún pedido debe aparecer 0.
+
+>:pushpin: **Nota**: Tened en cuenta que de los productos que no haya habido ningún pedido debe aparecer 0.
 
 ```sql
 SELECT productos.CodigoProducto, productos.Nombre, SUM(detallepedidos.Cantidad) AS SumCantidad
@@ -783,7 +784,7 @@ WHERE FechaPedido > '2009-03-31';
 
 Los clientes que están en las dos consultas son 16, 23 y 27, pero hay clientes que han realizado pagos y no pedidos, y viceversa.
 
-**Ejemplo E44301 – SELECT mutitabla con UNION**
+**Ejemplo 1 – SELECT mutitabla con UNION**
 Deseamos saber el CodigoCliente de los clientes que han realizado pagos posteriores al 31/03/2009 o pedidos posteriores al 31/03/2009.
 
 ```sql
@@ -811,7 +812,7 @@ SELECT AVG(Cantidad) AS CantidadMedia
 FROM pagos;
 ```
 
-**Ejemplo E44401 – Subconsulta en WHERE con operador de comparación**
+**Ejemplo 1 – Subconsulta en WHERE con operador de comparación**
 Mostrar los registros de pagos que tengan cantidades superiores a la media.
 
 ```sql
@@ -823,7 +824,7 @@ WHERE Cantidad > (SELECT AVG(Cantidad) AS CantidadMedia FROM pagos);
 **<u>Subconsultas en WHERE con operador IN</u>**
 El operador IN devuelve verdadero si el valor del campo de un registro está en el conjunto de valores devuelto por la subsonsulta.
 
-**Ejemplo E44402 – Subconsulta en WHERE con operador de IN**
+**Ejemplo 2 – Subconsulta en WHERE con operador de IN**
 Mostrar la Gama de los productos que de los que se haya pedido más de 30 unidades.
 
 ```sql
@@ -837,7 +838,7 @@ También puede usarse de forma negativa con **NOT IN**
 **<u>Subconsultas en WHERE con operador EXISTS</u>**
 El operador EXISTS es verdadero si la subconsulta devuelve al menos un registro.
 
-**Ejemplo E44403 – Subconsulta en WHERE con operador de EXISTS**
+**Ejemplo 3 – Subconsulta en WHERE con operador de EXISTS**
 Utiliza una subconsulta correlacionada para obtener los datos de los empleados que tenga algún cliente asignado.
 
 ```sql
@@ -851,7 +852,7 @@ También puede usarse de forma negativa con **NOT EXISTS**
 **<u>Subconsultas en FROM</u>**
 Podemos utilizar subconsultas como tablas y colocarlas en la cláusula FROM.
 
-**Ejemplo E44404 – Subconsulta en FROM**
+**Ejemplo 4 – Subconsulta en FROM**
 Aunque la siguiente consulta se puede obtener mediante una consulta de intersección típica, usaremos una subconsulta para probar su funcionamiento en FROM de forma sencilla. Las subconsultas de FROM deben tener un alias que asignaremos con AS.
 Muestra los datos de los empleados que trabajen en oficinas de Madrid.
 

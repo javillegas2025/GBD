@@ -269,26 +269,26 @@ Los siguientes ejemplos evaluan las expresiones que hay después de la cláusula
 </code></pre><p>Es importante conocer el orden de las cláusulas:</p>
 <pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>SELECT … FROM … WHERE … ORDER … LIMIT
 </code></pre><h4 id="utilidad-de-captura">Utilidad de captura </h4>
-<p>En muchas ocasiones nos interesaría llevar un registro de las instrucciones SQL ejecutadas y su resultrado. Conectados con la utilidad <code>mysql.exe</code> a MySQL podemos grabar toda la salida a un archivo a través de un comando:</p>
+<p>En muchas ocasiones nos interesaría llevar un registro de las instrucciones SQL ejecutadas y su resultrado. Conectados con la utilidad <strong><code>mysql.exe</code></strong> a MySQL podemos grabar toda la salida a un archivo a través de un comando:</p>
 <pre data-role="codeBlock" data-info="text" class="language-text text"><code>mysql&gt; tee archivo.txt
 mysql&gt; … instrucciones SQL …
 </code></pre><p>Para terminar la salida:</p>
 <pre data-role="codeBlock" data-info="text" class="language-text text"><code>mysql&gt; notee
 </code></pre><h4 id="ejemplos-de-las-primeras-consultas">Ejemplos de las primeras consultas </h4>
 <p>Con XAMPP-MySQL importar la BD de jardinería que facilitará el profesor.</p>
-<p><strong>Ejemplo E52501 - Tablas completas</strong><br>
+<p><strong>Ejemplo 1 - Tablas completas</strong><br>
 Mostrar todos los campos de todos los clientes.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> clientes<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52502 - Seleccionar campos a mostrar</strong><br>
+</code></pre><p><strong>Ejemplo 2 - Seleccionar campos a mostrar</strong><br>
 Mostrar los campos CodigoCliente, NombreCliente, Telefono, Ciudad, Region, Pais de todos los clientes.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoCliente<span class="token punctuation">,</span> NombreCliente<span class="token punctuation">,</span> Telefono<span class="token punctuation">,</span> Ciudad<span class="token punctuation">,</span> Region<span class="token punctuation">,</span> Pais
 <span class="token keyword keyword-FROM">FROM</span> clientes<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52503 – Campos calculados</strong><br>
+</code></pre><p><strong>Ejemplo 3 – Campos calculados</strong><br>
 Mostrar los campos CodigoCliente, NombreCliente, LimiteCredito de todos los clientes añadiendo un campo calculado que se el LimiteCreditoMensual como LimiteCredito/12. Haced la division entera para evitar decimales. Utilizaremos el <strong>alias de campo</strong> con la palabra reservada <strong>AS</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoCliente<span class="token punctuation">,</span> NombreCliente<span class="token punctuation">,</span> LimiteCredito<span class="token punctuation">,</span> LimiteCredito <span class="token operator">DIV</span> <span class="token number">12</span> <span class="token keyword keyword-AS">AS</span> LimiteCreditoMensual
 <span class="token keyword keyword-FROM">FROM</span> clientes<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52504 – No mostrar repetidos</strong><br>
+</code></pre><p><strong>Ejemplo 4 – No mostrar repetidos</strong><br>
 Mostrar las regiones (campo Region) todos los clientes evitando resultandos repetidos.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token keyword keyword-DISTINCT">DISTINCT</span> Region
 <span class="token keyword keyword-FROM">FROM</span> clientes<span class="token punctuation">;</span>
@@ -296,21 +296,21 @@ Mostrar las regiones (campo Region) todos los clientes evitando resultandos repe
 Mostrar todos los campos de todos los clientes ordenados por LimiteCredito ordenado descendentemente.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-ORDER">ORDER</span> <span class="token keyword keyword-BY">BY</span> LimiteCredito <span class="token keyword keyword-DESC">DESC</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52507 – Limitar el número de registros a mostrar del resultado</strong><br>
+</code></pre><p><strong>Ejemplo 5 – Limitar el número de registros a mostrar del resultado</strong><br>
 Utilizando la consulta del ejercicio anterior E5106 mostrar:</p>
 <ul>
-<li>Sólo los 5 primeros registros</li>
-<li>Empezando en el tercer registro, mostrar 10 registros</li>
-</ul>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> 
+<li>Sólo los 5 primeros registros<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> 
 <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-ORDER">ORDER</span> <span class="token keyword keyword-BY">BY</span> LimiteCredito <span class="token keyword keyword-DESC">DESC</span>
 <span class="token keyword keyword-LIMIT">LIMIT</span> <span class="token number">5</span><span class="token punctuation">;</span>
-</code></pre><pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
+</code></pre></li>
+<li>Empezando en el tercer registro, mostrar 10 registros<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-ORDER">ORDER</span> <span class="token keyword keyword-BY">BY</span> LimiteCredito <span class="token keyword keyword-DESC">DESC</span>
 <span class="token keyword keyword-LIMIT">LIMIT</span> <span class="token number">2</span><span class="token punctuation">,</span><span class="token number">10</span><span class="token punctuation">;</span>
-</code></pre><h4 id="consultas-con-selección-de-registros">Consultas con selección de registros </h4>
+</code></pre></li>
+</ul>
+<h4 id="consultas-con-selección-de-registros">Consultas con selección de registros </h4>
 <p>Para poder seleccionar registros es necesario indicar la condición que deben cumplir los campos de un registro para ser mostrado. Para ello se utiliza la sección <strong>WHERE</strong> de la instrucción SQL.<br>
 Los operadores relacionales que nos permiten comparar el valor de los campos son:</p>
 <table>
@@ -364,52 +364,52 @@ Los operadores relacionales que nos permiten comparar el valor de los campos son
 </tbody>
 </table>
 <p>Veamos unos cuantos ejemplos:</p>
-<p><strong>Ejemplo E52601 – Buscar un registro por el valor de su clave</strong><br>
+<p><strong>Ejemplo 1 – Buscar un registro por el valor de su clave</strong><br>
 Mostrar todos los campos del cliente con código igual a 12.</p>
 <blockquote>
-<p><strong>Nota:</strong> Al ser el campo clave, el resultado sólo mostrará un registro.</p>
+<p>📌 <strong>Nota:</strong> Al ser el campo clave, el resultado sólo mostrará un registro.</p>
 </blockquote>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-WHERE">WHERE</span> CodigoCliente <span class="token operator">=</span> <span class="token number">12</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52602 – Buscar registros por el valor de un campo</strong><br>
+</code></pre><p><strong>Ejemplo 2 – Buscar registros por el valor de un campo</strong><br>
 Mostrar todos los campos de los clientes de la Región Madrid.</p>
 <blockquote>
-<p><strong>Nota:</strong> Al no ser un campo clave, el resultado puede mostrar más de un registro.</p>
+<p>📌 <strong>Nota:</strong> Al no ser un campo clave, el resultado puede mostrar más de un registro.</p>
 </blockquote>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-WHERE">WHERE</span> Region <span class="token operator">=</span> <span class="token string">'Madrid'</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52603 – Buscar registros por comparación del valor de un campo</strong><br>
+</code></pre><p><strong>Ejemplo 3 – Buscar registros por comparación del valor de un campo</strong><br>
 Mostrar todos los campos de los clientes con Límite de Crédito mayor de 50000€.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-WHERE">WHERE</span> LimiteCredito <span class="token operator">&gt;</span> <span class="token number">50000</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52604 – Buscar registros por comparación del valor de un campo</strong><br>
+</code></pre><p><strong>Ejemplo 4 – Buscar registros por comparación del valor de un campo</strong><br>
 Mostrar todos los campos de los clientes con Límite de Crédito entre 10000€ y 60000€.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-WHERE">WHERE</span> LimiteCredito <span class="token operator">BETWEEN</span> <span class="token number">10000</span> <span class="token operator">AND</span> <span class="token number">60000</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52605 – Buscar registros por comparación del valor de un campo</strong><br>
+</code></pre><p><strong>Ejemplo 5 – Buscar registros por comparación del valor de un campo</strong><br>
 Mostrar todos los campos de los clientes con la Región nula.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-WHERE">WHERE</span> Region <span class="token operator">IS</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52606 – Ejemplo combinando con el apartado anterior</strong><br>
+</code></pre><p><strong>Ejemplo 5 – Ejemplo combinando con el apartado anterior</strong><br>
 Mostrar los Países de los clientes con la Región nula, sin repetir valores.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token keyword keyword-DISTINCT">DISTINCT</span> Pais 
 <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-WHERE">WHERE</span> Region <span class="token operator">IS</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52607 – Ejemplo con LIKE</strong><br>
+</code></pre><p><strong>Ejemplo 7 – Ejemplo con el operador LIKE</strong><br>
 Mostrar los Empleados cuyo email contenga "jardin".</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> Empleados
 <span class="token keyword keyword-WHERE">WHERE</span> Email <span class="token operator">LIKE</span> <span class="token string">'%jardin%'</span><span class="token punctuation">;</span>
-</code></pre><table>
-<tbody><tr><td><b>%</b></td><td>es una cadena de caracteres cualquiera</td></tr>
-<tr><td><b>_</b></td><td>es un sólo carácter cualquiera</td></tr>
-</tbody></table>
-<p><strong>Ejemplo E52608 –Ejemplo con IN</strong><br>
+</code></pre><blockquote>
+<p>📌 <strong>Nota:</strong><br>
+<strong>%</strong> es una cadena de caracteres cualquiera y <strong>_</strong> es un sólo carácter cualquiera.</p>
+</blockquote>
+<p><strong>Ejemplo 8 –Ejemplo con IN</strong><br>
 Mostrar los productos de las gamas 'Aromáticas', 'Herramientas' y Ornamentales'.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> productos
@@ -442,18 +442,18 @@ Mostrar los productos de las gamas 'Aromáticas', 'Herramientas' y Ornamentales'
 </tbody>
 </table>
 <p>Veamos unos cuantos ejemplos:</p>
-<p><strong>Ejemplo E52701 – Ejemplo con varias condiciones</strong><br>
+<p><strong>Ejemplo 1 – Ejemplo con varias condiciones</strong><br>
 Mostrar codigo y nombre de los Productos que sean de la Gama 'Frutales' y CantidadEnSock sea mayor que 50 unidades.</p>
 <blockquote>
-<p><strong>Nota:</strong> Mostremos también los campos implicados en las condiciones para comprobar el resultado.</p>
+<p>📌 <strong>Nota:</strong> Mostremos también los campos implicados en las condiciones para comprobar el resultado.</p>
 </blockquote>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoProducto<span class="token punctuation">,</span> Nombre<span class="token punctuation">,</span> Gama<span class="token punctuation">,</span>
 <span class="token keyword keyword-FROM">FROM</span> productos
 <span class="token keyword keyword-WHERE">WHERE</span> Gama <span class="token operator">=</span> <span class="token string">'Frutales'</span> <span class="token operator">AND</span> CantidadEnStock <span class="token operator">&gt;</span> <span class="token number">50</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52702 – Ejemplo con varias condiciones</strong><br>
+</code></pre><p><strong>Ejemplo 2 – Ejemplo con varias condiciones</strong><br>
 Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcelona'.</p>
 <blockquote>
-<p><strong>Nota:</strong> Mostremos también los campos implicados en las condiciones para comprobar el resultado.</p>
+<p>📌 <strong>Nota:</strong> Mostremos también los campos implicados en las condiciones para comprobar el resultado.</p>
 </blockquote>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoCliente<span class="token punctuation">,</span> NombreCliente<span class="token punctuation">,</span> Ciudad
 <span class="token keyword keyword-FROM">FROM</span> clientes
@@ -463,7 +463,7 @@ Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcel
 </div>
 <h4 id="consultas-con-funciones">Consultas con funciones </h4>
 <p>Las funciones nos permiten realizar transformaciones de los datos para obtener información. Existen multitud de funciones que procesan diferentes tipos de datos.</p>
-<p><em><strong><u>Algunas funciones con cadenas de caracteres</u></strong></em></p>
+<p><em><strong>Algunas funciones con cadenas de caracteres</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -506,7 +506,7 @@ Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcel
 </tr>
 </tbody>
 </table>
-<p><em><strong><u>Algunas funciones numéricas de un campo</u></strong></em></p>
+<p><em><strong>Algunas funciones numéricas de un campo</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -541,7 +541,7 @@ Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcel
 </tr>
 </tbody>
 </table>
-<p><strong><em><u>Algunas funciones de fechas de un campo</u></em></strong></p>
+<p><em><strong>Algunas funciones de fechas de un campo</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -572,7 +572,7 @@ Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcel
 </tr>
 </tbody>
 </table>
-<p><em><strong><u>Algunas funciones numéricas con varios registros</u></strong></em></p>
+<p><em><strong>&lt;Algunas funciones numéricas con varios registros</strong></em></p>
 <table>
 <thead>
 <tr>
@@ -607,81 +607,81 @@ Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcel
 <p class="admonition-title"><u>Referencias</u><br><a href="https://www.w3schools.com/sql/sql_ref_mysql.asp">MySQL w3schools – Funciones de MySQL</a><br><a href="https://dev.mysql.com/doc/refman/8.0/en/functions.htm">MySQL Oficial – Funciones</a></p>
 </div>
 <p><strong><u>Ejemplos de funciones para campos calculados y para condiciones</u></strong></p>
-<p><strong>Ejemplo E52801 – Ejemplo con funciones</strong><br>
+<p><strong>Ejemplo 1 – Ejemplo con funciones</strong><br>
 Mostrar código, nombre y "precio de venta al público" de los productos, pero ese precio debe ser con IVA incluido, es decir, agregarle al PrecioVenta el 21% multiplicándolo por 1.21. Asignar el alias <strong>pvp</strong> al nuevo campo calculado.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoProducto<span class="token punctuation">,</span> Nombre<span class="token punctuation">,</span> PrecioVenta<span class="token punctuation">,</span> <span class="token function">ROUND</span><span class="token punctuation">(</span>PrecioVenta <span class="token operator">*</span> <span class="token number">1.21</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> pvp
 <span class="token keyword keyword-FROM">FROM</span> Productos<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52802 – Ejemplo con funciones en las condiciones</strong><br>
+</code></pre><p><strong>Ejemplo 2 – Ejemplo con funciones en las condiciones</strong><br>
 Seleccionar en la consulta anterior los productos que tengan el nuevo campo pvp mayor de 100€</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoProducto<span class="token punctuation">,</span> Nombre<span class="token punctuation">,</span> PrecioVenta<span class="token punctuation">,</span> <span class="token function">ROUND</span><span class="token punctuation">(</span>PrecioVenta <span class="token operator">*</span> <span class="token number">1.21</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> pvp
 <span class="token keyword keyword-FROM">FROM</span> Productos
 <span class="token keyword keyword-WHERE">WHERE</span> <span class="token function">ROUND</span><span class="token punctuation">(</span>PrecioVenta <span class="token operator">*</span> <span class="token number">1.21</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">100</span><span class="token punctuation">;</span>
 </code></pre><p><strong><u>Ejemplos de funciones con cadenas de caracteres</u></strong></p>
-<p><strong>Ejemplo E52803 – Ejemplo con funciones</strong><br>
+<p><strong>Ejemplo 3 – Ejemplo con funciones</strong><br>
 Seleccionar de los empleados el nombre completo (NombreCompleto) concatenando el nombre y los dos apellidos.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CONCAT<span class="token punctuation">(</span>Nombre<span class="token punctuation">,</span> <span class="token string">' '</span><span class="token punctuation">,</span> Apellido1<span class="token punctuation">,</span> <span class="token string">' '</span><span class="token punctuation">,</span> Apellido2<span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NombreCompleto
 <span class="token keyword keyword-FROM">FROM</span> empleados<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52804 – Ejemplo con funciones</strong><br>
+</code></pre><p><strong>Ejemplo 4 – Ejemplo con funciones</strong><br>
 Obtener la inicial del nombre de todos los empleados.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token keyword keyword-LEFT">LEFT</span><span class="token punctuation">(</span>Nombre<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> inicial 
 <span class="token keyword keyword-FROM">FROM</span> empleados<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52805 – Ejemplo con funciones</strong><br>
+</code></pre><p><strong>Ejemplo 5 – Ejemplo con funciones</strong><br>
 Obtener el nombre de los empleados todo en mayúsculas.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">UCASE</span><span class="token punctuation">(</span>Nombre<span class="token punctuation">)</span>
 <span class="token keyword keyword-FROM">FROM</span> empleados<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52806 – Ejemplo con funciones</strong><br>
+</code></pre><p><strong>Ejemplo 6 – Ejemplo con funciones</strong><br>
 Obtener el código de las oficinas pero sustituyendo el guión por la barra, es decir, el '-' por '/'.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token keyword keyword-REPLACE">REPLACE</span><span class="token punctuation">(</span>CodigoOficina<span class="token punctuation">,</span> <span class="token string">'-'</span><span class="token punctuation">,</span> <span class="token string">'/'</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-FROM">FROM</span> oficinas<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52807 – Ejemplo con funciones</strong><br>
+</code></pre><p><strong>Ejemplo 7 – Ejemplo con funciones</strong><br>
 Obtener la primera palabra del nombre del proveedor de todos los productos.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> SUBSTRING_INDEX<span class="token punctuation">(</span>Proveedor<span class="token punctuation">,</span> <span class="token string">' '</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-FROM">FROM</span> productos<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52808 – Ejemplo con funciones</strong><br>
+</code></pre><p><strong>Ejemplo 8 – Ejemplo con funciones</strong><br>
 Obtener el código de los productos pero conel orden de los caracteres invertido.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoProducto<span class="token punctuation">,</span> REVERSE<span class="token punctuation">(</span>CodigoProducto<span class="token punctuation">)</span>
 <span class="token keyword keyword-FROM">FROM</span> productos<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52809 – Ejemplo con funciones</strong><br>
+</code></pre><p><strong>Ejemplo 9 – Ejemplo con funciones</strong><br>
 Obtener un gráfico de barras para el stock de cada producto. Utilizaremos el carácter '|' por cada unidad de stock.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> Codigoproducto<span class="token punctuation">,</span><span class="token keyword keyword-REPEAT">REPEAT</span><span class="token punctuation">(</span><span class="token string">'|'</span><span class="token punctuation">,</span> CantidadEnStock<span class="token punctuation">)</span>
 <span class="token keyword keyword-FROM">FROM</span> productos<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52810 – Ejemplo con funciones</strong><br>
+</code></pre><p><strong>Ejemplo 10 – Ejemplo con funciones</strong><br>
 Obtener el email de cada empleado teniendo en cuenta que el usuario es su nombre en minusculas y el dominio '@iesdoctorbalmis.com'</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CONCAT<span class="token punctuation">(</span><span class="token function">LCASE</span><span class="token punctuation">(</span>nombre<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token string">'@iesdoctorbalmis.com'</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> email
 <span class="token keyword keyword-FROM">FROM</span> empleados<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52811 – Ejemplo con funciones</strong><br>
+</code></pre><p><strong>Ejemplo 11 – Ejemplo con funciones</strong><br>
 Obtener la abreviatura del nombre y primer apellidos de los empleados concatenando la inicial del nombre y la inicial del apellido1</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CONCAT<span class="token punctuation">(</span><span class="token keyword keyword-LEFT">LEFT</span><span class="token punctuation">(</span>Nombre<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword keyword-LEFT">LEFT</span><span class="token punctuation">(</span>Apellido1<span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> inicial
 <span class="token keyword keyword-FROM">FROM</span> empleados<span class="token punctuation">;</span>
 </code></pre><p><strong><u>Ejemplos de funciones numéricas</u></strong></p>
-<p><strong>Ejemplo E52812 – Ejemplo con funciones</strong><br>
+<p><strong>Ejemplo 12 – Ejemplo con funciones</strong><br>
 Obtener un número aleatorio entre 0 y 9.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> FLOOR<span class="token punctuation">(</span>RAND<span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token operator">*</span> <span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p><strong><u>Ejemplos de funciones de fechas</u></strong><br>
-<strong>Ejemplo E52813 – Ejemplo con funciones</strong><br>
+</code></pre><p><strong><u>Ejemplos de funciones de fechas</u></strong></p>
+<p><strong>Ejemplo 13 – Ejemplo con funciones</strong><br>
 Mostrar en campos diferentes el año, el mes y el día de la fecha de los pedido.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token keyword keyword-YEAR">YEAR</span><span class="token punctuation">(</span>FechaPedido<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword keyword-MONTH">MONTH</span><span class="token punctuation">(</span>FechaPedido<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token keyword keyword-DAY">DAY</span><span class="token punctuation">(</span>FechaPedido<span class="token punctuation">)</span>
 <span class="token keyword keyword-FROM">FROM</span> pedidos<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52814 – Ejemplo con funciones</strong><br>
+</code></pre><p><strong>Ejemplo 14 – Ejemplo con funciones</strong><br>
 Mostrar todos los campos de pedidos realizados en enero del 2009.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> pedidos
 <span class="token keyword keyword-WHERE">WHERE</span> <span class="token keyword keyword-YEAR">YEAR</span><span class="token punctuation">(</span>FechaPedido<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">2009</span> <span class="token operator">AND</span> <span class="token keyword keyword-MONTH">MONTH</span><span class="token punctuation">(</span>FechaPedido<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52815 – Ejemplo con funciones</strong><br>
+</code></pre><p><strong>Ejemplo 15 – Ejemplo con funciones</strong><br>
 Mostrar todos los campos de pedidos realziados en lunes.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> pedidos
 <span class="token keyword keyword-WHERE">WHERE</span> DAYOFWEEK<span class="token punctuation">(</span>FechaEntrega<span class="token punctuation">)</span> <span class="token operator">=</span> <span class="token number">2</span><span class="token punctuation">;</span>
 </code></pre><p><strong><u>Ejemplos de funciones numéricas con varios registros</u></strong></p>
-<p><strong>Ejemplo E52816 – Ejemplo con funciones</strong><br>
+<p><strong>Ejemplo 16 – Ejemplo con funciones</strong><br>
 Mostrar el número total de pagos que se han recibido.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-FROM">FROM</span> pagos<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52817 – Ejemplo con funciones</strong><br>
+</code></pre><p><strong>Ejemplo 17 – Ejemplo con funciones</strong><br>
 Mostrar la cantidad en euros total que nos han ingresado.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">SUM</span><span class="token punctuation">(</span>Cantidad<span class="token punctuation">)</span>
 <span class="token keyword keyword-FROM">FROM</span> pagos<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E52818 – Ejemplo con funciones</strong><br>
+</code></pre><p><strong>Ejemplo 18 – Ejemplo con funciones</strong><br>
 Mostrar el importe del pago más pequeño y el importe de pago más grande recibido.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">MIN</span><span class="token punctuation">(</span>Cantidad<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token function">MAX</span><span class="token punctuation">(</span>Cantidad<span class="token punctuation">)</span>
 <span class="token keyword keyword-FROM">FROM</span> pagos<span class="token punctuation">;</span>
@@ -696,16 +696,19 @@ La sintaxis para realizar una consulta agrupada a una tabla es:</p>
 <span class="token punctuation">[</span><span class="token keyword keyword-HAVING">HAVING</span> where_definition<span class="token punctuation">]</span>
 <span class="token punctuation">[</span><span class="token keyword keyword-ORDER">ORDER</span> <span class="token keyword keyword-BY">BY</span> {col_name <span class="token operator">|</span> expr <span class="token operator">|</span> position} <span class="token punctuation">[</span><span class="token keyword keyword-ASC">ASC</span> <span class="token operator">|</span> <span class="token keyword keyword-DESC">DESC</span><span class="token punctuation">]</span> <span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">]</span>
 <span class="token punctuation">[</span><span class="token keyword keyword-LIMIT">LIMIT</span> <span class="token punctuation">[</span><span class="token keyword keyword-offset">offset</span><span class="token punctuation">,</span><span class="token punctuation">]</span> row_count<span class="token punctuation">]</span>
-</code></pre><p>Es importante conocer el orden de las cláusulas:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> … <span class="token keyword keyword-FROM">FROM</span> … <span class="token keyword keyword-WHERE">WHERE</span> … <span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> … <span class="token keyword keyword-HAVING">HAVING</span> … <span class="token keyword keyword-ORDER">ORDER</span> … <span class="token keyword keyword-LIMIT">LIMIT</span>
-</code></pre><h4 id="ejemplos-de-las-primeras-consultas-agrupadas">Ejemplos de las primeras consultas agrupadas </h4>
+</code></pre><blockquote>
+<p>✋ <strong>Importante</strong><br>
+El orden de las cláusulas obligatoriamente es:<br>
+<strong>SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER … LIMIT</strong></p>
+</blockquote>
+<h4 id="ejemplos-de-las-primeras-consultas-agrupadas">Ejemplos de las primeras consultas agrupadas </h4>
 <p>Con XAMPP-MySQL importar la BD de jardinería que facilitará el profesor.</p>
-<p><strong>Ejemplo E43201 - Contar</strong><br>
+<p><strong>Ejemplo 1 - Contar</strong><br>
 Mostrar el número de clientes (nombrar el nuevo campo NumClientes) que tenemos en cada ciudad.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> Ciudad<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumClientes
 <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> Ciudad<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E43202 – Sumar operaciones numéricas</strong><br>
+</code></pre><p><strong>Ejemplo 2 – Sumar operaciones numéricas</strong><br>
 Mostrar el pedido y el importe total (ImpTotal) de todas las líneas de cada pedido. En la tabla detallepedidos tenemos el CodigoPedido, y la Cantidad y PrecioUnidad de cada artículo del pedido. Deberemos sumar Cantidad * PrecioUnidad de cada línea y luego sumarlas todas.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">-- Sin Agrupar</span>
 <span class="token keyword keyword-SELECT">SELECT</span> CodigoPedido<span class="token punctuation">,</span> Cantidad <span class="token operator">*</span> PrecioUnidad <span class="token keyword keyword-AS">AS</span> ImpLinea
@@ -715,14 +718,14 @@ Mostrar el pedido y el importe total (ImpTotal) de todas las líneas de cada ped
 <span class="token keyword keyword-FROM">FROM</span> detallepedidos
 <span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> CodigoPedido<span class="token punctuation">;</span>
 </code></pre><p>Podemos añadir también filtros que deban cumplir los registros mediante condiciones en la cláusula <strong>WHERE</strong>.</p>
-<p><strong>Ejemplo E43203 – Agrupaciones con condiciones WHERE</strong><br>
+<p><strong>Ejemplo 3 – Agrupaciones con condiciones WHERE</strong><br>
 Mostrar el número de artículos (NumArticulos) de cada Gama cuyas PrecioVenta mayor que 20€.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> Gama<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumArticulos
 <span class="token keyword keyword-FROM">FROM</span> productos
 <span class="token keyword keyword-WHERE">WHERE</span> PrecioVenta <span class="token operator">&gt;</span> <span class="token number">20</span>
 <span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> Gama<span class="token punctuation">;</span>
 </code></pre><p>Pero puede ser que la condición a cumplir sea sobre los campos calculados. En estos casos, la condición irá en la cláusula <strong>HAVING</strong>.</p>
-<p><strong>Ejemplo E43204 – Agrupaciones con condiciones HAVING</strong><br>
+<p><strong>Ejemplo 4 – Agrupaciones con condiciones HAVING</strong><br>
 Mostrar las Gamas de artículos que tengan más de 100 diferentes. Mostrar también el número de artículos (NumArticulos).<br>
 S</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code>ELECT Gama<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumArticulos
@@ -730,7 +733,7 @@ S</p>
 <span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> Gama
 <span class="token keyword keyword-HAVING">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">100</span><span class="token punctuation">;</span>
 </code></pre><p>Incluso podemos tener consultas que combinen <strong>WHERE y HAVING</strong> simultáneamente.</p>
-<p><strong>Ejemplo E43205 – Agrupaciones con condiciones WHERE y HAVING</strong><br>
+<p><strong>Ejemplo 5 – Agrupaciones con condiciones WHERE y HAVING</strong><br>
 Mostrar los clientes que hayan realizado más de 1 pago de cantidad superior a los 3000€.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoCLiente<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumPagos
 <span class="token keyword keyword-FROM">FROM</span> pagos
@@ -739,8 +742,8 @@ Mostrar los clientes que hayan realizado más de 1 pago de cantidad superior a l
 <span class="token keyword keyword-HAVING">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">;</span>
 </code></pre><h2 id="consultas-select-multitabla">Consultas SELECT multitabla </h2>
 <h4 id="consultas-multitabla-de-cruce-relación-1-n">Consultas multitabla de cruce (relación 1-N) </h4>
-<p>Las consultas multitabla nos van a permitir procesar información de varias tablas conjuntamente. La sintaxis es la misma que hemos visto anteriormente para la sintaxis SELECT, pero en la cláusula FROM tendremos varias tablas.</p>
-<p><strong>Ejemplo E44101 – SELECT mutitabla</strong><br>
+<p>Las consultas multitabla nos van a permitir procesar información de varias tablas conjuntamente. La sintaxis es la misma que hemos visto anteriormente para la sintaxis SELECT, pero <strong>en la cláusula FROM tendremos varias tablas</strong>.</p>
+<p><strong>Ejemplo 1 – SELECT mutitabla</strong><br>
 Mostrar los valores de la tabla <strong>pagos</strong> añadiendo el campo <strong>NombreCliente</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> clientes<span class="token punctuation">.</span>NombreCliente<span class="token punctuation">,</span> pagos<span class="token punctuation">.</span><span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> pagos<span class="token punctuation">,</span> clientes
@@ -749,7 +752,7 @@ Mostrar los valores de la tabla <strong>pagos</strong> añadiendo el campo <stro
 ¿Cuántos registros tienen la tabla clientes?<br>
 ¿Cuántos registros devuelve la consulta anterior?<br>
 Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.</p>
-<p><strong>Ejemplo E44102 – SELECT mutitabla</strong><br>
+<p><strong>Ejemplo 2 – SELECT mutitabla</strong><br>
 Mostrar los valores de la tabla <strong>pedidos</strong> añadiendo el campo <strong>NombreCliente</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> clientes<span class="token punctuation">.</span>NombreCliente<span class="token punctuation">,</span> pedidos<span class="token punctuation">.</span><span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> pedidos<span class="token punctuation">,</span> clientes
@@ -758,7 +761,7 @@ Mostrar los valores de la tabla <strong>pedidos</strong> añadiendo el campo <st
 ¿Cuántos registros tienen la tabla clientes?<br>
 ¿Cuántos registros devuelve la consulta anterior?<br>
 Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.</p>
-<p><strong>Ejemplo E44103 – SELECT mutitabla</strong><br>
+<p><strong>Ejemplo 3 – SELECT mutitabla</strong><br>
 Mostrar los valores de la tabla <strong>empleados</strong> añadiendo los campos <strong>Ciudad</strong> y <strong>Pais de la Oficina</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> oficinas<span class="token punctuation">.</span>Ciudad<span class="token punctuation">,</span> oficinas<span class="token punctuation">.</span>Pais<span class="token punctuation">,</span> empleados<span class="token punctuation">.</span><span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> oficinas<span class="token punctuation">,</span> empleados
@@ -767,9 +770,9 @@ Mostrar los valores de la tabla <strong>empleados</strong> añadiendo los campos
 ¿Cuántos registros tienen la tabla empleados?<br>
 ¿Cuántos registros devuelve la consulta anterior?<br>
 Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.</p>
-<p>En relaciones reflexivas, debemos cruzar una tabla consigo misma. Para poder hacer esto, tenemos que asignar un alias a cada tabla para diferenciarlas.<br>
+<p>En <strong>relaciones reflexivas</strong>, debemos cruzar una tabla consigo misma. Para poder hacer esto, tenemos que asignar un <strong>alias</strong> a cada tabla para diferenciarlas.<br>
 Veamos un ejemplo.</p>
-<p><strong>Ejemplo E44104 – SELECT mutitabla</strong><br>
+<p><strong>Ejemplo 4 – SELECT mutitabla</strong><br>
 Mostrar los valores de la tabla <strong>empleados</strong> añadiendo los campos <strong>Nombre y Apellido1 de su jefe</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> jefes<span class="token punctuation">.</span>Nombre<span class="token punctuation">,</span> jefes<span class="token punctuation">.</span>Apellido1<span class="token punctuation">,</span> trabajadores<span class="token punctuation">.</span><span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> empleados <span class="token keyword keyword-as">as</span> trabajadores<span class="token punctuation">,</span> empleados <span class="token keyword keyword-as">as</span> jefes
@@ -778,7 +781,7 @@ Mostrar los valores de la tabla <strong>empleados</strong> añadiendo los campos
 ¿Cuántos registros devuelve la consulta anterior?<br>
 Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.</p>
 <p>También podemos relacionar más de una tabla. Veamos un ejemplo.</p>
-<p><strong>Ejemplo E44105 – SELECT mutitabla</strong><br>
+<p><strong>Ejemplo 5 – SELECT mutitabla</strong><br>
 Mostrar los siguientes valores:</p>
 <ul>
 <li>De pedidos: CodigoPedido y FechaPedido</li>
@@ -793,33 +796,33 @@ Mostrar los siguientes valores:</p>
 Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.</p>
 <p>Se puede observar que cuando se muestran datos de la tabla padre de relaciones con cardinalidad 1-N, estos se repiten ya que pueden tener muchos hijos. En el ejemplo anterior se puede ver claramente que los datos de la tabla pedidos se repiten tantas veces como líneas de detalle tengan.</p>
 <h4 id="consultas-multitabla-mediante-intersección">Consultas multitabla mediante INTERSECCIÓN </h4>
-<p>Las consultas de intersección se pueden ejecutar con la cláusula<br>
-<strong>tabla1 INNER JOIN tabla2 ON condicion</strong><br>
-El ejemplo anterior quedaría:</p>
-<p><strong>Ejemplo E44201 – SELECT mutitabla con INNER JOIN</strong><br>
+<p>Las consultas de intersección se pueden ejecutar con la cláusula</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code>tabla1 <span class="token keyword keyword-INNER">INNER</span> <span class="token keyword keyword-JOIN">JOIN</span> tabla2 <span class="token keyword keyword-ON">ON</span> condicion
+</code></pre><p>El ejemplo anterior quedaría:</p>
+<p><strong>Ejemplo 1 – SELECT mutitabla con INNER JOIN</strong><br>
 Mostrar los valores de la tabla <strong>pagos</strong> añadiendo el campo <strong>NombreCliente</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> clientes<span class="token punctuation">.</span>NombreCliente<span class="token punctuation">,</span> pagos<span class="token punctuation">.</span><span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> <span class="token punctuation">(</span>pagos <span class="token keyword keyword-INNER">INNER</span> <span class="token keyword keyword-JOIN">JOIN</span> clientes <span class="token keyword keyword-ON">ON</span> pagos<span class="token punctuation">.</span>CodigoCliente <span class="token operator">=</span> clientes<span class="token punctuation">.</span>CodigoCliente<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre><p>Veamos otro ejemplo de consulta multitabla:</p>
-<p><strong>Ejemplo E44202 – SELECT mutitabla con INNER JOIN</strong><br>
+<p><strong>Ejemplo 2 – SELECT mutitabla con INNER JOIN</strong><br>
 Mostrar los valores de la tabla <strong>detallepedidos</strong> pero añadiendo el campo FechaPedido y Estado de la tabla pedidos. Comprueba que el resultado contiene el mismo número de registros que detallepedidos.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> pedidos<span class="token punctuation">.</span>FechaPedido<span class="token punctuation">,</span> pedidos<span class="token punctuation">.</span>Estado<span class="token punctuation">,</span> detallepedidos<span class="token punctuation">.</span><span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> <span class="token punctuation">(</span>detallepedidos <span class="token keyword keyword-INNER">INNER</span> <span class="token keyword keyword-JOIN">JOIN</span> pedidos <span class="token keyword keyword-ON">ON</span> detallepedidos<span class="token punctuation">.</span>CodigoPedido <span class="token operator">=</span> pedidos<span class="token punctuation">.</span>CodigoPedido<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p>En las consultas multitabla mediante intersección, es posible que haya registros que no se muestren por no haber cruce entre entre ellos. Por ejemplo, si queremos saber el número de pedidos realizados por cada cliente, podríamos pensar en realizar la siguiente consulta:</p>
-<p><strong>Ejemplo E44203 – SELECT mutitabla con INNER JOIN</strong></p>
+</code></pre><p>En las <strong><mark>consultas multitabla mediante intersección, es posible que haya registros que no se muestren por no haber cruce entre entre ellos</mark></strong>. Por ejemplo, si queremos saber el número de pedidos realizados por cada cliente, podríamos pensar en realizar la siguiente consulta:</p>
+<p><strong>Ejemplo 3 – SELECT mutitabla con INNER JOIN</strong></p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> clientes<span class="token punctuation">.</span>CodigoCliente<span class="token punctuation">,</span> clientes<span class="token punctuation">.</span>NombreCliente<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>pedidos<span class="token punctuation">.</span>CodigoPedido<span class="token punctuation">)</span>
 <span class="token keyword keyword-FROM">FROM</span> clientes <span class="token keyword keyword-INNER">INNER</span> <span class="token keyword keyword-JOIN">JOIN</span> pedidos <span class="token keyword keyword-ON">ON</span> clientes<span class="token punctuation">.</span>CodigoCliente <span class="token operator">=</span> pedidos<span class="token punctuation">.</span>CodigoCliente
 <span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> clientes<span class="token punctuation">.</span>CodigoCliente<span class="token punctuation">,</span> clientes<span class="token punctuation">.</span>NombreCliente<span class="token punctuation">;</span>
 </code></pre><p>En la tabla de clientes hay 36 registros, pero el resultado de la consulta sólo muestra 19. Esto ocurre porque hay clientes que no han realizado todavía ningún pedido. Para evitar esto, se introduce un cambio en la consulta que permite incluir todos los registros de una tabla de la intersección, que en nuestro caso es clientes. Lo haremos con la cláusula <strong>LEFT</strong> de la relación <strong>clientes-pedidos</strong>:</p>
-<p><strong>Ejemplo E44204 – SELECT mutitabla con LEFT JOIN</strong></p>
+<p><strong>Ejemplo 4 – SELECT mutitabla con LEFT JOIN</strong></p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> clientes<span class="token punctuation">.</span>CodigoCliente<span class="token punctuation">,</span> clientes<span class="token punctuation">.</span>NombreCliente<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span>pedidos<span class="token punctuation">.</span>CodigoPedido<span class="token punctuation">)</span>
 <span class="token keyword keyword-FROM">FROM</span> clientes <span class="token keyword keyword-LEFT">LEFT</span> <span class="token keyword keyword-JOIN">JOIN</span> pedidos <span class="token keyword keyword-ON">ON</span> clientes<span class="token punctuation">.</span>CodigoCliente <span class="token operator">=</span> pedidos<span class="token punctuation">.</span>CodigoCliente
 <span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> clientes<span class="token punctuation">.</span>CodigoCliente<span class="token punctuation">,</span> clientes<span class="token punctuation">.</span>NombreCliente<span class="token punctuation">;</span>
 </code></pre><p>Veamos otro ejemplo:</p>
-<p><strong>Ejemplo E44205 – SELECT mutitabla con LEFT JOIN</strong><br>
+<p><strong>Ejemplo 5 – SELECT mutitabla con LEFT JOIN</strong><br>
 Mostrar el CodigoProducto y nombre de la tabla productos junto el la suma de la cantidad (SumCantidad) pedida en todos los pedidos existentes. (tabla detallepedidos).</p>
 <blockquote>
-<p>Nota: Tened en cuenta que de los productos que no haya habido ningún pedido debe aparecer 0.</p>
+<p>📌 <strong>Nota</strong>: Tened en cuenta que de los productos que no haya habido ningún pedido debe aparecer 0.</p>
 </blockquote>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> productos<span class="token punctuation">.</span>CodigoProducto<span class="token punctuation">,</span> productos<span class="token punctuation">.</span>Nombre<span class="token punctuation">,</span> <span class="token function">SUM</span><span class="token punctuation">(</span>detallepedidos<span class="token punctuation">.</span>Cantidad<span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> SumCantidad
 <span class="token keyword keyword-FROM">FROM</span> productos <span class="token keyword keyword-LEFT">LEFT</span> <span class="token keyword keyword-JOIN">JOIN</span> detallepedidos <span class="token keyword keyword-ON">ON</span> productos<span class="token punctuation">.</span>CodigoProducto <span class="token operator">=</span> detallepedidos<span class="token punctuation">.</span>CodigoProducto
@@ -836,7 +839,7 @@ Por ejemplo, tenemos por un lado los clientes que han realizado pagos posteriore
 <span class="token keyword keyword-FROM">FROM</span> pedidos
 <span class="token keyword keyword-WHERE">WHERE</span> FechaPedido <span class="token operator">&gt;</span> <span class="token string">'2009-03-31'</span><span class="token punctuation">;</span>
 </code></pre><p>Los clientes que están en las dos consultas son 16, 23 y 27, pero hay clientes que han realizado pagos y no pedidos, y viceversa.</p>
-<p><strong>Ejemplo E44301 – SELECT mutitabla con UNION</strong><br>
+<p><strong>Ejemplo 1 – SELECT mutitabla con UNION</strong><br>
 Deseamos saber el CodigoCliente de los clientes que han realizado pagos posteriores al 31/03/2009 o pedidos posteriores al 31/03/2009.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token keyword keyword-DISTINCT">DISTINCT</span> CodigoCliente
 <span class="token keyword keyword-FROM">FROM</span> pagos
@@ -853,14 +856,14 @@ Deseamos saber el CodigoCliente de los clientes que han realizado pagos posterio
 Para el siguiente ejemplo, primero buscamos la cantidad media que pagan los clientes.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">AVG</span><span class="token punctuation">(</span>Cantidad<span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> CantidadMedia 
 <span class="token keyword keyword-FROM">FROM</span> pagos<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo E44401 – Subconsulta en WHERE con operador de comparación</strong><br>
+</code></pre><p><strong>Ejemplo 1 – Subconsulta en WHERE con operador de comparación</strong><br>
 Mostrar los registros de pagos que tengan cantidades superiores a la media.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> pagos
 <span class="token keyword keyword-WHERE">WHERE</span> Cantidad <span class="token operator">&gt;</span> <span class="token punctuation">(</span><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">AVG</span><span class="token punctuation">(</span>Cantidad<span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> CantidadMedia <span class="token keyword keyword-FROM">FROM</span> pagos<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre><p><strong><u>Subconsultas en WHERE con operador IN</u></strong><br>
 El operador IN devuelve verdadero si el valor del campo de un registro está en el conjunto de valores devuelto por la subsonsulta.</p>
-<p><strong>Ejemplo E44402 – Subconsulta en WHERE con operador de IN</strong><br>
+<p><strong>Ejemplo 2 – Subconsulta en WHERE con operador de IN</strong><br>
 Mostrar la Gama de los productos que de los que se haya pedido más de 30 unidades.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token keyword keyword-DISTINCT">DISTINCT</span> Gama
 <span class="token keyword keyword-FROM">FROM</span> productos
@@ -868,7 +871,7 @@ Mostrar la Gama de los productos que de los que se haya pedido más de 30 unidad
 </code></pre><p>También puede usarse de forma negativa con <strong>NOT IN</strong></p>
 <p><strong><u>Subconsultas en WHERE con operador EXISTS</u></strong><br>
 El operador EXISTS es verdadero si la subconsulta devuelve al menos un registro.</p>
-<p><strong>Ejemplo E44403 – Subconsulta en WHERE con operador de EXISTS</strong><br>
+<p><strong>Ejemplo 3 – Subconsulta en WHERE con operador de EXISTS</strong><br>
 Utiliza una subconsulta correlacionada para obtener los datos de los empleados que tenga algún cliente asignado.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> empleados
@@ -876,7 +879,7 @@ Utiliza una subconsulta correlacionada para obtener los datos de los empleados q
 </code></pre><p>También puede usarse de forma negativa con <strong>NOT EXISTS</strong></p>
 <p><strong><u>Subconsultas en FROM</u></strong><br>
 Podemos utilizar subconsultas como tablas y colocarlas en la cláusula FROM.</p>
-<p><strong>Ejemplo E44404 – Subconsulta en FROM</strong><br>
+<p><strong>Ejemplo 4 – Subconsulta en FROM</strong><br>
 Aunque la siguiente consulta se puede obtener mediante una consulta de intersección típica, usaremos una subconsulta para probar su funcionamiento en FROM de forma sencilla. Las subconsultas de FROM deben tener un alias que asignaremos con AS.<br>
 Muestra los datos de los empleados que trabajen en oficinas de Madrid.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> empleados<span class="token punctuation">.</span><span class="token operator">*</span>
