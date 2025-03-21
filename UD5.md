@@ -37,18 +37,19 @@ toc:
 ## Contenidos
 
 1. Lenguaje de Manipulación de Datos
-2. Consultas SELECT básicas
-3. Consultas SELECT de AGRUPACIÓN
-4. Consultas SELECT multitabla
+2. Consultas **`SELECT`** básicas
+3. Consultas **`SELECT`** de AGRUPACIÓN
+4. Consultas **`SELECT`** multitabla
 
 ## Lenguaje de Manipulación de Datos
 
-:<div class="caso_estudio">
+<div class="caso_estudio">
 
 El **Lenguaje de Manipulación de Datos** (**LMD**, en inglés Data Manipulation Language, **DML**) es un lenguaje proporcionado por el sistema de gestión de base de datos que permite a los usuarios de la misma llevar a cabo las tareas de consulta o manipulación de los datos (inserción, borrado, actualización y consultas) basado en el modelo de datos adecuado.
 </div> <!-- fin caso de estudio -->
 
-!!!NOTE [MySQL Oficial – Sintaxis de las instrucciones DML](http://dev.mysql.com/doc/refman/8.0/en/sql-syntax-data-manipulation.html)
+!!!NOTE Referencias
+    [MySQL Oficial – Sintaxis de las instrucciones DML](http://dev.mysql.com/doc/refman/8.0/en/sql-syntax-data-manipulation.html)
 
 <div class="caso_estudio">
 
