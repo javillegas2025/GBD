@@ -677,10 +677,11 @@ Las consultas multitabla nos van a permitir procesar información de varias tabl
     FROM pagos, clientes
     WHERE pagos.CodigoCliente = clientes.CodigoCliente;
     ```
-    ¿Cuántos registros tienen la tabla pagos?  
-    ¿Cuántos registros tienen la tabla clientes?  
-    ¿Cuántos registros devuelve la consulta anterior?  
-    Si se elimina la condición **`WHERE`**, ¿cuántos registros obtenemos? Justifícalo.
+
+    * ¿Cuántos registros tienen la tabla pagos?  
+    * ¿Cuántos registros tienen la tabla clientes?  
+    * ¿Cuántos registros devuelve la consulta anterior?  
+    * Si se elimina la condición **`WHERE`**, ¿cuántos registros obtenemos? Justifícalo.
 
 !!! Example Ejemplo 2
     **SELECT multitabla**
@@ -690,10 +691,11 @@ Las consultas multitabla nos van a permitir procesar información de varias tabl
     FROM pedidos, clientes
     WHERE pedidos.CodigoCliente = clientes.CodigoCliente;
     ```
-    ¿Cuántos registros tienen la tabla pedidos?  
-    ¿Cuántos registros tienen la tabla clientes?  
-    ¿Cuántos registros devuelve la consulta anterior?  
-    Si se elimina la condición **`WHERE`**, ¿cuántos registros obtenemos? Justifícalo.
+
+    * ¿Cuántos registros tienen la tabla pedidos?  
+    * ¿Cuántos registros tienen la tabla clientes?  
+    * ¿Cuántos registros devuelve la consulta anterior?  
+    * Si se elimina la condición **`WHERE`**, ¿cuántos registros obtenemos? Justifícalo.
 
 !!! Example Ejemplo 3
     **SELECT multitabla**
@@ -703,10 +705,11 @@ Las consultas multitabla nos van a permitir procesar información de varias tabl
     FROM oficinas, empleados
     WHERE oficinas.CodigoOficina = empleados.CodigoOficina;
     ```
-    ¿Cuántos registros tienen la tabla oficinas?  
-    ¿Cuántos registros tienen la tabla empleados?  
-    ¿Cuántos registros devuelve la consulta anterior?  
-    Si se elimina la condición **`WHERE`**, ¿cuántos registros obtenemos? Justifícalo.
+
+    * ¿Cuántos registros tienen la tabla oficinas?  
+    * ¿Cuántos registros tienen la tabla empleados?  
+    * ¿Cuántos registros devuelve la consulta anterior?  
+    * Si se elimina la condición **`WHERE`**, ¿cuántos registros obtenemos? Justifícalo.
 
 En relaciones reflexivas, debemos cruzar una tabla consigo misma. Para poder hacer esto, tenemos que asignar un alias a cada tabla para diferenciarlas.
 Veamos un ejemplo.
@@ -719,9 +722,10 @@ Veamos un ejemplo.
     FROM empleados as trabajadores, empleados as jefes
     WHERE trabajadores.CodigoJefe = jefes.CodigoEmpleado;
     ```
-    ¿Cuántos registros tienen la tabla empleados?  
-    ¿Cuántos registros devuelve la consulta anterior?  
-    Si se elimina la condición **`WHERE`**, ¿cuántos registros obtenemos? Justifícalo.
+
+    * ¿Cuántos registros tienen la tabla empleados?  
+    * ¿Cuántos registros devuelve la consulta anterior?  
+    * Si se elimina la condición **`WHERE`**, ¿cuántos registros obtenemos? Justifícalo.
 
 !!! Example Ejemplo 5
     **SELECT multitabla con varias tablas**
@@ -734,9 +738,10 @@ Veamos un ejemplo.
     FROM pedidos, detallepedidos, productos
     WHERE pedidos.CodigoPedido = detallepedidos.CodigoPedido AND detallepedidos.CodigoProducto = productos.CodigoProducto;
     ```
-    ¿Cuántos registros tienen la tabla empleados?  
-    ¿Cuántos registros devuelve la consulta anterior?  
-    Si se elimina la condición **`WHERE`**, ¿cuántos registros obtenemos? Justifícalo.
+
+    * ¿Cuántos registros tienen la tabla empleados?  
+    * ¿Cuántos registros devuelve la consulta anterior?  
+    * Si se elimina la condición **`WHERE`**, ¿cuántos registros obtenemos? Justifícalo.
 
 Se puede observar que cuando se muestran datos de la tabla padre de relaciones con cardinalidad 1-N, estos se repiten ya que pueden tener muchos hijos. En el ejemplo anterior se puede ver claramente que los datos de la tabla pedidos se repiten tantas veces como líneas de detalle tengan.
 
