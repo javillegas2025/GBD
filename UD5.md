@@ -1,6 +1,5 @@
 ---
-title:
-    Apuntes
+title: Apuntes
 date: 16/06/2021
 export_on_save:
     puppeteer: true
@@ -88,7 +87,7 @@ Comenzaremos por utilizar la instrucción **`SELECT`** como si fuera una calcula
 Los siguientes ejemplos evaluan las expresiones que hay después de la cláusula **`SELECT`** y muestran el resultado por pantalla.
 
 !!!Example Ejemplo 1
-    El último ejemplo muestra tres columnas.
+    La última sentencia muestra tres columnas.
     ```sql
     -- Salida: 3000
     SELECT 20 * 150;
