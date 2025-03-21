@@ -606,7 +606,7 @@ Mostrar codigo y nombre de los Clientes que sean de la Ciudad 'Madrid' o 'Barcel
 <div class="admonition note">
 <p class="admonition-title"><u>Referencias</u><br><a href="https://www.w3schools.com/sql/sql_ref_mysql.asp">MySQL w3schools – Funciones de MySQL</a><br><a href="https://dev.mysql.com/doc/refman/8.0/en/functions.htm">MySQL Oficial – Funciones</a></p>
 </div>
-<p><strong><u>Ejemplos de funciones para campos calculados y para condiciones</u></strong></p>
+<p><strong>Ejemplos de funciones para campos calculados y para condiciones</strong></p>
 <p><strong>Ejemplo 1 – Ejemplo con funciones</strong><br>
 Mostrar código, nombre y "precio de venta al público" de los productos, pero ese precio debe ser con IVA incluido, es decir, agregarle al PrecioVenta el 21% multiplicándolo por 1.21. Asignar el alias <strong>pvp</strong> al nuevo campo calculado.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoProducto<span class="token punctuation">,</span> Nombre<span class="token punctuation">,</span> PrecioVenta<span class="token punctuation">,</span> <span class="token function">ROUND</span><span class="token punctuation">(</span>PrecioVenta <span class="token operator">*</span> <span class="token number">1.21</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> pvp
@@ -702,48 +702,163 @@ El orden de las cláusulas obligatoriamente es:<br>
 <strong>SELECT … FROM … WHERE … GROUP BY … HAVING … ORDER … LIMIT</strong></p>
 </blockquote>
 <h4 id="ejemplos-de-las-primeras-consultas-agrupadas">Ejemplos de las primeras consultas agrupadas </h4>
-<p>Con XAMPP-MySQL importar la BD de jardinería que facilitará el profesor.</p>
-<p><strong>Ejemplo 1 - Contar</strong><br>
-Mostrar el número de clientes (nombrar el nuevo campo NumClientes) que tenemos en cada ciudad.</p>
+<p>Con XAMPP-MySQL importar la BD de jardinería que facilitará el profesor.<br>
+!!! Example Ejemplo 11<br>
+<strong>Agrupaciones con condiciones</strong><br>
+Mostrar las oficinas que tengan más de 3 empleados asignados y estén ubicadas en España.</p>
+<pre class="language-text">```sql
+SELECT CodigoOficina, COUNT(*) AS NumEmpleados
+FROM empleados
+WHERE Pais = 'España'
+GROUP BY CodigoOficina
+HAVING COUNT(*) &gt; 3;
+```
+</pre>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 1</p>
+<p><strong>Agrupaciones con condiciones</strong><br>
+Mostrar las gamas de productos cuyo precio máximo sea superior a 100€.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> Gama<span class="token punctuation">,</span> <span class="token function">MAX</span><span class="token punctuation">(</span>PrecioVenta<span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> PrecioMaximo
+<span class="token keyword keyword-FROM">FROM</span> productos
+<span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> Gama
+<span class="token keyword keyword-HAVING">HAVING</span> <span class="token function">MAX</span><span class="token punctuation">(</span>PrecioVenta<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">100</span><span class="token punctuation">;</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 2</p>
+<p><strong>Agrupaciones con condiciones</strong><br>
+Mostrar los clientes que hayan realizado más de 2 pagos y cuyo importe total sea superior a 5000€.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoCliente<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumPagos<span class="token punctuation">,</span> <span class="token function">SUM</span><span class="token punctuation">(</span>Cantidad<span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> TotalPagos
+<span class="token keyword keyword-FROM">FROM</span> pagos
+<span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> CodigoCliente
+<span class="token keyword keyword-HAVING">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">2</span> <span class="token operator">AND</span> <span class="token function">SUM</span><span class="token punctuation">(</span>Cantidad<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">5000</span><span class="token punctuation">;</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 3</p>
+<p><strong>Agrupaciones con condiciones</strong><br>
+Mostrar las ciudades donde el número total de clientes sea mayor a 5 y el límite de crédito promedio sea superior a 20000€.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> Ciudad<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumClientes<span class="token punctuation">,</span> <span class="token function">AVG</span><span class="token punctuation">(</span>LimiteCredito<span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> CreditoPromedio
+<span class="token keyword keyword-FROM">FROM</span> clientes
+<span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> Ciudad
+<span class="token keyword keyword-HAVING">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">5</span> <span class="token operator">AND</span> <span class="token function">AVG</span><span class="token punctuation">(</span>LimiteCredito<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">20000</span><span class="token punctuation">;</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 4</p>
+<p><strong>Agrupaciones con condiciones</strong><br>
+Mostrar los empleados que hayan gestionado más de 5 pedidos y cuyo importe total sea superior a 15000€.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoEmpleado<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumPedidos<span class="token punctuation">,</span> <span class="token function">SUM</span><span class="token punctuation">(</span>Cantidad <span class="token operator">*</span> PrecioUnidad<span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> TotalImporte
+<span class="token keyword keyword-FROM">FROM</span> pedidos
+<span class="token keyword keyword-INNER">INNER</span> <span class="token keyword keyword-JOIN">JOIN</span> detallepedidos <span class="token keyword keyword-ON">ON</span> pedidos<span class="token punctuation">.</span>CodigoPedido <span class="token operator">=</span> detallepedidos<span class="token punctuation">.</span>CodigoPedido
+<span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> CodigoEmpleado
+<span class="token keyword keyword-HAVING">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">5</span> <span class="token operator">AND</span> <span class="token function">SUM</span><span class="token punctuation">(</span>Cantidad <span class="token operator">*</span> PrecioUnidad<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">15000</span><span class="token punctuation">;</span>
+</code></pre></div>
+<div class="caso_estudio">
+<p><strong>Ejemplo 1</strong> - Contar<br>
+Mostrar el número de clientes (nombrar el nuevo campo <strong><code>NumClientes</code></strong>) que tenemos en cada <strong><code>ciudad</code></strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> Ciudad<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumClientes
 <span class="token keyword keyword-FROM">FROM</span> clientes
 <span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> Ciudad<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo 2 – Sumar operaciones numéricas</strong><br>
-Mostrar el pedido y el importe total (ImpTotal) de todas las líneas de cada pedido. En la tabla detallepedidos tenemos el CodigoPedido, y la Cantidad y PrecioUnidad de cada artículo del pedido. Deberemos sumar Cantidad * PrecioUnidad de cada línea y luego sumarlas todas.</p>
+</code></pre></div> <!-- fin caso de estudio -->
+<div class="caso_estudio">
+<p><strong>Ejemplo 2</strong> - Sumar operaciones numéricas</p>
+<p>Mostrar el pedido y el importe total (<strong><code>ImpTotal</code></strong>) de todas las líneas de cada pedido. En la tabla detallepedidos tenemos el <strong><code>CodigoPedido</code></strong>, y la <strong><code>Cantidad</code></strong> y <strong><code>PrecioUnidad</code></strong> de cada artículo del pedido. Deberemos sumar <strong><code>Cantidad * PrecioUnidad</code></strong> de cada línea y luego sumarlas todas.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">-- Sin Agrupar</span>
 <span class="token keyword keyword-SELECT">SELECT</span> CodigoPedido<span class="token punctuation">,</span> Cantidad <span class="token operator">*</span> PrecioUnidad <span class="token keyword keyword-AS">AS</span> ImpLinea
 <span class="token keyword keyword-FROM">FROM</span> detallepedidos<span class="token punctuation">;</span>
-</code></pre><pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">-- Agrupando por Pedido</span>
+
+<span class="token comment">-- Agrupando por Pedido</span>
 <span class="token keyword keyword-SELECT">SELECT</span> CodigoPedido<span class="token punctuation">,</span> <span class="token function">SUM</span><span class="token punctuation">(</span>Cantidad <span class="token operator">*</span> PrecioUnidad<span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> ImpTotal
 <span class="token keyword keyword-FROM">FROM</span> detallepedidos
 <span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> CodigoPedido<span class="token punctuation">;</span>
-</code></pre><p>Podemos añadir también filtros que deban cumplir los registros mediante condiciones en la cláusula <strong>WHERE</strong>.</p>
-<p><strong>Ejemplo 3 – Agrupaciones con condiciones WHERE</strong><br>
-Mostrar el número de artículos (NumArticulos) de cada Gama cuyas PrecioVenta mayor que 20€.</p>
+</code></pre><p>Podemos añadir también filtros que deban cumplir los registros mediante condiciones en la cláusula <strong><code>WHERE</code></strong>.</p>
+</div> <!-- fin caso de estudio -->
+<div class="caso_estudio">
+<p><strong>Ejemplo 3</strong> – Agrupaciones con condiciones WHERE<br>
+Mostrar el número de artículos (<strong><code>NumArticulos</code></strong>) de cada Gama cuyas <strong><code>PrecioVenta</code></strong> mayor que 20€.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> Gama<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumArticulos
 <span class="token keyword keyword-FROM">FROM</span> productos
 <span class="token keyword keyword-WHERE">WHERE</span> PrecioVenta <span class="token operator">&gt;</span> <span class="token number">20</span>
 <span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> Gama<span class="token punctuation">;</span>
-</code></pre><p>Pero puede ser que la condición a cumplir sea sobre los campos calculados. En estos casos, la condición irá en la cláusula <strong>HAVING</strong>.</p>
-<p><strong>Ejemplo 4 – Agrupaciones con condiciones HAVING</strong><br>
-Mostrar las Gamas de artículos que tengan más de 100 diferentes. Mostrar también el número de artículos (NumArticulos).<br>
-S</p>
+</code></pre></div> <!-- fin caso de estudio -->
+<p>Pero puede ser que la condición a cumplir sea sobre los campos calculados. En estos casos, la condición irá en la cláusula <strong>HAVING</strong>.</p>
+<div class="caso_estudio">
+<p><strong>Ejemplo 4</strong> – Agrupaciones con condiciones HAVING<br>
+Mostrar las Gamas de artículos que tengan más de 100 diferentes. Mostrar también el número de artículos (<strong><code>NumArticulos</code></strong>).</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code>ELECT Gama<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumArticulos
 <span class="token keyword keyword-FROM">FROM</span> productos
 <span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> Gama
 <span class="token keyword keyword-HAVING">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">100</span><span class="token punctuation">;</span>
-</code></pre><p>Incluso podemos tener consultas que combinen <strong>WHERE y HAVING</strong> simultáneamente.</p>
-<p><strong>Ejemplo 5 – Agrupaciones con condiciones WHERE y HAVING</strong><br>
+</code></pre></div> <!-- fin caso de estudio -->
+<p>Incluso podemos tener consultas que combinen <strong>WHERE y HAVING</strong> simultáneamente.</p>
+<div class="caso_estudio">
+<p><strong>Ejemplo 5</strong> – Agrupaciones con condiciones WHERE y HAVING<br>
 Mostrar los clientes que hayan realizado más de 1 pago de cantidad superior a los 3000€.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoCLiente<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumPagos
 <span class="token keyword keyword-FROM">FROM</span> pagos
 <span class="token keyword keyword-WHERE">WHERE</span> Cantidad <span class="token operator">&gt;</span> <span class="token number">3000</span>
 <span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> CodigoCliente
 <span class="token keyword keyword-HAVING">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">;</span>
-</code></pre><h2 id="consultas-select-multitabla">Consultas SELECT multitabla </h2>
+</code></pre></div> <!-- fin caso de estudio -->
+!!! Example Ejemplo 6
+    **Agrupaciones con condiciones**
+    Mostrar las oficinas que tengan más de 5 empleados asignados.
+<pre class="language-text">```sql
+SELECT CodigoOficina, COUNT(*) AS NumEmpleados
+FROM empleados
+GROUP BY CodigoOficina
+HAVING COUNT(*) &gt; 5;
+```
+</pre>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 7</p>
+<p><strong>Agrupaciones con condiciones</strong><br>
+Mostrar las gamas de productos cuyo precio medio sea superior a 50€.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> Gama<span class="token punctuation">,</span> <span class="token function">AVG</span><span class="token punctuation">(</span>PrecioVenta<span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> PrecioMedio
+<span class="token keyword keyword-FROM">FROM</span> productos
+<span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> Gama
+<span class="token keyword keyword-HAVING">HAVING</span> <span class="token function">AVG</span><span class="token punctuation">(</span>PrecioVenta<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">50</span><span class="token punctuation">;</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 8</p>
+<p><strong>Agrupaciones con condiciones</strong><br>
+Mostrar los clientes que hayan realizado pagos por un importe total superior a 10,000€.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoCliente<span class="token punctuation">,</span> <span class="token function">SUM</span><span class="token punctuation">(</span>Cantidad<span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> TotalPagos
+<span class="token keyword keyword-FROM">FROM</span> pagos
+<span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> CodigoCliente
+<span class="token keyword keyword-HAVING">HAVING</span> <span class="token function">SUM</span><span class="token punctuation">(</span>Cantidad<span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">10000</span><span class="token punctuation">;</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 9</p>
+<p><strong>Agrupaciones con condiciones</strong><br>
+Mostrar los empleados que hayan gestionado más de 3 pedidos.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoEmpleado<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumPedidos
+<span class="token keyword keyword-FROM">FROM</span> pedidos
+<span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> CodigoEmpleado
+<span class="token keyword keyword-HAVING">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">3</span><span class="token punctuation">;</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 10</p>
+<p><strong>Agrupaciones con condiciones</strong><br>
+Mostrar las ciudades donde el número total de clientes sea mayor a 10.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> Ciudad<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumClientes
+<span class="token keyword keyword-FROM">FROM</span> clientes
+<span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> Ciudad
+<span class="token keyword keyword-HAVING">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">10</span><span class="token punctuation">;</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 5</p>
+<p><strong>Agrupaciones con condiciones</strong><br>
+Agrupaciones con condiciones <strong><code>WHERE</code></strong> y <strong><code>HAVING</code></strong><br>
+Mostrar los clientes que hayan realizado más de 1 pago de cantidad superior a los 3000€.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CodigoCLiente<span class="token punctuation">,</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NumPagos
+<span class="token keyword keyword-FROM">FROM</span> pagos
+<span class="token keyword keyword-WHERE">WHERE</span> Cantidad <span class="token operator">&gt;</span> <span class="token number">3000</span>
+<span class="token keyword keyword-GROUP">GROUP</span> <span class="token keyword keyword-BY">BY</span> CodigoCliente
+<span class="token keyword keyword-HAVING">HAVING</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">;</span>
+</code></pre></div>
+<h2 id="consultas-select-multitabla">Consultas SELECT multitabla </h2>
 <h4 id="consultas-multitabla-de-cruce-relación-1-n">Consultas multitabla de cruce (relación 1-N) </h4>
 <p>Las consultas multitabla nos van a permitir procesar información de varias tablas conjuntamente. La sintaxis es la misma que hemos visto anteriormente para la sintaxis SELECT, pero <strong>en la cláusula FROM tendremos varias tablas</strong>.</p>
-<p><strong>Ejemplo 1 – SELECT mutitabla</strong><br>
+<p><strong>Ejemplo 1</strong> – SELECT mutitabla<br>
 Mostrar los valores de la tabla <strong>pagos</strong> añadiendo el campo <strong>NombreCliente</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> clientes<span class="token punctuation">.</span>NombreCliente<span class="token punctuation">,</span> pagos<span class="token punctuation">.</span><span class="token operator">*</span>
 <span class="token keyword keyword-FROM">FROM</span> pagos<span class="token punctuation">,</span> clientes
@@ -752,6 +867,7 @@ Mostrar los valores de la tabla <strong>pagos</strong> añadiendo el campo <stro
 ¿Cuántos registros tienen la tabla clientes?<br>
 ¿Cuántos registros devuelve la consulta anterior?<br>
 Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.</p>
+ <!-- fin caso de estudio -->
 <p><strong>Ejemplo 2 – SELECT mutitabla</strong><br>
 Mostrar los valores de la tabla <strong>pedidos</strong> añadiendo el campo <strong>NombreCliente</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> clientes<span class="token punctuation">.</span>NombreCliente<span class="token punctuation">,</span> pedidos<span class="token punctuation">.</span><span class="token operator">*</span>

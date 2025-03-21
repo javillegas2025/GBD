@@ -63,14 +63,14 @@ Además, en consultas más complejas se puede:
 #### Consultas con operaciones numéricas y literales
 Comenzaremos por utilizar la instrucción SELECT como si fuera una calculadora. 
 Para ello utilizaremos los siguientes operadores aritméticos:
-|Operador |Función |
-|:---------|:--------|
-|**\+** |Suma|
-|**\-** |Resta|
-|**\*** |Producto o Multiplicación|
-|**/**  |División|
-|**DIV**|División entera|
-|**MOD** o **%**| Resto división|
+| Operador        | Función                   |
+| :-------------- | :------------------------ |
+| **\+**          | Suma                      |
+| **\-**          | Resta                     |
+| **\***          | Producto o Multiplicación |
+| **/**           | División                  |
+| **DIV**         | División entera           |
+| **MOD** o **%** | Resto división            |
 
 **Ejemplos**
 Los siguientes ejemplos evaluan las expresiones que hay después de la cláusula SELECT y muestran el resultado por pantalla. El último ejemplo muestra tres columnas.
@@ -202,18 +202,18 @@ Utilizando la consulta del ejercicio anterior E5106 mostrar:
 Para poder seleccionar registros es necesario indicar la condición que deben cumplir los campos de un registro para ser mostrado. Para ello se utiliza la sección **WHERE** de la instrucción SQL.
 Los operadores relacionales que nos permiten comparar el valor de los campos son:
 
-|Operador              | Función                                 |
-|:----------------------|:-----------------------------------------|
-| **=**                    | Igual a                                 |
-| **<**                   | Menor que                               |
-| **>**                    | Mayor que                               |
-| **<=**                   | Menor o igual                           |
-| **>=**                   | Mayor ou igual                          |
-| **LIKE**                 | Patrón que debe cumprir un campo cadena |
-| **BETWEEN**              | Intervalo de valores                    |
-| **IN**                   | Conjunto de valores                     |
-| **IS NULL**              | Es nulo                                  |
-| **IS NOT NULL**         | No es nulo                              |
+| Operador        | Función                                 |
+| :-------------- | :-------------------------------------- |
+| **=**           | Igual a                                 |
+| **<**           | Menor que                               |
+| **>**           | Mayor que                               |
+| **<=**          | Menor o igual                           |
+| **>=**          | Mayor ou igual                          |
+| **LIKE**        | Patrón que debe cumprir un campo cadena |
+| **BETWEEN**     | Intervalo de valores                    |
+| **IN**          | Conjunto de valores                     |
+| **IS NULL**     | Es nulo                                 |
+| **IS NOT NULL** | No es nulo                              |
 
 Veamos unos cuantos ejemplos:
 
@@ -300,11 +300,11 @@ WHERE Gama IN ('Aromáticas', 'Herramientas', 'Ornamentales');
 #### Consultas con varias condiciones
 Para poder realizar varias varias condiciones necesitamos combinarlas con operadores lógicos, que en MySQL son:
 
-|Operador|Función|
-|:--------:|:-------:|
-|**AND**|Y|
-|**OR**|O|
-|**NOT**|No|
+| Operador | Función |
+| :------: | :-----: |
+| **AND**  |    Y    |
+|  **OR**  |    O    |
+| **NOT**  |   No    |
 
 Veamos unos cuantos ejemplos:
 
@@ -338,49 +338,53 @@ WHERE Ciudad = 'Madrid' OR Ciudad = 'Barcelona';
 Las funciones nos permiten realizar transformaciones de los datos para obtener información. Existen multitud de funciones que procesan diferentes tipos de datos.
 
 ***Algunas funciones con cadenas de caracteres***
-| Función                     | Descripción                                                    |
-|:-----------------------------|:---------------------------------------------------------------|
-| **CONCAT(cad1, cad2, ...)**   | Concatena cadenas                                             |
-| **UPPER(cad)**                 | Pasa a mayúsculas una cadena                                  |
-| **LOWER(cad)**                 | Pasa a minúsculas una cadena                                  |
-| **LTRIM(cad)**                | Elimina de la cadena los espacios iniciales y finales         |
-| **LEFT(cad, X)**              | Obtiene los X primeros caracteres de la cadena                |
-| **RIGHT(cad, X)**           | Obtiene los X últimos caracteres de la cadena                 |
-| **LENGTH(cad)**               | Longitud de una cadena                                        |
-| **REPLACE(cad, ant, pos)**     | Obtiene una cadena tomando **cad** como origen y cambiando **ant** por **pos**|
+
+| Función                     | Descripción                                                                    |
+| :-------------------------- | :----------------------------------------------------------------------------- |
+| **CONCAT(cad1, cad2, ...)** | Concatena cadenas                                                              |
+| **UPPER(cad)**              | Pasa a mayúsculas una cadena                                                   |
+| **LOWER(cad)**              | Pasa a minúsculas una cadena                                                   |
+| **LTRIM(cad)**              | Elimina de la cadena los espacios iniciales y finales                          |
+| **LEFT(cad, X)**            | Obtiene los X primeros caracteres de la cadena                                 |
+| **RIGHT(cad, X)**           | Obtiene los X últimos caracteres de la cadena                                  |
+| **LENGTH(cad)**             | Longitud de una cadena                                                         |
+| **REPLACE(cad, ant, pos)**  | Obtiene una cadena tomando **cad** como origen y cambiando **ant** por **pos** |
 
 ***Algunas funciones numéricas de un campo***
-| Función          | Descripción                                     |
-|:------------------|:------------------------------------------------|
-| **RAND()**           | Número aleatorio entre 0 y 1                   |
-| **POW(num, exp)**    | Obtiene la potencia de num^exp                  |
-| **FLOOR(num)**       | Obtiene la parte entera de un número decimal    |
-| **ROUND(num, X)**    | Redondea un número a X decimales                |
-| **SIGN(num)**        | Devuelve 1 para positivo, 0 para 0 y -1 para negativo |
-| **ABS(num)**         | Obtiene el valor absoluto de un número          |
+
+| Función           | Descripción                                           |
+| :---------------- | :---------------------------------------------------- |
+| **RAND()**        | Número aleatorio entre 0 y 1                          |
+| **POW(num, exp)** | Obtiene la potencia de num^exp                        |
+| **FLOOR(num)**    | Obtiene la parte entera de un número decimal          |
+| **ROUND(num, X)** | Redondea un número a X decimales                      |
+| **SIGN(num)**     | Devuelve 1 para positivo, 0 para 0 y -1 para negativo |
+| **ABS(num)**      | Obtiene el valor absoluto de un número                |
 
 ***Algunas funciones de fechas de un campo***
-| Función                  | Descripción                                      |
-|:-------------------------|:-------------------------------------------------|
-| **YEAR(campo)**            | Muestra el año del valor de un campo de tipo fecha |
-| **MONTH(campo)**           | Muestra el mes del valor de un campo de tipo fecha |
-| **DAY(campo)**             | Muestra el día del valor de un campo de tipo fecha |
-| **DAYNAME(campo)**         | Muestra el nombre del día de la semana del campo   |
-| **DAYOFWEEK(campo)**       | Devuelve un número indicando el día de la semana de un campo fecha: <br>**Nota:** 1=Domingo, 2=Lunes, 3=Martes, 4=Miércoles, 5=Jueves, 6=Viernes, 7=Sábado. |
+
+| Función              | Descripción                                                                                                                                                 |
+| :------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| **YEAR(campo)**      | Muestra el año del valor de un campo de tipo fecha                                                                                                          |
+| **MONTH(campo)**     | Muestra el mes del valor de un campo de tipo fecha                                                                                                          |
+| **DAY(campo)**       | Muestra el día del valor de un campo de tipo fecha                                                                                                          |
+| **DAYNAME(campo)**   | Muestra el nombre del día de la semana del campo                                                                                                            |
+| **DAYOFWEEK(campo)** | Devuelve un número indicando el día de la semana de un campo fecha: <br>**Nota:** 1=Domingo, 2=Lunes, 3=Martes, 4=Miércoles, 5=Jueves, 6=Viernes, 7=Sábado. |
 
 ***<Algunas funciones numéricas con varios registros***
-| Función       | Descripción                                      |
-|:--------------|:-------------------------------------------------|
-| **COUNT(*)**     | Cuenta los registros seleccionados               |
-| **MIN(campo)**   | Valor mínimo del campo de los registros seleccionados |
-| **MAX(campo)**   | Valor máximo del campo de los registros seleccionados |
-| **SUM(campo)**   | Suma de los valores del campo                    |
-| **AVG(campo)**   | Media de los valores del campo                   |
 
-!!!Note <u>Referencias</u><br>[MySQL w3schools – Funciones de MySQL](https://www.w3schools.com/sql/sql_ref_mysql.asp)<br>[MySQL Oficial – Funciones](https://dev.mysql.com/doc/refman/8.0/en/functions.htm)
+| Función        | Descripción                                           |
+| :------------- | :---------------------------------------------------- |
+| **COUNT(*)**   | Cuenta los registros seleccionados                    |
+| **MIN(campo)** | Valor mínimo del campo de los registros seleccionados |
+| **MAX(campo)** | Valor máximo del campo de los registros seleccionados |
+| **SUM(campo)** | Suma de los valores del campo                         |
+| **AVG(campo)** | Media de los valores del campo                        |
+
+!!! Note <u>Referencias</u><br>[MySQL w3schools – Funciones de MySQL](https://www.w3schools.com/sql/sql_ref_mysql.asp)<br>[MySQL Oficial – Funciones](https://dev.mysql.com/doc/refman/8.0/en/functions.htm)
 
 
-**<u>Ejemplos de funciones para campos calculados y para condiciones</u>**
+**Ejemplos de funciones para campos calculados y para condiciones**
 
 **Ejemplo 1 – Ejemplo con funciones**
 Mostrar código, nombre y "precio de venta al público" de los productos, pero ese precio debe ser con IVA incluido, es decir, agregarle al PrecioVenta el 21% multiplicándolo por 1.21. Asignar el alias **pvp** al nuevo campo calculado.
@@ -536,8 +540,12 @@ SELECT MIN(Cantidad), MAX(Cantidad)
 FROM pagos;
 ```
 
+
+
 ## Consultas SELECT de AGRUPACIÓN
+
 #### Consultas de agrupación
+
 Cuando necesitamos agrupar varios registros para realizar operaciones para sumar, contar, o calcular la media, el mínimo o el máximo, necesitaremos realizar una instrucción SELECT indicando qué registros agrupamos, es decir, qué campos mostramos de los registros comunes y sobre qué campos realizamos la operación.
 La sintaxis para realizar una consulta agrupada a una tabla es:
 
@@ -559,9 +567,66 @@ SELECT [DISTINCT] campos
 
 #### Ejemplos de las primeras consultas agrupadas
 Con XAMPP-MySQL importar la BD de jardinería que facilitará el profesor.
+!!! Example Ejemplo 11
+    **Agrupaciones con condiciones**
+    Mostrar las oficinas que tengan más de 3 empleados asignados y estén ubicadas en España.
 
-**Ejemplo 1 - Contar**
-Mostrar el número de clientes (nombrar el nuevo campo NumClientes) que tenemos en cada ciudad.
+    ```sql
+    SELECT CodigoOficina, COUNT(*) AS NumEmpleados
+    FROM empleados
+    WHERE Pais = 'España'
+    GROUP BY CodigoOficina
+    HAVING COUNT(*) > 3;
+    ```
+
+!!! Example Ejemplo 1
+    **Agrupaciones con condiciones**
+    Mostrar las gamas de productos cuyo precio máximo sea superior a 100€.
+
+    ```sql
+    SELECT Gama, MAX(PrecioVenta) AS PrecioMaximo
+    FROM productos
+    GROUP BY Gama
+    HAVING MAX(PrecioVenta) > 100;
+    ```
+
+!!! Example Ejemplo 2
+    **Agrupaciones con condiciones**
+    Mostrar los clientes que hayan realizado más de 2 pagos y cuyo importe total sea superior a 5000€.
+
+    ```sql
+    SELECT CodigoCliente, COUNT(*) AS NumPagos, SUM(Cantidad) AS TotalPagos
+    FROM pagos
+    GROUP BY CodigoCliente
+    HAVING COUNT(*) > 2 AND SUM(Cantidad) > 5000;
+    ```
+
+!!! Example Ejemplo 3
+    **Agrupaciones con condiciones**
+    Mostrar las ciudades donde el número total de clientes sea mayor a 5 y el límite de crédito promedio sea superior a 20000€.
+
+    ```sql
+    SELECT Ciudad, COUNT(*) AS NumClientes, AVG(LimiteCredito) AS CreditoPromedio
+    FROM clientes
+    GROUP BY Ciudad
+    HAVING COUNT(*) > 5 AND AVG(LimiteCredito) > 20000;
+    ```
+
+!!! Example Ejemplo 4
+    **Agrupaciones con condiciones**
+    Mostrar los empleados que hayan gestionado más de 5 pedidos y cuyo importe total sea superior a 15000€.
+
+    ```sql
+    SELECT CodigoEmpleado, COUNT(*) AS NumPedidos, SUM(Cantidad * PrecioUnidad) AS TotalImporte
+    FROM pedidos
+    INNER JOIN detallepedidos ON pedidos.CodigoPedido = detallepedidos.CodigoPedido
+    GROUP BY CodigoEmpleado
+    HAVING COUNT(*) > 5 AND SUM(Cantidad * PrecioUnidad) > 15000;
+    ```
+<div class="caso_estudio">
+
+**Ejemplo 1** - Contar
+Mostrar el número de clientes (nombrar el nuevo campo **`NumClientes`**) que tenemos en cada **`ciudad`**.
 
 ```sql
 SELECT Ciudad, COUNT(*) AS NumClientes
@@ -569,26 +634,34 @@ FROM clientes
 GROUP BY Ciudad;
 ```
 
-**Ejemplo 2 – Sumar operaciones numéricas**
-Mostrar el pedido y el importe total (ImpTotal) de todas las líneas de cada pedido. En la tabla detallepedidos tenemos el CodigoPedido, y la Cantidad y PrecioUnidad de cada artículo del pedido. Deberemos sumar Cantidad * PrecioUnidad de cada línea y luego sumarlas todas.
+</div> <!-- fin caso de estudio -->
+
+
+<div class="caso_estudio">
+
+**Ejemplo 2** - Sumar operaciones numéricas
+
+Mostrar el pedido y el importe total (**`ImpTotal`**) de todas las líneas de cada pedido. En la tabla detallepedidos tenemos el **`CodigoPedido`**, y la **`Cantidad`** y **`PrecioUnidad`** de cada artículo del pedido. Deberemos sumar **`Cantidad * PrecioUnidad`** de cada línea y luego sumarlas todas.
 
 ```sql
 -- Sin Agrupar
 SELECT CodigoPedido, Cantidad * PrecioUnidad AS ImpLinea
 FROM detallepedidos;
-```
 
-```sql
 -- Agrupando por Pedido
 SELECT CodigoPedido, SUM(Cantidad * PrecioUnidad) AS ImpTotal
 FROM detallepedidos
 GROUP BY CodigoPedido;
 ```
 
-Podemos añadir también filtros que deban cumplir los registros mediante condiciones en la cláusula **WHERE**.
+Podemos añadir también filtros que deban cumplir los registros mediante condiciones en la cláusula **`WHERE`**.
 
-**Ejemplo 3 – Agrupaciones con condiciones WHERE**
-Mostrar el número de artículos (NumArticulos) de cada Gama cuyas PrecioVenta mayor que 20€.
+</div> <!-- fin caso de estudio -->
+
+<div class="caso_estudio">
+
+**Ejemplo 3** – Agrupaciones con condiciones WHERE
+Mostrar el número de artículos (**`NumArticulos`**) de cada Gama cuyas **`PrecioVenta`** mayor que 20€.
 
 ```sql
 SELECT Gama, COUNT(*) AS NumArticulos
@@ -597,21 +670,28 @@ WHERE PrecioVenta > 20
 GROUP BY Gama;
 ```
 
+</div> <!-- fin caso de estudio -->
+
 Pero puede ser que la condición a cumplir sea sobre los campos calculados. En estos casos, la condición irá en la cláusula **HAVING**.
 
-**Ejemplo 4 – Agrupaciones con condiciones HAVING**
-Mostrar las Gamas de artículos que tengan más de 100 diferentes. Mostrar también el número de artículos (NumArticulos).
-S
+<div class="caso_estudio">
+
+**Ejemplo 4** – Agrupaciones con condiciones HAVING
+Mostrar las Gamas de artículos que tengan más de 100 diferentes. Mostrar también el número de artículos (**`NumArticulos`**).
+
 ```sql
 ELECT Gama, COUNT(*) AS NumArticulos
 FROM productos
 GROUP BY Gama
 HAVING COUNT(*) > 100;
 ```
+</div> <!-- fin caso de estudio -->
 
 Incluso podemos tener consultas que combinen **WHERE y HAVING** simultáneamente.
 
-**Ejemplo 5 – Agrupaciones con condiciones WHERE y HAVING**
+<div class="caso_estudio">
+
+**Ejemplo 5** – Agrupaciones con condiciones WHERE y HAVING
 Mostrar los clientes que hayan realizado más de 1 pago de cantidad superior a los 3000€.
 
 ```sql
@@ -622,11 +702,82 @@ GROUP BY CodigoCliente
 HAVING COUNT(*) > 1;
 ```
 
+</div> <!-- fin caso de estudio -->
+!!! Example Ejemplo 6
+    **Agrupaciones con condiciones**
+    Mostrar las oficinas que tengan más de 5 empleados asignados.
+
+    ```sql
+    SELECT CodigoOficina, COUNT(*) AS NumEmpleados
+    FROM empleados
+    GROUP BY CodigoOficina
+    HAVING COUNT(*) > 5;
+    ```
+
+!!! Example Ejemplo 7
+    **Agrupaciones con condiciones**
+    Mostrar las gamas de productos cuyo precio medio sea superior a 50€.
+
+    ```sql
+    SELECT Gama, AVG(PrecioVenta) AS PrecioMedio
+    FROM productos
+    GROUP BY Gama
+    HAVING AVG(PrecioVenta) > 50;
+    ```
+
+!!! Example Ejemplo 8
+    **Agrupaciones con condiciones**
+    Mostrar los clientes que hayan realizado pagos por un importe total superior a 10,000€.
+
+    ```sql
+    SELECT CodigoCliente, SUM(Cantidad) AS TotalPagos
+    FROM pagos
+    GROUP BY CodigoCliente
+    HAVING SUM(Cantidad) > 10000;
+    ```
+
+!!! Example Ejemplo 9
+    **Agrupaciones con condiciones**
+    Mostrar los empleados que hayan gestionado más de 3 pedidos.
+
+    ```sql
+    SELECT CodigoEmpleado, COUNT(*) AS NumPedidos
+    FROM pedidos
+    GROUP BY CodigoEmpleado
+    HAVING COUNT(*) > 3;
+    ```
+
+!!! Example Ejemplo 10
+    **Agrupaciones con condiciones**
+    Mostrar las ciudades donde el número total de clientes sea mayor a 10.
+
+    ```sql
+    SELECT Ciudad, COUNT(*) AS NumClientes
+    FROM clientes
+    GROUP BY Ciudad
+    HAVING COUNT(*) > 10;
+    ```
+
+!!! Example Ejemplo 5
+    **Agrupaciones con condiciones**
+    Agrupaciones con condiciones **`WHERE`** y **`HAVING`**
+    Mostrar los clientes que hayan realizado más de 1 pago de cantidad superior a los 3000€.
+
+    ```sql
+    SELECT CodigoCLiente, COUNT(*) AS NumPagos
+    FROM pagos
+    WHERE Cantidad > 3000
+    GROUP BY CodigoCliente
+    HAVING COUNT(*) > 1;
+    ```
+
+
 ## Consultas SELECT multitabla
 #### Consultas multitabla de cruce (relación 1-N)
 Las consultas multitabla nos van a permitir procesar información de varias tablas conjuntamente. La sintaxis es la misma que hemos visto anteriormente para la sintaxis SELECT, pero **en la cláusula FROM tendremos varias tablas**.
 
-**Ejemplo 1 – SELECT mutitabla**
+
+**Ejemplo 1** – SELECT mutitabla
 Mostrar los valores de la tabla **pagos** añadiendo el campo **NombreCliente**.
 
 ```sql
@@ -639,6 +790,8 @@ WHERE pagos.CodigoCliente = clientes.CodigoCliente;
 ¿Cuántos registros tienen la tabla clientes?
 ¿Cuántos registros devuelve la consulta anterior?
 Si se elimina la condición WHERE, ¿cuántos registros obtenemos?. Justifícalo.
+
+</div> <!-- fin caso de estudio -->
 
 **Ejemplo 2 – SELECT mutitabla**
 Mostrar los valores de la tabla **pedidos** añadiendo el campo **NombreCliente**.
