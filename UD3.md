@@ -526,7 +526,7 @@ Se crea un índice sobre el **campo I** y, opcionalmente, le podemos dar un nomb
 
 !!! Example Ejemplo 1
     **Índices en tablas**
-    Creación de la tabla **articulos** y definición de un índice sobre el campo **categoría**.
+    Creación de la tabla **articulos** y definición de un índice sobre el campo **`categoría`**.
     ```sql
     CREATE TABLE articulos (
         codigo VARCHAR(4) PRIMARY KEY,
@@ -669,9 +669,9 @@ Un campo obligatorio se define con la opción **`NOT NULL`** al lado del campo.
     Crear la tabla **articulos** y definir el campo **`descripcion`** como obligatorio.
     ```sql
     CREATE TABLE articulos (
-    codigo VARCHAR(4) PRIMARY KEY,
-    descripcion VARCHAR(100) NOT NULL,
-    precio DECIMAL(10,2)
+        codigo VARCHAR(4) PRIMARY KEY,
+        descripcion VARCHAR(100) NOT NULL,
+        precio DECIMAL(10,2)
     );
     ```
 
@@ -956,7 +956,7 @@ En el lenguaje de SQL existe la palabra reservada **`CHECK`** para indicar la co
 
 !!! Example Ejemplo 23
     **Restricciones avanzadas**
-    Crear la tabla notas de manera que la **`nota`** del alumno esté entre 0 y 10.
+    Crear la tabla **notas** de manera que la **`nota`** del alumno esté entre 0 y 10.
     ```sql
     CREATE TABLE notas (
         nia VARCHAR(8),
@@ -985,7 +985,7 @@ En cualquier caso, a título informativo, se mostrará el código de este proced
 
 !!! Example Anexo ejemplo 24
     **Restricciones avanzadas**
-    Creación del trigger que soluciona el paso a mayúsculas del nombre de las asignaturas.
+    Creación del **trigger** que soluciona el paso a mayúsculas del nombre de las asignaturas.
     ```sql
     /* Crear el disparador */
     DELIMITER //
@@ -1002,7 +1002,7 @@ Para eliminar un **TRIGGER** disponemos de la instrucción **`DROP`**.
 
 !!! Example Anexo ejemplo 24b
     **Restricciones avanzadas**
-    Eliminar el trigger creado en el ejemplo anterior.
+    Eliminar el **trigger** creado en el ejemplo anterior.
     ```sql
     DROP TRIGGER notas_before_insert;
     ```

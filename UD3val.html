@@ -438,7 +438,7 @@ Prement a la pestanya <em>Insertar</em>, afegeix registres a la taula <strong>pr
 <div class="admonition example">
 <p class="admonition-title">Exemple 2</p>
 <p><strong>Eliminar una taula</strong><br>
-Eliminar la taula proveedores.</p>
+Eliminar la taula <strong>proveedores</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-TABLE">TABLE</span> proveedores<span class="token punctuation">;</span>
 </code></pre></div>
 <p>Amb la comanda <strong><code>RENAME TABLE</code></strong> podem canviar el nom d'una taula.</p>
@@ -547,7 +547,7 @@ Si hi ha camps a la taula que no s'especifiquen a la instrucció <strong><code>I
 <p class="admonition-title">Exemple 1</p>
 <p><strong>Inserir valors en taules</strong><br>
 Insereix un teclat i un ratolí sense fils a la taula <strong>articulos</strong>.</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-INTO">INTO</span> articulos <span class="token punctuation">(</span>codi<span class="token punctuation">,</span> descripcion<span class="token punctuation">,</span> precio<span class="token punctuation">)</span> <span class="token keyword keyword-VALUES">VALUES</span>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-INTO">INTO</span> articulos <span class="token punctuation">(</span>codigo<span class="token punctuation">,</span> descripcion<span class="token punctuation">,</span> precio<span class="token punctuation">)</span> <span class="token keyword keyword-VALUES">VALUES</span>
         <span class="token punctuation">(</span><span class="token string">'0001'</span><span class="token punctuation">,</span> <span class="token string">'TECLAT SENSE FILS'</span><span class="token punctuation">,</span> <span class="token number">10.45</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
         <span class="token punctuation">(</span><span class="token string">'0002'</span><span class="token punctuation">,</span> <span class="token string">'RATOLÍ SENSE FILS'</span><span class="token punctuation">,</span> <span class="token number">7.95</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre></div>
@@ -690,7 +690,7 @@ Ja hem dit anteriorment que una clau és composta si està formada per la concat
 <div class="admonition example">
 <p class="admonition-title">Exemple 4</p>
 <p><strong>Restriccions camp clau taules</strong><br>
-Crear la taula <strong>rrevision_itv</strong> on es guardaran les revisions d'ITV dels vehicles. La clau primària està formada per la <strong><code>matricula</code></strong> i la <strong><code>fecha</code></strong> de matriculació del vehicle.</p>
+Crear la taula <strong>revision_itv</strong> on es guardaran les revisions d'ITV dels vehicles. La clau primària està formada per la <strong><code>matricula</code></strong> i la <strong><code>fecha</code></strong> de matriculació del vehicle.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> revision_itv <span class="token punctuation">(</span>
     matricula <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     fecha <span class="token keyword keyword-DATE">DATE</span><span class="token punctuation">,</span>
@@ -720,9 +720,9 @@ Un camp obligatori es defineix amb l'opció <strong><code>NOT NULL</code></stron
 <p><strong>Restriccions camp obligatori</strong><br>
 Crear la taula <strong>articulos</strong> i definir el camp <strong><code>descripcion</code></strong> com a obligatori.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
-codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
-descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
-precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+    codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+    descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+    precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre></div>
 <p><strong>Eliminar la restricció de camp obligatori</strong><br>
@@ -800,7 +800,7 @@ Crear la taula <strong>localidades</strong> definint una clau forana sobre el ca
 <p>Quan creem una relació, i per tant una clau externa, es creen dos elements a la BD:</p>
 <ul>
 <li><strong>Índex</strong>: un índex (en el nostre exemple <strong>INDEX(cod_provincia)</strong>) amb el nom del camp per a la clau externa amb valors repetits, ja que pot ser una relació 1 → N i per tant haurà de repetir valors. En el nostre exemple, diverses localitats tindran la mateixa província.</li>
-<li><strong>Relació</strong>: s'assigna a la relació un nom per defecte format pel nom de la taula, el literal <em>ibfk</em> i un número. En el cas anterior serà <strong><code>localitats_ibfk1</code></strong>.</li>
+<li><strong>Relació</strong>: s'assigna a la relació un nom per defecte format pel nom de la taula, el literal <em>ibfk</em> i un número. En el cas anterior serà <strong><code>localidades_ibfk1</code></strong>.</li>
 </ul>
 <p>Si volem donar-li un nom nosaltres utilitzarem la clàusula <strong><code>CONSTRAINT</code></strong>:</p>
 <div class="admonition example">

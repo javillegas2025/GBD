@@ -615,7 +615,7 @@ Aumentar el precio de todos los artículos un 5%.</p>
 <div class="admonition example">
 <p class="admonition-title">Ejemplo 1</p>
 <p><strong>Índices en tablas</strong><br>
-Creación de la tabla <strong>articulos</strong> y definición de un índice sobre el campo <strong>categoría</strong>.</p>
+Creación de la tabla <strong>articulos</strong> y definición de un índice sobre el campo <strong><code>categoría</code></strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
     codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
     descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token keyword keyword-UNIQUE">UNIQUE</span><span class="token punctuation">,</span>
@@ -632,8 +632,8 @@ Si deseáramos crear un índice con valores repetidos cuando la tabla ya existe,
 </code></pre><p>Para añadir una clave primaria a una tabla que no tiene podemos hacerlo con la instrucción  <strong><code>ALTER TABLE</code></strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> nombreTabla
 <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>col_name1<span class="token punctuation">,</span>…<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Eliminar índices</strong></p>
-<p>Para eliminar un índice deberemos saber su nombre.</p>
+</code></pre><p><strong>Eliminar índices</strong><br>
+Para eliminar un índice deberemos saber su nombre.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-INDEX">INDEX</span> nombreIndice <span class="token keyword keyword-ON">ON</span> nombreTabla<span class="token punctuation">;</span>
 </code></pre><p>Cuando se define una clave primaria automáticamente se crea un índice único sobre el campo (o campos) que definen dicha clave.<br>
 Podemos eliminar el índice asociado a la clave primaria con la instrucción  <strong><code>ALTER TABLE</code></strong>.</p>
@@ -719,9 +719,9 @@ Un campo obligatorio se define con la opción <strong><code>NOT NULL</code></str
 <p><strong>Restricciones campo obligatorio</strong><br>
 Crear la tabla <strong>articulos</strong> y definir el campo <strong><code>descripcion</code></strong> como obligatorio.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
-codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
-descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
-precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+    codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
+    descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
+    precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre></div>
 <p><strong>Eliminar la restricción de campo obligatorio</strong><br>
@@ -846,7 +846,7 @@ Se utiliza la instrucción <strong><code>ALTER TABLE</code></strong> en combinac
 <p><strong>Restricciones campo por clave ajena</strong><br>
 Añadir la una clave ajena sobre el campo <strong><code>cod_provincia</code></strong> de la tabla <strong>localidades</strong> que haga referencia a la tabla <strong>provincias</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">-- Sin cláusula CONSTRAINT</span>
-<span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-ADD">ADD</span> 
+<span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-ADD">ADD</span>
 <span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>cod_provincia<span class="token punctuation">)</span> <span class="token keyword keyword-REFERENCES">REFERENCES</span> provincias <span class="token punctuation">(</span>cod_prov<span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token comment">-- Con cláusula CONSTRAINT</span>
 <span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> provincias_cod_prov
@@ -972,7 +972,7 @@ En el lenguaje de SQL existe la palabra reservada <strong><code>CHECK</code></st
 <div class="admonition example">
 <p class="admonition-title">Ejemplo 23</p>
 <p><strong>Restricciones avanzadas</strong><br>
-Crear la tabla notas de manera que la <strong><code>nota</code></strong> del alumno esté entre 0 y 10.</p>
+Crear la tabla <strong>notas</strong> de manera que la <strong><code>nota</code></strong> del alumno esté entre 0 y 10.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> notas <span class="token punctuation">(</span>
     nia <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     asignatura <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
@@ -998,7 +998,7 @@ En cualquier caso, a título informativo, se mostrará el código de este proced
 <div class="admonition example">
 <p class="admonition-title">Anexo ejemplo 24</p>
 <p><strong>Restricciones avanzadas</strong><br>
-Creación del trigger que soluciona el paso a mayúsculas del nombre de las asignaturas.</p>
+Creación del <strong>trigger</strong> que soluciona el paso a mayúsculas del nombre de las asignaturas.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Crear el disparador */</span>
 <span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
 <span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TRIGGER">TRIGGER</span> notas_before_insert BEFORE <span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-ON">ON</span> notas
@@ -1013,7 +1013,7 @@ Creación del trigger que soluciona el paso a mayúsculas del nombre de las asig
 <div class="admonition example">
 <p class="admonition-title">Anexo ejemplo 24b</p>
 <p><strong>Restricciones avanzadas</strong><br>
-Eliminar el trigger creado en el ejemplo anterior.</p>
+Eliminar el <strong>trigger</strong> creado en el ejemplo anterior.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-TRIGGER">TRIGGER</span> notas_before_insert<span class="token punctuation">;</span>
 </code></pre></div>
 <h2 id="tablas-a-partir-de-consultas">Tablas a partir de consultas </h2>

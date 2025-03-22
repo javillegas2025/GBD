@@ -309,7 +309,7 @@ Amb la comanda **`DROP TABLE`** podem eliminar una taula.
 
 !!! Example Exemple 2
     **Eliminar una taula**
-    Eliminar la taula proveedores.
+    Eliminar la taula **proveedores**.
     ```sql
     DROP TABLE proveedores;
     ```
@@ -436,7 +436,7 @@ Si hi ha camps a la taula que no s'especifiquen a la instrucció **`INSERT`**, s
     **Inserir valors en taules**
     Insereix un teclat i un ratolí sense fils a la taula **articulos**.
     ```sql
-    INSERT INTO articulos (codi, descripcion, precio) VALUES
+    INSERT INTO articulos (codigo, descripcion, precio) VALUES
             ('0001', 'TECLAT SENSE FILS', 10.45),
             ('0002', 'RATOLÍ SENSE FILS', 7.95);
     ```
@@ -634,7 +634,7 @@ Ja hem dit anteriorment que una clau és composta si està formada per la concat
 
 !!! Example Exemple 4
     **Restriccions camp clau taules**
-    Crear la taula **rrevision_itv** on es guardaran les revisions d'ITV dels vehicles. La clau primària està formada per la **`matricula`** i la **`fecha`** de matriculació del vehicle.
+    Crear la taula **revision_itv** on es guardaran les revisions d'ITV dels vehicles. La clau primària està formada per la **`matricula`** i la **`fecha`** de matriculació del vehicle.
     ```sql
     CREATE TABLE revision_itv (
         matricula VARCHAR(10),
@@ -671,9 +671,9 @@ Un camp obligatori es defineix amb l'opció **`NOT NULL`** al costat del camp.
     Crear la taula **articulos** i definir el camp **`descripcion`** com a obligatori.
     ```sql
     CREATE TABLE articulos (
-    codigo VARCHAR(4) PRIMARY KEY,
-    descripcion VARCHAR(100) NOT NULL,
-    precio DECIMAL(10,2)
+        codigo VARCHAR(4) PRIMARY KEY,
+        descripcion VARCHAR(100) NOT NULL,
+        precio DECIMAL(10,2)
     );
     ```
 
@@ -772,7 +772,7 @@ La clau externa es pot definir en el moment de crear la taula declarant-la despr
 Quan creem una relació, i per tant una clau externa, es creen dos elements a la BD:
 
 * **Índex**: un índex (en el nostre exemple **INDEX(cod_provincia)**) amb el nom del camp per a la clau externa amb valors repetits, ja que pot ser una relació 1 → N i per tant haurà de repetir valors. En el nostre exemple, diverses localitats tindran la mateixa província.
-* **Relació**: s'assigna a la relació un nom per defecte format pel nom de la taula, el literal *ibfk* i un número. En el cas anterior serà **`localitats_ibfk1`**.
+* **Relació**: s'assigna a la relació un nom per defecte format pel nom de la taula, el literal *ibfk* i un número. En el cas anterior serà **`localidades_ibfk1`**.
 
 Si volem donar-li un nom nosaltres utilitzarem la clàusula **`CONSTRAINT`**:
 
