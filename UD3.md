@@ -57,6 +57,7 @@ Para llevar a cabo esta etapa, se debe haber decidido cuál es el SGBD que se va
 En nuestro caso utilizaremos MySQL, y como su sintaxis se adapta en gran medida a SQL ANSI, los comandos que usaremos serán muy similares en el resto de SGBD relacionales.
 
 Cuando llegamos a este punto disponemos de:
+
 * descripción del sistema de información
 * el esquema conceptual del modelo entidad-relación
 * el esquema del diccionario de datos
@@ -69,6 +70,7 @@ El diseño físico no es una etapa aislada, ya que algunas decisiones que se tom
 El objetivo de esta etapa es producir una descripción de la implementación de la base de datos en memoria secundaria. Esta descripción incluye las estructuras de almacenamiento y los métodos de acceso que se utilizarán para conseguir un acceso eficiente a los datos.
 
 El objetivo por tanto es:
+
 * Conocer las **utilidades o herramientas** para la definición de información en un SGBD.
 * Conocer las **órdenes SQL** para la definición de datos.
 * Elegir **el tipo de dato** más adecuado para cada tipo de información.
@@ -77,6 +79,7 @@ El objetivo por tanto es:
 En esta unidad didáctica estudiaremos las instrucciones o comandos SQL del lenguaje de definición de datos (LDD) que permiten la creación de nuestra base de datos y que incluirá las tablas con sus campos e índices.
 
 La primera fase del diseño lógico consiste en traducir el esquema lógico global en un esquema que se pueda implementar en el SGBD escogido. Para ello, es necesario conocer toda la funcionalidad que éste ofrece. Por ejemplo, el diseñador deberá saber:
+
 * Si el sistema soporta la definición de claves primarias, claves ajenas y claves alternativas.
 * Si el sistema soporta la definición de datos requeridos (es decir, si se pueden definir atributos como no nulos).
 * Si el sistema soporta la definición de dominios.
@@ -95,6 +98,7 @@ Utilizaremos:
 </div> <!-- fin caso de estudio -->
 
 Para poder conectar a la BD de MySQL vamos a utilizar dos herramientas:
+
 * **Por línea de comandos: `mysql.exe`**
 * **Mediante la aplicación web (AW) `phpMyAdmin`**
 
@@ -172,6 +176,7 @@ Debemos buscar la información de restricciones de algunos campos:
 
 * **Restricciones por valor**
   Se definen en el diccionario de datos. Estas restricciones pueden estar referidas al:
+
   * Tipo de dato
   * Longitud
   * Dominio de valores
@@ -426,7 +431,6 @@ La sintaxis para consultar los registros de una tabla es:
 > :hand: **Importante**
 Si hay campos en la tabla que no se especifican en la instrucción **`INSERT`**, se le asignará el valor que se haya indicado en su creación por defecto (**`DEFAULT`**) y en caso contrario será **`NULL`**.
 
-
 !!! Example Ejemplo 1
     **Insertar valores en tablas**
     Inserta un teclado y un ratón inálabrico en la tabla **articulos**.
@@ -517,6 +521,7 @@ CREATE TABLE nombreTabla (
     INDEX [nombreIndice] (catecampoI)
 );
 ```
+
 Se crea un índice sobre el **campo I** y, opcionalmente, le podemos dar un nombre (mejor dejar que el SGBD le de un nombre automáticamente).
 
 !!! Example Ejemplo 1
@@ -553,7 +558,6 @@ ADD PRIMARY KEY (col_name1,…);
 ```
 
 **Eliminar índices**
-
 Para eliminar un índice deberemos saber su nombre.
 
 ```sql
@@ -624,7 +628,7 @@ Se puede añadir la clave primaria con posterioridad a la creación de la tabla 
     ```
 
 **Claves compuestas**
-Ya hemos dicho anteriormente que una clave es compuesta si está formada por la cocatenación de varios campos. 
+Ya hemos dicho anteriormente que una clave es compuesta si está formada por la concatenación de varios campos.
 
 !!! Example Ejemplo 4
     **Restricciones campo clave tablas**
@@ -655,8 +659,7 @@ Se podría haber creado la tabla en primer lugar y a continuación añadir la cl
 
 ### Restricción de campo obligatorio
 
-Cuando un campo no puede tener valores nulos, decimos que es un campo obligatorio.
-En nuestro ejemplo indicaremos la descripción como campo obligatorio para que ningún artículo tenga la descripción vacía.
+Cuando un campo no puede tener valores nulos, decimos que es un campo obligatorio. En nuestro ejemplo indicaremos la descripción como campo obligatorio para que ningún artículo tenga la descripción vacía.
 
 **Definir campo obligatorio al crear la tabla**
 Un campo obligatorio se define con la opción **`NOT NULL`** al lado del campo.
@@ -754,7 +757,7 @@ La clave ajena se puede definir en el momento de crear la tabla declarándola de
 
 !!! Example Ejemplo 11
     **Restricciones campo por clave ajena**
-    Crear la tabla **localidades** definiendo una clave foránea sobre el campo **`cod_provincia`** que haga referencia a la tabla **provincias**. 
+    Crear la tabla **localidades** definiendo una clave foránea sobre el campo **`cod_provincia`** que haga referencia a la tabla **provincias**.
     ```sql
     CREATE TABLE localidades (
         cod_loc INT(5) PRIMARY KEY,
@@ -768,7 +771,6 @@ Cuando creamos una relación, y por lo tanto una clave ajena, se crean dos eleme
 
 * **Índice**: un índice (en nuestro ejemplo **INDEX(cod_provincia)**) con el nombre del campo para la clave ajena con valores repetidos, ya que puede ser una relación 1 → N y por lo tanto tendrá que repetir valores. En nuestro ejemplo, varias localidades tendrán la misma provincia.
 * **Relación**: se asigna a la relación un nombre por defecto formado por el nombre de la tabla, el literal *ibfk* y un numero. En el caso anterior será **`localidades_ibfk1`**.
-
 
 Si queremos darle un nombre nosotros utilizaremos la cláusula **`CONSTRAINT`**:
 
@@ -796,7 +798,7 @@ Se utiliza la instrucción **`ALTER TABLE`** en combinación con la opción **`D
     ALTER TABLE localidades DROP FOREIGN KEY provincias_cod_prov;
     ```
 
-En caso de no haber utilizado la cláusula **`CONSTRAIN`** en la definición de la restricción entonces la eliminaremos indicando el nombre que se le ha dado por defecto.
+En caso de no haber utilizado la cláusula **`CONSTRAINT`** en la definición de la restricción entonces la eliminaremos indicando el nombre que se le ha dado por defecto.
 
 !!! Example Ejemplo 14
     **Restricciones campo por clave ajena**
@@ -825,7 +827,7 @@ Se utiliza la instrucción **`ALTER TABLE`** en combinación con la opción **`A
     Añadir la una clave ajena sobre el campo **`cod_provincia`** de la tabla **localidades** que haga referencia a la tabla **provincias**.
     ```sql
     -- Sin cláusula CONSTRAINT
-    ALTER TABLE localidades ADD 
+    ALTER TABLE localidades ADD
     FOREIGN KEY (cod_provincia) REFERENCES provincias (cod_prov);
     -- Con cláusula CONSTRAINT
     ALTER TABLE localidades ADD CONSTRAINT provincias_cod_prov
@@ -866,7 +868,6 @@ Si especifica una acción SET NULL, asegúrese de que no ha declarado las column
     ```
 
 * **SET DEFAULT**: <span style="color:red;">No disponible para MySQL con el motor de base de datos InnoDB</span>. Si en la tabla padre (**provincias**) se elimina un registro o se actualiza su clave, si hay algún valor de clave externa relacionado en la tabla referenciada (**localidades**) se actualizará el valor por defecto de la clave ajena.
-
 
 ### Otras restricciones y valores por defecto
 
