@@ -124,6 +124,7 @@ Para conectarnos como root hacemos:
 **`C:\Program Files\MySQL\MySQL Server 8.0\bin> mysql -u root -p`**
 
 !!! Example Ejemplo 1
+	**Scripts**
 	Crear un script de nombre **`b06ejer01.sql`** en una carpeta de nuestro gusto,por ejemplo **C:\GBD-UD06**. El script calcula la superficie de una pared a partir del ancho y alto de la misma. El ancho y alto se cargan previamente en dos variables.
 
 	El script lo creamos con un editor de texto y su contenido es el siguiente:
@@ -157,17 +158,17 @@ Las instrucciones **SET** y **SELECT** pueden ejecutarse también directamente d
 ### Comentarios
 
 Los comentarios dentro de los SCRIPTS pueden hacerse de la siguiente manera:
-<div style="padding: 3pt; background-color:rgba(219, 218, 218, 0.3); color: Orange; margin: 5pt 0pt 5pt 0pt;">
 
-\# comentario con almohadilla (solo una linea)
+```sql
+# comentario con almohadilla (solo una linea)
 -- Comentario con dos guiones (solo una linea)
-/* comentario con barra asterisco (solo una linea) \*/
+/* comentario con barra asterisco (solo una linea) */
 /*
 esto es
 un comentario
 multilinea
 */
-</div>
+```
 
 ### Variables definidas por el usuario
 
@@ -192,6 +193,7 @@ SELECT * FROM ciudades WHERE codigo > @num;
 También podemos calcular y asignar valor en la misma instrucción, almacenando resultados de nuestras **`SELECT`**, pero en este caso sólo funciona el operador **`:=`**. Si no deseamos que se produzca la salida del resultado, sino sólo almacenarlo, podemos usar la cláusula **`INTO`**:
 
 !!! Example Ejemplo 2
+	**Scripts**
 	Crear un script que asigne a la variable **numreg** la cantidad de ciudades que hay en la tabla **ciudades**.
 	```sql
 	-- Asigna el número de ciudades a la variable numreg y muestra el resultado por pantalla.
@@ -258,7 +260,8 @@ ERROR 1064 (42000): Algo está equivocado en su sintax cerca
 'MENSAJES' en la linea 1
 ```
 
-!!! Example Ejemplo **Ejemplo 3**
+!!! Example Ejemplo 3
+	**Scripts**
 	Crea un **script** que conecte con la base de datos **world** y guarde en una variable el número de registros de la tabla **city** y en otra el número de registros de la tabla **country**. Ejecutar un **`SELECT`** que muestre la cantidad de registros de las dos tablas.
 
 	El script **`b06ejer02.sql`** tendrá las siguiente instrucciones:
@@ -307,10 +310,6 @@ Ejemplo de forma de conexión.
 C:\> mysql -u root -p --silent --table
 ```
 
-<span style="color: red; font-weight: bold;">
-Aquí me he quedado
-</span>
-
 ## Procedimientos y estructuras de control
 
 ### Sintaxis y Estructura
@@ -322,106 +321,144 @@ La sintaxis más sencilla es la siguiente:
 ```sql
 DELIMITER //
 CREATE PROCEDURE nombre()
-	BEGIN
-		instrucciones;
-	END //
+BEGIN
+    instrucciones;
+END //
 DELIMITER ;
 ```
 
-Antes de comenzar debemos seleccionar la base de datos con la que vamos a trabajar. Por ejemplo:
+Antes de comenzar debemos seleccionar la base de datos con la que vamos a trabajar. Por ejemplo para trabajar con la base de datos world ejecutaríamos:
 
-```
+```sql
 USE world;
 ```
 
 Si por ejemplo deseamos un procedimiento que muestre el día y hora sería:
 
-```sql
-DELIMITER //
-CREATE PROCEDURE diayhora()
-BEGIN
-	SELECT NOW();
-END //
-DELIMITER ;
-```
+!!! Example Ejemplo 1
+	**Procedimientos**
+	Realizar un procedimiento que calcule el día y la hora actual y la muestre por pantalla.
+	```sql
+	DELIMITER //
+	CREATE PROCEDURE diayhora()
+	BEGIN
+	    SELECT NOW();
+	END //
+	DELIMITER ;
+	```
 
-Para llamar al procedimiento utilizaremos el comando CALL:
+Para llamar al procedimiento se utiliza el comando **`CALL`**.
 
-```sql
-CALL diayhora();
-```
+!!! Example Ejemplo 2
+	**Procedimientos**
+	Ejecutar el procedimiento **diayhora** creado en el ejemplo anterior.
+	```sql
+	CALL diayhora();
+	```
 
-Los procedimientos se asignan a una base de datos. Esto quiere decir que debemos indicar el **SCHEMA** o BASE DE DATOS al crear o eliminar el procedimiento. Podemos usar previamente la selección de base de datos por defecto con el comando **USE** como en el ejemplo anterior o bien indicarla al crear el procedimiento como se hace en los SELECT de las tablas. En el siguiente ejemplo creamos el procedimiento en world.
+Los procedimientos se asignan a una base de datos. Esto quiere decir que debemos indicar el **SCHEMA** o BASE DE DATOS al crear o eliminar el procedimiento. Podemos usar previamente la selección de base de datos por defecto con el comando **`USE`** como en el ejemplo anterior o bien indicarla al crear el procedimiento como se hace en los **`SELECT`** de las tablas. Por ejemplo para crear el procedimiento en la base de datos world, independientemente de cual tengamos seleccionada, la cabecera del procedimiento sería: **`CREATE PROCEDURE world.diayhora()`**.
 
-```sql
-DELIMITER //
-CREATE PROCEDURE world.diayhora()
-BEGIN
-	SELECT NOW();
-END //
-DELIMITER ;
-```
+#### DELIMITER
 
-***Delimiter***
-En la declaración del procedimiento hemos usado delimiter y, ¿por qué es importante el uso del DELIMITER?.
+En la declaración del procedimiento hemos usado delimiter pero, ¿por qué es importante el uso del **`DELIMITER`**?.
 
-Ya sabemos que por defecto MySQL usa como DELIMITER el punto y coma (;) , es decir, cada vez que encuentre punto y como(;) ejecuta hasta ahí. Como en los procedimientos hay varias líneas de códigos y algunas de ellas terminan con este delimiter se ejecutaría solo hasta ahí, lo que ocasionaría un error, y es por esto que se hace necesario indicarle a MySQL que utilice otro DELIMITER que puede ser cualquiera.
+Ya sabemos que por defecto MySQL usa como delimitador de fin de instrucción el punto y coma (;) , es decir, cada vez que encuentre punto y como(;) ejecuta hasta ahí. Como en los procedimientos hay varias líneas de códigos y algunas de ellas terminan con este delimitador se ejecutaría solo hasta ahí, lo que ocasionaría un error, y es por esto que es necesario indicarle a MySQL que utilice otro dlimitador que puede ser cualquiera. Ese es el próposito de la cláusula **`DELIMITER`**.
 
-Para nuestro ejemplo usamos // pero se podría usar también $$. Al finalizar la creación del procedimiento o función volvemos a cambiarlo por ;
+Para nuestro ejemplo usamos **//** pero se podría usar también **$$** o lo que queramos. Al finalizar la creación del procedimiento o función volvemos a cambiarlo por **;**
 
 ```sql
 DELIMITER $$
-...
-$$
+    ...
+    $$
 DELIMITER ;
 ```
 
-***Bloques de código***
-Para poder agrupar varias instrucciones utilizaremos BEGIN … END. En los procedimientos es necesario porque define el espacio de instrucciones que se almacenan.
+#### Bloques de código
 
-Estos bloques de código se usarán más adelante también en estructuras de control como **IF .. THEN … END IF**
+Para poder agrupar varias instrucciones en bloques utilizaremos: **`BEGIN ... END`**.
+En los procedimientos es necesario porque define el espacio de instrucciones que se almacenan.
 
-***Redefinir y Eliminar***
-Para eliminar un procedimiento utilizaremos la instrucción **DROP PROCEDURE**:
+Estos bloques de código se usarán más adelante también en estructuras de control como: **`IF .. THEN .. END IF`**
 
-```sql
-DROP PROCEDURE world.diayhora;
-```
+#### Redefinir y Eliminar
 
-Si queremos redefinir un procedimiento, para evitar que si no existe muestre un error
-usaremos:
+Para eliminar un procedimiento utilizaremos la instrucción **`DROP PROCEDURE`**.
 
 ```sql
-DROP PROCEDURE IF EXISTS world.diayhora;
+DROP PROCEDURE nombreProcedimiento;
 ```
 
-En nuestros ejemplos usaremos una base de datos denominada **ud6ejer**.
+Si queremos redefinir un procedimiento, para evitar que si no existe muestre un error lo haremos utilizando la cláusula **`IF EXISTS`**.
+
+```sql
+DROP PROCEDURE IF EXISTS nombreProcedimiento;
+```
 
 ### Variables locales del procedimiento
 
-Cuando necesitamos variables que usaremos dentro del procedimiento debemos usar la instrucción **DECLARE** como si lo hiciéramos en la instrucción CREATE TABLE.
-A continuación se muestran algunos ejemplos:
+Cuando necesitamos variables que usaremos dentro del procedimiento debemos usar la instrucción **`DECLARE`** como si lo hiciéramos en la instrucción **`CREATE TABLE`**. Las variables sólo serán visibles y accesibles dentro del procedimiento.
+Estas variables no comienzan con el caracter especial @, al contrario de lo que sucede en los scripts.
 
 ```sql
-DECLARE ciudad VARCHAR(100);
-DECLARE descripcion VARCHAR(160) CHARACTER SET utf8;
-DECLARE edad INT(3);
-DECLARE importe DECIMAL(15,2);
+DECLARE nombreVariable tipoVariable [opciones];
 ```
 
-Estas variables sólo serán visibles y accesibles dentro del procedimiento.
-
 ### Estructuras de control
+
+Las instrucciones de un procedimiento (o función) se ejecutan secuencialmente empezando por la instrucción que está justo después de la palabra reservada **`BEGIN`** y acabando por la que está justo antes de la palabra reservada **`END`**. Esta forma de ejcución de instrucciones se llama **secuencial**. El siguiente diagrama representa un bloque de 3 instrucciones que se ejecutan secuencialmente. El punto negro inicial representa el **`BEGIN`** y el punto con el aspa el **`END`**.
+
+```puml
+@startuml
+start
+:Instrucción 1;
+:Instrucción 2;
+:Instrucción 3;
+end
+@enduml
+```
+
 Las estructuras de control permiten modificar el flujo de ejecución de las instrucciones de un programa.
 
-***Sentencia IF***
-La más sencilla consiste en ejecutar unas instrucciones u otras según una condición:
+No obstante, hay algunas directiva que nos permiten cambiar el orden secuencial de ejecución de instrucciones. A estas directivas comunmente se les llama estructuras de control. Las estructuras de control se pueden englobar en dos categorías:
+
+* **Estructuras de control condicionales**: en función de una condición se ejecutan un bloque de instrucciones u otro (o ninguno).
+* **Estructuras de control de repetición**: permiten que un bloque de instrucciones se ejecuta un cierto o número de veces o mientras se cumpla una condición.
+
+#### Estructuras de control condicionales
+
+**Sentencia IF**
+Es la más sencilla de todas. Nos permite ejecutar unas instrucciones u otras según una condición. Hay 3 variantes:
+
+***Variante 1***
+Esquema general
 
 ```sql
 IF [condicion] THEN
 	[sentencia o bloque de sentencias]
 END IF;
 ```
+
+```puml
+@startuml
+start
+if (condición) then (Sí)
+#lightgreen:bloque sentencias 1;
+note
+Este bloque de sentencias sólo se
+ejecuta **SI** se cumple la condición.
+end note
+endif
+:bloque sentencias común;
+note right
+Este bloque de sentencias se ejecuta
+**siempre**, se cumpla o no la condición.
+end note
+stop
+@enduml
+```
+
+***Variante 2***
+Esquema general
 
 ```sql
 IF [condicion] THEN
@@ -430,6 +467,34 @@ ELSE
 	[sentencia o bloque de sentencias]
 END IF;
 ```
+
+```puml
+@startuml
+start
+if (condición) then (Sí)
+#lightgreen:bloque sentencias 1;
+note
+Este bloque de sentencias sólo se
+ejecuta **SI** se cumple la condición.
+end note
+else (No)
+#lightgreen:bloque sentencias 2;
+note right
+Este bloque de sentencias sólo se
+ejecuta si **NO** se cumple la condición.
+end note
+end if
+:bloque sentencias común;
+note
+Este bloque de sentencias se ejecuta
+**siempre**, se cumpla o no la condición.
+end note
+stop
+@enduml
+```
+
+***Variante 3***
+Esquema general
 
 ```sql
 IF [condicion] THEN
@@ -439,36 +504,80 @@ ELSEIF [condicion] THEN
 ELSE
 	[sentencia o bloque de sentencias]
 END IF;
-
-En el siguiente ejemplo creamos un procedimiento para mostrar un COLOR de forma aleatoria según el valor obtenido con la función RAND() que devuelve un número decimal entre 0 y 1, es decir, obtenemos un número n que cumple 0 <= n < 1.
-
-Ejemplo 1 – SCRIPT con IF
-
-```sql
-/* Eliminar el procedimiento si ya existe */
-DROP PROCEDURE IF EXISTS ud6ejer.colores;
-
-/* Crear el procedimiento */
-DELIMITER //
-CREATE PROCEDURE ud6ejer.colores()
-BEGIN
-	DECLARE num DECIMAL(15,2);
-	SET num := RAND();
-	IF (num < 0.25) THEN
-		SELECT 'verde' AS COLOR;
-	ELSEIF (num < 0.50) THEN
-		SELECT 'amarillo' AS COLOR;
-	ELSEIF (num < 0.75) THEN
-		SELECT 'naranja' AS COLOR;
-	ELSE
-		SELECT 'rojo' AS COLOR;
-	END IF;
-END //
-
-DELIMITER ;
-/* Llamar al procedimiento */
-CALL ud6ejer.colores();
 ```
+
+```puml
+@startuml
+!pragma useVerticalIf on
+start
+
+if (condición A) then (Sí)
+#lightgreen: bloque sentencias 1;
+note right
+Las sentencias sólo se ejecutan **SI**
+se cumple la condición A.
+end note
+(No) elseif (condition B) then (Sí)
+#lightgreen:bloque sentencias 2;
+note right
+Las sentencias sólo se ejecutan si **NO** se
+cumple la condición A y **SÍ** se cumple la B.
+end note
+
+else (No)
+#lightgreen:bloque sentencias 3;
+note right
+Las sentencias sólo se ejecutan si **NO** 
+se cumple ninguna condición.
+end note
+
+end if
+:bloque sentencias común;
+
+note
+Este bloque de sentencias se ejecuta
+**siempre**, se cumpla o no la condición.
+end note
+
+stop
+
+@enduml
+```
+Puede haber tantas cláusulas **`ELSEIF`** como queramos pero sólo puede haber una cláusula **`IF`** y una **`ELSE`**.
+
+!!! Example Ejemplo 3
+	**Procedimientos**
+	En el siguiente ejemplo creamos un procedimiento para mostrar un **color** de forma aleatoria según el valor obtenido con la función **`RAND()`** la cual devuelve un número real entre 0 y 1, es decir, obtenemos un número n que cumple 0 ≤ n < 1.
+	```sql
+	-- Eliminar el procedimiento si ya existe
+	DROP PROCEDURE IF EXISTS colores;
+
+	-- Crear el procedimiento
+	DELIMITER //
+	CREATE PROCEDURE colores()
+	BEGIN
+		DECLARE num DECIMAL(15,2);
+		SET num := RAND();
+		IF (num < 0.25) THEN
+			SELECT 'verde' AS COLOR;
+		ELSEIF (num < 0.50) THEN
+			SELECT 'amarillo' AS COLOR;
+		ELSEIF (num < 0.75) THEN
+			SELECT 'naranja' AS COLOR;
+		ELSE
+			SELECT 'rojo' AS COLOR;
+		END IF;
+	END //
+
+	DELIMITER ;
+	-- Llamar al procedimiento
+	CALL colores();
+	```
+
+
+<span style="color: red; font-weight: bold;">AQUÍ ME HE QUEDADO
+</span>
+
 ***Sentencia CASE***
 Cuando tenemos varias opciones como en el ejemplo anterior, podemos utilizar también la estructura **CASE**.
 
