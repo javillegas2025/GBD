@@ -40,80 +40,64 @@ toc:
 ## Introducción
 Analizando el mercado actual de Bases de Datos, el uso de los diferentes productos existentes se ha segmentado.
 
-|Grandes Empresas |La mayoría han apostado por Oracle por su seguridad y soporte.|
-|Pequeñas y medianas Empresas (PYMES)|
-Aquí es donde más abierto está el mercado:
-• Oracle Express
-• SQL Server de Microsoft
-• MySQL Server
-• PostgreSQL
-|
-|Pequeños negocios|Utilizan software propietario que utiliza SGBD con prestaciones de tipo ofimático como Microsoft Access.|
-|Aplicaciones y páginas web||La mayoría de los proveedores de internet tienen incluido en sus ofertas MySQL y PostgreSQL, pero los usuarios suelen usar MySQL.|
+|Usuarios BD|Bases de datos|
+|:------------|:-----------|
+|**Grandes Empresas** |La mayoría han apostado por Oracle por su seguridad y soporte.|
+|**Pequeñas y medianas Empresas (PYMES)**|Aquí es donde más abierto está el mercado. Entre las más utilizadas están: Oracle Express, SQL Server de Microsoft, MySQL Server y PostgreSQL|
+|**Pequeños negocios**|Utilizan software propietario que utiliza SGBD con prestaciones de tipo ofimático como Microsoft Access.|
+|**Aplicaciones y páginas web**|La mayoría de los proveedores de internet tienen incluido en sus ofertas MySQL y PostgreSQL, pero los usuarios suelen usar MySQL.|
 
-Aunque los aspectos fundamentales a la forma de utilizar un SGBD son muy parecidos, en este curso nos hemos centrado en MySQL.
+Aunque los aspectos fundamentales a la forma de utilizar un SGBD son muy parecidos, en este curso nos hemos centrado en **MySQL**.
 
-MySQL es un sistema de gestión de bases de datos SQL (SGBD - DBMS) multihilo y multiusuario que tiene más de 10 millones de instalaciones según MySQL AB de
-Oracle (<https://es.wikipedia.org/wiki/MySQL_AB>).
+MySQL es un sistema de gestión de bases de datos SQL (SGBD DBMS) multihilo y multiusuario que tiene más de 10 millones de instalaciones según MySQL AB de Oracle (<https://es.wikipedia.org/wiki/MySQL_AB>).
 
-Las librerías para acceder a bases de datos MySQL están disponibles en los principales lenguajes de programación con APIs específicas de lenguaje. Además,una interfaz ODBC llamada MyODBC permite utilizar lenguajes de programación
-adicionales que soportan la interfaz ODBC para comunicarse con una base de datos MySQL. El servidor MySQL y las bibliotecas oficiales se implementan
-principalmente en ANSI C.
+Las librerías para acceder a bases de datos MySQL están disponibles en los principales lenguajes de programación con APIs específicas de lenguaje. Además,una interfaz ODBC llamada MyODBC permite utilizar lenguajes de programación adicionales que soportan la interfaz ODBC para comunicarse con una base de datos MySQL. El servidor MySQL y las bibliotecas oficiales se implementan principalmente en ANSI C.
 
-MySQL es popular para aplicaciones web y actúa como el componente de base de datos de las plataformas LAMP, MAMP y WAMP (Linux/Mac/Windows-Apache-
-MySQL-PHP/Perl). Su popularidad como aplicación web está estrechamente ligada a la popularidad de PHP, que a menudo se combina con MySQL. PHP y MySQL son componentes esenciales para ejecutar la popular plataforma DE Gestor de Cotnenidos WordPress.
+MySQL es popular para aplicaciones web y actúa como el componente de base de datos de las plataformas LAMP, MAMP y WAMP (Linux/Mac/Windows-Apache-MySQL-PHP/Perl). Su popularidad como aplicación web está estrechamente ligada a la popularidad de PHP, que a menudo se combina con MySQL. PHP y MySQL son componentes esenciales para ejecutar la popular plataforma de Gestor de Cotnenidos WordPress.
 
-GBD - Gestión de Bases de Datos ASIR - 1
-***Cliente / Servidor***
+#### Cliente / Servidor
+
 La arquitectura **cliente-servidor** es un modelo de diseño de software en el que las tareas se reparten entre los proveedores de recursos o servicios, llamados servidores, y los demandantes, llamados clientes.
 
 Un cliente realiza peticiones a otro programa, el servidor, quien le da respuesta. Esta idea también se puede aplicar a programas que se ejecutan sobre una sola computadora, aunque es más ventajosa en un sistema operativo multiusuario distribuido a través de una red de computadoras.
 
-Cuando utilizamos un navegado en Internet y accedemos a un servidor mediante una dirección web, utilizamos el protocolo HTTP o HTTPS para enviar información del cliente al servidor y viceversa.
+Cuando utilizamos un navegado en Internet y accedemos a un servidor mediante una dirección web, utilizamos el protocolo **HTTP** o **HTTPS** para enviar información del cliente al servidor y viceversa.
 
 Tanto cliente como servidor ejecutan código y por lo tanto, procesan las instrucciones de programas y aplicaciones, y para ello se utilizan diferentes lenguajes de programación. A continuación se muestran algunos ejemplos:
-[Img. 6.1.1.png]()
+![Imagen 6.1.1](./.img/6.1.1.png)
 
-Puedes consultar el **Tiobe Index** de los lenguajes de programación más usados en:
-<https://www.tiobe.com/tiobe-index/>
+Puedes consultar el **Tiobe Index** de los lenguajes de programación más usados en: <https://www.tiobe.com/tiobe-index/>
 
 Puedes consultar la web del **Instituto de Ingeniería Eléctrica y Electrónica** (Institute of Electrical and Electronics Engineers o IEEE), que con más de 425.000 miembros y voluntarios en 160 países, también publica su propia lista de lenguajes de programación más populares (se puede filtrar por Web):
 <https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018>
 
-***Programación en BD***
+#### Programación en BD
 Los SGBD relacionales usan SQL como lenguaje de DCL, DDL y DML.
 
 * **DCL – Data Control Language** – Lenguaje de Control de Datos
 <https://es.wikipedia.org/wiki/Lenguaje_de_control_de_datos>
-* ** DDL – Data Definition Language** – Lenguaje de Definición de Datos
+* **DDL – Data Definition Language** – Lenguaje de Definición de Datos
 <https://es.wikipedia.org/wiki/Lenguaje_de_definici%C3%B3n_de_datos>
 * **DML – Data Manipulation Language** – Lenguaje de Manipulación de Datos
 <https://es.wikipedia.org/wiki/Lenguaje_de_manipulaci%C3%B3n_de_datos>
 
-En la Unidad 3 hemos trabajado el DDL y en la Unidad 5 el DML.
+En las unidades anteriores hemos trabajado tanto el  DDL como el DML.
 
-Además de esta organización, los SGBD permiten almacenar código para generar scripts. Oracle fue uno de los primeros en hacerlo con PL/SQL.
+Las bases de datos relacionales poseen unas extensiones del lenguaje de consultas SQL que les permiten crear bloques de código que se ejecutan como un todo. Hay dos tipos de bloques de código:
 
-**PL/SQL** (Procedural Language/Structured Query Language) es la extensión de procedimiento y programación al lenguaje de base de datos SQL basada en servidor e incrustado en el SGBD de Oracle.
+* **Scripts**: conjunto de instrucciones que se guardan en un fichero con extensión .sql y que no forman parte de la base de datos. Los scripts se utilizan principalmente para tareas de administración de la base de datos.
+* **Procedimientos y funciones almacenadas**: bloques de código que forman parte de una base de datos concreta, como las tablas. Los procedimientos y funciones son compilados después de crealos y pasan a formar parte de la base de datos como otro objeto más. Hay unos procedimientos especiales llamados **triggers** que se ejecutan cuando sucede algún evento sobre las tablas de la base de datos.
 
-PL/SQL soporta variables, condiciones, matrices y tratamiento de excepciones. Las implementaciones a partir de la versión 8 del RDBMS de Oracle han incluido además características de programación asociadas con la orientación a objetos.
-<https://es.wikipedia.org/wiki/PL/SQL>
+Todas las bases de datos relacionales permiten alamacenar código aunque la extemsión del lenguaje tiene una denominación diferente dependiendo del SGBD; en **Oracle se llama PL/SQL**, en **SQL Server Transact-SQL** y en **MySQL Stored Procedure Programming**.
 
-PL/SQL es propiedad de Oracle Corporation, pero algunos otros SGBD de SQL ofrecen lenguajes similares a PL/SQL. Por ejuemplo:
-* Microsoft dispone para SQL Server de Transact-SQL <https://es.wikipedia.org/wiki/Transact-SQL>
-* MySQL incorpora la Programación con Procedimientos Almacenados (Stored Procedure Programming).
+En este tema nos centraremos en MySQL para trabajar con programación a través de **procedimientos**, **funciones** y **tratamiento de eventos**.
 
-En este tema nos centraremos en MySQL para trabajar con programación a través de Procedimientos, Funciones y tratamiento de Eventos.
-
-!!!Note **<u>Referencias</u><br>
-[MySQL Oficial – Almacenamiento de Programas en MySQL](https://dev.mysql.com/doc/refman/8.0/en/stored-programs-views.html
-)
+!!!Note Referencias
+	[MySQL Oficial – Almacenamiento de Programas en MySQL](https://dev.mysql.com/doc/refman/8.0/en/stored-programs-views.html)
 
 Los procedimientos almacenados y funciones son nuevas funcionalidades incluidas desde la versión de MySQL 5.0.
-
-> Un procedimiento almacenado es un conjunto de comandos SQL que pueden almacenarse en el servidor, de forma que los usuarios ya no necesitan relanzar los comandos individuales ya que pueden en su lugar referirse al procedimiento almacenado.
-
 Algunas situaciones en que los procedimientos almacenados pueden ser particularmente útiles:
+
 * Cuando múltiples aplicaciones cliente se escriben en **distintos lenguajes** o funcionan en distintas plataformas, pero necesitan **realizar la misma operación en la base de datos**.
 * **Cuando la seguridad es muy importante**. Los bancos, por ejemplo, usan procedimientos almacenados para todas las operaciones comunes. Esto proporciona un entorno seguro y consistente, y los procedimientos pueden asegurar que cada operación se loguea apropiadamente. En tal entorno, las aplicaciones y los usuarios no obtendrían ningún acceso directo a las tablas de la base de datos, sólo pueden ejecutar algunos procedimientos almacenados.
 
@@ -122,83 +106,100 @@ Los procedimientos almacenados pueden mejorar el rendimiento ya que se necesita 
 Los procedimientos almacenados le permiten tener bibliotecas o funciones en el servidor de base de datos. Esta característica es compartida por los lenguajes de programación modernos que permiten este diseño interno, por ejemplo, usando clases. Usando estas características del lenguaje de programación cliente es beneficioso para el programador incluso fuera del entorno de la base de datos.
 
 ## Primeros SCRIPTS
-### SCRIPT en MySQL
-Comenzaremos por crear nuestro primer script en MySQL con sentencias de “Stored Procedures”.
 
-Utilizaremos SELECT para mostrar resultados y SET para guardar valores en variables.
+### SCRIPTS en MySQL
 
-**Ejemplo – SCRIPT MySQL**
-Vamos a crear una carpeta donde almacenaremos nuestros scripts. Por ejemplo en **C:\GBD-UD6**
+Comenzaremos por crear nuestro primer script en MySQL con sentencias de **Stored Procedures**.
 
-**Deseamos asignar a una variable el ancho de una pared y en otra variable el alto. Mostrar como resultado la superficie de la pared.**
+Utilizaremos **`SELECT`** para mostrar resultados y **`SET`** para guardar valores en variables.
 
-Creamos con Notepad++ un archivo **`b06ejer01.sql`** que incluya las siguientes instrucciones:
-```sql
-SET @x = 9;
-SET @y = 15;
-SELECT @x AS ancho, @y AS alto, @x * @y AS superficie;
-```
+Los scripts de MySQL se puede ejecutar directamente con el programa  **`mysql.exe`**.
 
-Para ejecutarlo conectamos con **`mysql.exe`**:
+<div class="caso_estudio">
 
+**`mysql.exe`** es una shell que conecta con el servidor de MySQL y permite ejecutar instrucciones de SQL. Cuando nos conectamos tenemos que indicar y contraseña si procede.
+</div> <!-- fin caso de estudio -->
+
+Para conectarnos como root hacemos: 
 **`C:\Program Files\MySQL\MySQL Server 8.0\bin> mysql -u root -p`**
 
-```
-mysql> source C:/GBD-UD6/b06ejer01.sql;
-Query OK, 0 rows affected (0.00 sec)
-Query OK, 0 rows affected (0.00 sec)
-+-------+------+------------+
-| ancho | alto | superficie |
-+-------+------+------------+
-| 9 | 15 | 135 |
-+-------+------+------------+
-1 row in set (0.00 sec)
+!!! Example Ejemplo 1
+	Crear un script de nombre **`b06ejer01.sql`** en una carpeta de nuestro gusto,por ejemplo **C:\GBD-UD06**. El script calcula la superficie de una pared a partir del ancho y alto de la misma. El ancho y alto se cargan previamente en dos variables.
 
+	El script lo creamos con un editor de texto y su contenido es el siguiente:
+
+	```sql
+	-- En x tenemos el ancho de la pared
+	SET @x = 9;
+	-- En y tenemos la altura
+	SET @y = 15;
+	-- La instrucción select calcula y muestra la superficie de la pared conjuntamente con el ancho y la altura.
+	SELECT @x AS ancho, @y AS alto, @x * @y AS superficie;
+	```
+
+	El script se puede ejecutar directamente con el programa  **`mysql.exe`**. Una vez que hayamos conectados utilizamos el comando **`source`** para ejecutar el script.
+
+	```txt
+	mysql> source C:/GBD-UD6/b06ejer01.sql;
+	Query OK, 0 rows affected (0.00 sec)
+	Query OK, 0 rows affected (0.00 sec)
+	+-------+------+------------+
+	| ancho | alto | superficie |
+	+-------+------+------------+
+	| 9     | 15   | 135        |
+	+-------+------+------------+
+	1 row in set (0.00 sec)
+	```
+
+Los nombres de las variables en los scripts tienen que comenzar con el símbolo **@**.
 Las instrucciones **SET** y **SELECT** pueden ejecutarse también directamente desde el intérprete de comandos.
 
 ### Comentarios
-Los comentarios dentro de los SCRIPTS pueden hacerse de la siguiente manera:
 
-```sql
-# comentario con almohadilla (solo una linea)
-/* comentario con almohadilla (solo una linea) */
+Los comentarios dentro de los SCRIPTS pueden hacerse de la siguiente manera:
+<div style="padding: 3pt; background-color:rgba(219, 218, 218, 0.3); color: Orange; margin: 5pt 0pt 5pt 0pt;">
+
+\# comentario con almohadilla (solo una linea)
+-- Comentario con dos guiones (solo una linea)
+/* comentario con barra asterisco (solo una linea) \*/
 /*
 esto es
 un comentario
 multilinea
 */
-```
-`
+</div>
+
 ### Variables definidas por el usuario
-Para definir una variable de usuario utilizaremos el carácter @. Asignaremos valores con el comando SET:
+
+Para definir una variable de usuario utilizaremos el carácter **@**. Asignaremos valores con el comando **`SET`**:
 
 ```sql
-SET @num=9, @cad='Hola';
-SET @num:=9, @cad:='Hola';
+SET @num = 9, @cad = 'Hola';
+SET @num := 9, @cad := 'Hola';
 ```
-Y para mostrar sus valores la instrucción SELECT:
+Y para mostrar sus valores la instrucción **`SELECT`**:
 
 ```sql
 SELECT @num, @cad;
 ```
 
-Las variables puede usarse en instrucciones SELECT de recuperación de datos, como:
+Las variables puede usarse en instrucciones **`SELECT`** de recuperación de datos, como:
 
 ```sql
-SELECT * FROM ciudades WHERE codigo>@num;
+SELECT * FROM ciudades WHERE codigo > @num;
 ```
 
-También podemos calcular y asignar valor en la misma instrucción, almacenando resultados de nuestras SELECT, pero en este caso sólo funciona el operador ':='.
-Ejemplo:
+También podemos calcular y asignar valor en la misma instrucción, almacenando resultados de nuestras **`SELECT`**, pero en este caso sólo funciona el operador **`:=`**. Si no deseamos que se produzca la salida del resultado, sino sólo almacenarlo, podemos usar la cláusula **`INTO`**:
 
-```sql
-SELECT @numreg := COUNT(*) FROM ciudades;
-```
-Si no deseamos que se produzca la salida del resultado, sino sólo almacenar, podemos usar la cláusula **INTO**:
-
-```sql
-SELECT COUNT(*) INTO @numreg FROM ciudades;
-```
+!!! Example Ejemplo 2
+	Crear un script que asigne a la variable **numreg** la cantidad de ciudades que hay en la tabla **ciudades**.
+	```sql
+	-- Asigna el número de ciudades a la variable numreg y muestra el resultado por pantalla.
+	SELECT @numreg := COUNT(*) FROM ciudades;
+	
+	-- Asigna el número de ciudades a la variable numreg pero NO  muestra el resultado por pantalla.
+	SELECT COUNT(*) INTO @numreg FROM ciudades;
+	```
 
 Para consultar todas las variables creadas por el usuario, podemos consultar la tabla **performance_schema.user_variables_by_thread** a partir de la versión 5.7 de MySQL:
 
@@ -207,40 +208,38 @@ SELECT * FROM performance_schema.user_variables_by_thread;
 ```
 
 ### Variables del sistema
-MySQL tiene muchas variables de sistema que pueden consultarse en <https://dev.mysql.com/doc/refman/8.0/en/server-system-variable-reference.html> y que podemos consultar con la instrucción **SHOW VARIABLES LIKE**.
+
+MySQL tiene muchas variables de sistema que pueden consultarse en <https://dev.mysql.com/doc/refman/8.0/en/server-system-variable-reference.html> y que podemos consultar con la instrucción **`SHOW VARIABLES LIKE`**.
 
 ```sql
 SHOW VARIABLES LIKE '%';
 ```
 
-Una variable **GLOBAL** contiene valores para todos los usuarios, mientras que una variables de **SESSION** es sólo para el usuario conectado.
+Las variables de sistema pueden ser de tipo:
 
-Para mostrar el valor de alguna variable global utilizaremos un doble @:
+* **GLOBAL**: su valor es para todos los usuarios conectados
+* **SESSION**: su valor puede ser diferente para cada usuario
+
+Para mostrar el valor de alguna variable global utilizaremos una doble **@** tal como se muestra en este ejemplo con la variable *max_connections*.
 
 ```sql
 SELECT @@max_connections;
 ```
 
-Para asignar un nuevo valor a la variable GLOBAL utilizaremos una de las dos opciones siguientes:
+Para asignar un nuevo valor a la variable **GLOBAL** utilizaremos una de las dos opciones siguientes:
 
 ```sql
-SET GLOBAL max_connections=50;
-SET @@global.max_connections=50;
+SET GLOBAL max_connections = 50;
+SET @@global.max_connections = 50;
 ```
 
-Las variables de sistema pueden ser de tipo:
-* **GLOBAL**: su valor es para todos los usuarios conectados
-* **SESSION**: su valor puede ser diferente para cada usuario
+Por ejemplo la variable *lc_messages* define el idioma en que se muestran los mensajes de error. Podríamos tener el valor *en_US* para tenerlos en inglés o *es_ES* para español.
 
-Por ejemplo la variable *lc_messages* define el idioma en que se muestran los mensajes de error.
-
-Podríamos tener el valor *en_US* para tenerlos en inglés o *es_ES* para español.
-
-Para asignar un nuevo valor a la variable de sistema de tipo SESSION utilizaremos una de las siguientes cuatro opciones:
+Para asignar un nuevo valor a la variable de sistema de tipo **SESSION** utilizaremos una de las siguientes cuatro opciones mostradas en el ejemplo con la variable *lc_messages*.
 
 ```sql
-SET lc_messages='es_ES';
-SET SESSION lc_messages='es_ES';
+SET lc_messages = 'es_ES';
+SET SESSION lc_messages = 'es_ES';
 SET @@lc_messages='es_ES';
 SET @@local.lc_messages='es_ES';
 ```
@@ -258,31 +257,35 @@ mysql> MENSAJES;
 ERROR 1064 (42000): Algo está equivocado en su sintax cerca
 'MENSAJES' en la linea 1
 ```
-**Ejemplo 2 – SCRIPT con variables**
-Crea un SCRIPT que conecte con la base de datos world y guarde en una variable el número de registros de la tabla city y en otra el número de registros de la tabla country. Ejecutar un SELECT que muestre la cantidad de registros de las dos tablas.
-**El script b06ejer02.sql tendrá las siguiente instrucciones:**
 
-```sql
-USE world;
-SELECT @numCity:=count(*) FROM city;
-SELECT @numCountry:=count(*) FROM country;
-SELECT @numCity AS NREG_City, @numCountry AS NREG_Country;
-```
-C:\> **cd "\Program Files\MySQL\MySQL Server 8.0\bin\mysql"**
-C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql> mysql -u root -p
-mysql> source C:/GBD-UD6/b06ejer02.sql;
+!!! Example Ejemplo **Ejemplo 3**
+	Crea un **script** que conecte con la base de datos **world** y guarde en una variable el número de registros de la tabla **city** y en otra el número de registros de la tabla **country**. Ejecutar un **`SELECT`** que muestre la cantidad de registros de las dos tablas.
 
-**<u>Ejecutar scripts</u>**
+	El script **`b06ejer02.sql`** tendrá las siguiente instrucciones:
+	```sql
+	USE world;
+	SELECT @numCity := count(*) FROM city;
+	SELECT @numCountry := count(*) FROM country;
+	SELECT @numCity AS NREG_City, @numCountry AS NREG_Country;
+	```
+	Para ejecutar el script realizamos los siguientes comandos:
+	```cmd 
+	C:\> cd "\Program Files\MySQL\MySQL Server 8.0\bin\mysql"
+	C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql> mysql -u root -p
+	mysql> source C:/GBD-UD6/b06ejer02.sql;
+	```
+
+#### Ejecutar scripts
 La mayoría de scripts los generamos en UTF8 por lo que deberemos cambiar el conjunto de caracteres de la ventana de comandos del CMD.
 
-```
+```cmd
 // Cambiar a juego de caracteres en UTF8
 C:\> chcp 65001
 // Cambiar a juego de caracteres en ANSI West European Latin
 C:\> chcp 1252
 ```
 
-Para cambiar en timepo real el juego de caracteres en el resultado de los SELECT en MySQL, podemos utilizar el comando **SET NAMES**.
+Para cambiar en timepo real el juego de caracteres en el resultado de los **`SELECT`** en MySQL, podemos utilizar el comando ****`SET NAMES`****.
 
 ```sql
 // Cambiar a juego de caracteres en UTF8
@@ -293,19 +296,25 @@ mysql> SET NAMES 'latin1';
 El comando **`mysql`** dispone además de muchos parámetros. Usaremos algunos:
 
 |Parámetro|Descripción|
-|-|-|
-|--silent| En el modo silencioso no muestra tantos mensajes|
-|--table| La salida de los SELECT la muestra en formato tabla|
-|--html| La salida de los SELECT la muestra en formato HTML|
+|:-|:-|
+|**--silent**| En el modo silencioso no muestra tantos mensajes|
+|**--table**| La salida de los SELECT la muestra en formato tabla|
+|**--html**| La salida de los SELECT la muestra en formato HTML|
 
-**Ejemplo:**
-
-```
+Ejemplo de forma de conexión.
+```cmd
+//Conectarse como root en modo silencioso
 C:\> mysql -u root -p --silent --table
 ```
+
+<span style="color: red; font-weight: bold;">
+Aquí me he quedado
+</span>
+
 ## Procedimientos y estructuras de control
 
 ### Sintaxis y Estructura
+
 Para poder almacenar un conjunto de instrucciones en la propia base de datos podemos utilizar los procedimientos.
 
 La sintaxis más sencilla es la siguiente:

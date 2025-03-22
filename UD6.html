@@ -180,65 +180,69 @@
 </ol>
 <h2 id="introducción">Introducción </h2>
 <p>Analizando el mercado actual de Bases de Datos, el uso de los diferentes productos existentes se ha segmentado.</p>
-<p>|Grandes Empresas |La mayoría han apostado por Oracle por su seguridad y soporte.|<br>
-|Pequeñas y medianas Empresas (PYMES)|<br>
-Aquí es donde más abierto está el mercado:<br>
-• Oracle Express<br>
-• SQL Server de Microsoft<br>
-• MySQL Server<br>
-• PostgreSQL<br>
-|<br>
-|Pequeños negocios|Utilizan software propietario que utiliza SGBD con prestaciones de tipo ofimático como Microsoft Access.|<br>
-|Aplicaciones y páginas web||La mayoría de los proveedores de internet tienen incluido en sus ofertas MySQL y PostgreSQL, pero los usuarios suelen usar MySQL.|</p>
-<p>Aunque los aspectos fundamentales a la forma de utilizar un SGBD son muy parecidos, en este curso nos hemos centrado en MySQL.</p>
-<p>MySQL es un sistema de gestión de bases de datos SQL (SGBD - DBMS) multihilo y multiusuario que tiene más de 10 millones de instalaciones según MySQL AB de<br>
-Oracle (<a href="https://es.wikipedia.org/wiki/MySQL_AB">https://es.wikipedia.org/wiki/MySQL_AB</a>).</p>
-<p>Las librerías para acceder a bases de datos MySQL están disponibles en los principales lenguajes de programación con APIs específicas de lenguaje. Además,una interfaz ODBC llamada MyODBC permite utilizar lenguajes de programación<br>
-adicionales que soportan la interfaz ODBC para comunicarse con una base de datos MySQL. El servidor MySQL y las bibliotecas oficiales se implementan<br>
-principalmente en ANSI C.</p>
-<p>MySQL es popular para aplicaciones web y actúa como el componente de base de datos de las plataformas LAMP, MAMP y WAMP (Linux/Mac/Windows-Apache-<br>
-MySQL-PHP/Perl). Su popularidad como aplicación web está estrechamente ligada a la popularidad de PHP, que a menudo se combina con MySQL. PHP y MySQL son componentes esenciales para ejecutar la popular plataforma DE Gestor de Cotnenidos WordPress.</p>
-<p>GBD - Gestión de Bases de Datos ASIR - 1<br>
-<em><strong>Cliente / Servidor</strong></em><br>
-La arquitectura <strong>cliente-servidor</strong> es un modelo de diseño de software en el que las tareas se reparten entre los proveedores de recursos o servicios, llamados servidores, y los demandantes, llamados clientes.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Usuarios BD</th>
+<th style="text-align:left">Bases de datos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Grandes Empresas</strong></td>
+<td style="text-align:left">La mayoría han apostado por Oracle por su seguridad y soporte.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Pequeñas y medianas Empresas (PYMES)</strong></td>
+<td style="text-align:left">Aquí es donde más abierto está el mercado. Entre las más utilizadas están: Oracle Express, SQL Server de Microsoft, MySQL Server y PostgreSQL</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Pequeños negocios</strong></td>
+<td style="text-align:left">Utilizan software propietario que utiliza SGBD con prestaciones de tipo ofimático como Microsoft Access.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Aplicaciones y páginas web</strong></td>
+<td style="text-align:left">La mayoría de los proveedores de internet tienen incluido en sus ofertas MySQL y PostgreSQL, pero los usuarios suelen usar MySQL.</td>
+</tr>
+</tbody>
+</table>
+<p>Aunque los aspectos fundamentales a la forma de utilizar un SGBD son muy parecidos, en este curso nos hemos centrado en <strong>MySQL</strong>.</p>
+<p>MySQL es un sistema de gestión de bases de datos SQL (SGBD DBMS) multihilo y multiusuario que tiene más de 10 millones de instalaciones según MySQL AB de Oracle (<a href="https://es.wikipedia.org/wiki/MySQL_AB">https://es.wikipedia.org/wiki/MySQL_AB</a>).</p>
+<p>Las librerías para acceder a bases de datos MySQL están disponibles en los principales lenguajes de programación con APIs específicas de lenguaje. Además,una interfaz ODBC llamada MyODBC permite utilizar lenguajes de programación adicionales que soportan la interfaz ODBC para comunicarse con una base de datos MySQL. El servidor MySQL y las bibliotecas oficiales se implementan principalmente en ANSI C.</p>
+<p>MySQL es popular para aplicaciones web y actúa como el componente de base de datos de las plataformas LAMP, MAMP y WAMP (Linux/Mac/Windows-Apache-MySQL-PHP/Perl). Su popularidad como aplicación web está estrechamente ligada a la popularidad de PHP, que a menudo se combina con MySQL. PHP y MySQL son componentes esenciales para ejecutar la popular plataforma de Gestor de Cotnenidos WordPress.</p>
+<h4 id="cliente--servidor">Cliente / Servidor </h4>
+<p>La arquitectura <strong>cliente-servidor</strong> es un modelo de diseño de software en el que las tareas se reparten entre los proveedores de recursos o servicios, llamados servidores, y los demandantes, llamados clientes.</p>
 <p>Un cliente realiza peticiones a otro programa, el servidor, quien le da respuesta. Esta idea también se puede aplicar a programas que se ejecutan sobre una sola computadora, aunque es más ventajosa en un sistema operativo multiusuario distribuido a través de una red de computadoras.</p>
-<p>Cuando utilizamos un navegado en Internet y accedemos a un servidor mediante una dirección web, utilizamos el protocolo HTTP o HTTPS para enviar información del cliente al servidor y viceversa.</p>
+<p>Cuando utilizamos un navegado en Internet y accedemos a un servidor mediante una dirección web, utilizamos el protocolo <strong>HTTP</strong> o <strong>HTTPS</strong> para enviar información del cliente al servidor y viceversa.</p>
 <p>Tanto cliente como servidor ejecutan código y por lo tanto, procesan las instrucciones de programas y aplicaciones, y para ello se utilizan diferentes lenguajes de programación. A continuación se muestran algunos ejemplos:<br>
-<a href="">Img. 6.1.1.png</a></p>
-<p>Puedes consultar el <strong>Tiobe Index</strong> de los lenguajes de programación más usados en:<br>
-<a href="https://www.tiobe.com/tiobe-index/">https://www.tiobe.com/tiobe-index/</a></p>
+<img src="./.img/6.1.1.png" alt="Imagen 6.1.1"></p>
+<p>Puedes consultar el <strong>Tiobe Index</strong> de los lenguajes de programación más usados en: <a href="https://www.tiobe.com/tiobe-index/">https://www.tiobe.com/tiobe-index/</a></p>
 <p>Puedes consultar la web del <strong>Instituto de Ingeniería Eléctrica y Electrónica</strong> (Institute of Electrical and Electronics Engineers o IEEE), que con más de 425.000 miembros y voluntarios en 160 países, también publica su propia lista de lenguajes de programación más populares (se puede filtrar por Web):<br>
 <a href="https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018">https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018</a></p>
-<p><em><strong>Programación en BD</strong></em><br>
-Los SGBD relacionales usan SQL como lenguaje de DCL, DDL y DML.</p>
+<h4 id="programación-en-bd">Programación en BD </h4>
+<p>Los SGBD relacionales usan SQL como lenguaje de DCL, DDL y DML.</p>
 <ul>
 <li><strong>DCL – Data Control Language</strong> – Lenguaje de Control de Datos<br>
 <a href="https://es.wikipedia.org/wiki/Lenguaje_de_control_de_datos">https://es.wikipedia.org/wiki/Lenguaje_de_control_de_datos</a></li>
-<li>** DDL – Data Definition Language** – Lenguaje de Definición de Datos<br>
+<li><strong>DDL – Data Definition Language</strong> – Lenguaje de Definición de Datos<br>
 <a href="https://es.wikipedia.org/wiki/Lenguaje_de_definici%C3%B3n_de_datos">https://es.wikipedia.org/wiki/Lenguaje_de_definición_de_datos</a></li>
 <li><strong>DML – Data Manipulation Language</strong> – Lenguaje de Manipulación de Datos<br>
 <a href="https://es.wikipedia.org/wiki/Lenguaje_de_manipulaci%C3%B3n_de_datos">https://es.wikipedia.org/wiki/Lenguaje_de_manipulación_de_datos</a></li>
 </ul>
-<p>En la Unidad 3 hemos trabajado el DDL y en la Unidad 5 el DML.</p>
-<p>Además de esta organización, los SGBD permiten almacenar código para generar scripts. Oracle fue uno de los primeros en hacerlo con PL/SQL.</p>
-<p><strong>PL/SQL</strong> (Procedural Language/Structured Query Language) es la extensión de procedimiento y programación al lenguaje de base de datos SQL basada en servidor e incrustado en el SGBD de Oracle.</p>
-<p>PL/SQL soporta variables, condiciones, matrices y tratamiento de excepciones. Las implementaciones a partir de la versión 8 del RDBMS de Oracle han incluido además características de programación asociadas con la orientación a objetos.<br>
-<a href="https://es.wikipedia.org/wiki/PL/SQL">https://es.wikipedia.org/wiki/PL/SQL</a></p>
-<p>PL/SQL es propiedad de Oracle Corporation, pero algunos otros SGBD de SQL ofrecen lenguajes similares a PL/SQL. Por ejuemplo:</p>
+<p>En las unidades anteriores hemos trabajado tanto el  DDL como el DML.</p>
+<p>Las bases de datos relacionales poseen unas extensiones del lenguaje de consultas SQL que les permiten crear bloques de código que se ejecutan como un todo. Hay dos tipos de bloques de código:</p>
 <ul>
-<li>Microsoft dispone para SQL Server de Transact-SQL <a href="https://es.wikipedia.org/wiki/Transact-SQL">https://es.wikipedia.org/wiki/Transact-SQL</a></li>
-<li>MySQL incorpora la Programación con Procedimientos Almacenados (Stored Procedure Programming).</li>
+<li><strong>Scripts</strong>: conjunto de instrucciones que se guardan en un fichero con extensión .sql y que no forman parte de la base de datos. Los scripts se utilizan principalmente para tareas de administración de la base de datos.</li>
+<li><strong>Procedimientos y funciones almacenadas</strong>: bloques de código que forman parte de una base de datos concreta, como las tablas. Los procedimientos y funciones son compilados después de crealos y pasan a formar parte de la base de datos como otro objeto más. Hay unos procedimientos especiales llamados <strong>triggers</strong> que se ejecutan cuando sucede algún evento sobre las tablas de la base de datos.</li>
 </ul>
-<p>En este tema nos centraremos en MySQL para trabajar con programación a través de Procedimientos, Funciones y tratamiento de Eventos.</p>
+<p>Todas las bases de datos relacionales permiten alamacenar código aunque la extemsión del lenguaje tiene una denominación diferente dependiendo del SGBD; en <strong>Oracle se llama PL/SQL</strong>, en <strong>SQL Server Transact-SQL</strong> y en <strong>MySQL Stored Procedure Programming</strong>.</p>
+<p>En este tema nos centraremos en MySQL para trabajar con programación a través de <strong>procedimientos</strong>, <strong>funciones</strong> y <strong>tratamiento de eventos</strong>.</p>
 <div class="admonition note">
-<p class="admonition-title">**<u>Referencias</u><br></p>
-</div>
+<p class="admonition-title">Referencias</p>
 <p><a href="https://dev.mysql.com/doc/refman/8.0/en/stored-programs-views.html">MySQL Oficial – Almacenamiento de Programas en MySQL</a></p>
-<p>Los procedimientos almacenados y funciones son nuevas funcionalidades incluidas desde la versión de MySQL 5.0.</p>
-<blockquote>
-<p>Un procedimiento almacenado es un conjunto de comandos SQL que pueden almacenarse en el servidor, de forma que los usuarios ya no necesitan relanzar los comandos individuales ya que pueden en su lugar referirse al procedimiento almacenado.</p>
-</blockquote>
-<p>Algunas situaciones en que los procedimientos almacenados pueden ser particularmente útiles:</p>
+</div>
+<p>Los procedimientos almacenados y funciones son nuevas funcionalidades incluidas desde la versión de MySQL 5.0.<br>
+Algunas situaciones en que los procedimientos almacenados pueden ser particularmente útiles:</p>
 <ul>
 <li>Cuando múltiples aplicaciones cliente se escriben en <strong>distintos lenguajes</strong> o funcionan en distintas plataformas, pero necesitan <strong>realizar la misma operación en la base de datos</strong>.</li>
 <li><strong>Cuando la seguridad es muy importante</strong>. Los bancos, por ejemplo, usan procedimientos almacenados para todas las operaciones comunes. Esto proporciona un entorno seguro y consistente, y los procedimientos pueden asegurar que cada operación se loguea apropiadamente. En tal entorno, las aplicaciones y los usuarios no obtendrían ningún acceso directo a las tablas de la base de datos, sólo pueden ejecutar algunos procedimientos almacenados.</li>
@@ -246,76 +250,87 @@ Los SGBD relacionales usan SQL como lenguaje de DCL, DDL y DML.</p>
 <p>Los procedimientos almacenados pueden mejorar el rendimiento ya que se necesita enviar menos información entre el servidor y el cliente. El inconveniente es que aumenta la carga del servidor de la base de datos ya que la mayoría del trabajo se realiza en la parte del servidor y no en el cliente. Considere esto, si muchas máquinas cliente (como servidores Web) se sirven a sólo uno o pocos servidores de bases de datos.</p>
 <p>Los procedimientos almacenados le permiten tener bibliotecas o funciones en el servidor de base de datos. Esta característica es compartida por los lenguajes de programación modernos que permiten este diseño interno, por ejemplo, usando clases. Usando estas características del lenguaje de programación cliente es beneficioso para el programador incluso fuera del entorno de la base de datos.</p>
 <h2 id="primeros-scripts">Primeros SCRIPTS </h2>
-<h3 id="script-en-mysql">SCRIPT en MySQL </h3>
-<p>Comenzaremos por crear nuestro primer script en MySQL con sentencias de “Stored Procedures”.</p>
-<p>Utilizaremos SELECT para mostrar resultados y SET para guardar valores en variables.</p>
-<p><strong>Ejemplo – SCRIPT MySQL</strong><br>
-Vamos a crear una carpeta donde almacenaremos nuestros scripts. Por ejemplo en <strong>C:\GBD-UD6</strong></p>
-<p><strong>Deseamos asignar a una variable el ancho de una pared y en otra variable el alto. Mostrar como resultado la superficie de la pared.</strong></p>
-<p>Creamos con Notepad++ un archivo <strong><code>b06ejer01.sql</code></strong> que incluya las siguientes instrucciones:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SET">SET</span> <span class="token variable">@x</span> <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span>
+<h3 id="scripts-en-mysql">SCRIPTS en MySQL </h3>
+<p>Comenzaremos por crear nuestro primer script en MySQL con sentencias de <strong>Stored Procedures</strong>.</p>
+<p>Utilizaremos <strong><code>SELECT</code></strong> para mostrar resultados y <strong><code>SET</code></strong> para guardar valores en variables.</p>
+<p>Los scripts de MySQL se puede ejecutar directamente con el programa  <strong><code>mysql.exe</code></strong>.</p>
+<div class="caso_estudio">
+<p><strong><code>mysql.exe</code></strong> es una shell que conecta con el servidor de MySQL y permite ejecutar instrucciones de SQL. Cuando nos conectamos tenemos que indicar y contraseña si procede.</p>
+</div> <!-- fin caso de estudio -->
+<p>Para conectarnos como root hacemos:<br>
+<strong><code>C:\Program Files\MySQL\MySQL Server 8.0\bin&gt; mysql -u root -p</code></strong></p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 1</p>
+<p>Crear un script de nombre <strong><code>b06ejer01.sql</code></strong> en una carpeta de nuestro gusto,por ejemplo <strong>C:\GBD-UD06</strong>. El script calcula la superficie de una pared a partir del ancho y alto de la misma. El ancho y alto se cargan previamente en dos variables.</p>
+<p>El script lo creamos con un editor de texto y su contenido es el siguiente:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">-- En x tenemos el ancho de la pared</span>
+<span class="token keyword keyword-SET">SET</span> <span class="token variable">@x</span> <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span>
+<span class="token comment">-- En y tenemos la altura</span>
 <span class="token keyword keyword-SET">SET</span> <span class="token variable">@y</span> <span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">;</span>
+<span class="token comment">-- La instrucción select calcula y muestra la superficie de la pared conjuntamente con el ancho y la altura.</span>
 <span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@x</span> <span class="token keyword keyword-AS">AS</span> ancho<span class="token punctuation">,</span> <span class="token variable">@y</span> <span class="token keyword keyword-AS">AS</span> alto<span class="token punctuation">,</span> <span class="token variable">@x</span> <span class="token operator">*</span> <span class="token variable">@y</span> <span class="token keyword keyword-AS">AS</span> superficie<span class="token punctuation">;</span>
-</code></pre><p>Para ejecutarlo conectamos con <strong><code>mysql.exe</code></strong>:</p>
-<p><strong><code>C:\Program Files\MySQL\MySQL Server 8.0\bin&gt; mysql -u root -p</code></strong></p>
-<pre data-role="codeBlock" data-info="" class="language-text"><code>mysql&gt; source C:/GBD-UD6/b06ejer01.sql;
+</code></pre><p>El script se puede ejecutar directamente con el programa  <strong><code>mysql.exe</code></strong>. Una vez que hayamos conectados utilizamos el comando <strong><code>source</code></strong> para ejecutar el script.</p>
+<pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>mysql&gt; source C:/GBD-UD6/b06ejer01.sql;
 Query OK, 0 rows affected (0.00 sec)
 Query OK, 0 rows affected (0.00 sec)
 +-------+------+------------+
 | ancho | alto | superficie |
 +-------+------+------------+
-| 9 | 15 | 135 |
+| 9     | 15   | 135        |
 +-------+------+------------+
 1 row in set (0.00 sec)
-
-Las instrucciones **SET** y **SELECT** pueden ejecutarse también directamente desde el intérprete de comandos.
-
-### Comentarios
-Los comentarios dentro de los SCRIPTS pueden hacerse de la siguiente manera:
-
-```sql
-# comentario con almohadilla (solo una linea) {#comentario-con-almohadilla-solo-una-linea }
-/* comentario con almohadilla (solo una linea) */
-/*
-esto es
-un comentario
-multilinea
-*/
-</code></pre><p>`</p>
-<h3>Variables definidas por el usuario</h3>
-<p>Para definir una variable de usuario utilizaremos el carácter @. Asignaremos valores con el comando SET:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SET">SET</span> <span class="token variable">@num</span><span class="token operator">=</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token variable">@cad</span><span class="token operator">=</span><span class="token string">'Hola'</span><span class="token punctuation">;</span>
-<span class="token keyword keyword-SET">SET</span> <span class="token variable">@num</span>:<span class="token operator">=</span><span class="token number">9</span><span class="token punctuation">,</span> <span class="token variable">@cad</span>:<span class="token operator">=</span><span class="token string">'Hola'</span><span class="token punctuation">;</span>
-</code></pre><p>Y para mostrar sus valores la instrucción SELECT:</p>
+</code></pre></div>
+<p>Los nombres de las variables en los scripts tienen que comenzar con el símbolo <strong>@</strong>.<br>
+Las instrucciones <strong>SET</strong> y <strong>SELECT</strong> pueden ejecutarse también directamente desde el intérprete de comandos.</p>
+<h3 id="comentarios">Comentarios </h3>
+<p>Los comentarios dentro de los SCRIPTS pueden hacerse de la siguiente manera:</p>
+<div style="padding: 3pt; background-color:rgba(219, 218, 218, 0.3); color: Orange; margin: 5pt 0pt 5pt 0pt;">
+<p># comentario con almohadilla (solo una linea)<br>
+-- Comentario con dos guiones (solo una linea)<br>
+/* comentario con barra asterisco (solo una linea) */<br>
+/*<br>
+esto es<br>
+un comentario<br>
+multilinea<br>
+*/</p>
+</div>
+<h3 id="variables-definidas-por-el-usuario">Variables definidas por el usuario </h3>
+<p>Para definir una variable de usuario utilizaremos el carácter <strong>@</strong>. Asignaremos valores con el comando <strong><code>SET</code></strong>:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SET">SET</span> <span class="token variable">@num</span> <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token variable">@cad</span> <span class="token operator">=</span> <span class="token string">'Hola'</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-SET">SET</span> <span class="token variable">@num</span> :<span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token variable">@cad</span> :<span class="token operator">=</span> <span class="token string">'Hola'</span><span class="token punctuation">;</span>
+</code></pre><p>Y para mostrar sus valores la instrucción <strong><code>SELECT</code></strong>:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@num</span><span class="token punctuation">,</span> <span class="token variable">@cad</span><span class="token punctuation">;</span>
-</code></pre><p>Las variables puede usarse en instrucciones SELECT de recuperación de datos, como:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> ciudades <span class="token keyword keyword-WHERE">WHERE</span> codigo<span class="token operator">&gt;</span><span class="token variable">@num</span><span class="token punctuation">;</span>
-</code></pre><p>También podemos calcular y asignar valor en la misma instrucción, almacenando resultados de nuestras SELECT, pero en este caso sólo funciona el operador ':='.<br>
-Ejemplo:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@numreg</span> :<span class="token operator">=</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-FROM">FROM</span> ciudades<span class="token punctuation">;</span>
-</code></pre><p>Si no deseamos que se produzca la salida del resultado, sino sólo almacenar, podemos usar la cláusula <strong>INTO</strong>:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-INTO">INTO</span> <span class="token variable">@numreg</span> <span class="token keyword keyword-FROM">FROM</span> ciudades<span class="token punctuation">;</span>
-</code></pre><p>Para consultar todas las variables creadas por el usuario, podemos consultar la tabla <strong>performance_schema.user_variables_by_thread</strong> a partir de la versión 5.7 de MySQL:</p>
+</code></pre><p>Las variables puede usarse en instrucciones <strong><code>SELECT</code></strong> de recuperación de datos, como:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> ciudades <span class="token keyword keyword-WHERE">WHERE</span> codigo <span class="token operator">&gt;</span> <span class="token variable">@num</span><span class="token punctuation">;</span>
+</code></pre><p>También podemos calcular y asignar valor en la misma instrucción, almacenando resultados de nuestras <strong><code>SELECT</code></strong>, pero en este caso sólo funciona el operador <strong><code>:=</code></strong>. Si no deseamos que se produzca la salida del resultado, sino sólo almacenarlo, podemos usar la cláusula <strong><code>INTO</code></strong>:</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 2</p>
+<p>Crear un script que asigne a la variable <strong>numreg</strong> la cantidad de ciudades que hay en la tabla <strong>ciudades</strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">-- Asigna el número de ciudades a la variable numreg y muestra el resultado por pantalla.</span>
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@numreg</span> :<span class="token operator">=</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-FROM">FROM</span> ciudades<span class="token punctuation">;</span>
+
+<span class="token comment">-- Asigna el número de ciudades a la variable numreg pero NO  muestra el resultado por pantalla.</span>
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-INTO">INTO</span> <span class="token variable">@numreg</span> <span class="token keyword keyword-FROM">FROM</span> ciudades<span class="token punctuation">;</span>
+</code></pre></div>
+<p>Para consultar todas las variables creadas por el usuario, podemos consultar la tabla <strong>performance_schema.user_variables_by_thread</strong> a partir de la versión 5.7 de MySQL:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> performance_schema<span class="token punctuation">.</span>user_variables_by_thread<span class="token punctuation">;</span>
-</code></pre><h3>Variables del sistema</h3>
-<p>MySQL tiene muchas variables de sistema que pueden consultarse en <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variable-reference.html">https://dev.mysql.com/doc/refman/8.0/en/server-system-variable-reference.html</a> y que podemos consultar con la instrucción <strong>SHOW VARIABLES LIKE</strong>.</p>
+</code></pre><h3 id="variables-del-sistema">Variables del sistema </h3>
+<p>MySQL tiene muchas variables de sistema que pueden consultarse en <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variable-reference.html">https://dev.mysql.com/doc/refman/8.0/en/server-system-variable-reference.html</a> y que podemos consultar con la instrucción <strong><code>SHOW VARIABLES LIKE</code></strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SHOW">SHOW</span> VARIABLES <span class="token operator">LIKE</span> <span class="token string">'%'</span><span class="token punctuation">;</span>
-</code></pre><p>Una variable <strong>GLOBAL</strong> contiene valores para todos los usuarios, mientras que una variables de <strong>SESSION</strong> es sólo para el usuario conectado.</p>
-<p>Para mostrar el valor de alguna variable global utilizaremos un doble @:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> @<span class="token variable">@max_connections</span><span class="token punctuation">;</span>
-</code></pre><p>Para asignar un nuevo valor a la variable GLOBAL utilizaremos una de las dos opciones siguientes:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SET">SET</span> <span class="token keyword keyword-GLOBAL">GLOBAL</span> max_connections<span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">;</span>
-<span class="token keyword keyword-SET">SET</span> @<span class="token variable">@global.max_connections</span><span class="token operator">=</span><span class="token number">50</span><span class="token punctuation">;</span>
 </code></pre><p>Las variables de sistema pueden ser de tipo:</p>
 <ul>
 <li><strong>GLOBAL</strong>: su valor es para todos los usuarios conectados</li>
 <li><strong>SESSION</strong>: su valor puede ser diferente para cada usuario</li>
 </ul>
-<p>Por ejemplo la variable <em>lc_messages</em> define el idioma en que se muestran los mensajes de error.</p>
-<p>Podríamos tener el valor <em>en_US</em> para tenerlos en inglés o <em>es_ES</em> para español.</p>
-<p>Para asignar un nuevo valor a la variable de sistema de tipo SESSION utilizaremos una de las siguientes cuatro opciones:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SET">SET</span> lc_messages<span class="token operator">=</span><span class="token string">'es_ES'</span><span class="token punctuation">;</span>
-<span class="token keyword keyword-SET">SET</span> <span class="token keyword keyword-SESSION">SESSION</span> lc_messages<span class="token operator">=</span><span class="token string">'es_ES'</span><span class="token punctuation">;</span>
+<p>Para mostrar el valor de alguna variable global utilizaremos una doble <strong>@</strong> tal como se muestra en este ejemplo con la variable <em>max_connections</em>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> @<span class="token variable">@max_connections</span><span class="token punctuation">;</span>
+</code></pre><p>Para asignar un nuevo valor a la variable <strong>GLOBAL</strong> utilizaremos una de las dos opciones siguientes:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SET">SET</span> <span class="token keyword keyword-GLOBAL">GLOBAL</span> max_connections <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-SET">SET</span> @<span class="token variable">@global.max_connections</span> <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">;</span>
+</code></pre><p>Por ejemplo la variable <em>lc_messages</em> define el idioma en que se muestran los mensajes de error. Podríamos tener el valor <em>en_US</em> para tenerlos en inglés o <em>es_ES</em> para español.</p>
+<p>Para asignar un nuevo valor a la variable de sistema de tipo <strong>SESSION</strong> utilizaremos una de las siguientes cuatro opciones mostradas en el ejemplo con la variable <em>lc_messages</em>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SET">SET</span> lc_messages <span class="token operator">=</span> <span class="token string">'es_ES'</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-SET">SET</span> <span class="token keyword keyword-SESSION">SESSION</span> lc_messages <span class="token operator">=</span> <span class="token string">'es_ES'</span><span class="token punctuation">;</span>
 <span class="token keyword keyword-SET">SET</span> @<span class="token variable">@lc_messages</span><span class="token operator">=</span><span class="token string">'es_ES'</span><span class="token punctuation">;</span>
 <span class="token keyword keyword-SET">SET</span> @<span class="token variable">@local.lc_messages</span><span class="token operator">=</span><span class="token string">'es_ES'</span><span class="token punctuation">;</span>
 </code></pre><p>Prueba a ejecutar las siguientes instrucciones después de conectar con <strong><code>mysql.exe</code></strong> y comprueba el resultado:</p>
@@ -328,23 +343,26 @@ mysql<span class="token operator">&gt;</span> <span class="token keyword keyword
 mysql<span class="token operator">&gt;</span> MENSAJES<span class="token punctuation">;</span>
 ERROR <span class="token number">1064</span> <span class="token punctuation">(</span><span class="token number">42000</span><span class="token punctuation">)</span>: Algo está equivocado en su sintax cerca
 <span class="token string">'MENSAJES'</span> en la linea <span class="token number">1</span>
-</code></pre><p><strong>Ejemplo 2 – SCRIPT con variables</strong><br>
-Crea un SCRIPT que conecte con la base de datos world y guarde en una variable el número de registros de la tabla city y en otra el número de registros de la tabla country. Ejecutar un SELECT que muestre la cantidad de registros de las dos tablas.<br>
-<strong>El script b06ejer02.sql tendrá las siguiente instrucciones:</strong></p>
+</code></pre><div class="admonition example">
+<p class="admonition-title">Ejemplo <strong>Ejemplo 3</strong></p>
+<p>Crea un <strong>script</strong> que conecte con la base de datos <strong>world</strong> y guarde en una variable el número de registros de la tabla <strong>city</strong> y en otra el número de registros de la tabla <strong>country</strong>. Ejecutar un <strong><code>SELECT</code></strong> que muestre la cantidad de registros de las dos tablas.</p>
+<p>El script <strong><code>b06ejer02.sql</code></strong> tendrá las siguiente instrucciones:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-USE">USE</span> world<span class="token punctuation">;</span>
-<span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@numCity</span>:<span class="token operator">=</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-FROM">FROM</span> city<span class="token punctuation">;</span>
-<span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@numCountry</span>:<span class="token operator">=</span><span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-FROM">FROM</span> country<span class="token punctuation">;</span>
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@numCity</span> :<span class="token operator">=</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-FROM">FROM</span> city<span class="token punctuation">;</span>
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@numCountry</span> :<span class="token operator">=</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-FROM">FROM</span> country<span class="token punctuation">;</span>
 <span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@numCity</span> <span class="token keyword keyword-AS">AS</span> NREG_City<span class="token punctuation">,</span> <span class="token variable">@numCountry</span> <span class="token keyword keyword-AS">AS</span> NREG_Country<span class="token punctuation">;</span>
-</code></pre><p>C:&gt; <strong>cd "\Program Files\MySQL\MySQL Server 8.0\bin\mysql"</strong><br>
-C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql&gt; mysql -u root -p<br>
-mysql&gt; source C:/GBD-UD6/b06ejer02.sql;</p>
-<p><strong><u>Ejecutar scripts</u></strong><br>
-La mayoría de scripts los generamos en UTF8 por lo que deberemos cambiar el conjunto de caracteres de la ventana de comandos del CMD.</p>
-<pre data-role="codeBlock" data-info="" class="language-text"><code>// Cambiar a juego de caracteres en UTF8
+</code></pre><p>Para ejecutar el script realizamos los siguientes comandos:</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>C:\&gt; cd "\Program Files\MySQL\MySQL Server 8.0\bin\mysql"
+C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql&gt; mysql -u root -p
+mysql&gt; source C:/GBD-UD6/b06ejer02.sql;
+</code></pre></div>
+<h4 id="ejecutar-scripts">Ejecutar scripts </h4>
+<p>La mayoría de scripts los generamos en UTF8 por lo que deberemos cambiar el conjunto de caracteres de la ventana de comandos del CMD.</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>// Cambiar a juego de caracteres en UTF8
 C:\&gt; chcp 65001
 // Cambiar a juego de caracteres en ANSI West European Latin
 C:\&gt; chcp 1252
-</code></pre><p>Para cambiar en timepo real el juego de caracteres en el resultado de los SELECT en MySQL, podemos utilizar el comando <strong>SET NAMES</strong>.</p>
+</code></pre><p>Para cambiar en timepo real el juego de caracteres en el resultado de los <strong><code>SELECT</code></strong> en MySQL, podemos utilizar el comando <strong><strong><code>SET NAMES</code></strong></strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">// Cambiar a juego de caracteres en UTF8</span>
 mysql<span class="token operator">&gt;</span> <span class="token keyword keyword-SET">SET</span> NAMES <span class="token string">'utf8'</span><span class="token punctuation">;</span>
 <span class="token comment">// Cambiar a juego de caracteres en ANSI West European Latin</span>
@@ -353,29 +371,33 @@ mysql<span class="token operator">&gt;</span> <span class="token keyword keyword
 <table>
 <thead>
 <tr>
-<th>Parámetro</th>
-<th>Descripción</th>
+<th style="text-align:left">Parámetro</th>
+<th style="text-align:left">Descripción</th>
 </tr>
 </thead>
 <tbody>
 <tr>
-<td>--silent</td>
-<td>En el modo silencioso no muestra tantos mensajes</td>
+<td style="text-align:left"><strong>--silent</strong></td>
+<td style="text-align:left">En el modo silencioso no muestra tantos mensajes</td>
 </tr>
 <tr>
-<td>--table</td>
-<td>La salida de los SELECT la muestra en formato tabla</td>
+<td style="text-align:left"><strong>--table</strong></td>
+<td style="text-align:left">La salida de los SELECT la muestra en formato tabla</td>
 </tr>
 <tr>
-<td>--html</td>
-<td>La salida de los SELECT la muestra en formato HTML</td>
+<td style="text-align:left"><strong>--html</strong></td>
+<td style="text-align:left">La salida de los SELECT la muestra en formato HTML</td>
 </tr>
 </tbody>
 </table>
-<p><strong>Ejemplo:</strong></p>
-<pre data-role="codeBlock" data-info="" class="language-text"><code>C:\&gt; mysql -u root -p --silent --table
-</code></pre><h2>Procedimientos y estructuras de control</h2>
-<h3>Sintaxis y Estructura</h3>
+<p>Ejemplo de forma de conexión.</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>//Conectarse como root en modo silencioso
+C:\&gt; mysql -u root -p --silent --table
+</code></pre><span style="color: red; font-weight: bold;">
+Aquí me he quedado
+</span>
+<h2 id="procedimientos-y-estructuras-de-control">Procedimientos y estructuras de control </h2>
+<h3 id="sintaxis-y-estructura">Sintaxis y Estructura </h3>
 <p>Para poder almacenar un conjunto de instrucciones en la propia base de datos podemos utilizar los procedimientos.</p>
 <p>La sintaxis más sencilla es la siguiente:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
@@ -420,7 +442,7 @@ Para eliminar un procedimiento utilizaremos la instrucción <strong>DROP PROCEDU
 usaremos:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> <span class="token keyword keyword-IF">IF</span> <span class="token keyword keyword-EXISTS">EXISTS</span> world<span class="token punctuation">.</span>diayhora<span class="token punctuation">;</span>
 </code></pre><p>En nuestros ejemplos usaremos una base de datos denominada <strong>ud6ejer</strong>.</p>
-<h3>Variables locales del procedimiento</h3>
+<h3 id="variables-locales-del-procedimiento">Variables locales del procedimiento </h3>
 <p>Cuando necesitamos variables que usaremos dentro del procedimiento debemos usar la instrucción <strong>DECLARE</strong> como si lo hiciéramos en la instrucción CREATE TABLE.<br>
 A continuación se muestran algunos ejemplos:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DECLARE">DECLARE</span> ciudad <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -428,7 +450,7 @@ A continuación se muestran algunos ejemplos:</p>
 <span class="token keyword keyword-DECLARE">DECLARE</span> edad <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token keyword keyword-DECLARE">DECLARE</span> importe <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre><p>Estas variables sólo serán visibles y accesibles dentro del procedimiento.</p>
-<h3>Estructuras de control</h3>
+<h3 id="estructuras-de-control">Estructuras de control </h3>
 <p>Las estructuras de control permiten modificar el flujo de ejecución de las instrucciones de un programa.</p>
 <p><em><strong>Sentencia IF</strong></em><br>
 La más sencilla consiste en ejecutar unas instrucciones u otras según una condición:</p>
@@ -559,7 +581,7 @@ Otra estructura de control es la de bucles, que consisten en realizar de forma r
 
 <span class="token comment">/* Llamar al procedimiento */</span>
 <span class="token keyword keyword-CALL">CALL</span> ud6ejer<span class="token punctuation">.</span>sumadieznumeros<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><h3 id="parámetros">Parámetros </h3>
+</code></pre><h3>Parámetros</h3>
 <p>En muchas ocasiones los procedimientos necesitan recibir valores como parámetros. En MySQL podemos definir estas variables y usarlas dentro del procedimiento. En ejemplo siguiente, si queremos comparar dos cadenas y saber cuál tiene más caracteres, deberemos indicarle al procedimiento qué cadenas comparar.</p>
 <p>Ejemplo 4 – SCRIPT con parámetros</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Eliminar el procedimiento si ya existe */</span>
@@ -582,7 +604,7 @@ Otra estructura de control es la de bucles, que consisten en realizar de forma r
 
 <span class="token comment">/* Llamar al procedimiento */</span>
 <span class="token keyword keyword-CALL">CALL</span> ud6ejer<span class="token punctuation">.</span>comparacadenas<span class="token punctuation">(</span><span class="token string">'Mi primera cadena'</span><span class="token punctuation">,</span><span class="token string">'Esta debe ser más larga'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><h2 id="funciones-predefinidas-4-funciones-predefinidas">Funciones predefinidas 4. Funciones predefinidas </h2>
+</code></pre><h2>Funciones predefinidas 4. Funciones predefinidas</h2>
 <p>Una función es un conjunto de líneas de código que realizan una tarea específica, al  igual  que un procedimiento, pero además puede retornar un valor.<br>
 En MySQL existen multitud de funciones predefinidas. Se pueden consultar en la documentación oficial y en otras reconocidas:</p>
 <div class="admonition note">
@@ -597,13 +619,13 @@ En MySQL existen multitud de funciones predefinidas. Se pueden consultar en la d
 <p>Las funciones pueden tomar parámetros que modifiquen su funcionamiento.<br>
 Los procedimiento y las funciones son utilizadas para descomponer grandes problemas en tareas simples y para implementar operaciones que son comúnmente utilizadas durante un programa y de esta manera reducir la cantidad de código.</p>
 <p>Cuando una función es invocada/llamada, se le pasa el control a la misma, y una vez  que esta finaliza devuelve el control al punto desde el cual fue llamada.</p>
-<h3 id="funciones-matemáticas">Funciones matemáticas </h3>
+<h3>Funciones matemáticas</h3>
 <p>Las que más vamos a usar son: <strong>ABS, FLOOR, MOD, POW, SQRT, RAND, ROUND, SIGN</strong></p>
 <p><em><strong>Ejemplos de funciones predefinidas</strong></em></p>
 <p><strong>Ejemplo 1</strong> - Valor absoluto de un número entero</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code> <span class="token keyword keyword-SELECT">SELECT</span> ABS<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">17</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre><p>Resultado: 17</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment"># Resultado: 21</span>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment"># Resultado: 21 {#resultado-21 }</span>
 <span class="token keyword keyword-SELECT">SELECT</span> ABS<span class="token punctuation">(</span><span class="token number">21</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre><p><strong>Ejemplo 2 -  Parte entera de un número decimal</strong></p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> FLOOR<span class="token punctuation">(</span><span class="token number">35.789</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
@@ -642,7 +664,7 @@ Los procedimiento y las funciones son utilizadas para descomponer grandes proble
 </code></pre><p>Resultado: 1</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> SIGN<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre><p>Resultado: 0</p>
-<h2 id="funciones-de-cadenas-o-strings">Funciones de cadenas o strings </h2>
+<h2>Funciones de cadenas o strings</h2>
 <p>Las que más vamos a usar son: <strong>CONCAT, UPPER, LOWER, LEFT, RIGHT, SUBSTRING, SUBSTRING_INDEX,INSTR, LENGTH, TRIM, REPEAT, REPLACE, REVERSE, STRCMP</strong></p>
 <p>Ejemplo 1 - Concatenar varias cadenas</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CONCAT<span class="token punctuation">(</span><span class="token string">'Juan '</span><span class="token punctuation">,</span><span class="token string">'López '</span><span class="token punctuation">,</span><span class="token string">'García'</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NOMBRE<span class="token punctuation">;</span>
@@ -707,7 +729,7 @@ SELECT SUBSTRING_INDEX('<a href="http://www.iesdoctorbalmis.com">www.iesdoctorba
 +---------------------+
 </code></pre></div> <!-- fin caso de estudio -->
 <div class="ejercicio">
-<h3 id="white_check_mark-ejercicio">✅ Ejercicio </h3>
+<h3>✅ Ejercicio</h3>
 </div> <!-- fin ejercicio -->
 
       </div>
