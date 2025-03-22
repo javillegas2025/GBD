@@ -185,7 +185,9 @@
 <li>Vistas</li>
 </ol>
 <h2 id="del-diseño-lógico-al-diseño-físico">Del diseño lógico al diseño físico </h2>
+<div class="caso_estudio">
 <p>El <strong>diseño físico</strong> es el proceso de producir la descripción de la implementación de la base de datos en memoria secundaria: estructuras de almacenamiento y métodos de acceso que garanticen un acceso eficiente a los datos.</p>
+</div> <!-- fin caso de estudio -->
 <p>Para llevar a cabo esta etapa, se debe haber decidido cuál es el SGBD que se va a utilizar, ya que el esquema físico se adapta a él.</p>
 <p>En nuestro caso utilizaremos MySQL, y como su sintaxis se adapta en gran medida a SQL ANSI, los comandos que usaremos serán muy similares en el resto de SGBD relacionales.</p>
 <p>Cuando llegamos a este punto disponemos de:</p>
@@ -214,13 +216,15 @@
 <li>Si el sistema soporta la definición de reglas de negocio (es decir, restricciones de cardinalidad o de cálculo)</li>
 <li>Cómo se crean las tablas base</li>
 </ul>
-<p>SINTAXIS<br>
+<div class="caso_estudio">
+<p><strong>SINTAXIS</strong><br>
 Utilizaremos:</p>
 <ul>
 <li>palabras en mayúsculas para las reservadas de MySQL</li>
 <li>palabras en minúsculas para los nombres de nuestros elementos (tablas, campos, índices, …)</li>
 <li>corchetes para indicar un contenido opcional</li>
 </ul>
+</div> <!-- fin caso de estudio -->
 <p>Para poder conectar a la BD de MySQL vamos a utilizar dos herramientas:</p>
 <ul>
 <li><strong>Por línea de comandos: <code>mysql.exe</code></strong></li>
@@ -231,16 +235,18 @@ Utilizaremos:</p>
 <p>Desde esta herramienta pondremos en marcha el servidor MySQL. Además, si vamos a usar <strong>phpMyAdmin</strong> tendremos que arrancar también el servicio web de <strong>Apache</strong>.</p>
 <p>Abriremos las dos herramientas a la vez y comprobaremos que al ejecutar las instrucciones en una de ellas, su resultado se puede ver en las dos.</p>
 <p><img src=".img/3.1.png" alt="Panel de control de XAMPP"></p>
+<hr>
 <p>Para poder conectar con <code>mysql.exe</code> abriremos una ventana de comandos (CMD) y nos desplazaremos hasta la carpeta donde tenemos la herramienta. Para conectar debemos indicar que conectamos con el usuario root que no tiene contraseña:</p>
-<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>C:\&gt; cd \xampp\mysql\bin
-C:\xampp\mysql\bin&gt; mysql -u root
-
-</code></pre><p>Para conectar con la Aplicación web phpMyAdmin abriremos un navegador e introduciremos la URL:</p>
-<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>http://localhost/phpmyadmin
-</code></pre><p>Para ejecutar instrucciones usaremos la pestaña SQL.</p>
+<div class="caso_estudio">
+<p>C:&gt; <strong>cd \xampp\mysql\bin</strong><br>
+C:\xampp\mysql\bin&gt; <strong>mysql -u root</strong></p>
+</div> <!-- fin caso de estudio -->
+<hr>
+<p>Para conectar con la Aplicación web phpMyAdmin abriremos un navegador e introduciremos la URL: <a href="http://localhost/phpmyadmin">http://localhost/phpmyadmin</a></p>
+<p>Para ejecutar instrucciones usaremos la pestaña SQL.</p>
 <h2 id="crear-base-de-datos">Crear Base de Datos </h2>
-<p>Lo primero que debemos hacer es crear una base de datos.<br>
-<strong>MySQL</strong> permite disponer de varias bases de datos en cada instancia que estemos ejecutado. Cuando conectamos a MySQL podemos conocer las bases de datos que hay creadas con el comando:</p>
+<p>Lo primero que debemos hacer es crear una base de datos.</p>
+<p><strong>MySQL</strong> permite disponer de varias bases de datos en cada instancia que estemos ejecutado. Cuando conectamos a MySQL podemos conocer las bases de datos que hay creadas con el comando:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SHOW">SHOW</span> <span class="token keyword keyword-DATABASES">DATABASES</span><span class="token punctuation">;</span>
 </code></pre><p>Para crear una base de datos nueva utilizaremos el comando:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-DATABASE">DATABASE</span> NombreBD<span class="token punctuation">;</span>
@@ -251,7 +257,7 @@ C:\xampp\mysql\bin&gt; mysql -u root
 </code></pre><p>En <strong><code>my.ini</code></strong> se puede indicar en una variable el <strong>ENGINE</strong> por defecto.</p>
 <pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>[mysqld]
 default-storage-engine = InnoDB
-</code></pre><p>Por defecto ya tiene este valor y podemos comprobarlo en phpMyAdmin en la pestaña “Variables”.</p>
+</code></pre><p>Por defecto ya tiene este valor y podemos comprobarlo en phpMyAdmin en la pestaña <em>Variables</em>.</p>
 <p>Para eliminar una base de datos nueva utilizaremos el comando:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-DATABASE">DATABASE</span> NombreBD<span class="token punctuation">;</span>
 </code></pre><h2 id="tablas-y-campos">Tablas y campos </h2>
@@ -284,7 +290,7 @@ Se definen en el diccionario de datos El valor de un campo vendrá dado por una 
 </li>
 </ul>
 <p>Las restricciones por valor y de existencia tendrán efecto en la propia creación de la tabla, pero las restricciones de cardinalidad y por campos calculados serán definidos por <strong>disparadores (triggers)</strong> que comprueben o calculen los datos y así, garanticen su integridad.</p>
-<p>El <mark>esquema relacional (<strong>modelo lógico)</strong> consta de un conjunto de <strong>relaciones</strong> (tablas)</mark> y, para cada una de ellas, se tiene:</p>
+<p>El <strong>esquema relacional (modelo lógico) consta de un conjunto de relaciones (tablas)</strong> y, para cada una de ellas, se tiene:</p>
 <ul>
 <li>El <strong>nombre de la relación</strong> (que se convierte en el DF en un tabla)</li>
 <li>La <strong>lista de atributos</strong> entre paréntesis (que se convierten en el DF en campos)</li>
@@ -336,16 +342,17 @@ Se definen en el diccionario de datos El valor de un campo vendrá dado por una 
 </tbody>
 </table>
 <div class="admonition note">
-<p class="admonition-title"><strong><u>Referencias</u></strong><br><a href="https://dev.mysql.com/doc/refman/8.0/en/data-types.html">Tipos de datos en MySQL – Documentación oficial</a></p>
+<p class="admonition-title"><strong>Referencias</strong></p>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/data-types.html">Tipos de datos en MySQL – Documentación oficial</a></p>
 </div>
-<p>Para crear una tabla utilizaremos el comando sql <strong>CREATE TABLE</strong> reducido:</p>
+<p>Para crear una tabla utilizaremos el comando sql <strong><code>CREATE TABLE</code></strong> reducido:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> NombreTabla <span class="token punctuation">(</span>
     Campo1<span class="token punctuation">,</span>
     Campo2<span class="token punctuation">,</span>
     <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
     CampoN
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p>La sintaxis para definir un “campo” en la instrucción anterior es:</p>
+</code></pre><p>La sintaxis para definir un <strong>campo</strong> en la instrucción anterior es:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code>nombre_col TIPO
 <span class="token punctuation">[</span><span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token operator">|</span> <span class="token boolean">NULL</span><span class="token punctuation">]</span>
 <span class="token punctuation">[</span><span class="token keyword keyword-DEFAULT">DEFAULT</span> valor_por_defecto<span class="token punctuation">]</span>
@@ -353,14 +360,30 @@ Se definen en el diccionario de datos El valor de un campo vendrá dado por una 
 <span class="token punctuation">[</span><span class="token punctuation">[</span><span class="token keyword keyword-PRIMARY">PRIMARY</span><span class="token punctuation">]</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">]</span>
 <span class="token punctuation">[</span><span class="token keyword keyword-UNIQUE">UNIQUE</span><span class="token punctuation">]</span>
 <span class="token punctuation">[</span><span class="token keyword keyword-COMMENT">COMMENT</span> <span class="token string">'string'</span><span class="token punctuation">]</span>
-</code></pre><div class="admonition note">
-<p class="admonition-title"><strong><u>Referencias</u></strong><br><a href="https://dev.mysql.com/doc/refman/8.0/en/create-table.html">CREATE TABLE en MySQL – Documentación oficial</a></p>
+</code></pre><div class="admonition example">
+<p class="admonition-title">Ejemplo 1</p>
+<p>Crear una tabla llamada <strong>artículos</strong> con los siguientes campos:</p>
+<ul>
+<li><strong><code>codigo</code></strong> como cadena de 4 caracteres</li>
+<li><strong><code>descripcion</code></strong> como cadena de 100 caracteres</li>
+<li><strong><code>precio</code></strong> como un real con 2 decimales.</li>
+</ul>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
+    codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
+<div class="admonition note">
+<p class="admonition-title"><strong>Referencias</strong></p>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/create-table.html">CREATE TABLE en MySQL – Documentación oficial</a></p>
 </div>
-<p><strong>Ejercicio 1</strong></p>
-<pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>Partiendo del esquema lógico, crea la tabla de proveedores de nuestra comunidad autónoma siguiente:
-proveedores ( cod_prov, localidad, nombre,provincia)
-El diccionario de datos (sólo con restricciones de valor) es:
-</code></pre><table>
+<div class="ejercicio">
+<h3 id="white_check_mark-ejercicio-1">✅ Ejercicio 1 </h3>
+<p>Partiendo del esquema lógico, crea la tabla de proveedores de nuestra comunidad autónoma siguiente:<br>
+<strong>proveedores</strong>(cod_prov, localidad, nombre, provincia)<br>
+El diccionario de datos (sólo con restricciones de valor) es:</p>
+<table>
 <thead>
 <tr>
 <th style="text-align:left">CAMPO</th>
@@ -396,58 +419,94 @@ El diccionario de datos (sólo con restricciones de valor) es:
 </tr>
 </tbody>
 </table>
-<p><strong><u>Solución:</u></strong></p>
+</div> <!-- fin ejercicio -->
+<p><strong>Solución:</strong></p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> proveedores <span class="token punctuation">(</span>
     cod_prov    <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
     localidad   <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token keyword keyword-DEFAULT">DEFAULT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
     nombre      <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword keyword-UNIQUE">UNIQUE</span><span class="token punctuation">,</span>
     provincia   <span class="token keyword keyword-ENUM">ENUM</span><span class="token punctuation">(</span><span class="token string">'Alicante'</span><span class="token punctuation">,</span><span class="token string">'Valencia'</span><span class="token punctuation">,</span><span class="token string">'Castellón'</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Ejercicio 2</strong></p>
-<pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>En XAMPP-MySQL mediante la utilidad mysql.exe ejecuta las instrucciones anteriores.
-
-Entra a phpMyAdmin y comprueba con el asistente visual la estructura de la tabla y crea otra llamada proveedores2 con la misma información con la herramienta gráfica.
-Pulsando en la pestaña Insertar, añade registros a la tabla proveedores.
-
-Comprueba con el botón Examinar los datos introducidos. Comprobarás que aparece un botón Editar y otro Borrar que afecta a cada registro.
-</code></pre><p>Con el comando <strong>DROP TABLE</strong> podemos eliminar una tabla:</p>
+</code></pre><div class="ejercicio">
+<h3 id="white_check_mark-ejercicio-2">✅ Ejercicio 2 </h3>
+<p>En XAMPP-MySQL mediante la utilidad <strong><code>mysql.exe</code></strong> ejecuta las instrucciones anteriores.</p>
+<p>Entra a <strong>phpMyAdmin</strong> y comprueba con el asistente visual la estructura de la tabla y crea otra llamada <strong>proveedores2</strong> con la misma información con la herramienta gráfica.<br>
+Pulsando en la pestaña <em>Insertar</em>, añade registros a la tabla <strong>proveedores2</strong>.</p>
+<p>Comprueba con el botón <em>Examinar</em> los datos introducidos. Comprobarás que aparece un botón <em>Editar</em> y otro <em>Borrar</em> que afecta a cada registro.</p>
+</div> <!-- fin ejercicio -->
+<p>Con el comando <strong><code>DROP TABLE</code></strong> podemos eliminar una tabla.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 2</p>
+<p><strong>Eliminar una tabla</strong><br>
+Eliminar la tabla proveedores.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-TABLE">TABLE</span> proveedores<span class="token punctuation">;</span>
-</code></pre><p>Con el comando <strong>RENAME TABLE</strong> podemos cambiar su nombre:</p>
+</code></pre></div>
+<p>Con el comando <strong><code>RENAME TABLE</code></strong> podemos cambiar el nombre de una tabla.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 3</p>
+<p><strong>Cambiar el nombre a una tabla</strong><br>
+Cambiar el nombre de la tabla proveedores por distribuidores.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-RENAME">RENAME</span> <span class="token keyword keyword-TABLE">TABLE</span> proveedores <span class="token keyword keyword-TO">TO</span> distribuidores<span class="token punctuation">;</span>
-</code></pre><p>Comenzaremos por crear una tabla de artículos con los siguientes campos:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
-    codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
-<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p><strong><u>Añadir un campo a una tabla existente</u></strong><br>
-Una vez creada una tabla, es posible que necesitemos añadir, modificar o eliminar algún campo existente. Para ello utilizaremos las siguientes instrucciones SQL.</p>
+</code></pre></div>
+<p><strong>Añadir un campo a una tabla existente</strong><br>
+Una vez creada una tabla, es posible que necesitemos añadir, modificar o eliminar algún campo existente. Para ello utilizaremos el comando <strong><code>ALTER TABLE</code></strong>. Esto comando admite muchas variantes.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 4</p>
+<p><strong>Añadir campos a una tabla</strong><br>
+Añadir el campo <strong><code>descuento</code></strong>, de tipo entero con 3 dígitos y sin aceptar valores nulos, depués del campo <strong><code>precio</code></strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos
 <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-COLUMN">COLUMN</span> descuento <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
 <span class="token keyword keyword-AFTER">AFTER</span> precio<span class="token punctuation">;</span>
-</code></pre><p><strong><u>Modificar un campo a una tabla existente</u></strong></p>
-<p>A continuación mostramos dos formas de cambiar un campo</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos
-<span class="token keyword keyword-MODIFY">MODIFY</span> <span class="token keyword keyword-COLUMN">COLUMN</span> descuento <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
-</code></pre><pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos
-CHANGE descuento dto <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
-</code></pre><p>Con la segunda forma podemos cambiar también el nombre del campo de 'descuento' a 'dto' sin perder los valores existentes.</p>
-<p><strong><u>Eliminar un campo de una tabla existente</u></strong></p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos
-<span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-COLUMN">COLUMN</span> dto<span class="token punctuation">;</span>
-</code></pre><p><strong>Ejercicio 3</strong></p>
-<pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>En XAMPP-MySQL mediante la utilidad mysql.exe ejecuta las instrucciones anteriores.
-
-Entra a phpMyAdmin y comprueba con el asistente visual la estructura de la tabla articulos.
-Inserta registros y comprueba si puedes editar la información.
-¿Por qué al Examinar no aparecen los botones Editar y Borrar?
-</code></pre><h2 id="añadir-y-editar-registros">Añadir y editar registros </h2>
-<h4 id="insert">INSERT </h4>
-<p>El comando <strong>INSERT</strong> inserta nuevas filas en una tabla existente. Existen dos maneras de insertar registrso en una tabla:</p>
+</code></pre></div>
+<p><strong>Modificar un campo a una tabla existente</strong><br>
+Hay dos formas de cambiar un campo de una tabla:</p>
 <ul>
 <li>
-<p><strong>Con cláusula VALUES</strong><br>
-El formato del comando es <strong>INSERT ... VALUES</strong> e inserta filas basándose en los valores especificados explícitamente.</p>
+<p><strong>Con la opción <code>MODIFY</code></strong>. Se puede cambiar la definición del campo pero no el nombre.</p>
+<div class="admonition danger">
+<p class="admonition-title">Peligro</p>
+<p>La instrucción <strong><code>ALTER TABLE</code></strong> con la opción <strong><code>MODIFY</code></strong> hace que se pierdan los datos que había en la columna cambiada.</p>
+</div>
+</li>
+<li>
+<p><strong>Con la opción <code>CHANGE</code></strong>. Se puede cambiar tanto la definición como nombre del campo. Con esta opción se preservan los cambios.</p>
+</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 5</p>
+<p><strong>Modificar la definición de los campos de una tabla</strong><br>
+Modificar el campo <strong><code>descuento</code></strong> de manera que ahora pase a tener 4 dígitos.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos
+<span class="token keyword keyword-MODIFY">MODIFY</span> <span class="token keyword keyword-COLUMN">COLUMN</span> descuento <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 6</p>
+<p><strong>Modificar la definición de los campos de una tabla</strong><br>
+Modificar el campo <strong><code>descuento</code></strong> de manera que ahora pase a tener 4 dígitos y se llame <strong><code>dto</code></strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos CHANGE descuento dto <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
+</code></pre></div>
+<p><strong>Eliminar un campo de una tabla existente</strong><br>
+Con la instrucción <strong><code>ALTER TABLE</code></strong> y la opción <strong><code>DROP COLUMN</code></strong> podemos eliminar un campo de una tabla.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 7</p>
+<p><strong>Eliminar campos de una tabla</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos
+<span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-COLUMN">COLUMN</span> dto<span class="token punctuation">;</span>
+</code></pre></div>
+<div class="ejercicio">
+<h3 id="white_check_mark-ejercicio-3">✅ Ejercicio 3 </h3>
+<p>En XAMPP-MySQL mediante la utilidad <strong><code>mysql.exe</code></strong> ejecuta las instrucciones anteriores.</p>
+<p>Entra a <strong>phpMyAdmin</strong> y comprueba con el asistente visual la estructura de la tabla <strong>articulos</strong>.<br>
+Inserta registros y comprueba si puedes editar la información.<br>
+¿Por qué al <em>Examinar</em> no aparecen los botones <em>Editar</em> y <em>Borrar</em>?</p>
+</div> <!-- fin ejercicio -->
+<h2 id="añadir-y-editar-registros">Añadir y editar registros </h2>
+<h3 id="insert">INSERT </h3>
+<p>El comando <strong><code>INSERT</code></strong> inserta nuevas filas en una tabla existente. Existen dos maneras de insertar registrso en una tabla:</p>
+<ul>
+<li>
+<p><strong>Con la cláusula <code>VALUES</code></strong><br>
+El formato del comando es <strong><code>INSERT ... VALUES</code></strong> e inserta filas basándose en los valores especificados explícitamente.</p>
 <ul>
 <li>
 <p><strong>Insertar un registro</strong>: La sintaxis para insertar un registro es la siguiente:</p>
@@ -466,8 +525,8 @@ El formato del comando es <strong>INSERT ... VALUES</strong> e inserta filas bas
 </ul>
 </li>
 <li>
-<p><strong>Con setencia SELECT</strong><br>
-El formato del comando es <strong>INSERT ... SELECT</strong> e inserta filas seleccionadas de otra tabla o tablas.<br>
+<p><strong>Con setencia <strong><code>SELECT</code></strong></strong><br>
+El formato del comando es <strong><code>INSERT ... SELECT</code></strong> e inserta filas seleccionadas de otra tabla o tablas.<br>
 La sintaxis para consultar los registros de una tabla es:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> col_name1<span class="token punctuation">,</span> col_name2<span class="token punctuation">,</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
 <span class="token keyword keyword-FROM">FROM</span> nombreTabla
@@ -481,39 +540,62 @@ La sintaxis para consultar los registros de una tabla es:</p>
 </ul>
 <blockquote>
 <p>✋ <strong>Importante</strong><br>
-Si hay campos en la tabla que no se especifican en la instrucción <strong>INSERT</strong>, se le asignará el valor que se haya indicado en su creación por defecto (<strong>DEFAULT</strong>) y en caso contrario será <strong>NULL</strong>.</p>
+Si hay campos en la tabla que no se especifican en la instrucción <strong><code>INSERT</code></strong>, se le asignará el valor que se haya indicado en su creación por defecto (<strong><code>DEFAULT</code></strong>) y en caso contrario será <strong><code>NULL</code></strong>.</p>
 </blockquote>
-<p><strong>Ejemplo</strong></p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 1</p>
+<p><strong>Insertar valores en tablas</strong><br>
+Inserta un teclado y un ratón inálabrico en la tabla <strong>articulos</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-INTO">INTO</span> articulos <span class="token punctuation">(</span>codigo<span class="token punctuation">,</span> descripcion<span class="token punctuation">,</span> precio<span class="token punctuation">)</span> <span class="token keyword keyword-VALUES">VALUES</span>
     <span class="token punctuation">(</span><span class="token string">'0001'</span><span class="token punctuation">,</span> <span class="token string">'TECLADO INALÁMBRICO'</span><span class="token punctuation">,</span> <span class="token number">10.45</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token punctuation">(</span><span class="token string">'0002'</span><span class="token punctuation">,</span> <span class="token string">'RATÓN INALÁMBRICO'</span><span class="token punctuation">,</span> <span class="token number">7.95</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><h2 id="update">UPDATE </h2>
-<p>La senetencia <strong>UPDATE</strong> actualiza columnas de filas existentes de una tabla con nuevos valores.</p>
-<p>La cláusula <strong>SET</strong> indica las columnas a modificar y los valores que deben tomar.</p>
-<p>La cláusula <strong>WHERE</strong>, si se proporciona, especifica qué filas deben ser actualizadas. Si no se especifica, serán actualizadas todas ellas.</p>
+</code></pre></div>
+<h2 id="update">UPDATE </h2>
+<p>La senetencia <strong><code>UPDATE</code></strong> actualiza columnas de filas existentes de una tabla con nuevos valores.</p>
+<p>La cláusula <strong><code>SET</code></strong> indica las columnas a modificar y los valores que deben tomar.</p>
+<p>La cláusula <strong><code>WHERE</code></strong>, si se proporciona, especifica qué filas deben ser actualizadas. Si no se especifica, serán actualizadas todas ellas.</p>
 <p>La sintaxis para actualizar registros es:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-UPDATE">UPDATE</span> nombreTabla
 <span class="token keyword keyword-SET">SET</span> campo <span class="token operator">=</span> valor
 <span class="token punctuation">[</span><span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">]</span><span class="token punctuation">;</span>
-</code></pre><p>En la cláusula <strong>SET</strong> utilizaremos <em>valor</em> para indicar una cadena, número, fecha, …</p>
-<p><strong>Ejemplo – Actualizar el nombre a una persona</strong></p>
+</code></pre><p>En la cláusula <strong><code>SET</code></strong> utilizaremos <em>valor</em> para indicar una cadena, número, fecha, …</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 1</p>
+<p><strong>Actualización de registros</strong><br>
+Actualizar el nombre de una persona identificada por el DNI.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-UPDATE">UPDATE</span> personas
 <span class="token keyword keyword-SET">SET</span> nombre <span class="token operator">=</span> <span class="token string">'Juan López'</span>
 <span class="token keyword keyword-WHERE">WHERE</span> dni <span class="token operator">=</span> <span class="token string">'21555666'</span><span class="token punctuation">;</span>
-</code></pre><p>Pero también puede ser una expresión.</p>
-<p><strong>Ejemplo – Aumentar la edad de una persona por su cumpleaños</strong></p>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 2</p>
+<p><strong>Actualización de registros</strong><br>
+Aumentar la edad de una persona por su cumpleaños.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-UPDATE">UPDATE</span> personas
 <span class="token keyword keyword-SET">SET</span> edad <span class="token operator">=</span> edad <span class="token operator">+</span> <span class="token number">1</span>
 <span class="token keyword keyword-WHERE">WHERE</span> dni <span class="token operator">=</span> <span class="token string">'21555666'</span><span class="token punctuation">;</span>
-</code></pre><p><strong>Ejemplo – Aumentar el precio de todos los artículos un 5%</strong></p>
+</code></pre></div>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 3</p>
+<p><strong>Actualización de registros</strong><br>
+Aumentar el precio de todos los artículos un 5%.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-UPDATE">UPDATE</span> articulos
 <span class="token keyword keyword-SET">SET</span> precio <span class="token operator">=</span> precio <span class="token operator">+</span> precio <span class="token operator">*</span> <span class="token number">5</span> <span class="token operator">/</span> <span class="token number">100</span><span class="token punctuation">;</span>
-</code></pre><h2 id="delete">DELETE </h2>
-<p>La sentencia <strong>DELETE</strong> elimina las columnas de una tabla que cumplan la condición dada por la cláusula, y devuelve el número de registros borrados. Sin cláusula <strong>WHERE</strong> elimina todos los registros.</p>
+</code></pre></div>
+<div class="admonition danger">
+<p class="admonition-title">Peligro</p>
+<p>Cuidado con la cláusula <strong><code>UPDATE</code></strong> ya que si no ponemos ninguna condición (claúsula <strong><code>WHERE</code></strong>) se actualizarán todos los registros de la tabla.</p>
+</div>
+<h2 id="delete">DELETE </h2>
+<p>La sentencia <strong><code>DELETE</code></strong> elimina las columnas de una tabla que cumplan la condición dada por la cláusula, y devuelve el número de registros borrados. Sin cláusula <strong><code>WHERE</code></strong> elimina todos los registros.</p>
 <p>La sintaxis para eliminar registros es:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DELETE">DELETE</span> <span class="token keyword keyword-FROM">FROM</span> nombreTabla
 <span class="token punctuation">[</span><span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">]</span><span class="token punctuation">;</span>
-</code></pre><h2 id="índices">Índices </h2>
+</code></pre><div class="admonition danger">
+<p class="admonition-title">Peligro</p>
+<p>Cuidado con la cláusula <strong><code>DELETE</code></strong> ya que si no ponemos ninguna condición (claúsula <strong><code>WHERE</code></strong>) se eliminarán todos los registros de la tabla.</p>
+</div>
+<h2 id="índices">Índices </h2>
 <p>Los indices son estructuras que se crean en las Bases de Daros para poder controlar la integridad y realizar búsquedas de manera más eficiente.</p>
 <p>Al crear una tabla podemos crear varios índices con las siguientes palabras reservadas:</p>
 <ul>
@@ -521,87 +603,176 @@ Si hay campos en la tabla que no se especifican en la instrucción <strong>INSER
 <li><strong>UNIQUE</strong>: un índice único para un campo que sea clave alternativa.</li>
 <li><strong>INDEX</strong>: un índice con valores repetidos para optimizar búsquedas sobre un campo.</li>
 </ul>
-<p><strong>Ejemplo</strong></p>
+<p>Los índices de pueden crear en el momento de la creación de la tabla añadiendo filas con la opción <strong><code>INDEX</code></strong> después de la definición de los campos.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> nombreTabla <span class="token punctuation">(</span>
+    Campo1<span class="token punctuation">,</span>
+    Campo2<span class="token punctuation">,</span>
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    CampoN    
+    <span class="token keyword keyword-INDEX">INDEX</span> <span class="token punctuation">[</span>nombreIndice<span class="token punctuation">]</span> <span class="token punctuation">(</span>catecampoI<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Se crea un índice sobre el <strong>campo I</strong> y, opcionalmente, le podemos dar un nombre (mejor dejar que el SGBD le de un nombre automáticamente).</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 1</p>
+<p><strong>Índices en tablas</strong><br>
+Creación de la tabla <strong>articulos</strong> y definición de un índice sobre el campo <strong>categoría</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
     codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
     descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token keyword keyword-UNIQUE">UNIQUE</span><span class="token punctuation">,</span>
     categoria <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token keyword keyword-INDEX">INDEX</span> <span class="token punctuation">[</span>nombreIndice<span class="token punctuation">]</span> <span class="token punctuation">(</span>categoria<span class="token punctuation">)</span>
+    <span class="token keyword keyword-INDEX">INDEX</span> <span class="token punctuation">(</span>categoria<span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p>Como aparece en el ejemplo anterior, <strong>nombreIndice</strong> se puede especificar o no. Si no se hace tomará el nombre del campo.</p>
-<p><strong><u>Añadir índices</u></strong><br>
+</code></pre></div>
+<p><strong>Añadir índices</strong><br>
 Si deseáramos crear un índice con valores repetidos cuando la tabla ya existe, utilizaríamos el comando siguiente:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-INDEX">INDEX</span> index_name <span class="token keyword keyword-ON">ON</span> nombreTabla <span class="token punctuation">(</span>col_name1<span class="token punctuation">,</span>…<span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre><p>Si deseáramos crear un índice cuando con valores únicos cuando la tabla ya existe, utilizaríamos el comando siguiente:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-UNIQUE">UNIQUE</span> <span class="token keyword keyword-INDEX">INDEX</span> index_name <span class="token keyword keyword-ON">ON</span> nombreTabla <span class="token punctuation">(</span>col_name1<span class="token punctuation">,</span>…<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p>Para añadir una clave primaria a una tabla que no tiene:</p>
+</code></pre><p>Para añadir una clave primaria a una tabla que no tiene podemos hacerlo con la instrucción  <strong><code>ALTER TABLE</code></strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> nombreTabla
 <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>col_name1<span class="token punctuation">,</span>…<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p><strong><u>Eliminar índices</u></strong></p>
-<p>Para eliminar un índice deberemos saber su nombre:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-INDEX">INDEX</span> index_name <span class="token keyword keyword-ON">ON</span> nombreTabla<span class="token punctuation">;</span>
-</code></pre><p>Para eliminar el índice de clave primaria:</p>
+</code></pre><p><strong>Eliminar índices</strong></p>
+<p>Para eliminar un índice deberemos saber su nombre.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-INDEX">INDEX</span> nombreIndice <span class="token keyword keyword-ON">ON</span> nombreTabla<span class="token punctuation">;</span>
+</code></pre><p>Cuando se define una clave primaria automáticamente se crea un índice único sobre el campo (o campos) que definen dicha clave.<br>
+Podemos eliminar el índice asociado a la clave primaria con la instrucción  <strong><code>ALTER TABLE</code></strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> nombreTabla
 <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">;</span>
 </code></pre><h2 id="restricciones">Restricciones </h2>
-<h4 id="restricción-de-campo-clave">Restricción de campo clave </h4>
+<h3 id="restricción-de-campo-clave">Restricción de campo clave </h3>
 <p>La necesidad de identificar un registro unívocamente nos obliga a crear una restricción por el campo clave, ya que este no podrá ser nulo ni tener valores duplicados.</p>
 <p>De hecho no se pueden editar los datos de una tabla que no tenga clave primaria, aunque sí se pueden insertar registros.</p>
-<p><strong><u>Crear campo clave al crear la tabla</u></strong></p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
+<p>Las claves (primarias y foráneas) puden ser:</p>
+<ul>
+<li><strong>Simles</strong>: formadas por un solo campo</li>
+<li><strong>Compuestas</strong>: formadas por la concatenación de varios campos</li>
+</ul>
+<p><strong>Definir la clave primaria en el momento de  crear la tabla</strong><br>
+Esta se pude declarar en la misma fila en la que se define un campo (sólo es válido si el campo es simple) o después de la definición de los campos en una línea independiente (válido para todo tipo de claves, simples o compuestad).</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 1</p>
+<p><strong>Restricciones campo clave tablas</strong><br>
+Crear la tabla <strong>articulos</strong> y de finir el campo <strong><code>codigo</code></strong> como clave primaria.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">-- La clave primaria se define al lado del campo</span>
+<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
     codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
     descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">,</span>
     precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p><strong><u>Eliminar la clave primaria</u></strong></p>
+<span class="token comment">-- La clave primaria se define al final en una fila independiente</span>
+<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
+    codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token punctuation">,</span>
+    precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+    <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>codigo<span class="token punctuation">)</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
+<p><strong>Eliminar la clave primaria</strong><br>
+Se puede llevar a cabo con la instrucción <strong><code>ALTER TABLE</code></strong> combinada con la opción <strong><code>DROP</code></strong>.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 2</p>
+<p><strong>Restricciones campo clave tablas</strong><br>
+Eliminar la clave primaria de la tabla <strong>articulos</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">;</span>
-</code></pre><p><strong><u>Añadir la clave primaria a una tabla existente</u></strong></p>
+</code></pre></div>
+<p><strong>Añadir la clave primaria a una tabla existente</strong><br>
+Se puede añadir la clave primaria con posterioridad a la creación de la tabla con la instrucción <strong><code>ALTER TABLE</code></strong> combinada con la opción <strong><code>ADD</code></strong>.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 3</p>
+<p><strong>Restricciones campo clave tablas</strong><br>
+Añadir la clave primaria definida sobre el campo  <strong><code>codigo</code></strong> a la tabla <strong>articulos</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">(</span>codigo<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p><strong><u>Claves compuestas</u></strong><br>
-En ocasiones la clave está compuesta por varios campos. Por ejemplo en una tabla donde se guardan las revisiones de ITV de vehículos la clave está formada por la fecha y la matrícula del vehículo. Lo podríamos indicar de la siguiente forma:</p>
+</code></pre></div>
+<p><strong>Claves compuestas</strong><br>
+Ya hemos dicho anteriormente que una clave es compuesta si está formada por la cocatenación de varios campos.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 4</p>
+<p><strong>Restricciones campo clave tablas</strong><br>
+Crear la tabla <strong>revision_itv</strong> donde se guardarán las revisiones de ITV de los vehículos. La clave primaria está formada por la <strong><code>matrícula</code></strong> y la <strong><code>fecha</code></strong> de matriculación del vehículo.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> revision_itv <span class="token punctuation">(</span>
     matricula <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     fecha <span class="token keyword keyword-DATE">DATE</span><span class="token punctuation">,</span>
     estado <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>matricula<span class="token punctuation">,</span> fecha<span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p>o bien:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> revision_itv <span class="token punctuation">(</span>
+</code></pre></div>
+<p>Se podría haber creado la tabla en primer lugar y a continuación añadir la clave primaria.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 4b</p>
+<p><strong>Restricciones campo clave tablas</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">-- Crear la tabla</span>
+<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> revision_itv <span class="token punctuation">(</span>
     matricula <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     fecha <span class="token keyword keyword-DATE">DATE</span><span class="token punctuation">,</span>
     estado <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
+<span class="token comment">-- Añadir la clave primaria</span>
 <span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> revision_itv <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>matricula<span class="token punctuation">,</span> fecha<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><h4 id="restricción-de-campo-obligatorio">Restricción de campo obligatorio </h4>
+</code></pre></div>
+<h3 id="restricción-de-campo-obligatorio">Restricción de campo obligatorio </h3>
 <p>Cuando un campo no puede tener valores nulos, decimos que es un campo obligatorio.<br>
 En nuestro ejemplo indicaremos la descripción como campo obligatorio par que ningún artículo tenga la descripción vacía.</p>
-<p><strong><u>Crear campo obligatorio al crear la tabla</u></strong></p>
+<p><strong>Definir campo obligatorio al crear la tabla</strong><br>
+Un campo obligatorio se define con la opción NOT NULL al lado del campo.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 5</p>
+<p><strong>Restricciones campo obligatorio</strong><br>
+Crear la tabla <strong>articulos</strong> y definir el campo <strong><code>descripcion</code></strong> como obligatorio.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
 codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
 descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
 precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p><strong><u>Eliminar la restricción de campo obligatorio</u></strong></p>
+</code></pre></div>
+<p><strong>Eliminar la restricción de campo obligatorio</strong><br>
+Para eliminar la restricción de campo obligatorio utilizamos la instrucción <strong><code>ALTER TABLE</code></strong> con la opción <strong><code>CHANGE</code></strong>.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 6</p>
+<p><strong>Restricciones campo obligatorio</strong><br>
+Eliminar la restricción de campo obligatorio del campo <strong><code>descripcion</code></strong> de la tabla <strong>articulos</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos CHANGE descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
-</code></pre><p><strong><u>Añadir la restricción de campo obligatorio en una tabla que ya existe</u></strong></p>
+</code></pre></div>
+<p><strong>Añadir la restricción de campo obligatorio en una tabla que ya existe</strong><br>
+También se hace con la instrucción <strong><code>ALTER TABLE</code></strong> con la opción <strong><code>CHANGE</code></strong>.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 7</p>
+<p><strong>Restricciones campo obligatorio</strong><br>
+Añadir la restricción de campo obligatorio del campo <strong><code>descripcion</code></strong> de la tabla <strong>articulos</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos CHANGE descripcion descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">;</span>
-</code></pre><h4 id="restricción-de-campo-con-valores-únicos">Restricción de campo con valores únicos </h4>
-<p>Cuando un campo no puede tener valores repetidos, decimos que es un campo único.<br>
-Lo que hace realmente la base de datos es crear un índice con valores únicos.</p>
-<p><strong><u>Crear campo obligatorio al crear la tabla</u></strong></p>
+</code></pre></div>
+<h3 id="restricción-de-campo-con-valores-únicos">Restricción de campo con valores únicos </h3>
+<p>Cuando un campo no puede tener valores repetidos, decimos que es un campo único. Cuando se define un campo único automáticamente se crea un índice sobre ese con valores únicos.</p>
+<p><strong>Definir un campo único al crear la tabla</strong><br>
+Se puede hacer con la opción <strong><code>UNIQUE</code></strong> al lado del campo sobre el que se define.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 8</p>
+<p><strong>Restricciones campo único</strong><br>
+Definir una restricción única sobre el campo <strong><code>descripcion</code></strong> en el momento de la creación de la tabla <strong>articulos</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
     codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
     descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span> <span class="token keyword keyword-UNIQUE">UNIQUE</span><span class="token punctuation">,</span>
     precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p><strong><u>Eliminar la restricción de campo obligatorio</u></strong></p>
+</code></pre></div>
+<p><strong>Eliminar la restricción de campo único</strong><br>
+Se lleva a cabo con la instrucción <strong><code>ALTER TABLE</code></strong> combinada con la opción <strong><code>DROP</code></strong>. La restricción se elimina borrando el índice asociado que se crea cuando se define ésta.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 9</p>
+<p><strong>Restricciones campo único</strong><br>
+Eliminar la restricción única definida sobre el campo <strong><code>descripcion</code></strong> de la tabla <strong>articulos</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-INDEX">INDEX</span> descripcion<span class="token punctuation">;</span>
-</code></pre><p><strong><u>Añadir la restricción de campo obligatorio en una tabla que ya existe</u></strong></p>
+</code></pre></div>
+<p><strong>Añadir la restricción de campo único en una tabla que ya existe</strong><br>
+Se lleva a cabo con la instrucción <strong><code>ALTER TABLE</code></strong> combinada con la opción <strong><code>ADD</code></strong>.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 10</p>
+<p><strong>Restricciones campo único</strong><br>
+Añadir una restricción única sobre el campo descripcion de la tabla articulos.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-UNIQUE">UNIQUE</span><span class="token punctuation">(</span>descripcion<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><h4 id="restricción-de-campo-por-clave-ajena">Restricción de campo por clave ajena </h4>
-<p>Como ya hemos visto en los esquemas lógicos relacionales obtenidos de los esquemas conceptuales, existen claves ajenas o extranjeras que contienen valores de la clave primaria de otra tabla con la que se relacionan.</p>
+</code></pre></div>
+<h3 id="restricción-de-campo-por-clave-ajena">Restricción de campo por clave ajena </h3>
+<p>Como ya hemos visto en los esquemas lógicos relacionales obtenidos de los esquemas conceptuales, existen claves ajenas, foráneas o extranjeras que contienen valores de la clave primaria de otra tabla con la que se relacionan.</p>
 <p>En un esquema que tiene localidades y provincias, donde indicamos en cada localidad de qué provincia es, podríamos tener las siguientes tablas:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> provincias <span class="token punctuation">(</span>
         cod_prov <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
@@ -613,43 +784,78 @@ Lo que hace realmente la base de datos es crear un índice con valores únicos.<
     localidad <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     cod_provincia <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p><strong><u>Crear clave ajena al crear la tabla</u></strong></p>
+</code></pre><p><strong>Crear clave ajena al crear la tabla</strong><br>
+La clave ajena se puede definir en el momento de crear la tabla declarándola después de la definición de los campos de la tabla.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 11</p>
+<p><strong>Restricciones campo por clave ajena</strong><br>
+Crear la tabla <strong>localidades</strong> definiendo una clave foránea sobre el campo <strong><code>cod_provincia</code></strong> que haga referencia a la tabla <strong>provincias</strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token punctuation">(</span>
     cod_loc <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
     localidad <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     cod_provincia <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>cod_provincia<span class="token punctuation">)</span> <span class="token keyword keyword-REFERENCES">REFERENCES</span> provincias <span class="token punctuation">(</span>cod_prov<span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p>Cuando creamos una relación, y por lo tanto una clave ajena, se crean dos elementos en la BD.</p>
+</code></pre></div>
+<p>Cuando creamos una relación, y por lo tanto una clave ajena, se crean dos elementos en la BD:</p>
 <ul>
-<li><strong>Índice</strong>: un índice (en nuestro ejemplo INDEX (cod_provincia)) con el nombre del campo para la clave ajena con valores repetidos, ya que puede ser una relación 1 → N y por lo tanto tendrá que repetir valores. En nuestro ejemplo, varias localidades tendrán la misma provincia.</li>
-<li><strong>Relación</strong>: se asigna a la relación un nombre por defecto formado por el nombre de la tabla, 'ibfk' y un numero. En el caso anterior será: localidades_ibfk1.</li>
+<li><strong>Índice</strong>: un índice (en nuestro ejemplo <strong>INDEX(cod_provincia)</strong>) con el nombre del campo para la clave ajena con valores repetidos, ya que puede ser una relación 1 → N y por lo tanto tendrá que repetir valores. En nuestro ejemplo, varias localidades tendrán la misma provincia.</li>
+<li><strong>Relación</strong>: se asigna a la relación un nombre por defecto formado por el nombre de la tabla, el literal <em>ibfk</em> y un numero. En el caso anterior será <strong><code>localidades_ibfk1</code></strong>.</li>
 </ul>
-<p>Si queremos darle un nombre nosotros utilizaremos <strong>CONSTRAINT</strong>:</p>
+<p>Si queremos darle un nombre nosotros utilizaremos la cláusula <strong><code>CONSTRAINT</code></strong>:</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 12</p>
+<p><strong>Restricciones campo por clave ajena</strong><br>
+Ejemplo equivalente al anterior en el que se le ha dado el nombre <strong><code>provincias_cod_prov</code></strong> a la restricción de clave ajena.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token punctuation">(</span>
     cod_loc <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
     localidad <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     cod_provincia <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> provincias_cod_prov <span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>cod_provincia<span class="token punctuation">)</span> <span class="token keyword keyword-REFERENCES">REFERENCES</span> provincias <span class="token punctuation">(</span>cod_prov<span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p>De esta forma se utilizará el valor de CONSTRAINT tanto para el índice como para la relación.</p>
-<p><strong><u>Eliminar la restricción de clave ajena</u></strong></p>
-<p>Si tenemos el <strong>CONSTRAINT</strong> lo utilizaremos:</p>
+</code></pre></div>
+<p>De esta forma se utilizará el valor de CONSTRAINT tanto para el índice como para la relación.</p>
+<p><strong>Eliminar la restricción de clave ajena</strong><br>
+Se utiliza la instrucción <strong><code>ALTER TABLE</code></strong> en combinación con la opción <strong><code>DROP</code></strong> para este propósito. Si hemos definido la restricción con una cláusula <strong><code>CONSTRAINT</code></strong> la utilizaremos.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 13</p>
+<p><strong>Restricciones campo por clave ajena</strong><br>
+Eliminar la restricción de clave ajena de nombre <strong><code>provincias_cod_prov</code></strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> provincias_cod_prov<span class="token punctuation">;</span>
-</code></pre><p>En caso contrario eliminaremos el que crea por defecto:</p>
+</code></pre></div>
+<p>En caso de no haber utilizado la cláusula <strong><code>CONSTRAIN</code></strong> en la definición de la restricción entonces la eliminaremos indicando el nombre que se le ha dado por defecto.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 14</p>
+<p><strong>Restricciones campo por clave ajena</strong><br>
+Eliminar la restricción de clave ajena definida anónimamente en la tabla <strong>localidades</strong>. Sabemos que sólo hay esta restricción de clave ajena.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> localidades_ibkf_1<span class="token punctuation">;</span>
-</code></pre><p>También tendremos que decidir si deseamos eliminar el índice existente o no. En caso de desear eliminarlo deberemos indicarlo con la instrucción correspondiente según hayamos indicado CONSTRAINT o no:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-INDEX">INDEX</span> provincias_cod_prov<span class="token punctuation">;</span>
+</code></pre></div>
+<p>También tendremos que decidir si deseamos eliminar el índice existente o no. En caso de desear eliminarlo deberemos indicarlo con la instrucción correspondiente según hayamos indicado <strong><code>CONSTRAINT</code></strong> o no. Si no hemos utilizado la opción <strong><code>CONSTRAINT</code></strong> entonces el índice tiene el mismo nombre que el campo sobre el que se define.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 15</p>
+<p><strong>Restricciones campo por clave ajena</strong><br>
+Eliminar el índice asociado a la clave ajena definida en la tabla <strong>localidades</strong> sobre el campo <strong><code>cod_provincia</code></strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">-- Se le había dado un nombre al índice.</span>
+<span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-INDEX">INDEX</span> provincias_cod_prov<span class="token punctuation">;</span>
+<span class="token comment">-- No se le había dado un nombre al índice.</span>
 <span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-INDEX">INDEX</span> cod_provincia<span class="token punctuation">;</span>
-</code></pre><p><strong><u>Añadir la restricción de clave ajena a una tabla existente</u></strong></p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-ADD">ADD</span> 
+</code></pre></div>
+<p><strong>Añadir la restricción de clave ajena a una tabla existente</strong><br>
+Se utiliza la instrucción <strong><code>ALTER TABLE</code></strong> en combinación con la opción <strong><code>ADD</code></strong> para este propósito.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 16</p>
+<p><strong>Restricciones campo por clave ajena</strong><br>
+Añadir la una clave ajena sobre el campo <strong><code>cod_provincia</code></strong> de la tabla <strong>localidades</strong> que haga referencia a la tabla <strong>provincias</strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">-- Sin cláusula CONSTRAINT</span>
+<span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-ADD">ADD</span> 
 <span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>cod_provincia<span class="token punctuation">)</span> <span class="token keyword keyword-REFERENCES">REFERENCES</span> provincias <span class="token punctuation">(</span>cod_prov<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p>o con CONSTRAINT:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> provincias_cod_prov
+<span class="token comment">-- Con cláusula CONSTRAINT</span>
+<span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> provincias_cod_prov
 <span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>cod_provincia<span class="token punctuation">)</span> <span class="token keyword keyword-REFERENCES">REFERENCES</span> provincias <span class="token punctuation">(</span>cod_prov<span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><h4 id="restricción-por-borrado-o-actualización-de-una-clave-ajena">Restricción por borrado o actualización de una clave ajena </h4>
+</code></pre></div>
+<h3 id="restricción-por-borrado-o-actualización-de-una-clave-ajena">Restricción por borrado o actualización de una clave ajena </h3>
 <p>Una de las acciones más importantes para mantener la integridad en una base de datos es identificar correctamente la acción a realizar cuando eliminamos o actualizamos el valor de la clave ajena de un registro.</p>
-<p>En el caso de vaciar el campo <strong>localidades.cod_provincia</strong> podemos hacer varias acciones:</p>
+<p>En el caso de vaciar el campo <strong><code>localidades.cod_provincia</code></strong> podemos hacer llevar a cabo varias acciones:</p>
 <ul>
 <li>
 <p><strong>RESTRICT</strong>: Es el valor por defecto. El servidor MySQL rechazará la operación de eliminación o actualización para la tabla padre (provincias) si hay un valor de clave externa relacionado en la tabla referenciada (localidades), es decir, no se puede en provincias eliminar un registro o cambiar su clave, si existen localidades de esa provincia.</p>
@@ -667,7 +873,7 @@ Si especifica una acción SET NULL, asegúrese de que no ha declarado las column
 <li>Al <strong>borrar</strong>, si en la tabla padre (provincias) se elimina un registro, se eliminarán también todos los registros de la tabla referenciada (localidades) que tenga este valor en su calve ajena.</li>
 <li>Al <strong>actualizar</strong>, si en la tabla padre (provincias) se actualiza la clave de un registro, se actualizarán también todos los registros de la tabla referenciada (localidades) que tenga este valor en su clave ajena con el nuevo valor.</li>
 </ul>
-<p>Para indicar estas acciones <mark>añadiremos a la instrucción de <strong>FOREIGN KEY</strong> ALGUNA de las siguientes cláusulas</mark>:</p>
+<p>Para indicar estas acciones <strong>añadiremos a la sentencia FOREIGN KEY alguna de las siguientes cláusulas</strong>:</p>
 <ul>
 <li>ON DELETE RESTRICT</li>
 <li>ON DELETE SET NULL</li>
@@ -676,25 +882,34 @@ Si especifica una acción SET NULL, asegúrese de que no ha declarado las column
 <li>ON UPDATE SET NULL</li>
 <li>ON UPDATE CASCADE</li>
 </ul>
-<p>Si por ejemplo deseamos que al eliminar una provincia se eliminen todas las localidades dependientes, y que no permita cambiar el identificador de provincias si tiene localidades, la instrucción de creación de esa clave ajena sería:</p>
+</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 17</p>
+<p><strong>Restricciones por borrado/actualización de clave ajena</strong><br>
+Definir una instrucción sobre la tabla <strong>localidades</strong> de manera que al eliminar una provincia se eliminen todas las localidades de esa provincia y que no permita cambiar el identificador de provincia si tiene localidades.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-ALTER">ALTER</span> <span class="token keyword keyword-TABLE">TABLE</span> localidades <span class="token keyword keyword-ADD">ADD</span> <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> provincias_cod_prov
 <span class="token keyword keyword-FOREIGN">FOREIGN</span> <span class="token keyword keyword-KEY">KEY</span> <span class="token punctuation">(</span>cod_provincia<span class="token punctuation">)</span> <span class="token keyword keyword-REFERENCES">REFERENCES</span> provincias <span class="token punctuation">(</span>cod_prov<span class="token punctuation">)</span>
 <span class="token keyword keyword-ON">ON</span> <span class="token keyword keyword-DELETE">DELETE</span> <span class="token keyword keyword-CASCADE">CASCADE</span>
 <span class="token keyword keyword-ON">ON</span> <span class="token keyword keyword-UPDATE">UPDATE</span> <span class="token keyword keyword-RESTRICT">RESTRICT</span><span class="token punctuation">;</span>
-</code></pre></li>
-<li>
-<p><strong>SET DEFAULT</strong>: <mark>No disponible para MySQL con el motor de base de datos <strong>InnoDB</strong></mark>. Si en la tabla padre (provincias) se elimina un registro o se actualiza su clave, si hay algún valor de clave externa relacionado en la tabla referenciada (localidades) se actualizará el valor por defecto de la clave ajena.</p>
-</li>
+</code></pre></div>
+<ul>
+<li><strong>SET DEFAULT</strong>: <span style="color:red;">No disponible para MySQL con el motor de base de datos InnoDB</span>. Si en la tabla padre (provincias) se elimina un registro o se actualiza su clave, si hay algún valor de clave externa relacionado en la tabla referenciada (localidades) se actualizará el valor por defecto de la clave ajena.</li>
 </ul>
-<h4 id="otras-restricciones-y-valores-por-defecto">Otras restricciones y valores por defecto </h4>
-<p><strong><u>Enteros positivos</u></strong><br>
-Al definir un campo podemos indicar que sólo se aceptarán números positivos con la palabra reservada <strong>UNSIGNED</strong>:</p>
+<h3 id="otras-restricciones-y-valores-por-defecto">Otras restricciones y valores por defecto </h3>
+<p><strong>Enteros positivos</strong><br>
+Al definir un campo podemos indicar que sólo se aceptarán números positivos con la palabra reservada <strong><code>UNSIGNED</code></strong> y asignarle un valor por defecto determinado con la palabra reservada <strong><code>DEFAULT</code></strong> si cuando se inserta un registro no se proporciona un valor para dicho campo.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 18</p>
+<p><strong>Otras restricciones y valores por defecto</strong><br>
+En el momento de la creación de la tabla <strong>articulos</strong>, definid el campo <strong><code>precio</code></strong> para que no pueda aceptar valores negativos y que por defecto valga 0.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> articulos <span class="token punctuation">(</span>
     codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">3</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
     descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">100</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span><span class="token punctuation">,</span>
     precio <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword keyword-UNSIGNED">UNSIGNED</span> <span class="token keyword keyword-DEFAULT">DEFAULT</span> <span class="token number">0</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p><strong><u>Fecha de alta y de modificación</u></strong><br>
+</code></pre></div>
+<p><strong>Fecha de alta y de modificación</strong><br>
 Cuando deseamos tener en una tabla la fecha de alta y modificación podemos utilizar campos que se creen y actualicen automáticamente.</p>
 <ul>
 <li>
@@ -702,85 +917,90 @@ Cuando deseamos tener en una tabla la fecha de alta y modificación podemos util
 </li>
 <li>
 <p>Con <strong>ON UPDATE CURRENT_TIMESTAMP</strong> un campo actualizará el valor con la fecha y hora del sistema cada vez que se actualice el registro.</p>
+</li>
+</ul>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 19</p>
+<p><strong>Otras restricciones y valores por defecto</strong><br>
+En el momento de craeción de la tabla <strong>ejemplo</strong>, definid el campo <strong><code>fecha_modificacion</code></strong> para que se actualice con el valor del instante en que se lleve a cabo la actualización de un registro y para que el campo <strong><code>fecha_alta</code></strong> se ajuste al instante actual cuando se inserte un registro.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> ejemplo <span class="token punctuation">(</span>
     codigo <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
     fecha_alta <span class="token keyword keyword-DATETIME">DATETIME</span> <span class="token keyword keyword-DEFAULT">DEFAULT</span> <span class="token keyword keyword-CURRENT_TIMESTAMP">CURRENT_TIMESTAMP</span><span class="token punctuation">,</span>
     fecha_modificacion <span class="token keyword keyword-DATETIME">DATETIME</span> <span class="token keyword keyword-ON">ON</span> <span class="token keyword keyword-UPDATE">UPDATE</span> <span class="token keyword keyword-CURRENT_TIMESTAMP">CURRENT_TIMESTAMP</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre></li>
-</ul>
-<p><strong><u>Rellenado a ceros</u></strong><br>
-Cuando deseemos rellenar con ceros a la izquierda un campo codigo para que estén ordenados utilizaremos la palabra reservada <strong>ZEROFILL</strong>.</p>
+</code></pre></div>
+<p><strong>Rellenado a ceros</strong><br>
+El relleno con ceros a la izquierda se lleva a cabo sobre campos de tipo <strong><code>INT</code></strong>. Para ello utilizamos la opción <strong><code>ZEROFILL</code></strong>.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 20</p>
+<p><strong>Otras restricciones y valores por defecto</strong><br>
+En el momento de la creación de la tabla <strong>ejemplo</strong> definid el campo --` para que se rellene con ceros a la izquierda.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> ejemplo <span class="token punctuation">(</span>
     codigo <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> ZEROFILL <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
     descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-
+<span class="token comment">/* El valor del código 1 se insertará rellenando con ceros a la izquierda
+para obtener el valor con 4 dígitos. */</span>
 <span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-INTO">INTO</span> ejemplo <span class="token punctuation">(</span>codigo<span class="token punctuation">,</span> descripcion<span class="token punctuation">)</span> <span class="token keyword keyword-VALUES">VALUES</span> <span class="token punctuation">(</span><span class="token string">'1'</span><span class="token punctuation">,</span><span class="token string">'registro uno'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p><strong><u>Clave primaria automática - Autoincremento</u></strong><br>
-Cuando tenemos una entidad donde almacenamos registros pero en el esquema conceptual del modelo entidad-relación no teníamos una clave primaria, tenemos que añadir un atributo <strong>codigo</strong> para disponer de una clave primaria.</p>
-<p>Lo normal es que esta información no se la pidamos al usuario, ya que en el sistema a analizar no aparecía esta información, por lo que se suele dejar que sea el sistema el que genere este codigo automáticamente con la palabra reservada <strong>AUTO_INCREMENT</strong>.</p>
+</code></pre></div>
+<p><strong>Clave primaria automática - Autoincremento</strong><br>
+Cuando tenemos una entidad donde almacenamos registros pero en el esquema conceptual del modelo entidad-relación no teníamos una clave primaria, tenemos que añadir un atributo <strong><code>codigo</code></strong> (o cualquier otro nombre) para disponer de una clave primaria.</p>
+<p>Lo normal es que esta información no se la pidamos al usuario, ya que en el sistema a analizar no aparecía esta información, por lo que se suele dejar que sea el sistema el que genere este codigo automáticamente con la palabra reservada <strong><code>AUTO_INCREMENT</code></strong>.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 22</p>
+<p><strong>Otras restricciones y valores por defecto</strong><br>
+Crear la tabla <strong>ejemplo</strong> de manera que la clave primaria sea un campo autoincrementado.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> ejemplo <span class="token punctuation">(</span>
     codigo <span class="token keyword keyword-INT">INT</span><span class="token punctuation">(</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-AUTO_INCREMENT">AUTO_INCREMENT</span> <span class="token keyword keyword-PRIMARY">PRIMARY</span> <span class="token keyword keyword-KEY">KEY</span><span class="token punctuation">,</span>
     descripcion <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">50</span><span class="token punctuation">)</span> <span class="token operator">NOT</span> <span class="token boolean">NULL</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-I
-<span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-INTO">INTO</span> ejemplo <span class="token punctuation">(</span>descripcion<span class="token punctuation">)</span> <span class="token keyword keyword-VALUES">VALUES</span> <span class="token punctuation">(</span><span class="token string">'registro uno'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p>En phpMyAdmin, seleccionando la tabla y luego pulsando en la pestaña operaciones, podemos ver y cambiar el valor siguiente de AUTO_INCREMENT.</p>
-<h4 id="restricciones-avanzadas">Restricciones avanzadas </h4>
-<p><strong><u>Campos calculados</u></strong><br>
+<span class="token comment">-- No especificamos el campo codigo ya que este es autoincrementado</span>
+<span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-INTO">INTO</span> ejemplo<span class="token punctuation">(</span>descripcion<span class="token punctuation">)</span> <span class="token keyword keyword-VALUES">VALUES</span> <span class="token punctuation">(</span><span class="token string">'registro uno'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
+<p>En <strong>phpMyAdmin</strong>, seleccionando la tabla y luego pulsando en la pestaña operaciones, podemos ver y cambiar el valor siguiente de <strong>AUTO_INCREMENT</strong>.</p>
+<div class="admonition warning">
+<p class="admonition-title">Aviso</p>
+<p>No proporcionar nunca valores de los campos autoincrementados en las instrucciones de inserción ya que esto nos puede conducir a errores difíciles de tratar.</p>
+</div>
+<h3 id="restricciones-avanzadas">Restricciones avanzadas </h3>
+<p><strong>Campos calculados</strong><br>
 Una solución para los campos calculados es no crearlos en las tablas sino en las consultas con funciones de MySQL.</p>
-<p>Este tipo de cálculos y funciones los veremos en la siguiente UD4 donde trabajaremos el lenguaje de consultas SQL con las instrucciones SELECT.</p>
+<p>Este tipo de cálculos y funciones los veremos en la siguiente unidad didáctica donde trabajaremos el lenguaje de consultas SQL con las instrucciones <strong><code>SELECT</code></strong>.</p>
 <p>De todas formas, para aquellos que deseen ir practicando, puedes consultar las funciones disponibles en:<br>
-<a href="https://dev.mysql.com/doc/refman/8.0/en/func-op-summary-ref.html">https://dev.mysql.com/doc/refman/8.0/en/func-op-summary-ref.html</a>.</p>
-<p><strong><u>Filtro de valores válidos</u></strong><br>
-En el lenguaje de SQL existe la palabra reservada <strong>CHECK</strong> para indicar la condición que debe cumplir un valor para ser válido.</p>
-<p>Por ejemplo: La nota de un alumno debe estar comprendida entre 0 y 10.</p>
+<a href="https://dev.mysql.com/doc/refman/8.0/en/func-op-summary-ref.html">https://dev.mysql.com/doc/refman/8.0/en/func-op-summary-ref.html</a></p>
+<p><strong>Filtro de valores válidos</strong><br>
+En el lenguaje de SQL existe la palabra reservada <strong><code>CHECK</code></strong> para indicar la condición que debe cumplir un valor de un campo para ser válido.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 23</p>
+<p><strong>Restricciones avanzadas</strong><br>
+Crear la tabla notas de manera que la nota del alumno esté entre 0 y 10.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> notas <span class="token punctuation">(</span>
     nia <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     asignatura <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     nota <span class="token keyword keyword-DECIMAL">DECIMAL</span> <span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> check_nota <span class="token keyword keyword-CHECK">CHECK</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>nota <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">and</span> <span class="token punctuation">(</span>nota <span class="token operator">&lt;=</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> check_nota <span class="token keyword keyword-CHECK">CHECK</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>nota <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">AND</span> <span class="token punctuation">(</span>nota <span class="token operator">&lt;=</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p>Estas condiciones funcionan perfectamente en muchos SGBD, pero en MySQL, aunque no dan error no se tienen en cuenta.</p>
-<p>Por lo tanto, si deseamos controlar estas restricciones deberemos hacer uso de disparadores o <strong>triggers</strong>. En la unidad UD5 profundizaremos en los disparadores (triggers en inglés) pero ahora introduciremos su uso.</p>
-<p>Para crear un disparador para controlar valores de un campo al insertar usaremos la siguiente sintaxis:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Crear el disparador */</span>
-<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
-<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TRIGGER">TRIGGER</span> nombretabla_before_insert BEFORE <span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-ON">ON</span> nombretabla
-<span class="token keyword keyword-BEGIN">BEGIN</span>
-    <span class="token keyword keyword-FOR EACH ROW">FOR EACH ROW</span> <span class="token keyword keyword-BEGIN">BEGIN</span>
-        <span class="token keyword keyword-IF">IF</span> <span class="token punctuation">(</span>condicion error<span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
-            SIGNAL SQLSTATE <span class="token string">'45000'</span><span class="token punctuation">;</span>
-            <span class="token keyword keyword-SET">SET</span> MESSAGE_TEXT <span class="token operator">=</span> <span class="token string">'nuevo mensaje de error'</span><span class="token punctuation">;</span>
-        <span class="token keyword keyword-END">END</span> <span class="token keyword keyword-IF">IF</span><span class="token punctuation">;</span>
-    <span class="token keyword keyword-END">END</span><span class="token punctuation">;</span>
-<span class="token keyword keyword-END">END</span> <span class="token comment">//</span>
-<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
-</code></pre><p>El ejemplo de la nota anterior quedaría:</p>
-<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Crear el disparador */</span>
-<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
-<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TRIGGER">TRIGGER</span> notas_before_insert BEFORE <span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-ON">ON</span> notas
-<span class="token keyword keyword-BEGIN">BEGIN</span>
-    <span class="token keyword keyword-FOR EACH ROW">FOR EACH ROW</span> <span class="token keyword keyword-BEGIN">BEGIN</span>
-        <span class="token keyword keyword-IF">IF</span> <span class="token punctuation">(</span> <span class="token punctuation">(</span>NEW<span class="token punctuation">.</span>nota <span class="token operator">&lt;</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">OR</span> <span class="token punctuation">(</span>NEW<span class="token punctuation">.</span>nota <span class="token operator">&gt;</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
-            SIGNAL SQLSTATE <span class="token string">'45000'</span><span class="token punctuation">;</span>
-            <span class="token keyword keyword-SET">SET</span> MESSAGE_TEXT <span class="token operator">=</span> <span class="token string">'Compruebe el valor del campo nota que debe estar comprendido entre 0 y 10 puntos'</span><span class="token punctuation">;</span>
-        <span class="token keyword keyword-END">END</span> <span class="token keyword keyword-IF">IF</span><span class="token punctuation">;</span>
-    <span class="token keyword keyword-END">END</span><span class="token punctuation">;</span>
-<span class="token keyword keyword-END">END</span> <span class="token comment">//</span>
-<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
-</code></pre><p><strong><u>Transformaciones antes de grabar</u></strong><br>
-Al igual que en el apartado anterior CHECK nos permite realizar estos cambios.</p>
-<p>Por ejemplo, si queremos que un campo de tipo carácter sólo almacene caracteres en mayúsculas, lo haríamos con la función UPPER() dentro de una restricción CHECK.</p>
-<p>Por ejemplo: La asignatura de un alumno debe estar en mayúsculas.</p>
+</code></pre></div>
+<p><strong>Transformaciones antes de grabar</strong><br>
+Al igual que en el apartado anterior <strong><code>CHECK</code></strong> nos permite realizar estos cambios.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 24</p>
+<p><strong>Restricciones avanzadas</strong><br>
+Deseamos que en el campo asignatura se almacenen los valores en mayúscula independientemente de como los proporcione el usuario. Para ello utilizaremos la función <strong><code>UPPER()</code></strong> dentro de una restricción <strong><code>CHECK</code></strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> notas <span class="token punctuation">(</span>
     nia <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     asignatura <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     nota <span class="token keyword keyword-DECIMAL">DECIMAL</span> <span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
-    <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> check_asignatura <span class="token keyword keyword-CHECK">CHECK</span> <span class="token punctuation">(</span>asignatura <span class="token operator">=</span> UPPER<span class="token punctuation">(</span>asignatura<span class="token punctuation">)</span> <span class="token punctuation">)</span>
+    <span class="token keyword keyword-CONSTRAINT">CONSTRAINT</span> check_asignatura <span class="token keyword keyword-CHECK">CHECK</span> <span class="token punctuation">(</span> asignatura <span class="token operator">=</span> UPPER<span class="token punctuation">(</span>asignatura<span class="token punctuation">)</span> <span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p>En MySQL, al no disponer de CHECK utilizaremos el disparador <strong>BEFORE INSERT</strong> como en el apartado anterior.</p>
+</code></pre></div>
+<p>Aunque esta definición no da ningún error en MySQL, desafortunadamente esta funcionalidad no está implementada a día de hoy.<br>
+El problema se puede solventar definiendo un procedimeiento especial llamado <strong>trigger</strong> o disparador. En una uidad didáctica posterior se tratará en profundidad el trabajo con triggers.<br>
+En cualquier caso, a título informativo, se mostrará el código de este prparaocedimiento que en nuestro caso tendrá la función de interceptar el valor de la asignatura que se quiere insertar y sustituirá el valor proporcionado por el mismo pero pasado a mayúsculas.</p>
+<div class="admonition example">
+<p class="admonition-title">Anexo ejemplo 24</p>
+<p><strong>Restricciones avanzadas</strong><br>
+Creación del trigger que soluciona el paso a mayúsculas del nombre de las asignaturas.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Crear el disparador */</span>
 <span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
 <span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TRIGGER">TRIGGER</span> notas_before_insert BEFORE <span class="token keyword keyword-INSERT">INSERT</span> <span class="token keyword keyword-ON">ON</span> notas
@@ -790,69 +1010,93 @@ Al igual que en el apartado anterior CHECK nos permite realizar estos cambios.</
         <span class="token keyword keyword-END">END</span><span class="token punctuation">;</span>
     <span class="token keyword keyword-END">END</span> <span class="token comment">//</span>
 <span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
-</code></pre><p>Para eliminar una restricción de TRIGGER disponemos de la instrucción <strong>DROP</strong>.</p>
+</code></pre></div>
+<p>Para eliminar un <strong>TRIGGER</strong> disponemos de la instrucción <strong><code>DROP</code></strong>.</p>
+<div class="admonition example">
+<p class="admonition-title">Anexo ejemplo 24b</p>
+<p><strong>Restricciones avanzadas</strong><br>
+Eliminar el trigger creado en el ejemplo anterior.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-TRIGGER">TRIGGER</span> notas_before_insert<span class="token punctuation">;</span>
-</code></pre><h2 id="tablas-a-partir-de-consultas">Tablas a partir de consultas </h2>
+</code></pre></div>
+<h2 id="tablas-a-partir-de-consultas">Tablas a partir de consultas </h2>
 <p>Existe la posibilidad de crear tablas a partir de consultas de otras tablas.</p>
-<p>La sintaxis es muy sencilla, pues si tenemos una consulta de tipo:</p>
+<p>La sintaxis es muy sencilla, pues si tenemos una consulta del tipo:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> campo1<span class="token punctuation">,</span> campo2
 <span class="token keyword keyword-FROM">FROM</span> nombretabla
 <span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">;</span>
 </code></pre><p>Podríamos obtener una tabla con la siguiente instrucción SQL:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> nuevatabla
 <span class="token keyword keyword-SELECT">SELECT</span> campo1<span class="token punctuation">,</span> campo2 <span class="token keyword keyword-FROM">FROM</span> nombretabla <span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">;</span>
-</code></pre><p>Pero eso sí, la crea sin clave primaria, ni restricciones ni índices.</p>
+</code></pre><p>Pero eso sí, la crea <strong>sin clave primaria, ni restricciones ni índices</strong>.</p>
 <p>Por ejemplo, si queremos una copia completa de la tabla provincias en provincias2:</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 1</p>
+<p><strong>Tablas a partir de consultas</strong><br>
+Crear un duplicado de la tabla provincias de nombre provincias2.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> provincias2
 <span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> provincias<span class="token punctuation">;</span>
-</code></pre><h2 id="vistas">Vistas </h2>
+</code></pre></div>
+<h2 id="vistas">Vistas </h2>
+<div class="caso_estudio">
 <p>Una <strong>vista</strong> es una consulta que se presenta como una tabla (virtual) a partir de un conjunto de tablas en una base de datos relacional.</p>
+</div> <!-- fin caso de estudio -->
 <p>Las vistas tienen la misma estructura que una tabla: filas y columnas. La única diferencia es que sólo se almacena de ellas la definición, no los datos. Los datos que se recuperan mediante una consulta a una vista se presentarán igual que los de una tabla. De hecho, si no se sabe que se está trabajando con una vista, nada hace suponer que es así. Al igual que sucede con una tabla, se pueden insertar, actualizar, borrar y seleccionar datos en una vista. Aunque siempre es posible seleccionar datos de una vista, en algunas condiciones existen restricciones para realizar el resto de las operaciones sobre vistas.</p>
-<p>Una vista se especifica a través de una expresión de consulta (una sentencia SELECT) que la calcula y que puede realizarse sobre una o más tablas. Sobre un conjunto de tablas relacionales se puede trabajar con un número cualquiera de vistas.</p>
-<p>La mayoría de los SGBD soportan la creación y manipulación de vistas. Las vistas se crean cuando se necesitan hacer varias sentencias para devolver una tabla final.</p>
-<p>La sintaxis es muy sencilla, pues si tenemos una consulta de tipo:</p>
+<p>Una vista se especifica a través de una expresión de consulta (una sentencia <strong><code>SELECT</code></strong>) que la calcula y que puede realizarse sobre una o más tablas. Sobre un conjunto de tablas relacionales se puede trabajar con un número cualquiera de vistas.</p>
+<p>La mayoría de los SGBD soportan la creación y manipulación de vistas. La sintaxis es muy sencilla, pues si tenemos una consulta de tipo:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> campo1<span class="token punctuation">,</span> campo2
 <span class="token keyword keyword-FROM">FROM</span> nombretabla
 <span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">;</span>
-</code></pre><p>Podríamos obtener una tabla con la siguiente instrucción SQL:</p>
+</code></pre><p>Podríamos obtener una vista con la sentencia <strong><code>CREATE VIEW</code></strong> de la siguiente manera:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-VIEW">VIEW</span> nuevaVista <span class="token keyword keyword-AS">AS</span>
 <span class="token keyword keyword-SELECT">SELECT</span> campo1<span class="token punctuation">,</span> campo2
 <span class="token keyword keyword-FROM">FROM</span> nombretabla
 <span class="token punctuation">[</span><span class="token keyword keyword-WHERE">WHERE</span> condicion<span class="token punctuation">]</span><span class="token punctuation">;</span>
-</code></pre><p>Por ejemplo, si queremos una vista de la tabla personas que sean de la provincia = '1':</p>
+</code></pre><div class="admonition example">
+<p class="admonition-title">Ejemplo 1</p>
+<p><strong>Vistas</strong><br>
+Crear una vista denombre personas1 a partir de la tabla personas de manera que sólo contenga las provincias de código igual a 1.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-VIEW">VIEW</span> personas1 <span class="token keyword keyword-AS">AS</span>
-<span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> personas <span class="token keyword keyword-WHERE">WHERE</span> cod_provincia <span class="token operator">=</span> <span class="token string">'1'</span><span class="token punctuation">;</span>
-</code></pre><h4 id="vistas-para-aplicar-restricciones">Vistas para aplicar restricciones </h4>
-<p>A estas consultas podemos añadir restricciones con la cláusula WHERE para filtrar valores válidos simplemente añadiendo <strong>WITH CHECK OPTION</strong>:</p>
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> personas <span class="token keyword keyword-WHERE">WHERE</span> cod_provincia <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+</code></pre></div>
+<h3 id="vistas-para-aplicar-restricciones">Vistas para aplicar restricciones </h3>
+<p>Cuando creamos una vista de una tabla con restricciones de tipo CHECK, por defecto, las inserciones en la vista no tendrán en cuenta las restricciones. Esto se puede solucionar añadiendo la cláusula <strong><code>WITH CHECK OPTION</code></strong> después de la clúsula <strong><code>WHERE</code></strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-VIEW">VIEW</span> nuevatabla <span class="token keyword keyword-AS">AS</span>
 <span class="token keyword keyword-SELECT">SELECT</span> campo1<span class="token punctuation">,</span> campo2
 <span class="token keyword keyword-FROM">FROM</span> nombretabla
 <span class="token keyword keyword-WHERE">WHERE</span> condicion
 <span class="token keyword keyword-WITH">WITH</span> <span class="token keyword keyword-CHECK">CHECK</span> <span class="token keyword keyword-OPTION">OPTION</span><span class="token punctuation">;</span>
-</code></pre><p>Por ejemplo si tenemos una tabla denominada notas_data</p>
+</code></pre><p>También se puede crear una vista con restricciones <strong><code>CHECK</code></strong> aunque la tabla sobre la que se realiza no las tenga.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 2</p>
+<p><strong>Vistas</strong><br>
+Tenemos una tabla denominada <strong>notas_data</strong></p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> notas_data <span class="token punctuation">(</span>
     nia <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     asignatura <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     nota <span class="token keyword keyword-DECIMAL">DECIMAL</span> <span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p>Podríamos crear una vista para utilizarla como tabla con la restricción de valor de nota entre 0 y 10:</p>
+</code></pre><p>Crear una vista sobre esta tabla con la restricción de valor de nota entre 0 y 10.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-VIEW">VIEW</span> notas <span class="token keyword keyword-AS">AS</span>
 <span class="token keyword keyword-SELECT">SELECT</span> nia<span class="token punctuation">,</span> asignatura<span class="token punctuation">,</span> nota <span class="token keyword keyword-FROM">FROM</span> notas_data <span class="token keyword keyword-WHERE">WHERE</span> <span class="token punctuation">(</span>nota <span class="token operator">&gt;=</span> <span class="token number">0</span><span class="token punctuation">)</span> <span class="token operator">and</span> <span class="token punctuation">(</span>nota <span class="token operator">&lt;=</span> <span class="token number">10</span><span class="token punctuation">)</span>
 <span class="token keyword keyword-WITH">WITH</span> <span class="token keyword keyword-CHECK">CHECK</span> <span class="token keyword keyword-OPTION">OPTION</span><span class="token punctuation">;</span>
-</code></pre><p>De esta forma nos evitamos tener que crear un trigger, ya que esta vista sería actualizable por disponer de los campos de la tabla directamente.</p>
-<h4 id="vistas-para-aplicar-transformaciones-o-mostrar-campos-calculados">Vistas para aplicar transformaciones o mostrar campos calculados </h4>
-<p>Por ejemplo si tenemos una tabla denominada notas_data</p>
+</code></pre></div>
+<h3 id="vistas-para-aplicar-transformaciones-o-mostrar-campos-calculados">Vistas para aplicar transformaciones o mostrar campos calculados </h3>
+<p>El siguiente ejemplo aclara este concepto.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 3</p>
+<p>Supongamos que tenemos una tabla denominada <strong>notas_data</strong></p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-TABLE">TABLE</span> notas <span class="token punctuation">(</span>
     nia <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">8</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     asignatura <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     nota1 <span class="token keyword keyword-DECIMAL">DECIMAL</span> <span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
     nota2 <span class="token keyword keyword-DECIMAL">DECIMAL</span> <span class="token punctuation">(</span><span class="token number">6</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span>
 <span class="token punctuation">)</span><span class="token punctuation">;</span>
-</code></pre><p>También podríamos crear una transformación sobre un campo para su correcta visualización en mayúsculas con UPPER o calcular el promedio de dos campos con un decimal:</p>
+</code></pre><p>Crear una vista que tenga el campo <strong><code>asignatura</code></strong> en mayúsculas y un campo calculado adicional que sea la nota media (<strong><code>promedio</code></strong>) de <strong><code>nota1</code></strong> y <strong><code>nota2</code></strong> con una precisión de un decimal.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-VIEW">VIEW</span> notas_view <span class="token keyword keyword-AS">AS</span>
 <span class="token keyword keyword-SELECT">SELECT</span> nia<span class="token punctuation">,</span> UPPER<span class="token punctuation">(</span>asignatura<span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> asignatura_upper<span class="token punctuation">,</span> nota1<span class="token punctuation">,</span> nota2<span class="token punctuation">,</span> <span class="token function">round</span><span class="token punctuation">(</span><span class="token punctuation">(</span>nota1<span class="token operator">+</span>nota2<span class="token punctuation">)</span><span class="token operator">/</span><span class="token number">2</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span> <span class="token keyword keyword-as">as</span> promedio <span class="token keyword keyword-FROM">FROM</span> notas<span class="token punctuation">;</span>
 </code></pre><p>Este sistema nos obligaría a editar los datos en la tabla <strong>notas</strong> pero visualizar el resultado con la vista <strong>notas_view</strong>.</p>
-<h4 id="vistas-con-phpmyadmin">Vistas con phpMyAdmin </h4>
+</div>
+<h3 id="vistas-con-phpmyadmin">Vistas con phpMyAdmin </h3>
 <p>Una vez hemos creado una vista, podremos editarla si lo deseamos. Para ello, si utilizamos phpMyAdmin, pulsaremos sobre la vista, luego en <strong>Estructura</strong> y posteriormente en <strong>Editar vista</strong>:<br>
 <img src=".img/3.2.png" alt="Edición vista"></p>
 
