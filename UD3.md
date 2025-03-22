@@ -109,7 +109,7 @@ Abriremos las dos herramientas a la vez y comprobaremos que al ejecutar las inst
 ![Panel de control de XAMPP](.img/3.1.png)
 
 ***
-Para poder conectar con `mysql.exe` abriremos una ventana de comandos (CMD) y nos desplazaremos hasta la carpeta donde tenemos la herramienta. Para conectar debemos indicar que conectamos con el usuario root que no tiene contraseña:
+Para poder conectar con **`mysql.exe`** abriremos una ventana de comandos (CMD) y nos desplazaremos hasta la carpeta donde tenemos la herramienta. Para conectar debemos indicar que conectamos con el usuario root que no tiene contraseña:
 
 <div class="caso_estudio">
 
@@ -339,7 +339,7 @@ Hay dos formas de cambiar un campo de una tabla:
     !!! Danger Peligro
         La instrucción **`ALTER TABLE`** con la opción **`MODIFY`** hace que se pierdan los datos que había en la columna cambiada.
 
-* **Con la opción `CHANGE`**. Se puede cambiar tanto la definición como nombre del campo. Con esta opción se preservan los cambios.
+* **Con la opción `CHANGE`**. Se puede cambiar tanto la definición como el nombre del campo. Con esta opción se preservan los cambios.
 
 !!! Example Ejemplo 5
     **Modificar la definición de los campos de una tabla**
@@ -386,14 +386,14 @@ El comando **`INSERT`** inserta nuevas filas en una tabla existente. Existen dos
 * **Con la cláusula `VALUES`**
   El formato del comando es **`INSERT ... VALUES`** e inserta filas basándose en los valores especificados explícitamente.
 
-  * **Insertar un registro**: La sintaxis para insertar un registro es la siguiente:
+  * **Insertar un registro**: la sintaxis para insertar un registro es la siguiente:
 
     ```sql
     INSERT INTO nombreTabla (col_name1, col_name2, ...)
     VALUES (valor_col1, valor_col2, ... );
     ```
 
-  * **Insertar varios registros**: La sintaxis para insertar varios registros es la siguiente:
+  * **Insertar varios registros**: la sintaxis para insertar varios registros es la siguiente:
 
     ```sql
     INSERT INTO nombreTabla (col_name1, colname2, ...)
@@ -582,11 +582,11 @@ Las claves (primarias y foráneas) puden ser:
 * **Compuestas**: formadas por la concatenación de varios campos
 
 **Definir la clave primaria en el momento de  crear la tabla**
-Esta se pude declarar en la misma fila en la que se define un campo (sólo es válido si el campo es simple) o después de la definición de los campos en una línea independiente (válido para todo tipo de claves, simples o compuestad).
+Esta se pude declarar en la misma fila en la que se define un campo (sólo es válido si el campo es simple) o después de la definición de los campos en una línea independiente (válido para todo tipo de claves, simples o compuestas).
 
 !!! Example Ejemplo 1
     **Restricciones campo clave tablas**
-    Crear la tabla **articulos** y de finir el campo **`codigo`** como clave primaria.
+    Crear la tabla **articulos** y definir el campo **`codigo`** como clave primaria.
     ```sql
     -- La clave primaria se define al lado del campo
     CREATE TABLE articulos (
@@ -656,10 +656,10 @@ Se podría haber creado la tabla en primer lugar y a continuación añadir la cl
 ### Restricción de campo obligatorio
 
 Cuando un campo no puede tener valores nulos, decimos que es un campo obligatorio.
-En nuestro ejemplo indicaremos la descripción como campo obligatorio par que ningún artículo tenga la descripción vacía.
+En nuestro ejemplo indicaremos la descripción como campo obligatorio para que ningún artículo tenga la descripción vacía.
 
 **Definir campo obligatorio al crear la tabla**
-Un campo obligatorio se define con la opción NOT NULL al lado del campo.
+Un campo obligatorio se define con la opción **`NOT NULL`** al lado del campo.
 
 !!! Example Ejemplo 5
     **Restricciones campo obligatorio**
@@ -725,7 +725,7 @@ Se lleva a cabo con la instrucción **`ALTER TABLE`** combinada con la opción *
 
 !!! Example Ejemplo 10
     **Restricciones campo único**
-    Añadir una restricción única sobre el campo descripcion de la tabla articulos.
+    Añadir una restricción única sobre el campo **`descripcion`** de la tabla **articulos**.
      ```sql
     ALTER TABLE articulos ADD UNIQUE(descripcion);
     ```
@@ -784,7 +784,7 @@ Si queremos darle un nombre nosotros utilizaremos la cláusula **`CONSTRAINT`**:
     );
     ```
 
-De esta forma se utilizará el valor de CONSTRAINT tanto para el índice como para la relación.
+De esta forma se utilizará el valor de **`CONSTRAINT`** tanto para el índice como para la relación.
 
 **Eliminar la restricción de clave ajena**
 Se utiliza la instrucción **`ALTER TABLE`** en combinación con la opción **`DROP`** para este propósito. Si hemos definido la restricción con una cláusula **`CONSTRAINT`** la utilizaremos.
@@ -836,7 +836,7 @@ Se utiliza la instrucción **`ALTER TABLE`** en combinación con la opción **`A
 
 Una de las acciones más importantes para mantener la integridad en una base de datos es identificar correctamente la acción a realizar cuando eliminamos o actualizamos el valor de la clave ajena de un registro.
 
-En el caso de vaciar el campo **`localidades.cod_provincia`** podemos hacer llevar a cabo varias acciones:
+En el caso de vaciar el campo **`localidades.cod_provincia`** podemos llevar a cabo varias acciones:
 
 * **RESTRICT**: Es el valor por defecto. El servidor MySQL rechazará la operación de eliminación o actualización para la tabla padre (provincias) si hay un valor de clave externa relacionado en la tabla referenciada (localidades), es decir, no se puede en provincias eliminar un registro o cambiar su clave, si existen localidades de esa provincia.
 * **NO ACTION**: Pertenece al SQL estándar. En MySQL es equivalente a RESTRICT. Algunos sistemas de base de datos tienen verificaciones diferidas, y NO ACTION es un cheque diferido. En MySQL, las restricciones de clave externa se verifican inmediatamente, por lo que NO ACCIÓN es lo mismo que RESTRICT.
@@ -846,14 +846,14 @@ Si especifica una acción SET NULL, asegúrese de que no ha declarado las column
   * Al **borrar**, si en la tabla padre (provincias) se elimina un registro, se eliminarán también todos los registros de la tabla referenciada (localidades) que tenga este valor en su calve ajena.
   * Al **actualizar**, si en la tabla padre (provincias) se actualiza la clave de un registro, se actualizarán también todos los registros de la tabla referenciada (localidades) que tenga este valor en su clave ajena con el nuevo valor.
 
-  Para indicar estas acciones **añadiremos a la sentencia FOREIGN KEY alguna de las siguientes cláusulas**:
+  Para indicar estas acciones **añadiremos a la sentencia `FOREIGN KEY` alguna de las siguientes cláusulas**:
 
-  * ON DELETE RESTRICT
-  * ON DELETE SET NULL
-  * ON DELETE CASCADE
-  * ON UPDATE RESTRICT
-  * ON UPDATE SET NULL
-  * ON UPDATE CASCADE
+  * **`ON DELETE RESTRICT`**
+  * **`ON DELETE SET NULL`**
+  * **`ON DELETE CASCADE`**
+  * **`ON UPDATE RESTRICT`**
+  * **`ON UPDATE SET NULL`**
+  * **`ON UPDATE CASCADE`**
 
 !!! Example Ejemplo 17
     **Restricciones por borrado/actualización de clave ajena**
@@ -865,7 +865,7 @@ Si especifica una acción SET NULL, asegúrese de que no ha declarado las column
     ON UPDATE RESTRICT;
     ```
 
-* **SET DEFAULT**: <span style="color:red;">No disponible para MySQL con el motor de base de datos InnoDB</span>. Si en la tabla padre (provincias) se elimina un registro o se actualiza su clave, si hay algún valor de clave externa relacionado en la tabla referenciada (localidades) se actualizará el valor por defecto de la clave ajena.
+* **SET DEFAULT**: <span style="color:red;">No disponible para MySQL con el motor de base de datos InnoDB</span>. Si en la tabla padre (**provincias**) se elimina un registro o se actualiza su clave, si hay algún valor de clave externa relacionado en la tabla referenciada (**localidades**) se actualizará el valor por defecto de la clave ajena.
 
 
 ### Otras restricciones y valores por defecto
@@ -907,7 +907,7 @@ El relleno con ceros a la izquierda se lleva a cabo sobre campos de tipo **`INT`
 
 !!! Example Ejemplo 20
     **Otras restricciones y valores por defecto**
-    En el momento de la creación de la tabla **ejemplo** definid el campo --` para que se rellene con ceros a la izquierda.
+    En el momento de la creación de la tabla **ejemplo** definid el campo **`codigo`** para que se rellene con ceros a la izquierda.
     ```sql
     CREATE TABLE ejemplo (
         codigo INT(4) ZEROFILL PRIMARY KEY,
@@ -955,7 +955,7 @@ En el lenguaje de SQL existe la palabra reservada **`CHECK`** para indicar la co
 
 !!! Example Ejemplo 23
     **Restricciones avanzadas**
-    Crear la tabla notas de manera que la nota del alumno esté entre 0 y 10.
+    Crear la tabla notas de manera que la **`nota`** del alumno esté entre 0 y 10.
     ```sql
     CREATE TABLE notas (
         nia VARCHAR(8),
@@ -969,7 +969,7 @@ Al igual que en el apartado anterior **`CHECK`** nos permite realizar estos camb
 
 !!! Example Ejemplo 24
     **Restricciones avanzadas**
-    Deseamos que en el campo asignatura se almacenen los valores en mayúscula independientemente de como los proporcione el usuario. Para ello utilizaremos la función **`UPPER()`** dentro de una restricción **`CHECK`**.
+    Deseamos que en el campo **`asignatura`** se almacenen los valores en mayúscula independientemente de como los proporcione el usuario. Para ello utilizaremos la función **`UPPER()`** dentro de una restricción **`CHECK`**.
     ```sql
     CREATE TABLE notas (
         nia VARCHAR(8),
@@ -979,9 +979,8 @@ Al igual que en el apartado anterior **`CHECK`** nos permite realizar estos camb
     );
     ```
 
-Aunque esta definición no da ningún error en MySQL, desafortunadamente esta funcionalidad no está implementada a día de hoy.
-El problema se puede solventar definiendo un procedimeiento especial llamado **trigger** o disparador. En una uidad didáctica posterior se tratará en profundidad el trabajo con triggers.
-En cualquier caso, a título informativo, se mostrará el código de este prparaocedimiento que en nuestro caso tendrá la función de interceptar el valor de la asignatura que se quiere insertar y sustituirá el valor proporcionado por el mismo pero pasado a mayúsculas. 
+Aunque esta definición no da ningún error en MySQL, desafortunadamente esta funcionalidad no está implementada a día de hoy. El problema se puede solventar definiendo un procedimeiento especial llamado **trigger** o disparador. En una uidad didáctica posterior se tratará en profundidad el trabajo con triggers.
+En cualquier caso, a título informativo, se mostrará el código de este procedimiento que en nuestro caso tendrá la función de interceptar el valor de la asignatura que se quiere insertar y sustituirá el valor proporcionado por el mismo pero pasado a mayúsculas.
 
 !!! Example Anexo ejemplo 24
     **Restricciones avanzadas**
@@ -1028,11 +1027,9 @@ SELECT campo1, campo2 FROM nombretabla WHERE condicion;
 
 Pero eso sí, la crea **sin clave primaria, ni restricciones ni índices**.
 
-Por ejemplo, si queremos una copia completa de la tabla provincias en provincias2:
-
 !!! Example Ejemplo 1
     **Tablas a partir de consultas**
-    Crear un duplicado de la tabla provincias de nombre provincias2.
+    Crear un duplicado de la tabla **provincias** de nombre **provincias2**.
     ```sql
     CREATE TABLE provincias2
     SELECT * FROM provincias;
@@ -1068,7 +1065,7 @@ FROM nombretabla
 
 !!! Example Ejemplo 1
     **Vistas**
-    Crear una vista denombre personas1 a partir de la tabla personas de manera que sólo contenga las provincias de código igual a 1.
+    Crear una vista de nombre **personas1** a partir de la tabla **personas** de manera que sólo contenga las provincias de código igual a 1.
     ```sql
     CREATE VIEW personas1 AS
     SELECT * FROM personas WHERE cod_provincia = 1;
@@ -1076,7 +1073,7 @@ FROM nombretabla
 
 ### Vistas para aplicar restricciones
 
-Cuando creamos una vista de una tabla con restricciones de tipo CHECK, por defecto, las inserciones en la vista no tendrán en cuenta las restricciones. Esto se puede solucionar añadiendo la cláusula **`WITH CHECK OPTION`** después de la clúsula **`WHERE`**.
+Cuando creamos una vista de una tabla con restricciones de tipo **`CHECK`**, por defecto, las inserciones en la vista no tendrán en cuenta las restricciones. Esto se puede solucionar añadiendo la cláusula **`WITH CHECK OPTION`** después de la clúsula **`WHERE`**.
 
 ```sql
 CREATE VIEW nuevatabla AS
@@ -1098,7 +1095,7 @@ También se puede crear una vista con restricciones **`CHECK`** aunque la tabla 
         nota DECIMAL (6,2)
     );
     ```
-    Crear una vista sobre esta tabla con la restricción de valor de nota entre 0 y 10.
+    Crear una vista sobre esta tabla con la restricción de valor de **`nota`** entre 0 y 10.
     ```sql
     CREATE VIEW notas AS
     SELECT nia, asignatura, nota FROM notas_data WHERE (nota >= 0) and (nota <= 10)
@@ -1128,5 +1125,5 @@ El siguiente ejemplo aclara este concepto.
 
 ### Vistas con phpMyAdmin
 
-Una vez hemos creado una vista, podremos editarla si lo deseamos. Para ello, si utilizamos phpMyAdmin, pulsaremos sobre la vista, luego en **Estructura** y posteriormente en **Editar vista**:
+Una vez hemos creado una vista, podremos editarla si lo deseamos. Para ello, si utilizamos phpMyAdmin, pulsaremos sobre la vista, luego en *Estructura* y posteriormente en *Editar vista*:
 ![Edición vista](.img/3.2.png)
