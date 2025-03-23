@@ -33,11 +33,13 @@ toc:
 ---
 
 ÍNDICE
+
 1. Introducción
 2. Primeros SCRIPTS
 3. Procedimientos y estructuras de control
 
 ## Introducción
+
 Analizando el mercado actual de Bases de Datos, el uso de los diferentes productos existentes se ha segmentado.
 
 |Usuarios BD|Bases de datos|
@@ -55,8 +57,7 @@ Las librerías para acceder a bases de datos MySQL están disponibles en los pri
 
 MySQL es popular para aplicaciones web y actúa como el componente de base de datos de las plataformas LAMP, MAMP y WAMP (Linux/Mac/Windows-Apache-MySQL-PHP/Perl). Su popularidad como aplicación web está estrechamente ligada a la popularidad de PHP, que a menudo se combina con MySQL. PHP y MySQL son componentes esenciales para ejecutar la popular plataforma de Gestor de Cotnenidos WordPress.
 
-#### Cliente / Servidor
-
+**Cliente / Servidor**
 La arquitectura **cliente-servidor** es un modelo de diseño de software en el que las tareas se reparten entre los proveedores de recursos o servicios, llamados servidores, y los demandantes, llamados clientes.
 
 Un cliente realiza peticiones a otro programa, el servidor, quien le da respuesta. Esta idea también se puede aplicar a programas que se ejecutan sobre una sola computadora, aunque es más ventajosa en un sistema operativo multiusuario distribuido a través de una red de computadoras.
@@ -71,7 +72,7 @@ Puedes consultar el **Tiobe Index** de los lenguajes de programación más usado
 Puedes consultar la web del **Instituto de Ingeniería Eléctrica y Electrónica** (Institute of Electrical and Electronics Engineers o IEEE), que con más de 425.000 miembros y voluntarios en 160 países, también publica su propia lista de lenguajes de programación más populares (se puede filtrar por Web):
 <https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018>
 
-#### Programación en BD
+**Programación en BD**
 Los SGBD relacionales usan SQL como lenguaje de DCL, DDL y DML.
 
 * **DCL – Data Control Language** – Lenguaje de Control de Datos
@@ -92,7 +93,7 @@ Todas las bases de datos relacionales permiten alamacenar código aunque la exte
 
 En este tema nos centraremos en MySQL para trabajar con programación a través de **procedimientos**, **funciones** y **tratamiento de eventos**.
 
-!!!Note Referencias
+!!! Note Referencias
 	[MySQL Oficial – Almacenamiento de Programas en MySQL](https://dev.mysql.com/doc/refman/8.0/en/stored-programs-views.html)
 
 Los procedimientos almacenados y funciones son nuevas funcionalidades incluidas desde la versión de MySQL 5.0.
@@ -296,6 +297,7 @@ mysql> SET NAMES 'utf8';
 // Cambiar a juego de caracteres en ANSI West European Latin
 mysql> SET NAMES 'latin1';
 ```
+
 El comando **`mysql`** dispone además de muchos parámetros. Usaremos algunos:
 
 |Parámetro|Descripción|
@@ -305,6 +307,7 @@ El comando **`mysql`** dispone además de muchos parámetros. Usaremos algunos:
 |**--html**| La salida de los SELECT la muestra en formato HTML|
 
 Ejemplo de forma de conexión.
+
 ```cmd
 //Conectarse como root en modo silencioso
 C:\> mysql -u root -p --silent --table
@@ -362,7 +365,7 @@ Los procedimientos se asignan a una base de datos. Esto quiere decir que debemos
 
 En la declaración del procedimiento hemos usado delimiter pero, ¿por qué es importante el uso del **`DELIMITER`**?.
 
-Ya sabemos que por defecto MySQL usa como delimitador de fin de instrucción el punto y coma (;) , es decir, cada vez que encuentre punto y como(;) ejecuta hasta ahí. Como en los procedimientos hay varias líneas de códigos y algunas de ellas terminan con este delimitador se ejecutaría solo hasta ahí, lo que ocasionaría un error, y es por esto que es necesario indicarle a MySQL que utilice otro dlimitador que puede ser cualquiera. Ese es el próposito de la cláusula **`DELIMITER`**.
+Ya sabemos que por defecto MySQL usa como delimitador de fin de instrucción el punto y coma (\;) , es decir, cada vez que encuentre punto y como(\;) ejecuta hasta ahí. Como en los procedimientos hay varias líneas de códigos y algunas de ellas terminan con este delimitador se ejecutaría solo hasta ahí, lo que ocasionaría un error, y es por esto que es necesario indicarle a MySQL que utilice otro dlimitador que puede ser cualquiera. Ese es el próposito de la cláusula **`DELIMITER`**.
 
 Para nuestro ejemplo usamos **//** pero se podría usar también **$$** o lo que queramos. Al finalizar la creación del procedimiento o función volvemos a cambiarlo por **;**
 
@@ -403,11 +406,11 @@ Estas variables no comienzan con el caracter especial @, al contrario de lo que 
 DECLARE nombreVariable tipoVariable [opciones];
 ```
 
-### Estructuras de control
+#### Estructuras de control
 
 Las instrucciones de un procedimiento (o función) se ejecutan secuencialmente empezando por la instrucción que está justo después de la palabra reservada **`BEGIN`** y acabando por la que está justo antes de la palabra reservada **`END`**. Esta forma de ejcución de instrucciones se llama **secuencial**. El siguiente diagrama representa un bloque de 3 instrucciones que se ejecutan secuencialmente. El punto negro inicial representa el **`BEGIN`** y el punto con el aspa el **`END`**.
 
-```puml
+```puml {align="center", style="zoom:1"}
 @startuml
 start
 :Instrucción 1;
@@ -438,7 +441,7 @@ IF [condicion] THEN
 END IF;
 ```
 
-```puml
+```puml {align="center", style="zoom:1"}
 @startuml
 start
 if (condición) then (Sí)
@@ -457,6 +460,8 @@ stop
 @enduml
 ```
 
+El rombo equivaldría al **`END IF`**.
+
 ***Variante 2***
 Esquema general
 
@@ -468,7 +473,7 @@ ELSE
 END IF;
 ```
 
-```puml
+```puml {align="center", style="zoom:1"}
 @startuml
 start
 if (condición) then (Sí)
@@ -506,11 +511,10 @@ ELSE
 END IF;
 ```
 
-```puml
+```puml {align="center", style="zoom:1"}
 @startuml
 !pragma useVerticalIf on
 start
-
 if (condición A) then (Sí)
 #lightgreen: bloque sentencias 1;
 note right
@@ -523,26 +527,22 @@ note right
 Las sentencias sólo se ejecutan si **NO** se
 cumple la condición A y **SÍ** se cumple la B.
 end note
-
 else (No)
 #lightgreen:bloque sentencias 3;
 note right
 Las sentencias sólo se ejecutan si **NO** 
 se cumple ninguna condición.
 end note
-
 end if
 :bloque sentencias común;
-
 note
 Este bloque de sentencias se ejecuta
 **siempre**, se cumpla o no la condición.
 end note
-
 stop
-
 @enduml
 ```
+
 Puede haber tantas cláusulas **`ELSEIF`** como queramos pero sólo puede haber una cláusula **`IF`** y una **`ELSE`**.
 
 !!! Example Ejemplo 3
@@ -609,7 +609,6 @@ END CASE;
 Si realizamos el mismo ejemplo con CASE quedaría:
 
 Ejemplo 2 – SCRIPT con CASE
-
 ```sql
 /* Eliminar el procedimiento si ya existe */
 DROP PROCEDURE IF EXISTS ud6ejer.colorescase;
