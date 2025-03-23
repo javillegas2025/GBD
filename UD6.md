@@ -538,7 +538,7 @@ end if
 :bloque sentencias común;
 note
 Este bloque de sentencias se ejecuta
-**siempre**, se cumpla o no la condición.
+**siempre**, se cumplan o no la condiciones.
 end note
 stop
 @enduml
