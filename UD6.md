@@ -121,7 +121,7 @@ Los scripts de MySQL se puede ejecutar directamente con el programa  **`mysql.ex
 **`mysql.exe`** es una shell que conecta con el servidor de MySQL y permite ejecutar instrucciones de SQL. Cuando nos conectamos tenemos que indicar y contraseña si procede.
 </div> <!-- fin caso de estudio -->
 
-Para conectarnos como root hacemos: 
+Para conectarnos como root hacemos:
 **`C:\Program Files\MySQL\MySQL Server 8.0\bin> mysql -u root -p`**
 
 !!! Example Ejemplo 1
@@ -159,37 +159,37 @@ Las instrucciones **SET** y **SELECT** pueden ejecutarse también directamente d
 
 Los comentarios dentro de los SCRIPTS pueden hacerse de la siguiente manera:
 
-    ```sql
-    -- comentario con almohadilla (solo una linea)
-    -- Comentario con dos guiones (solo una linea)
-    /* comentario con barra asterisco (solo una linea) */
-    /*
-      esto es
-      un comentario
-      multilinea
-    */
-    ```
+```sql
+# comentario con almohadilla (solo una linea)
+-- Comentario con dos guiones (solo una linea)
+/* comentario con barra asterisco (solo una linea) */
+/*
+  esto es
+  un comentario
+  multilinea
+*/
+```
 
 ### Variables definidas por el usuario
 
 Para definir una variable de usuario utilizaremos el carácter **@**. Asignaremos valores con el comando **`SET`**:
 
-    ```sql
-    SET @num = 9, @cad = 'Hola';
-    SET @num := 9, @cad := 'Hola';
-    ```
+```sql
+SET @num = 9, @cad = 'Hola';
+SET @num := 9, @cad := 'Hola';
+```
 
 Y para mostrar sus valores la instrucción **`SELECT`**:
 
-    ```sql
-    SELECT @num, @cad;
-    ```
+```sql
+SELECT @num, @cad;
+```
 
 Las variables puede usarse en instrucciones **`SELECT`** de recuperación de datos, como:
 
-    ```sql
-    SELECT * FROM ciudades WHERE codigo > @num;
-    ```
+```sql
+SELECT * FROM ciudades WHERE codigo > @num;
+```
 
 También podemos calcular y asignar valor en la misma instrucción, almacenando resultados de nuestras **`SELECT`**, pero en este caso sólo funciona el operador **`:=`**. Si no deseamos que se produzca la salida del resultado, sino sólo almacenarlo, podemos usar la cláusula **`INTO`**:
 
@@ -206,17 +206,17 @@ También podemos calcular y asignar valor en la misma instrucción, almacenando 
 
 Para consultar todas las variables creadas por el usuario, podemos consultar la tabla **performance_schema.user_variables_by_thread** a partir de la versión 5.7 de MySQL:
 
-    ```sql
-    SELECT * FROM performance_schema.user_variables_by_thread;
-    ```
+```sql
+SELECT * FROM performance_schema.user_variables_by_thread;
+```
 
 ### Variables del sistema
 
 MySQL tiene muchas variables de sistema que pueden consultarse en <https://dev.mysql.com/doc/refman/8.0/en/server-system-variable-reference.html> y que podemos consultar con la instrucción **`SHOW VARIABLES LIKE`**.
 
-    ```sql
-    SHOW VARIABLES LIKE '%';
-    ```
+```sql
+SHOW VARIABLES LIKE '%';
+```
 
 Las variables de sistema pueden ser de tipo:
 
@@ -225,46 +225,46 @@ Las variables de sistema pueden ser de tipo:
 
 Para mostrar el valor de alguna variable global utilizaremos una doble **@** tal como se muestra en este ejemplo con la variable *max_connections*.
 
-    ```sql
-    SELECT @@max_connections;
-    ```
+```sql
+SELECT @@max_connections;
+```
 
 Para asignar un nuevo valor a la variable **GLOBAL** utilizaremos una de las dos opciones siguientes:
 
-    ```sql
-    SET GLOBAL max_connections = 50;
-    SET @@global.max_connections = 50;
-    ```
+```sql
+SET GLOBAL max_connections = 50;
+SET @@global.max_connections = 50;
+```
 
 Por ejemplo la variable *lc_messages* define el idioma en que se muestran los mensajes de error. Podríamos tener el valor *en_US* para tenerlos en inglés o *es_ES* para español.
 
 Para asignar un nuevo valor a la variable de sistema de tipo **SESSION** utilizaremos una de las siguientes cuatro opciones mostradas en el ejemplo con la variable *lc_messages*.
 
-    ```sql
-    SET lc_messages = 'es_ES';
-    SET @@lc_messages='es_ES';
-    SET SESSION lc_messages = 'es_ES';
-    SET @@local.lc_messages='es_ES';
-    ```
+```sql
+SET lc_messages = 'es_ES';
+SET @@lc_messages='es_ES';
+SET SESSION lc_messages = 'es_ES';
+SET @@local.lc_messages='es_ES';
+```
     
 Prueba a ejecutar las siguientes instrucciones después de conectar con **`mysql.exe`** y comprueba el resultado:
 
-    ```sql
-    mysql> SET SESSION lc_messages='en_US';
-    mysql> MENSAJES;
-    ERROR 1064 (42000): You have an error in your SQL syntax; check
-    the manual that corresponds to your MySQL server version for the
-    right syntax to use near 'MENSAJES' at line 1
-    mysql> SET SESSION lc_messages='es_ES';
-    mysql> MENSAJES;
-    ERROR 1064 (42000): Algo está equivocado en su sintax cerca
-    'MENSAJES' en la linea 1
-    ```
-    
-    !!! Example Ejemplo 3
+```sql
+mysql> SET SESSION lc_messages='en_US';
+mysql> MENSAJES;
+ERROR 1064 (42000): You have an error in your SQL syntax; check
+the manual that corresponds to your MySQL server version for the
+right syntax to use near 'MENSAJES' at line 1
+mysql> SET SESSION lc_messages='es_ES';
+mysql> MENSAJES;
+ERROR 1064 (42000): Algo está equivocado en su sintax cerca
+'MENSAJES' en la linea 1
+```
+
+!!! Example Ejemplo 3
     **Scripts**
     Crea un **script** que conecte con la base de datos **world** y guarde en una variable el número de registros de la tabla **city** y en otra el número de registros de la tabla **country**. Ejecutar un **`SELECT`** que muestre la cantidad de registros de las dos tablas.
-    
+
     El script **`b06ejer02.sql`** tendrá las siguiente instrucciones:
     ```sql
     USE world;
@@ -283,21 +283,21 @@ Prueba a ejecutar las siguientes instrucciones después de conectar con **`mysql
 
 La mayoría de scripts los generamos en UTF8 por lo que deberemos cambiar el conjunto de caracteres de la ventana de comandos del CMD.
 
-    ```cmd
-    // Cambiar a juego de caracteres en UTF8
-    C:\> chcp 65001
-    // Cambiar a juego de caracteres en ANSI West European Latin
-    C:\> chcp 1252
-    ```
+```cmd
+// Cambiar a juego de caracteres en UTF8
+C:\> chcp 65001
+// Cambiar a juego de caracteres en ANSI West European Latin
+C:\> chcp 1252
+```
 
 Para cambiar en timepo real el juego de caracteres en el resultado de los **`SELECT`** en MySQL, podemos utilizar el comando ****`SET NAMES`****.
 
-    ```sql
-    // Cambiar a juego de caracteres en UTF8
-    mysql> SET NAMES 'utf8';
-    // Cambiar a juego de caracteres en ANSI West European Latin
-    mysql> SET NAMES 'latin1';
-    ```
+```sql
+// Cambiar a juego de caracteres en UTF8
+mysql> SET NAMES 'utf8';
+// Cambiar a juego de caracteres en ANSI West European Latin
+mysql> SET NAMES 'latin1';
+```
 
 El comando **`mysql`** dispone además de muchos parámetros. Usaremos algunos:
 
@@ -309,10 +309,10 @@ El comando **`mysql`** dispone además de muchos parámetros. Usaremos algunos:
 
 Ejemplo de forma de conexión.
 
-    ```cmd
-    //Conectarse como root en modo silencioso
-    C:\> mysql -u root -p --silent --table
-    ```
+```cmd
+//Conectarse como root en modo silencioso
+C:\> mysql -u root -p --silent --table
+```
 
 ## Procedimientos y estructuras de control
 
@@ -322,20 +322,20 @@ Para poder almacenar un conjunto de instrucciones en la propia base de datos pod
 
 La sintaxis más sencilla es la siguiente:
 
-    ```sql
-    DELIMITER //
-    CREATE PROCEDURE nombre()
-    BEGIN
-        instrucciones;
-    END //
-    DELIMITER ;
-    ```
+```sql
+DELIMITER //
+CREATE PROCEDURE nombre()
+BEGIN
+    instrucciones;
+END //
+DELIMITER ;
+```
 
 Antes de comenzar debemos seleccionar la base de datos con la que vamos a trabajar. Por ejemplo para trabajar con la base de datos world ejecutaríamos:
 
-    ```sql
-    USE world;
-    ```
+```sql
+USE world;
+```
 
 Si por ejemplo deseamos un procedimiento que muestre el día y hora sería:
 
@@ -370,12 +370,12 @@ Ya sabemos que por defecto MySQL usa como delimitador de fin de instrucción el 
 
 Para nuestro ejemplo usamos **//** pero se podría usar también **$$** o lo que queramos. Al finalizar la creación del procedimiento o función volvemos a cambiarlo por **;**
 
-    ```sql
-    DELIMITER $$
-        ...
-        $$
-    DELIMITER ;
-    ```
+```sql
+DELIMITER $$
+    ...
+    $$
+DELIMITER ;
+```
 
 #### Bloques de código
 
@@ -388,38 +388,38 @@ Estos bloques de código se usarán más adelante también en estructuras de con
 
 Para eliminar un procedimiento utilizaremos la instrucción **`DROP PROCEDURE`**.
 
-    ```sql
-    DROP PROCEDURE nombreProcedimiento;
-    ```
+```sql
+DROP PROCEDURE nombreProcedimiento;
+```
 
 Si queremos redefinir un procedimiento, para evitar que si no existe muestre un error lo haremos utilizando la cláusula **`IF EXISTS`**.
 
-    ```sql
-    DROP PROCEDURE IF EXISTS nombreProcedimiento;
-    ```
+```sql
+DROP PROCEDURE IF EXISTS nombreProcedimiento;
+```
 
 ### Variables locales del procedimiento
 
 Cuando necesitamos variables que usaremos dentro del procedimiento debemos usar la instrucción **`DECLARE`** como si lo hiciéramos en la instrucción **`CREATE TABLE`**. Las variables sólo serán visibles y accesibles dentro del procedimiento.
 Estas variables no comienzan con el caracter especial @, al contrario de lo que sucede en los scripts.
 
-    ```sql
-    DECLARE nombreVariable tipoVariable [opciones];
-    ```
+```sql
+DECLARE nombreVariable tipoVariable [opciones];
+```
 
 #### Estructuras de control
 
 Las instrucciones de un procedimiento (o función) se ejecutan secuencialmente empezando por la instrucción que está justo después de la palabra reservada **`BEGIN`** y acabando por la que está justo antes de la palabra reservada **`END`**. Esta forma de ejcución de instrucciones se llama **secuencial**. El siguiente diagrama representa un bloque de 3 instrucciones que se ejecutan secuencialmente. El punto negro inicial representa el **`BEGIN`** y el punto con el aspa el **`END`**.
 
-    ```puml {align="center", style="zoom:1"}
-    @startuml
-    start
-    :Instrucción 1;
-    :Instrucción 2;
-    :Instrucción 3;
-    end
-    @enduml
-    ```
+```puml {align="center", style="zoom:1"}
+   @startuml
+   start
+   :Instrucción 1;
+   :Instrucción 2;
+   :Instrucción 3;
+   end
+@enduml
+```
 
 Las estructuras de control permiten modificar el flujo de ejecución de las instrucciones de un programa.
 
@@ -436,113 +436,113 @@ Es la más sencilla de todas. Nos permite ejecutar unas instrucciones u otras se
 ***Variante 1***
 Esquema general
 
-    ```sql
-    IF [condicion] THEN
-        [sentencia o bloque de sentencias]
-    END IF;
-    ```
+```sql
+IF [condicion] THEN
+    [sentencia o bloque de sentencias]
+END IF;
+```
 
-    ```puml {align="center", style="zoom:1"}
-    @startuml
-    start
-    if (condición) then (Sí)
-    #lightgreen:bloque sentencias 1;
-    note
-    Este bloque de sentencias sólo se
-    ejecuta **SI** se cumple la condición.
-    end note
-    endif
-    :bloque sentencias común;
-    note right
-    Este bloque de sentencias se ejecuta
-    **siempre**, se cumpla o no la condición.
-    end note
-    stop
-    @enduml
-    ```
+```puml {align="center", style="zoom:1"}
+@startuml
+start
+if (condición) then (Sí)
+#lightgreen:bloque sentencias 1;
+note
+Este bloque de sentencias sólo se
+ejecuta **SI** se cumple la condición.
+end note
+endif
+:bloque sentencias común;
+note right
+Este bloque de sentencias se ejecuta
+**siempre**, se cumpla o no la condición.
+end note
+stop
+@enduml
+```
 
 El rombo equivaldría al **`END IF`**.
 
 ***Variante 2***
 Esquema general
 
-    ```sql
-    IF [condicion] THEN
-        [sentencia o bloque de sentencias]
-    ELSE
-        [sentencia o bloque de sentencias]
-    END IF;
-    ```
+```sql
+IF [condicion] THEN
+    [sentencia o bloque de sentencias]
+ELSE
+    [sentencia o bloque de sentencias]
+END IF;
+```
 
-    ```puml {align="center", style="zoom:1"}
+```puml {align="center", style="zoom:1"}
+@startuml
+start
+if (condición) then (Sí)
+#lightgreen:bloque sentencias 1;
+note
+Este bloque de sentencias sólo se
+ejecuta **SI** se cumple la condición.
+end note
+else (No)
+#lightgreen:bloque sentencias 2;
+note right
+Este bloque de sentencias sólo se
+ejecuta si **NO** se cumple la condición.
+end note
+end if
+:bloque sentencias común;
+note
+Este bloque de sentencias se ejecuta
+**siempre**, se cumpla o no la condición.
+end note
+stop
+@enduml
+```
+
+***Variante 3***
+Esquema general
+
+```sql
+IF [condicion] THEN
+    [sentencia o bloque de sentencias]
+ELSEIF [condicion] THEN
+    [sentencia o bloque de sentencias]
+ELSE
+    [sentencia o bloque de sentencias]
+END IF;
+```
+
+```puml {align="center", style="zoom:1"}
     @startuml
-    start
-    if (condición) then (Sí)
-    #lightgreen:bloque sentencias 1;
-    note
-    Este bloque de sentencias sólo se
-    ejecuta **SI** se cumple la condición.
-    end note
-    else (No)
-    #lightgreen:bloque sentencias 2;
-    note right
-    Este bloque de sentencias sólo se
-    ejecuta si **NO** se cumple la condición.
-    end note
-    end if
-    :bloque sentencias común;
-    note
-    Este bloque de sentencias se ejecuta
-    **siempre**, se cumpla o no la condición.
-    end note
-    stop
-    @enduml
-    ```
-
-    ***Variante 3***
-    Esquema general
-    
-    ```sql
-    IF [condicion] THEN
-        [sentencia o bloque de sentencias]
-    ELSEIF [condicion] THEN
-        [sentencia o bloque de sentencias]
-    ELSE
-        [sentencia o bloque de sentencias]
-    END IF;
-    ```
-    
-    ```puml {align="center", style="zoom:1"}
-        @startuml
-    !pragma useVerticalIf on
-    start
-    if (condición A) then (Sí)
-    #lightgreen: bloque sentencias 1;
-    note right
-    Las sentencias sólo se ejecutan **SI**
-    se cumple la condición A.
-    end note
-    (No) elseif (condition B) then (Sí)
-    #lightgreen:bloque sentencias 2;
-    note right
-    Las sentencias sólo se ejecutan si **NO** se
-    cumple la condición A y **SÍ** se cumple la B.
-    end note
-    else (No)
-    #lightgreen:bloque sentencias 3;
-    note right
-    Las sentencias sólo se ejecutan si **NO** 
-    se cumple ninguna condición.
-    end note
-    end if
-    :bloque sentencias común;
-    note
-    Este bloque de sentencias se ejecuta
-    **siempre**, se cumpla o no la condición.
-    end note
-    stop
-    @enduml
-    ```
+!pragma useVerticalIf on
+start
+if (condición A) then (Sí)
+#lightgreen: bloque sentencias 1;
+note right
+Las sentencias sólo se ejecutan **SI**
+se cumple la condición A.
+end note
+(No) elseif (condition B) then (Sí)
+#lightgreen:bloque sentencias 2;
+note right
+Las sentencias sólo se ejecutan si **NO** se
+cumple la condición A y **SÍ** se cumple la B.
+end note
+else (No)
+#lightgreen:bloque sentencias 3;
+note right
+Las sentencias sólo se ejecutan si **NO** 
+se cumple ninguna condición.
+end note
+end if
+:bloque sentencias común;
+note
+Este bloque de sentencias se ejecuta
+**siempre**, se cumpla o no la condición.
+end note
+stop
+@enduml
+```
     
 Puede haber tantas cláusulas **`ELSEIF`** como queramos pero sólo puede haber una cláusula **`IF`** y una **`ELSE`**.
 
@@ -573,15 +573,13 @@ Puede haber tantas cláusulas **`ELSEIF`** como queramos pero sólo puede haber 
     DELIMITER ;
     -- Llamar al procedimiento
     CALL colores();
-    ```    	ELSEIF (num < 0.50) THEN
-    		SELECT 'amarillo' AS COLOR;
-    	ELSEIF (num < 0.75) THEN
-    		SELECT 'naranja' AS COLOR;
-    	ELSE
-    		SELECT 'rojo' AS COLOR;
-    	END IF;
-
-
+    ```     ELSEIF (num < 0.50) THEN
+      SELECT 'amarillo' AS COLOR;
+     ELSEIF (num < 0.75) THEN
+      SELECT 'naranja' AS COLOR;
+     ELSE
+      SELECT 'rojo' AS COLOR;
+     END IF;
 
 <span style="color: red; font-weight: bold;">AQUÍ ME HE QUEDADO
 </span>
@@ -591,12 +589,12 @@ Cuando tenemos varias opciones como en el ejemplo anterior, podemos utilizar tam
 
 ```sql
 CASE [variable o expresión]
-	WHEN [valor] THEN
-		[sentencia o bloque de sentencias]
-	[WHEN [valor] THEN
-		[sentencia o bloque de sentencias] ]
-	[ELSE
-		[sentencia o bloque de sentencias] ]
+ WHEN [valor] THEN
+  [sentencia o bloque de sentencias]
+ [WHEN [valor] THEN
+  [sentencia o bloque de sentencias] ]
+ [ELSE
+  [sentencia o bloque de sentencias] ]
 END CASE;
 ```
 
@@ -604,19 +602,20 @@ O bien
 
 ```txt
 CASE
-	WHEN [condicion] THEN
-		[sentencia o bloque de sentencias]
-	[WHEN [condicion] THEN
-		[sentencia o bloque de sentencias] ]
-	[...]
-	[ELSE
-		[sentencia o bloque de sentencias] ]
+ WHEN [condicion] THEN
+  [sentencia o bloque de sentencias]
+ [WHEN [condicion] THEN
+  [sentencia o bloque de sentencias] ]
+ [...]
+ [ELSE
+  [sentencia o bloque de sentencias] ]
 END CASE;
 ```
 
 Si realizamos el mismo ejemplo con CASE quedaría:
 
 Ejemplo 2 – SCRIPT con CASE
+
 ```sql
 /* Eliminar el procedimiento si ya existe */
 DROP PROCEDURE IF EXISTS ud6ejer.colorescase;
@@ -625,30 +624,31 @@ DROP PROCEDURE IF EXISTS ud6ejer.colorescase;
 DELIMITER //
 CREATE PROCEDURE ud6ejer.colorescase()
 BEGIN
-	DECLARE num DECIMAL(15,2);
-	SET num := RAND();
-	CASE
-		WHEN (num < 0.25) THEN
-			SELECT 'verde' AS COLOR;
-		WHEN (num < 0.50) THEN
-			SELECT 'amarillo' AS COLOR;
-		WHEN (num < 0.75) THEN
-			SELECT 'naranja' AS COLOR;
-		ELSE
-			SELECT 'rojo' AS COLOR;
-	END CASE;
+ DECLARE num DECIMAL(15,2);
+ SET num := RAND();
+ CASE
+  WHEN (num < 0.25) THEN
+   SELECT 'verde' AS COLOR;
+  WHEN (num < 0.50) THEN
+   SELECT 'amarillo' AS COLOR;
+  WHEN (num < 0.75) THEN
+   SELECT 'naranja' AS COLOR;
+  ELSE
+   SELECT 'rojo' AS COLOR;
+ END CASE;
 END //
 DELIMITER ;
 
 /* Llamar al procedimiento */
 CALL ud6ejer.colorescase();
 ```
+
 ***Sentencia WHILE***
 Otra estructura de control es la de bucles, que consisten en realizar de forma repetida un conjunto de instrucciones. Tenemos varias estructuras para hacer bucles como **REPEAT** o **LOOP**, pero nosotros usaremos **WHILE**.
 
 ```sql
 WHILE [condicion] DO
-	[sentencia o bloque de sentencias]
+ [sentencia o bloque de sentencias]
 END WHILE;
 ```
 
@@ -659,7 +659,7 @@ DECLARE contador INT;
 SET contador := 1;
 WHILE (contador <= 10) DO
 
-	[sentencia o bloque de sentencias]
+ [sentencia o bloque de sentencias]
 
 SET contador := contador + 1;
 END WHILE;
@@ -677,15 +677,15 @@ DROP PROCEDURE IF EXISTS ud6ejer.sumadieznumeros;
 DELIMITER //
 CREATE PROCEDURE ud6ejer.sumadieznumeros()
 BEGIN
-	DECLARE contador INT;
-	DECLARE resultado INT;
-	SET resultado := 0;
-	SET contador := 1;
-	WHILE (contador<=10) DO
-		SET resultado := resultado + contador;
-		SET contador := contador + 1;
-	END WHILE;
-	SELECT resultado AS 'SUMADIEZNUMEROS';
+ DECLARE contador INT;
+ DECLARE resultado INT;
+ SET resultado := 0;
+ SET contador := 1;
+ WHILE (contador<=10) DO
+  SET resultado := resultado + contador;
+  SET contador := contador + 1;
+ END WHILE;
+ SELECT resultado AS 'SUMADIEZNUMEROS';
 END //
 DELIMITER ;
 
@@ -707,14 +707,14 @@ DROP PROCEDURE IF EXISTS ud6ejer.comparacadenas;
 DELIMITER //
 CREATE PROCEDURE ud6ejer.comparacadenas(cad1 VARCHAR(500), cad2 VARCHAR(500))
 BEGIN
-	CASE
-		WHEN (LENGTH(cad1)>LENGTH(cad2)) THEN
-			SELECT 'La PRIMERA cadena es más larga' AS RESULTADO;
-		WHEN (LENGTH(cad1)<LENGTH(cad2)) THEN
-			SELECT 'La SEGUNDA cadena es más larga' AS RESULTADO;
-		ELSE
-			SELECT 'La dos cadenas miden lo mismo' AS RESULTADO;
-	END CASE;
+ CASE
+  WHEN (LENGTH(cad1)>LENGTH(cad2)) THEN
+   SELECT 'La PRIMERA cadena es más larga' AS RESULTADO;
+  WHEN (LENGTH(cad1)<LENGTH(cad2)) THEN
+   SELECT 'La SEGUNDA cadena es más larga' AS RESULTADO;
+  ELSE
+   SELECT 'La dos cadenas miden lo mismo' AS RESULTADO;
+ END CASE;
 END //
 DELIMITER ;
 
@@ -724,7 +724,7 @@ CALL ud6ejer.comparacadenas('Mi primera cadena','Esta debe ser más larga');
 
 ## Funciones predefinidas 4. Funciones predefinidas
 
- Una función es un conjunto de líneas de código que realizan una tarea específica, al  igual  que un procedimiento, pero además puede retornar un valor. 
+ Una función es un conjunto de líneas de código que realizan una tarea específica, al  igual  que un procedimiento, pero además puede retornar un valor.
 En MySQL existen multitud de funciones predefinidas. Se pueden consultar en la documentación oficial y en otras reconocidas:
 
 !!! Note Referencias
@@ -734,12 +734,13 @@ En MySQL existen multitud de funciones predefinidas. Se pueden consultar en la d
     * [MySQL Oficial – Funciones en MySQL – Web en español](http://ftp.tcrc.edu.tw/MySQL/doc/refman/5.0/es/functions.html)
     * [MySQL Oficial – Funciones en MySQL – Ejemplos]( http://mysql.conclase.net/curso/?cap=011)
 
-Las funciones pueden tomar parámetros que modifiquen su funcionamiento. 
+Las funciones pueden tomar parámetros que modifiquen su funcionamiento.
 Los procedimiento y las funciones son utilizadas para descomponer grandes problemas en tareas simples y para implementar operaciones que son comúnmente utilizadas durante un programa y de esta manera reducir la cantidad de código.
 
 Cuando una función es invocada/llamada, se le pasa el control a la misma, y una vez  que esta finaliza devuelve el control al punto desde el cual fue llamada.
 
 ### Funciones matemáticas
+
 Las que más vamos a usar son: **ABS, FLOOR, MOD, POW, SQRT, RAND, ROUND, SIGN**
 
 ***Ejemplos de funciones predefinidas***
@@ -757,8 +758,6 @@ Resultado: 17
 SELECT ABS(21);
 ```
 
-  
-
 **Ejemplo 2 -  Parte entera de un número decimal**
 
 ```sql
@@ -770,6 +769,7 @@ Resultado: 35
 ```sql
 SELECT FLOOR(-35.789);
 ```
+
 Resultado: -36
 
 **Ejemplo 3 -  Resto de una división entre dos número enteros**
@@ -781,18 +781,19 @@ SELECT MOD(15, 4);
 Resultado: 3
 
 **Ejemplo 4 - Potencia de un número y su exponente**
- 
+
 ```sql
  SELECT POW(5, 2);
 ```
- 
+
  Resultado: 25
 
 **Ejemplo 5 - Raíz cuadrada de un número**
- 
+
 ```sql
  SELECT SQRT(64);
 ```
+
 Resultado: 8
 
 **Ejemplo 6 - Número aleatorio decimal entre 0 y 1**
@@ -801,39 +802,45 @@ Resultado: 8
 SELECT RAND();
  ```
 
-Resultado: 0.601966295951946 
+Resultado: 0.601966295951946
 
 **Ejemplo 7 - Redondea un número decimal hasta los decimales que se indiquen**
 
 ```sql
 SELECT ROUND(45.267, 1);
 ```
-Resultado: 45.3 
+
+Resultado: 45.3
 
 ```sql
 SELECT ROUND(-45.267, 2);
 ```
-Resultado: -45.27 
+
+Resultado: -45.27
 
 ```sql
 SELECT ROUND(45.267);
 ```
-Resultado: 45 
+
+Resultado: 45
 
 ```sql
 SELECT ROUND(45.75);
 ```
-Resultado: 46 
+
+Resultado: 46
 
 ```sql
 SELECT ROUND(-45.267);
 ```
-Resultado: -45 
+
+Resultado: -45
 
 ```sql
 SELECT ROUND(-45.67);
 ```
-Resultado: -46 
+
+Resultado: -46
 
 **Ejemplo 8 - Obtiene el signo del número**
 
@@ -852,6 +859,7 @@ Resultado: 1
 ```sql
 SELECT SIGN(0);
 ```
+
 Resultado: 0
 
 ## Funciones de cadenas o strings
@@ -869,7 +877,7 @@ SELECT CONCAT('Juan ','López ','García') AS NOMBRE;
  +-------------------+
  | Juan López García |
  +-------------------+
- 
+
 Ejemplo 2 - Pasar a mayúsculas
 
 ```sql
@@ -886,13 +894,13 @@ SELECT UPPER('Soy alumno de FP') AS MENSAJE;
 ```sql
  SELECT LOWER('Soy alumno de FP') AS MENSAJE;
 ```
- 
+
  +------------------+
  | MENSAJE          |
  +------------------+
  | soy alumno de fp |
  +------------------+
- 
+
 ```sql
 Ejemplo 3 - Obtener una parte inicial de la cadena 
 SELECT LEFT('Juan López García',4) AS NOMBRE;
@@ -903,7 +911,7 @@ SELECT LEFT('Juan López García',4) AS NOMBRE;
 +--------+
 | Juan   |
 +--------+
-/* Obtener una parte final de la cadena */
+/*Obtener una parte final de la cadena */
 SELECT RIGHT('Juan López García',6) AS APELLIDO2;
 +-----------+
 | APELLIDO2 |
@@ -917,12 +925,12 @@ SELECT SUBSTRING('Juan López García',6,5) AS APELLIDO1;
 +-----------+
 | López     |
 +-----------+
-/* Obtener parte de una cadena utilizando la posición de un delimitador */
+/* Obtener parte de una cadena utilizando la posición de un delimitador*/
 SELECT SUBSTRING_INDEX('www.iesdoctorbalmis.com','.',2) AS DOMINIO;
 +---------------------+
 | DOMINIO             |
 +---------------------+
-| www.iesdoctorbalmis |
+| <www.iesdoctorbalmis> |
 +---------------------+
 
 <div class="caso_estudio">
@@ -943,9 +951,8 @@ SELECT SUBSTRING_INDEX('www.iesdoctorbalmis.com','.',2) AS DOMINIO;
 
 </div> <!-- fin caso de estudio -->
 
-
 <div class="ejercicio">
 
-### :white_check_mark: Ejercicio 
+### :white_check_mark: Ejercicio
 
 </div> <!-- fin ejercicio -->

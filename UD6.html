@@ -1,0 +1,766 @@
+<!DOCTYPE html><html><head>
+      <title>Apuntes</title>
+      <meta charset="utf-8">
+      <meta name="viewport" content="width=device-width, initial-scale=1.0">
+      
+      <link rel="stylesheet" href="file:////home/jose/.vscode/extensions/shd101wyy.markdown-preview-enhanced-0.8.18/crossnote/dependencies/katex/katex.min.css">
+      
+      
+      
+      
+      
+      <style>
+      code[class*=language-],pre[class*=language-]{color:#333;background:0 0;font-family:Consolas,"Liberation Mono",Menlo,Courier,monospace;text-align:left;white-space:pre;word-spacing:normal;word-break:normal;word-wrap:normal;line-height:1.4;-moz-tab-size:8;-o-tab-size:8;tab-size:8;-webkit-hyphens:none;-moz-hyphens:none;-ms-hyphens:none;hyphens:none}pre[class*=language-]{padding:.8em;overflow:auto;border-radius:3px;background:#f5f5f5}:not(pre)>code[class*=language-]{padding:.1em;border-radius:.3em;white-space:normal;background:#f5f5f5}.token.blockquote,.token.comment{color:#969896}.token.cdata{color:#183691}.token.doctype,.token.macro.property,.token.punctuation,.token.variable{color:#333}.token.builtin,.token.important,.token.keyword,.token.operator,.token.rule{color:#a71d5d}.token.attr-value,.token.regex,.token.string,.token.url{color:#183691}.token.atrule,.token.boolean,.token.code,.token.command,.token.constant,.token.entity,.token.number,.token.property,.token.symbol{color:#0086b3}.token.prolog,.token.selector,.token.tag{color:#63a35c}.token.attr-name,.token.class,.token.class-name,.token.function,.token.id,.token.namespace,.token.pseudo-class,.token.pseudo-element,.token.url-reference .token.variable{color:#795da3}.token.entity{cursor:help}.token.title,.token.title .token.punctuation{font-weight:700;color:#1d3e81}.token.list{color:#ed6a43}.token.inserted{background-color:#eaffea;color:#55a532}.token.deleted{background-color:#ffecec;color:#bd2c00}.token.bold{font-weight:700}.token.italic{font-style:italic}.language-json .token.property{color:#183691}.language-markup .token.tag .token.punctuation{color:#333}.language-css .token.function,code.language-css{color:#0086b3}.language-yaml .token.atrule{color:#63a35c}code.language-yaml{color:#183691}.language-ruby .token.function{color:#333}.language-markdown .token.url{color:#795da3}.language-makefile .token.symbol{color:#795da3}.language-makefile .token.variable{color:#183691}.language-makefile .token.builtin{color:#0086b3}.language-bash .token.keyword{color:#0086b3}pre[data-line]{position:relative;padding:1em 0 1em 3em}pre[data-line] .line-highlight-wrapper{position:absolute;top:0;left:0;background-color:transparent;display:block;width:100%}pre[data-line] .line-highlight{position:absolute;left:0;right:0;padding:inherit 0;margin-top:1em;background:hsla(24,20%,50%,.08);background:linear-gradient(to right,hsla(24,20%,50%,.1) 70%,hsla(24,20%,50%,0));pointer-events:none;line-height:inherit;white-space:pre}pre[data-line] .line-highlight:before,pre[data-line] .line-highlight[data-end]:after{content:attr(data-start);position:absolute;top:.4em;left:.6em;min-width:1em;padding:0 .5em;background-color:hsla(24,20%,50%,.4);color:#f4f1ef;font:bold 65%/1.5 sans-serif;text-align:center;vertical-align:.3em;border-radius:999px;text-shadow:none;box-shadow:0 1px #fff}pre[data-line] .line-highlight[data-end]:after{content:attr(data-end);top:auto;bottom:.4em}html body{font-family:'Helvetica Neue',Helvetica,'Segoe UI',Arial,freesans,sans-serif;font-size:16px;line-height:1.6;color:#333;background-color:#fff;overflow:initial;box-sizing:border-box;word-wrap:break-word}html body>:first-child{margin-top:0}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{line-height:1.2;margin-top:1em;margin-bottom:16px;color:#000}html body h1{font-size:2.25em;font-weight:300;padding-bottom:.3em}html body h2{font-size:1.75em;font-weight:400;padding-bottom:.3em}html body h3{font-size:1.5em;font-weight:500}html body h4{font-size:1.25em;font-weight:600}html body h5{font-size:1.1em;font-weight:600}html body h6{font-size:1em;font-weight:600}html body h1,html body h2,html body h3,html body h4,html body h5{font-weight:600}html body h5{font-size:1em}html body h6{color:#5c5c5c}html body strong{color:#000}html body del{color:#5c5c5c}html body a:not([href]){color:inherit;text-decoration:none}html body a{color:#08c;text-decoration:none}html body a:hover{color:#00a3f5;text-decoration:none}html body img{max-width:100%}html body>p{margin-top:0;margin-bottom:16px;word-wrap:break-word}html body>ol,html body>ul{margin-bottom:16px}html body ol,html body ul{padding-left:2em}html body ol.no-list,html body ul.no-list{padding:0;list-style-type:none}html body ol ol,html body ol ul,html body ul ol,html body ul ul{margin-top:0;margin-bottom:0}html body li{margin-bottom:0}html body li.task-list-item{list-style:none}html body li>p{margin-top:0;margin-bottom:0}html body .task-list-item-checkbox{margin:0 .2em .25em -1.8em;vertical-align:middle}html body .task-list-item-checkbox:hover{cursor:pointer}html body blockquote{margin:16px 0;font-size:inherit;padding:0 15px;color:#5c5c5c;background-color:#f0f0f0;border-left:4px solid #d6d6d6}html body blockquote>:first-child{margin-top:0}html body blockquote>:last-child{margin-bottom:0}html body hr{height:4px;margin:32px 0;background-color:#d6d6d6;border:0 none}html body table{margin:10px 0 15px 0;border-collapse:collapse;border-spacing:0;display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}html body table th{font-weight:700;color:#000}html body table td,html body table th{border:1px solid #d6d6d6;padding:6px 13px}html body dl{padding:0}html body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}html body dl dd{padding:0 16px;margin-bottom:16px}html body code{font-family:Menlo,Monaco,Consolas,'Courier New',monospace;font-size:.85em;color:#000;background-color:#f0f0f0;border-radius:3px;padding:.2em 0}html body code::after,html body code::before{letter-spacing:-.2em;content:'\00a0'}html body pre>code{padding:0;margin:0;word-break:normal;white-space:pre;background:0 0;border:0}html body .highlight{margin-bottom:16px}html body .highlight pre,html body pre{padding:1em;overflow:auto;line-height:1.45;border:#d6d6d6;border-radius:3px}html body .highlight pre{margin-bottom:0;word-break:normal}html body pre code,html body pre tt{display:inline;max-width:initial;padding:0;margin:0;overflow:initial;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}html body pre code:after,html body pre code:before,html body pre tt:after,html body pre tt:before{content:normal}html body blockquote,html body dl,html body ol,html body p,html body pre,html body ul{margin-top:0;margin-bottom:16px}html body kbd{color:#000;border:1px solid #d6d6d6;border-bottom:2px solid #c7c7c7;padding:2px 4px;background-color:#f0f0f0;border-radius:3px}@media print{html body{background-color:#fff}html body h1,html body h2,html body h3,html body h4,html body h5,html body h6{color:#000;page-break-after:avoid}html body blockquote{color:#5c5c5c}html body pre{page-break-inside:avoid}html body table{display:table}html body img{display:block;max-width:100%;max-height:100%}html body code,html body pre{word-wrap:break-word;white-space:pre}}.markdown-preview{width:100%;height:100%;box-sizing:border-box}.markdown-preview ul{list-style:disc}.markdown-preview ul ul{list-style:circle}.markdown-preview ul ul ul{list-style:square}.markdown-preview ol{list-style:decimal}.markdown-preview ol ol,.markdown-preview ul ol{list-style-type:lower-roman}.markdown-preview ol ol ol,.markdown-preview ol ul ol,.markdown-preview ul ol ol,.markdown-preview ul ul ol{list-style-type:lower-alpha}.markdown-preview .newpage,.markdown-preview .pagebreak{page-break-before:always}.markdown-preview pre.line-numbers{position:relative;padding-left:3.8em;counter-reset:linenumber}.markdown-preview pre.line-numbers>code{position:relative}.markdown-preview pre.line-numbers .line-numbers-rows{position:absolute;pointer-events:none;top:1em;font-size:100%;left:0;width:3em;letter-spacing:-1px;border-right:1px solid #999;-webkit-user-select:none;-moz-user-select:none;-ms-user-select:none;user-select:none}.markdown-preview pre.line-numbers .line-numbers-rows>span{pointer-events:none;display:block;counter-increment:linenumber}.markdown-preview pre.line-numbers .line-numbers-rows>span:before{content:counter(linenumber);color:#999;display:block;padding-right:.8em;text-align:right}.markdown-preview .mathjax-exps .MathJax_Display{text-align:center!important}.markdown-preview:not([data-for=preview]) .code-chunk .code-chunk-btn-group{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .status{display:none}.markdown-preview:not([data-for=preview]) .code-chunk .output-div{margin-bottom:16px}.markdown-preview .md-toc{padding:0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link div,.markdown-preview .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}.markdown-preview .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}.scrollbar-style::-webkit-scrollbar{width:8px}.scrollbar-style::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}.scrollbar-style::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode]){position:relative;width:100%;height:100%;top:0;left:0;margin:0;padding:0;overflow:auto}html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{position:relative;top:0;min-height:100vh}@media screen and (min-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em calc(50% - 457px + 2em)}}@media screen and (max-width:914px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode]) .markdown-preview{font-size:14px!important;padding:1em}}@media print{html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{display:none}}html body[for=html-export]:not([data-presentation-mode]) #sidebar-toc-btn{position:fixed;bottom:8px;left:8px;font-size:28px;cursor:pointer;color:inherit;z-index:99;width:32px;text-align:center;opacity:.4}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] #sidebar-toc-btn{opacity:1}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc{position:fixed;top:0;left:0;width:300px;height:100%;padding:32px 0 48px 0;font-size:14px;box-shadow:0 0 4px rgba(150,150,150,.33);box-sizing:border-box;overflow:auto;background-color:inherit}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar{width:8px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-track{border-radius:10px;background-color:transparent}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc::-webkit-scrollbar-thumb{border-radius:5px;background-color:rgba(150,150,150,.66);border:4px solid rgba(150,150,150,.66);background-clip:content-box}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc a{text-decoration:none}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc{padding:0 16px}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link{display:inline;padding:.25rem 0}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link div,html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper .md-toc-link p{display:inline}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .md-sidebar-toc .md-toc .md-toc-link-wrapper.highlighted .md-toc-link{font-weight:800}html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{left:300px;width:calc(100% - 300px);padding:2em calc(50% - 457px - 300px / 2);margin:0;box-sizing:border-box}@media screen and (max-width:1274px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{padding:2em}}@media screen and (max-width:450px){html body[for=html-export]:not([data-presentation-mode])[html-show-sidebar-toc] .markdown-preview{width:100%}}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .markdown-preview{left:50%;transform:translateX(-50%)}html body[for=html-export]:not([data-presentation-mode]):not([html-show-sidebar-toc]) .md-sidebar-toc{display:none}@font-face{font-family:"Material Icons";font-style:normal;font-weight:400;src:local("Material Icons"),local("MaterialIcons-Regular"),url("data:application/x-font-woff;charset=utf-8;base64,d09GRgABAAAAAAfIAAsAAAAADDAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAABHU1VCAAABCAAAADMAAABCsP6z7U9TLzIAAAE8AAAARAAAAFZW7kosY21hcAAAAYAAAADTAAACjtP6ytBnbHlmAAACVAAAAxgAAAQ4zRtvlGhlYWQAAAVsAAAALwAAADYRwZsnaGhlYQAABZwAAAAcAAAAJAeKAzxobXR4AAAFuAAAABIAAAA8OGQAAGxvY2EAAAXMAAAAIAAAACAG5AfwbWF4cAAABewAAAAfAAAAIAEfAERuYW1lAAAGDAAAAVcAAAKFkAhoC3Bvc3QAAAdkAAAAYgAAAK2vz7wkeJxjYGRgYOBikGPQYWB0cfMJYeBgYGGAAJAMY05meiJQDMoDyrGAaQ4gZoOIAgCKIwNPAHicY2BkPsQ4gYGVgYOpk+kMAwNDP4RmfM1gxMjBwMDEwMrMgBUEpLmmMDgwVLy4xKzzX4chhrmK4QpQmBEkBwAZygyweJzFkr0NwjAQhZ+TEP6CRUfHBEwRUWaQTICyQbpMwRCskA5RUIONxG0RnnNpKAIV4qzPku/8c353ACYAYrIjCWCuMAh2ptf0/hiL3p/gyPUWa3osqlt0L1zu9r71z8dGrJRykFoauXQd932Lj5vhG+MjxGeYI8MKETObMpslf5EyP8tg+vHun5r539PvlvXzaVhRFVQDTPEWKVQR90KhnnC5Ek67vUKN4VuFasM/ldARj43CCkCsEjpJSoVVgRyU0GVSK6wUpFFCx8lFgX0BiXpRPQB4nE2TTWjcRhTH3xttpDhxN7uxPlp3u/FK7moRPixafRijNosxSw/LUsIwNcaEHPZggo/FmEKMCKWU4kNOOftQSlhE8alnH0Ix9BqWnHooPRrTQ0+mnu2bXTu2pPdGM9LM/6c3fwECTM4gBBMYQNqxzLrZAjqYSlqu2TAHZQA0/DQJH6FtzqGDnvbt4Ggwvzw/nL8EfH8kW0fsuRqhgWXZnY7M1picaUL7Du5BHeDzMIl83dAt016wH1qmvtSMo5R6YRJHTR//FXsff/nj/tc/5K9P5d+nP22+fFK5u7v3K39SW3y+OtDKO3L85vD09PD9z5X17a2N1g4tqk01RlqX7gyoEmnsWQtVr4rtZMmukEaFBZxzefkCn11cyKMLZgshRwgTYNoLNXCBz2ja7HvZG7hDpPSNfoo5vs0knK/9hb+rNpu+8kHPgk/Ao4kK3tWtTpSEtvkA9c+wE6UaUdwieNkaHg55tBEtRiEPw1s0+FtrtTcc9two2lhMknV7PZF/cs6+uUFTmpTGbEx7sQCPSLOttHS3GRltqp7SNzVSKzl6aWnZT/CX5k6/v9N3Hh8fHBwffJVjhrC6OgH5dkIt/tPsq+d/PD5Qz7G7efzq1THFjdZVPe/N6ulQ3JnDWSE5junsFsVIiFwL/htf1S5gJ3BfOcUxfHKLnzqpFpyfZ9cX+/5WB6a+Y0pHpzkNrYNVDwMsikK+y7WuLCRg/oFHkA8VT3rDg5ZnU6ktzzINymV0m74Xd5pfIGXyFeVEQSShkzqG7TBBa2OxVRKitLXv7h3uuftXnXq7lz2tZ/WnWa9dx9dCjDhHzmuVQATlmljr9dZErUydSo2Hbi/b1vXtrOeGCk2/8s3ZlO8+ueJT8BVlw5pGw2oYccdSiHHqx0RlabHqdNR9jAETl6PreJcPBnnfpTLnOQ8C3OV8AmQGzouV1iZdeb5SSIoVc8W8/kcDtksUH5FrU6/aqBqNWcMEzxG4DAQ14qRQhi9mWU0rzepKezbjfgCwQKxVYq5ajRgpRqy45CqwkJydcEkbTkvRz8P5/2ZpDTN4nGNgZGBgAOKb6v+/xvPbfGXgZmEAgeuB2kkI+v8bFgbmKiCXg4EJJAoAPyAKhQB4nGNgZGBg1vmvwxDDwgACQJKRARXwAwAzZQHQeJxjYQCCFAYGFgbSMQAcWACdAAAAAAAAAAwALgBgAIQAmADSAQgBIgE8AVABoAHeAfwCHHicY2BkYGDgZ7BgYGMAASYg5gJCBob/YD4DAA/hAWQAeJxlkbtuwkAURMc88gApQomUJoq0TdIQzEOpUDokKCNR0BuzBiO/tF6QSJcPyHflE9Klyyekz2CuG8cr7547M3d9JQO4xjccnJ57vid2cMHqxDWc40G4Tv1JuEF+Fm6ijRfhM+oz4Ra6eBVu4wZvvMFpXLIa40PYQQefwjVc4Uu4Tv1HuEH+FW7i1mkKn6Hj3Am3sHC6wm08Ou8tpSZGe1av1PKggjSxPd8zJtSGTuinyVGa6/Uu8kxZludCmzxMEzV0B6U004k25W35fj2yNlCBSWM1paujKFWZSbfat+7G2mzc7weiu34aczzFNYGBhgfLfcV6iQP3ACkSaj349AxXSN9IT0j16JepOb01doiKbNWt1ovippz6sVYYwsXgX2rGVFIkq7Pl2PNrI6qW6eOshj0xaSq9mpNEZIWs8LZUfOouNkVXxp/d5woqebeYIf4D2J1ywQB4nG3LOw6AIBAE0B384B+PAkgEa+QwNnYmHt+EpXSal5lkSBBnoP8oCFSo0aCFRIceA0ZMmLFAYSW88rmvtMUjG3RiQ9HvpfusM6zWNmtc5H/iPewha50tOt5PS/QBx2IeSwAA") format("woff")}.admonition{box-shadow:0 2px 2px 0 rgba(0,0,0,.14),0 1px 5px 0 rgba(0,0,0,.12),0 3px 1px -2px rgba(0,0,0,.2);position:relative;margin:1.5625em 0;padding:0 1.2rem;border-left:.4rem solid rgba(68,138,255,.8);border-radius:.2rem;background-color:rgba(255,255,255,.05);overflow:auto}.admonition>p{margin-top:.8rem}.admonition>.admonition-title{margin:0 -1.2rem;padding:.8rem 1.2rem .8rem 3.6rem;border-bottom:1px solid rgba(68,138,255,.2);background-color:rgba(68,138,255,.1);font-weight:700}.admonition>.admonition-title:before{position:absolute;left:1.2rem;font-size:1.5rem;color:rgba(68,138,255,.8);content:"\E3C9"}.admonition>.admonition-title:before{font-family:Material Icons;font-style:normal;font-variant:normal;font-weight:400;line-height:2rem;text-transform:none;white-space:nowrap;speak:none;word-wrap:normal;direction:ltr}.admonition.abstract,.admonition.summary,.admonition.tldr{border-left-color:rgba(0,176,255,.8)}.admonition.abstract>.admonition-title,.admonition.summary>.admonition-title,.admonition.tldr>.admonition-title{background-color:rgba(0,176,255,.1);border-bottom-color:rgba(0,176,255,.2)}.admonition.abstract>.admonition-title:before,.admonition.summary>.admonition-title:before,.admonition.tldr>.admonition-title:before{color:#00b0ff;content:"\E8D2"}.admonition.hint,.admonition.tip{border-left-color:rgba(0,191,165,.8)}.admonition.hint>.admonition-title,.admonition.tip>.admonition-title{background-color:rgba(0,191,165,.1);border-bottom-color:rgba(0,191,165,.2)}.admonition.hint>.admonition-title:before,.admonition.tip>.admonition-title:before{color:#00bfa5;content:"\E80E"}.admonition.info,.admonition.todo{border-left-color:rgba(0,184,212,.8)}.admonition.info>.admonition-title,.admonition.todo>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.info>.admonition-title:before,.admonition.todo>.admonition-title:before{color:#00b8d4;content:"\E88E"}.admonition.check,.admonition.done,.admonition.success{border-left-color:rgba(0,200,83,.8)}.admonition.check>.admonition-title,.admonition.done>.admonition-title,.admonition.success>.admonition-title{background-color:rgba(0,200,83,.1);border-bottom-color:rgba(0,200,83,.2)}.admonition.check>.admonition-title:before,.admonition.done>.admonition-title:before,.admonition.success>.admonition-title:before{color:#00c853;content:"\E876"}.admonition.faq,.admonition.help,.admonition.question{border-left-color:rgba(100,221,23,.8)}.admonition.faq>.admonition-title,.admonition.help>.admonition-title,.admonition.question>.admonition-title{background-color:rgba(100,221,23,.1);border-bottom-color:rgba(100,221,23,.2)}.admonition.faq>.admonition-title:before,.admonition.help>.admonition-title:before,.admonition.question>.admonition-title:before{color:#64dd17;content:"\E887"}.admonition.attention,.admonition.caution,.admonition.warning{border-left-color:rgba(255,145,0,.8)}.admonition.attention>.admonition-title,.admonition.caution>.admonition-title,.admonition.warning>.admonition-title{background-color:rgba(255,145,0,.1);border-bottom-color:rgba(255,145,0,.2)}.admonition.attention>.admonition-title:before{color:#ff9100;content:"\E417"}.admonition.caution>.admonition-title:before,.admonition.warning>.admonition-title:before{color:#ff9100;content:"\E002"}.admonition.fail,.admonition.failure,.admonition.missing{border-left-color:rgba(255,82,82,.8)}.admonition.fail>.admonition-title,.admonition.failure>.admonition-title,.admonition.missing>.admonition-title{background-color:rgba(255,82,82,.1);border-bottom-color:rgba(255,82,82,.2)}.admonition.fail>.admonition-title:before,.admonition.failure>.admonition-title:before,.admonition.missing>.admonition-title:before{color:#ff5252;content:"\E14C"}.admonition.bug,.admonition.danger,.admonition.error{border-left-color:rgba(255,23,68,.8)}.admonition.bug>.admonition-title,.admonition.danger>.admonition-title,.admonition.error>.admonition-title{background-color:rgba(255,23,68,.1);border-bottom-color:rgba(255,23,68,.2)}.admonition.danger>.admonition-title:before{color:#ff1744;content:"\E3E7"}.admonition.error>.admonition-title:before{color:#ff1744;content:"\E14C"}.admonition.bug>.admonition-title:before{color:#ff1744;content:"\E868"}.admonition.example,.admonition.snippet{border-left-color:rgba(0,184,212,.8)}.admonition.example>.admonition-title,.admonition.snippet>.admonition-title{background-color:rgba(0,184,212,.1);border-bottom-color:rgba(0,184,212,.2)}.admonition.example>.admonition-title:before,.admonition.snippet>.admonition-title:before{color:#00b8d4;content:"\E242"}.admonition.cite,.admonition.quote{border-left-color:rgba(158,158,158,.8)}.admonition.cite>.admonition-title,.admonition.quote>.admonition-title{background-color:rgba(158,158,158,.1);border-bottom-color:rgba(158,158,158,.2)}.admonition.cite>.admonition-title:before,.admonition.quote>.admonition-title:before{color:#9e9e9e;content:"\E244"}
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+/* Please visit the URL below for more information: */
+/*   https://shd101wyy.github.io/markdown-preview-enhanced/#/customize-css */
+@font-face {
+  font-family: 'Catamaran';
+  font-style: normal;
+  font-weight: 400;
+  src: url(https://fonts.gstatic.com/s/catamaran/v19/o-0bIpQoyXQa2RxT7-5B6Ryxs2E_6n1iPHjd5a7dvg.ttf) format('truetype');
+}
+.markdown-preview.markdown-preview .caso_estudio {
+  background-color: #f5f5f5;
+  border: 2px solid #969696;
+  padding: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .ejercicio {
+  background-color: #f5faf5;
+  border: 2px solid #969b96;
+  padding-left: 15px;
+  padding-right: 15px;
+  margin-top: 15px;
+  margin-bottom: 15px;
+  border-radius: 5px;
+  box-shadow: 0 0 7px 0 rgba(78, 120, 158, 0.1);
+}
+.markdown-preview.markdown-preview .contenedor {
+  display: flex;
+  justify-content: center;
+  margin: 30px auto 30px auto;
+}
+.markdown-preview.markdown-preview .fondo {
+  background: url(https://programacioniesbalmis.github.io/Imagenes/BannersMoodle/banner.png);
+  background-size: cover;
+  width: 75%;
+  height: 160px;
+  border-radius: 10px;
+  position: relative;
+}
+.markdown-preview.markdown-preview .cita {
+  font-family: Arial;
+  font-style: italic;
+  font-weight: 600;
+  text-align: justify;
+  line-height: 1.5rem;
+  opacity: 0.6;
+  color: white;
+  padding: 5rem;
+  position: relative;
+  top: 50%;
+  left: 50%;
+  font-size: 1.3rem;
+  transform: translate(-50%, -50%);
+}
+.markdown-preview.markdown-preview .abre_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-left: 30px;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, -15%);
+}
+.markdown-preview.markdown-preview .cierra_comilla {
+  font-family: "Catamaran";
+  font-weight: 600;
+  color: white;
+  padding-right: 30px;
+  right: 0%;
+  position: absolute;
+  font-size: 6rem;
+  transform: translate(0%, 55%);
+}
+.markdown-preview.markdown-preview .autor {
+  font-family: Arial;
+  color: white;
+  margin: 0px;
+  padding-left: 30px;
+  position: absolute;
+  top: 83%;
+  font-size: 1rem;
+}
+.markdown-preview.markdown-preview .flotante {
+  display: flex;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: center;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    justify-content: space-between;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante {
+    flex-direction: row;
+  }
+}
+.markdown-preview.markdown-preview .flotante_izq {
+  margin-right: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_izq {
+    width: auto;
+  }
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: 100%;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .flotante_der {
+    width: auto;
+  }
+}
+.markdown-preview.markdown-preview .galeria_imagenes {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+@media (max-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: column;
+  }
+}
+@media (min-width: 550px) {
+  .markdown-preview.markdown-preview .galeria_imagenes {
+    flex-direction: row;
+  }
+}
+
+      </style>
+      <!-- The content below will be included at the end of the <head> element. --><script type="text/javascript">
+  document.addEventListener("DOMContentLoaded", function () {
+    // your code here
+  });
+</script></head><body for="html-export">
+    
+    
+      <div class="crossnote markdown-preview  ">
+      
+<p>ÍNDICE</p>
+<ol>
+<li>Introducción</li>
+<li>Primeros SCRIPTS</li>
+<li>Procedimientos y estructuras de control</li>
+</ol>
+<h2 id="introducción">Introducción </h2>
+<p>Analizando el mercado actual de Bases de Datos, el uso de los diferentes productos existentes se ha segmentado.</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Usuarios BD</th>
+<th style="text-align:left">Bases de datos</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>Grandes Empresas</strong></td>
+<td style="text-align:left">La mayoría han apostado por Oracle por su seguridad y soporte.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Pequeñas y medianas Empresas (PYMES)</strong></td>
+<td style="text-align:left">Aquí es donde más abierto está el mercado. Entre las más utilizadas están: Oracle Express, SQL Server de Microsoft, MySQL Server y PostgreSQL</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Pequeños negocios</strong></td>
+<td style="text-align:left">Utilizan software propietario que utiliza SGBD con prestaciones de tipo ofimático como Microsoft Access.</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>Aplicaciones y páginas web</strong></td>
+<td style="text-align:left">La mayoría de los proveedores de internet tienen incluido en sus ofertas MySQL y PostgreSQL, pero los usuarios suelen usar MySQL.</td>
+</tr>
+</tbody>
+</table>
+<p>Aunque los aspectos fundamentales a la forma de utilizar un SGBD son muy parecidos, en este curso nos hemos centrado en <strong>MySQL</strong>.</p>
+<p>MySQL es un sistema de gestión de bases de datos SQL (SGBD DBMS) multihilo y multiusuario que tiene más de 10 millones de instalaciones según MySQL AB de Oracle (<a href="https://es.wikipedia.org/wiki/MySQL_AB">https://es.wikipedia.org/wiki/MySQL_AB</a>).</p>
+<p>Las librerías para acceder a bases de datos MySQL están disponibles en los principales lenguajes de programación con APIs específicas de lenguaje. Además,una interfaz ODBC llamada MyODBC permite utilizar lenguajes de programación adicionales que soportan la interfaz ODBC para comunicarse con una base de datos MySQL. El servidor MySQL y las bibliotecas oficiales se implementan principalmente en ANSI C.</p>
+<p>MySQL es popular para aplicaciones web y actúa como el componente de base de datos de las plataformas LAMP, MAMP y WAMP (Linux/Mac/Windows-Apache-MySQL-PHP/Perl). Su popularidad como aplicación web está estrechamente ligada a la popularidad de PHP, que a menudo se combina con MySQL. PHP y MySQL son componentes esenciales para ejecutar la popular plataforma de Gestor de Cotnenidos WordPress.</p>
+<p><strong>Cliente / Servidor</strong><br>
+La arquitectura <strong>cliente-servidor</strong> es un modelo de diseño de software en el que las tareas se reparten entre los proveedores de recursos o servicios, llamados servidores, y los demandantes, llamados clientes.</p>
+<p>Un cliente realiza peticiones a otro programa, el servidor, quien le da respuesta. Esta idea también se puede aplicar a programas que se ejecutan sobre una sola computadora, aunque es más ventajosa en un sistema operativo multiusuario distribuido a través de una red de computadoras.</p>
+<p>Cuando utilizamos un navegado en Internet y accedemos a un servidor mediante una dirección web, utilizamos el protocolo <strong>HTTP</strong> o <strong>HTTPS</strong> para enviar información del cliente al servidor y viceversa.</p>
+<p>Tanto cliente como servidor ejecutan código y por lo tanto, procesan las instrucciones de programas y aplicaciones, y para ello se utilizan diferentes lenguajes de programación. A continuación se muestran algunos ejemplos:<br>
+<img src="./.img/6.1.1.png" alt="Imagen 6.1.1"></p>
+<p>Puedes consultar el <strong>Tiobe Index</strong> de los lenguajes de programación más usados en: <a href="https://www.tiobe.com/tiobe-index/">https://www.tiobe.com/tiobe-index/</a></p>
+<p>Puedes consultar la web del <strong>Instituto de Ingeniería Eléctrica y Electrónica</strong> (Institute of Electrical and Electronics Engineers o IEEE), que con más de 425.000 miembros y voluntarios en 160 países, también publica su propia lista de lenguajes de programación más populares (se puede filtrar por Web):<br>
+<a href="https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018">https://spectrum.ieee.org/static/interactive-the-top-programming-languages-2018</a></p>
+<p><strong>Programación en BD</strong><br>
+Los SGBD relacionales usan SQL como lenguaje de DCL, DDL y DML.</p>
+<ul>
+<li><strong>DCL – Data Control Language</strong> – Lenguaje de Control de Datos<br>
+<a href="https://es.wikipedia.org/wiki/Lenguaje_de_control_de_datos">https://es.wikipedia.org/wiki/Lenguaje_de_control_de_datos</a></li>
+<li><strong>DDL – Data Definition Language</strong> – Lenguaje de Definición de Datos<br>
+<a href="https://es.wikipedia.org/wiki/Lenguaje_de_definici%C3%B3n_de_datos">https://es.wikipedia.org/wiki/Lenguaje_de_definición_de_datos</a></li>
+<li><strong>DML – Data Manipulation Language</strong> – Lenguaje de Manipulación de Datos<br>
+<a href="https://es.wikipedia.org/wiki/Lenguaje_de_manipulaci%C3%B3n_de_datos">https://es.wikipedia.org/wiki/Lenguaje_de_manipulación_de_datos</a></li>
+</ul>
+<p>En las unidades anteriores hemos trabajado tanto el  DDL como el DML.</p>
+<p>Las bases de datos relacionales poseen unas extensiones del lenguaje de consultas SQL que les permiten crear bloques de código que se ejecutan como un todo. Hay dos tipos de bloques de código:</p>
+<ul>
+<li><strong>Scripts</strong>: conjunto de instrucciones que se guardan en un fichero con extensión .sql y que no forman parte de la base de datos. Los scripts se utilizan principalmente para tareas de administración de la base de datos.</li>
+<li><strong>Procedimientos y funciones almacenadas</strong>: bloques de código que forman parte de una base de datos concreta, como las tablas. Los procedimientos y funciones son compilados después de crealos y pasan a formar parte de la base de datos como otro objeto más. Hay unos procedimientos especiales llamados <strong>triggers</strong> que se ejecutan cuando sucede algún evento sobre las tablas de la base de datos.</li>
+</ul>
+<p>Todas las bases de datos relacionales permiten alamacenar código aunque la extemsión del lenguaje tiene una denominación diferente dependiendo del SGBD; en <strong>Oracle se llama PL/SQL</strong>, en <strong>SQL Server Transact-SQL</strong> y en <strong>MySQL Stored Procedure Programming</strong>.</p>
+<p>En este tema nos centraremos en MySQL para trabajar con programación a través de <strong>procedimientos</strong>, <strong>funciones</strong> y <strong>tratamiento de eventos</strong>.</p>
+<div class="admonition note">
+<p class="admonition-title">Referencias</p>
+<p><a href="https://dev.mysql.com/doc/refman/8.0/en/stored-programs-views.html">MySQL Oficial – Almacenamiento de Programas en MySQL</a></p>
+</div>
+<p>Los procedimientos almacenados y funciones son nuevas funcionalidades incluidas desde la versión de MySQL 5.0.<br>
+Algunas situaciones en que los procedimientos almacenados pueden ser particularmente útiles:</p>
+<ul>
+<li>Cuando múltiples aplicaciones cliente se escriben en <strong>distintos lenguajes</strong> o funcionan en distintas plataformas, pero necesitan <strong>realizar la misma operación en la base de datos</strong>.</li>
+<li><strong>Cuando la seguridad es muy importante</strong>. Los bancos, por ejemplo, usan procedimientos almacenados para todas las operaciones comunes. Esto proporciona un entorno seguro y consistente, y los procedimientos pueden asegurar que cada operación se loguea apropiadamente. En tal entorno, las aplicaciones y los usuarios no obtendrían ningún acceso directo a las tablas de la base de datos, sólo pueden ejecutar algunos procedimientos almacenados.</li>
+</ul>
+<p>Los procedimientos almacenados pueden mejorar el rendimiento ya que se necesita enviar menos información entre el servidor y el cliente. El inconveniente es que aumenta la carga del servidor de la base de datos ya que la mayoría del trabajo se realiza en la parte del servidor y no en el cliente. Considere esto, si muchas máquinas cliente (como servidores Web) se sirven a sólo uno o pocos servidores de bases de datos.</p>
+<p>Los procedimientos almacenados le permiten tener bibliotecas o funciones en el servidor de base de datos. Esta característica es compartida por los lenguajes de programación modernos que permiten este diseño interno, por ejemplo, usando clases. Usando estas características del lenguaje de programación cliente es beneficioso para el programador incluso fuera del entorno de la base de datos.</p>
+<h2 id="primeros-scripts">Primeros SCRIPTS </h2>
+<h3 id="scripts-en-mysql">SCRIPTS en MySQL </h3>
+<p>Comenzaremos por crear nuestro primer script en MySQL con sentencias de <strong>Stored Procedures</strong>.</p>
+<p>Utilizaremos <strong><code>SELECT</code></strong> para mostrar resultados y <strong><code>SET</code></strong> para guardar valores en variables.</p>
+<p>Los scripts de MySQL se puede ejecutar directamente con el programa  <strong><code>mysql.exe</code></strong>.</p>
+<div class="caso_estudio">
+<p><strong><code>mysql.exe</code></strong> es una shell que conecta con el servidor de MySQL y permite ejecutar instrucciones de SQL. Cuando nos conectamos tenemos que indicar y contraseña si procede.</p>
+</div> <!-- fin caso de estudio -->
+<p>Para conectarnos como root hacemos:<br>
+<strong><code>C:\Program Files\MySQL\MySQL Server 8.0\bin&gt; mysql -u root -p</code></strong></p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 1</p>
+<p><strong>Scripts</strong><br>
+Crear un script de nombre <strong><code>b06ejer01.sql</code></strong> en una carpeta de nuestro gusto,por ejemplo <strong>C:\GBD-UD06</strong>. El script calcula la superficie de una pared a partir del ancho y alto de la misma. El ancho y alto se cargan previamente en dos variables.</p>
+<p>El script lo creamos con un editor de texto y su contenido es el siguiente:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">-- En x tenemos el ancho de la pared</span>
+<span class="token keyword keyword-SET">SET</span> <span class="token variable">@x</span> <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">;</span>
+<span class="token comment">-- En y tenemos la altura</span>
+<span class="token keyword keyword-SET">SET</span> <span class="token variable">@y</span> <span class="token operator">=</span> <span class="token number">15</span><span class="token punctuation">;</span>
+<span class="token comment">-- La instrucción select calcula y muestra la superficie de la pared conjuntamente con el ancho y la altura.</span>
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@x</span> <span class="token keyword keyword-AS">AS</span> ancho<span class="token punctuation">,</span> <span class="token variable">@y</span> <span class="token keyword keyword-AS">AS</span> alto<span class="token punctuation">,</span> <span class="token variable">@x</span> <span class="token operator">*</span> <span class="token variable">@y</span> <span class="token keyword keyword-AS">AS</span> superficie<span class="token punctuation">;</span>
+</code></pre><p>El script se puede ejecutar directamente con el programa  <strong><code>mysql.exe</code></strong>. Una vez que hayamos conectados utilizamos el comando <strong><code>source</code></strong> para ejecutar el script.</p>
+<pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>mysql&gt; source C:/GBD-UD6/b06ejer01.sql;
+Query OK, 0 rows affected (0.00 sec)
+Query OK, 0 rows affected (0.00 sec)
++-------+------+------------+
+| ancho | alto | superficie |
++-------+------+------------+
+| 9     | 15   | 135        |
++-------+------+------------+
+1 row in set (0.00 sec)
+</code></pre></div>
+<p>Los nombres de las variables en los scripts tienen que comenzar con el símbolo <strong>@</strong>.<br>
+Las instrucciones <strong>SET</strong> y <strong>SELECT</strong> pueden ejecutarse también directamente desde el intérprete de comandos.</p>
+<h3 id="comentarios">Comentarios </h3>
+<p>Los comentarios dentro de los SCRIPTS pueden hacerse de la siguiente manera:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment"># comentario con almohadilla (solo una linea)</span>
+<span class="token comment">-- Comentario con dos guiones (solo una linea)</span>
+<span class="token comment">/* comentario con barra asterisco (solo una linea) */</span>
+<span class="token comment">/*
+  esto es
+  un comentario
+  multilinea
+*/</span>
+</code></pre><h3 id="variables-definidas-por-el-usuario">Variables definidas por el usuario </h3>
+<p>Para definir una variable de usuario utilizaremos el carácter <strong>@</strong>. Asignaremos valores con el comando <strong><code>SET</code></strong>:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SET">SET</span> <span class="token variable">@num</span> <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token variable">@cad</span> <span class="token operator">=</span> <span class="token string">'Hola'</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-SET">SET</span> <span class="token variable">@num</span> :<span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token variable">@cad</span> :<span class="token operator">=</span> <span class="token string">'Hola'</span><span class="token punctuation">;</span>
+</code></pre><p>Y para mostrar sus valores la instrucción <strong><code>SELECT</code></strong>:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@num</span><span class="token punctuation">,</span> <span class="token variable">@cad</span><span class="token punctuation">;</span>
+</code></pre><p>Las variables puede usarse en instrucciones <strong><code>SELECT</code></strong> de recuperación de datos, como:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> ciudades <span class="token keyword keyword-WHERE">WHERE</span> codigo <span class="token operator">&gt;</span> <span class="token variable">@num</span><span class="token punctuation">;</span>
+</code></pre><p>También podemos calcular y asignar valor en la misma instrucción, almacenando resultados de nuestras <strong><code>SELECT</code></strong>, pero en este caso sólo funciona el operador <strong><code>:=</code></strong>. Si no deseamos que se produzca la salida del resultado, sino sólo almacenarlo, podemos usar la cláusula <strong><code>INTO</code></strong>:</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 2</p>
+<p><strong>Scripts</strong><br>
+Crear un script que asigne a la variable <strong>numreg</strong> la cantidad de ciudades que hay en la tabla <strong>ciudades</strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">-- Asigna el número de ciudades a la variable numreg y muestra el resultado por pantalla.</span>
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@numreg</span> :<span class="token operator">=</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-FROM">FROM</span> ciudades<span class="token punctuation">;</span>
+
+<span class="token comment">-- Asigna el número de ciudades a la variable numreg pero NO  muestra el resultado por pantalla.</span>
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-INTO">INTO</span> <span class="token variable">@numreg</span> <span class="token keyword keyword-FROM">FROM</span> ciudades<span class="token punctuation">;</span>
+</code></pre></div>
+<p>Para consultar todas las variables creadas por el usuario, podemos consultar la tabla <strong>performance_schema.user_variables_by_thread</strong> a partir de la versión 5.7 de MySQL:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> performance_schema<span class="token punctuation">.</span>user_variables_by_thread<span class="token punctuation">;</span>
+</code></pre><h3 id="variables-del-sistema">Variables del sistema </h3>
+<p>MySQL tiene muchas variables de sistema que pueden consultarse en <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variable-reference.html">https://dev.mysql.com/doc/refman/8.0/en/server-system-variable-reference.html</a> y que podemos consultar con la instrucción <strong><code>SHOW VARIABLES LIKE</code></strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SHOW">SHOW</span> VARIABLES <span class="token operator">LIKE</span> <span class="token string">'%'</span><span class="token punctuation">;</span>
+</code></pre><p>Las variables de sistema pueden ser de tipo:</p>
+<ul>
+<li><strong>GLOBAL</strong>: su valor es para todos los usuarios conectados</li>
+<li><strong>SESSION</strong>: su valor puede ser diferente para cada usuario</li>
+</ul>
+<p>Para mostrar el valor de alguna variable global utilizaremos una doble <strong>@</strong> tal como se muestra en este ejemplo con la variable <em>max_connections</em>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> @<span class="token variable">@max_connections</span><span class="token punctuation">;</span>
+</code></pre><p>Para asignar un nuevo valor a la variable <strong>GLOBAL</strong> utilizaremos una de las dos opciones siguientes:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SET">SET</span> <span class="token keyword keyword-GLOBAL">GLOBAL</span> max_connections <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-SET">SET</span> @<span class="token variable">@global.max_connections</span> <span class="token operator">=</span> <span class="token number">50</span><span class="token punctuation">;</span>
+</code></pre><p>Por ejemplo la variable <em>lc_messages</em> define el idioma en que se muestran los mensajes de error. Podríamos tener el valor <em>en_US</em> para tenerlos en inglés o <em>es_ES</em> para español.</p>
+<p>Para asignar un nuevo valor a la variable de sistema de tipo <strong>SESSION</strong> utilizaremos una de las siguientes cuatro opciones mostradas en el ejemplo con la variable <em>lc_messages</em>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SET">SET</span> lc_messages <span class="token operator">=</span> <span class="token string">'es_ES'</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-SET">SET</span> @<span class="token variable">@lc_messages</span><span class="token operator">=</span><span class="token string">'es_ES'</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-SET">SET</span> <span class="token keyword keyword-SESSION">SESSION</span> lc_messages <span class="token operator">=</span> <span class="token string">'es_ES'</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-SET">SET</span> @<span class="token variable">@local.lc_messages</span><span class="token operator">=</span><span class="token string">'es_ES'</span><span class="token punctuation">;</span>
+</code></pre><p>Prueba a ejecutar las siguientes instrucciones después de conectar con <strong><code>mysql.exe</code></strong> y comprueba el resultado:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code>mysql<span class="token operator">&gt;</span> <span class="token keyword keyword-SET">SET</span> <span class="token keyword keyword-SESSION">SESSION</span> lc_messages<span class="token operator">=</span><span class="token string">'en_US'</span><span class="token punctuation">;</span>
+mysql<span class="token operator">&gt;</span> MENSAJES<span class="token punctuation">;</span>
+ERROR <span class="token number">1064</span> <span class="token punctuation">(</span><span class="token number">42000</span><span class="token punctuation">)</span>: You have an error <span class="token operator">in</span> your <span class="token keyword keyword-SQL">SQL</span> syntax<span class="token punctuation">;</span> <span class="token keyword keyword-check">check</span>
+the manual that corresponds <span class="token keyword keyword-to">to</span> your MySQL server version <span class="token keyword keyword-for">for</span> the
+<span class="token keyword keyword-right">right</span> syntax <span class="token keyword keyword-to">to</span> <span class="token keyword keyword-use">use</span> near <span class="token string">'MENSAJES'</span> at line <span class="token number">1</span>
+mysql<span class="token operator">&gt;</span> <span class="token keyword keyword-SET">SET</span> <span class="token keyword keyword-SESSION">SESSION</span> lc_messages<span class="token operator">=</span><span class="token string">'es_ES'</span><span class="token punctuation">;</span>
+mysql<span class="token operator">&gt;</span> MENSAJES<span class="token punctuation">;</span>
+ERROR <span class="token number">1064</span> <span class="token punctuation">(</span><span class="token number">42000</span><span class="token punctuation">)</span>: Algo está equivocado en su sintax cerca
+<span class="token string">'MENSAJES'</span> en la linea <span class="token number">1</span>
+</code></pre><div class="admonition example">
+<p class="admonition-title">Ejemplo 3</p>
+<p><strong>Scripts</strong><br>
+Crea un <strong>script</strong> que conecte con la base de datos <strong>world</strong> y guarde en una variable el número de registros de la tabla <strong>city</strong> y en otra el número de registros de la tabla <strong>country</strong>. Ejecutar un <strong><code>SELECT</code></strong> que muestre la cantidad de registros de las dos tablas.</p>
+<p>El script <strong><code>b06ejer02.sql</code></strong> tendrá las siguiente instrucciones:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-USE">USE</span> world<span class="token punctuation">;</span>
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@numCity</span> :<span class="token operator">=</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-FROM">FROM</span> city<span class="token punctuation">;</span>
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@numCountry</span> :<span class="token operator">=</span> <span class="token function">count</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token keyword keyword-FROM">FROM</span> country<span class="token punctuation">;</span>
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@numCity</span> <span class="token keyword keyword-AS">AS</span> NREG_City<span class="token punctuation">,</span> <span class="token variable">@numCountry</span> <span class="token keyword keyword-AS">AS</span> NREG_Country<span class="token punctuation">;</span>
+</code></pre><p>Para ejecutar el script realizamos los siguientes comandos:</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>C:\&gt; cd "\Program Files\MySQL\MySQL Server 8.0\bin\mysql"
+C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql&gt; mysql -u root -p
+mysql&gt; source C:/GBD-UD6/b06ejer02.sql;
+</code></pre></div>
+<h4 id="ejecutar-scripts">Ejecutar scripts </h4>
+<p>La mayoría de scripts los generamos en UTF8 por lo que deberemos cambiar el conjunto de caracteres de la ventana de comandos del CMD.</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>// Cambiar a juego de caracteres en UTF8
+C:\&gt; chcp 65001
+// Cambiar a juego de caracteres en ANSI West European Latin
+C:\&gt; chcp 1252
+</code></pre><p>Para cambiar en timepo real el juego de caracteres en el resultado de los <strong><code>SELECT</code></strong> en MySQL, podemos utilizar el comando <strong><strong><code>SET NAMES</code></strong></strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">// Cambiar a juego de caracteres en UTF8</span>
+mysql<span class="token operator">&gt;</span> <span class="token keyword keyword-SET">SET</span> NAMES <span class="token string">'utf8'</span><span class="token punctuation">;</span>
+<span class="token comment">// Cambiar a juego de caracteres en ANSI West European Latin</span>
+mysql<span class="token operator">&gt;</span> <span class="token keyword keyword-SET">SET</span> NAMES <span class="token string">'latin1'</span><span class="token punctuation">;</span>
+</code></pre><p>El comando <strong><code>mysql</code></strong> dispone además de muchos parámetros. Usaremos algunos:</p>
+<table>
+<thead>
+<tr>
+<th style="text-align:left">Parámetro</th>
+<th style="text-align:left">Descripción</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td style="text-align:left"><strong>--silent</strong></td>
+<td style="text-align:left">En el modo silencioso no muestra tantos mensajes</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>--table</strong></td>
+<td style="text-align:left">La salida de los SELECT la muestra en formato tabla</td>
+</tr>
+<tr>
+<td style="text-align:left"><strong>--html</strong></td>
+<td style="text-align:left">La salida de los SELECT la muestra en formato HTML</td>
+</tr>
+</tbody>
+</table>
+<p>Ejemplo de forma de conexión.</p>
+<pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>//Conectarse como root en modo silencioso
+C:\&gt; mysql -u root -p --silent --table
+</code></pre><h2 id="procedimientos-y-estructuras-de-control">Procedimientos y estructuras de control </h2>
+<h3 id="sintaxis-y-estructura">Sintaxis y Estructura </h3>
+<p>Para poder almacenar un conjunto de instrucciones en la propia base de datos podemos utilizar los procedimientos.</p>
+<p>La sintaxis más sencilla es la siguiente:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
+<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> nombre<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-BEGIN">BEGIN</span>
+    instrucciones<span class="token punctuation">;</span>
+<span class="token keyword keyword-END">END</span> <span class="token comment">//</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
+</code></pre><p>Antes de comenzar debemos seleccionar la base de datos con la que vamos a trabajar. Por ejemplo para trabajar con la base de datos world ejecutaríamos:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-USE">USE</span> world<span class="token punctuation">;</span>
+</code></pre><p>Si por ejemplo deseamos un procedimiento que muestre el día y hora sería:</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 1</p>
+<p><strong>Procedimientos</strong><br>
+Realizar un procedimiento que calcule el día y la hora actual y la muestre por pantalla.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
+<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> diayhora<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-BEGIN">BEGIN</span>
+    <span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">NOW</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-END">END</span> <span class="token comment">//</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
+</code></pre></div>
+<p>Para llamar al procedimiento se utiliza el comando <strong><code>CALL</code></strong>.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 2</p>
+<p><strong>Procedimientos</strong><br>
+Ejecutar el procedimiento <strong>diayhora</strong> creado en el ejemplo anterior.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CALL">CALL</span> diayhora<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre></div>
+<p>Los procedimientos se asignan a una base de datos. Esto quiere decir que debemos indicar el <strong>SCHEMA</strong> o BASE DE DATOS al crear o eliminar el procedimiento. Podemos usar previamente la selección de base de datos por defecto con el comando <strong><code>USE</code></strong> como en el ejemplo anterior o bien indicarla al crear el procedimiento como se hace en los <strong><code>SELECT</code></strong> de las tablas. Por ejemplo para crear el procedimiento en la base de datos world, independientemente de cual tengamos seleccionada, la cabecera del procedimiento sería: <strong><code>CREATE PROCEDURE world.diayhora()</code></strong>.</p>
+<h4 id="delimiter">DELIMITER </h4>
+<p>En la declaración del procedimiento hemos usado delimiter pero, ¿por qué es importante el uso del <strong><code>DELIMITER</code></strong>?.</p>
+<p>Ya sabemos que por defecto MySQL usa como delimitador de fin de instrucción el punto y coma (;) , es decir, cada vez que encuentre punto y como(;) ejecuta hasta ahí. Como en los procedimientos hay varias líneas de códigos y algunas de ellas terminan con este delimitador se ejecutaría solo hasta ahí, lo que ocasionaría un error, y es por esto que es necesario indicarle a MySQL que utilice otro dlimitador que puede ser cualquiera. Ese es el próposito de la cláusula <strong><code>DELIMITER</code></strong>.</p>
+<p>Para nuestro ejemplo usamos <strong>//</strong> pero se podría usar también <strong>$$</strong> o lo que queramos. Al finalizar la creación del procedimiento o función volvemos a cambiarlo por <strong>;</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DELIMITER">DELIMITER</span> $$
+    <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+    $$
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
+</code></pre><h4 id="bloques-de-código">Bloques de código </h4>
+<p>Para poder agrupar varias instrucciones en bloques utilizaremos: <strong><code>BEGIN ... END</code></strong>.<br>
+En los procedimientos es necesario porque define el espacio de instrucciones que se almacenan.</p>
+<p>Estos bloques de código se usarán más adelante también en estructuras de control como: <strong><code>IF .. THEN .. END IF</code></strong></p>
+<h4 id="redefinir-y-eliminar">Redefinir y Eliminar </h4>
+<p>Para eliminar un procedimiento utilizaremos la instrucción <strong><code>DROP PROCEDURE</code></strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> nombreProcedimiento<span class="token punctuation">;</span>
+</code></pre><p>Si queremos redefinir un procedimiento, para evitar que si no existe muestre un error lo haremos utilizando la cláusula <strong><code>IF EXISTS</code></strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> <span class="token keyword keyword-IF">IF</span> <span class="token keyword keyword-EXISTS">EXISTS</span> nombreProcedimiento<span class="token punctuation">;</span>
+</code></pre><h3 id="variables-locales-del-procedimiento">Variables locales del procedimiento </h3>
+<p>Cuando necesitamos variables que usaremos dentro del procedimiento debemos usar la instrucción <strong><code>DECLARE</code></strong> como si lo hiciéramos en la instrucción <strong><code>CREATE TABLE</code></strong>. Las variables sólo serán visibles y accesibles dentro del procedimiento.<br>
+Estas variables no comienzan con el caracter especial @, al contrario de lo que sucede en los scripts.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DECLARE">DECLARE</span> nombreVariable tipoVariable <span class="token punctuation">[</span>opciones<span class="token punctuation">]</span><span class="token punctuation">;</span>
+</code></pre><h4 id="estructuras-de-control">Estructuras de control </h4>
+<p>Las instrucciones de un procedimiento (o función) se ejecutan secuencialmente empezando por la instrucción que está justo después de la palabra reservada <strong><code>BEGIN</code></strong> y acabando por la que está justo antes de la palabra reservada <strong><code>END</code></strong>. Esta forma de ejcución de instrucciones se llama <strong>secuencial</strong>. El siguiente diagrama representa un bloque de 3 instrucciones que se ejecutan secuencialmente. El punto negro inicial representa el <strong><code>BEGIN</code></strong> y el punto con el aspa el <strong><code>END</code></strong>.</p>
+<p align="center" style="zoom:1" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="ACTIVITY" height="250px" preserveAspectRatio="none" style="width:115px;height:250px;background:#FFFFFF;" version="1.1" viewBox="0 0 115 250" width="115px" zoomAndPan="magnify"><defs></defs><g><ellipse cx="57.6063" cy="20" fill="#222222" rx="10" ry="10" style="stroke:#222222;stroke-width:1;"></ellipse><rect fill="#F1F1F1" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="93.2125" x="11" y="50"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73.2125" x="21" y="72.8281">Instrucción 1</text><rect fill="#F1F1F1" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="93.2125" x="11" y="106.3441"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73.2125" x="21" y="129.1722">Instrucción 2</text><rect fill="#F1F1F1" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="93.2125" x="11" y="162.6882"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73.2125" x="21" y="185.5163">Instrucción 3</text><ellipse cx="57.6063" cy="229.0323" fill="none" rx="10" ry="10" style="stroke:#222222;stroke-width:1.5;"></ellipse><line style="stroke:#222222;stroke-width:2.5;" x1="51.4191" x2="63.7934" y1="222.8452" y2="235.2195"></line><line style="stroke:#222222;stroke-width:2.5;" x1="63.7934" x2="51.4191" y1="222.8452" y2="235.2195"></line><line style="stroke:#181818;stroke-width:1;" x1="57.6063" x2="57.6063" y1="30" y2="50"></line><polygon fill="#181818" points="53.6063,40,57.6063,50,61.6063,40,57.6063,44" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="57.6063" x2="57.6063" y1="86.3441" y2="106.3441"></line><polygon fill="#181818" points="53.6063,96.3441,57.6063,106.3441,61.6063,96.3441,57.6063,100.3441" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="57.6063" x2="57.6063" y1="142.6882" y2="162.6882"></line><polygon fill="#181818" points="53.6063,152.6882,57.6063,162.6882,61.6063,152.6882,57.6063,156.6882" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="57.6063" x2="57.6063" y1="199.0323" y2="219.0323"></line><polygon fill="#181818" points="53.6063,209.0323,57.6063,219.0323,61.6063,209.0323,57.6063,213.0323" style="stroke:#181818;stroke-width:1;"></polygon><!--SRC=[Kr1GA2v9B2hXKb1GiFBCAoufAarEpZoyEK_1q1fJp0YBc35OB3Kl1G00]--></g></svg></p><p>Las estructuras de control permiten modificar el flujo de ejecución de las instrucciones de un programa.</p>
+<p>No obstante, hay algunas directiva que nos permiten cambiar el orden secuencial de ejecución de instrucciones. A estas directivas comunmente se les llama estructuras de control. Las estructuras de control se pueden englobar en dos categorías:</p>
+<ul>
+<li><strong>Estructuras de control condicionales</strong>: en función de una condición se ejecutan un bloque de instrucciones u otro (o ninguno).</li>
+<li><strong>Estructuras de control de repetición</strong>: permiten que un bloque de instrucciones se ejecuta un cierto o número de veces o mientras se cumpla una condición.</li>
+</ul>
+<h4 id="estructuras-de-control-condicionales">Estructuras de control condicionales </h4>
+<p><strong>Sentencia IF</strong><br>
+Es la más sencilla de todas. Nos permite ejecutar unas instrucciones u otras según una condición. Hay 3 variantes:</p>
+<p><em><strong>Variante 1</strong></em><br>
+Esquema general</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-IF">IF</span> <span class="token punctuation">[</span>condicion<span class="token punctuation">]</span> <span class="token keyword keyword-THEN">THEN</span>
+    <span class="token punctuation">[</span>sentencia o bloque de sentencias<span class="token punctuation">]</span>
+<span class="token keyword keyword-END">END</span> <span class="token keyword keyword-IF">IF</span><span class="token punctuation">;</span>
+</code></pre><p align="center" style="zoom:1" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="ACTIVITY" height="302px" preserveAspectRatio="none" style="width:689px;height:302px;background:#FFFFFF;" version="1.1" viewBox="0 0 689 302" width="689px" zoomAndPan="magnify"><defs></defs><g><ellipse cx="322.2736" cy="20" fill="#222222" rx="10" ry="10" style="stroke:#222222;stroke-width:1;"></ellipse><path d="M10,99.4909 L10,144.903 A0,0 0 0 0 10,144.903 L236.1792,144.903 A0,0 0 0 0 236.1792,144.903 L236.1792,126.197 L256.1792,122.197 L236.1792,118.197 L236.1792,109.4909 L226.1792,99.4909 L10,99.4909 A0,0 0 0 0 10,99.4909" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><path d="M226.1792,99.4909 L226.1792,109.4909 L236.1792,109.4909 L226.1792,99.4909" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="203.9182" x="16" y="118.388">Este bloque de sentencias sólo se</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="44.278" x="16" y="136.094">ejecuta</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="12.22" x="63.658" y="136.094">SI</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="141.9211" x="79.2581" y="136.094">se cumple la condición.</text><rect fill="#90EE90" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="132.1888" x="256.1792" y="104.0249"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="112.1888" x="266.1792" y="126.853">bloque sentencias 1</text><polygon fill="#F1F1F1" points="297.3203,50,347.2269,50,359.2269,62,347.2269,74,297.3203,74,285.3203,62,297.3203,50" style="stroke:#181818;stroke-width:0.5;"></polygon><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="8.8769" x="326.2736" y="85.7589">Sí</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="49.9066" x="297.3203" y="66.268">condición</text><polygon fill="#F1F1F1" points="322.2736,164.903,334.2736,176.903,322.2736,188.903,310.2736,176.903,322.2736,164.903" style="stroke:#181818;stroke-width:0.5;"></polygon><path d="M424.4721,204.369 L424.4721,223.075 L404.4721,227.075 L424.4721,231.075 L424.4721,249.7811 A0,0 0 0 0 424.4721,249.7811 L677.4313,249.7811 A0,0 0 0 0 677.4313,249.7811 L677.4313,214.369 L667.4313,204.369 L424.4721,204.369 A0,0 0 0 0 424.4721,204.369" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><path d="M667.4313,204.369 L667.4313,214.369 L677.4313,214.369 L667.4313,204.369" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="222.8852" x="430.4721" y="223.266">Este bloque de sentencias se ejecuta</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="52.689" x="430.4721" y="240.972">siempre</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="179.2702" x="483.1611" y="240.972">, se cumpla o no la condición.</text><rect fill="#F1F1F1" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="164.397" x="240.0751" y="208.903"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="144.397" x="250.0751" y="231.7311">bloque sentencias común</text><ellipse cx="322.2736" cy="280.7811" fill="none" rx="11" ry="11" style="stroke:#222222;stroke-width:1;"></ellipse><ellipse cx="322.2736" cy="280.7811" fill="#222222" rx="6" ry="6" style="stroke:#222222;stroke-width:1;"></ellipse><line style="stroke:#181818;stroke-width:1;" x1="322.2736" x2="322.2736" y1="74" y2="104.0249"></line><polygon fill="#181818" points="318.2736,94.0249,322.2736,104.0249,326.2736,94.0249,322.2736,98.0249" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="359.2269" x2="398.368" y1="62" y2="62"></line><polygon fill="#181818" points="394.368,112.197,398.368,122.197,402.368,112.197,398.368,116.197" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="398.368" x2="398.368" y1="62" y2="176.903"></line><line style="stroke:#181818;stroke-width:1;" x1="398.368" x2="334.2736" y1="176.903" y2="176.903"></line><polygon fill="#181818" points="344.2736,172.903,334.2736,176.903,344.2736,180.903,340.2736,176.903" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="322.2736" x2="322.2736" y1="140.369" y2="164.903"></line><polygon fill="#181818" points="318.2736,154.903,322.2736,164.903,326.2736,154.903,322.2736,158.903" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="322.2736" x2="322.2736" y1="30" y2="50"></line><polygon fill="#181818" points="318.2736,40,322.2736,50,326.2736,40,322.2736,44" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="322.2736" x2="322.2736" y1="188.903" y2="208.903"></line><polygon fill="#181818" points="318.2736,198.903,322.2736,208.903,326.2736,198.903,322.2736,202.903" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="322.2736" x2="322.2736" y1="245.2471" y2="269.7811"></line><polygon fill="#181818" points="318.2736,259.7811,322.2736,269.7811,326.2736,259.7811,322.2736,263.7811" style="stroke:#181818;stroke-width:1;"></polygon><!--SRC=[VSun3i8m30NGtQUmnD9Q28aLPWPcJX1IjmrAdTAunsBgnfgB4Q028G6RzMtv_QXcK70r5ZP8vQnBavIeBGiMXtGfOU5TqsepCClcwCDvP8miocATYRZUWWHbs4LbdDVLnqLCamyv03wn7TKWqM5Fb1EqOzTxHc_mRQ-0fSB7ppou6hwWDdJfAayPXtkzVpxZB0DHTDpr0nCjNxx1aBcV9QA6_WO0]--></g></svg></p><p>El rombo equivaldría al <strong><code>END IF</code></strong>.</p>
+<p><em><strong>Variante 2</strong></em><br>
+Esquema general</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-IF">IF</span> <span class="token punctuation">[</span>condicion<span class="token punctuation">]</span> <span class="token keyword keyword-THEN">THEN</span>
+    <span class="token punctuation">[</span>sentencia o bloque de sentencias<span class="token punctuation">]</span>
+<span class="token keyword keyword-ELSE">ELSE</span>
+    <span class="token punctuation">[</span>sentencia o bloque de sentencias<span class="token punctuation">]</span>
+<span class="token keyword keyword-END">END</span> <span class="token keyword keyword-IF">IF</span><span class="token punctuation">;</span>
+</code></pre><p align="center" style="zoom:1" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="ACTIVITY" height="273px" preserveAspectRatio="none" style="width:820px;height:273px;background:#FFFFFF;" version="1.1" viewBox="0 0 820 273" width="820px" zoomAndPan="magnify"><defs></defs><g><ellipse cx="398.368" cy="20" fill="#222222" rx="10" ry="10" style="stroke:#222222;stroke-width:1;"></ellipse><polygon fill="#F1F1F1" points="373.4147,50,423.3213,50,435.3213,62,423.3213,74,373.4147,74,361.4147,62,373.4147,50" style="stroke:#181818;stroke-width:0.5;"></polygon><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="49.9066" x="373.4147" y="66.268">condición</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="8.8769" x="352.5377" y="58.777">Sí</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="15.0149" x="435.3213" y="58.777">No</text><path d="M10,84 L10,129.412 A0,0 0 0 0 10,129.412 L236.1792,129.412 A0,0 0 0 0 236.1792,129.412 L236.1792,110.706 L256.1792,106.706 L236.1792,102.706 L236.1792,94 L226.1792,84 L10,84 A0,0 0 0 0 10,84" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><path d="M226.1792,84 L226.1792,94 L236.1792,94 L226.1792,84" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="203.9182" x="16" y="102.897">Este bloque de sentencias sólo se</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="44.278" x="16" y="120.603">ejecuta</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="12.22" x="63.658" y="120.603">SI</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="141.9211" x="79.2581" y="120.603">se cumple la condición.</text><rect fill="#90EE90" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="132.1888" x="256.1792" y="88.534"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="112.1888" x="266.1792" y="111.362">bloque sentencias 1</text><path d="M560.5568,84 L560.5568,102.706 L540.5568,106.706 L560.5568,110.706 L560.5568,129.412 A0,0 0 0 0 560.5568,129.412 L808.394,129.412 A0,0 0 0 0 808.394,129.412 L808.394,94 L798.394,84 L560.5568,84 A0,0 0 0 0 560.5568,84" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><path d="M798.394,84 L798.394,94 L808.394,94 L798.394,84" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="203.9182" x="566.5568" y="102.897">Este bloque de sentencias sólo se</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="57.239" x="566.5568" y="120.603">ejecuta si</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="20.917" x="627.1758" y="120.603">NO</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="141.9211" x="651.4729" y="120.603">se cumple la condición.</text><rect fill="#90EE90" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="132.1888" x="408.368" y="88.534"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="112.1888" x="418.368" y="111.362">bloque sentencias 2</text><polygon fill="#F1F1F1" points="398.368,135.412,410.368,147.412,398.368,159.412,386.368,147.412,398.368,135.412" style="stroke:#181818;stroke-width:0.5;"></polygon><path d="M43.2103,174.8781 L43.2103,220.2901 A0,0 0 0 0 43.2103,220.2901 L296.1695,220.2901 A0,0 0 0 0 296.1695,220.2901 L296.1695,201.5841 L316.1695,197.5841 L296.1695,193.5841 L296.1695,184.8781 L286.1695,174.8781 L43.2103,174.8781 A0,0 0 0 0 43.2103,174.8781" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><path d="M286.1695,174.8781 L286.1695,184.8781 L296.1695,184.8781 L286.1695,174.8781" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="222.8852" x="49.2103" y="193.7751">Este bloque de sentencias se ejecuta</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="52.689" x="49.2103" y="211.4811">siempre</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="179.2702" x="101.8993" y="211.4811">, se cumpla o no la condición.</text><rect fill="#F1F1F1" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="164.397" x="316.1695" y="179.412"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="144.397" x="326.1695" y="202.2401">bloque sentencias común</text><ellipse cx="398.368" cy="251.2901" fill="none" rx="11" ry="11" style="stroke:#222222;stroke-width:1;"></ellipse><ellipse cx="398.368" cy="251.2901" fill="#222222" rx="6" ry="6" style="stroke:#222222;stroke-width:1;"></ellipse><line style="stroke:#181818;stroke-width:1;" x1="361.4147" x2="322.2736" y1="62" y2="62"></line><line style="stroke:#181818;stroke-width:1;" x1="322.2736" x2="322.2736" y1="62" y2="88.534"></line><polygon fill="#181818" points="318.2736,78.534,322.2736,88.534,326.2736,78.534,322.2736,82.534" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="435.3213" x2="474.4624" y1="62" y2="62"></line><line style="stroke:#181818;stroke-width:1;" x1="474.4624" x2="474.4624" y1="62" y2="88.534"></line><polygon fill="#181818" points="470.4624,78.534,474.4624,88.534,478.4624,78.534,474.4624,82.534" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="322.2736" x2="322.2736" y1="124.8781" y2="147.412"></line><line style="stroke:#181818;stroke-width:1;" x1="322.2736" x2="386.368" y1="147.412" y2="147.412"></line><polygon fill="#181818" points="376.368,143.412,386.368,147.412,376.368,151.412,380.368,147.412" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="474.4624" x2="474.4624" y1="124.8781" y2="147.412"></line><line style="stroke:#181818;stroke-width:1;" x1="474.4624" x2="410.368" y1="147.412" y2="147.412"></line><polygon fill="#181818" points="420.368,143.412,410.368,147.412,420.368,151.412,416.368,147.412" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="398.368" x2="398.368" y1="30" y2="50"></line><polygon fill="#181818" points="394.368,40,398.368,50,402.368,40,398.368,44" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="398.368" x2="398.368" y1="159.412" y2="179.412"></line><polygon fill="#181818" points="394.368,169.412,398.368,179.412,402.368,169.412,398.368,173.412" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="398.368" x2="398.368" y1="215.7561" y2="240.2901"></line><polygon fill="#181818" points="394.368,230.2901,398.368,240.2901,402.368,230.2901,398.368,234.2901" style="stroke:#181818;stroke-width:1;"></polygon><!--SRC=[bP0n3i8m34NtdC8IIniX91XXPc0fGqyGKhSDIfsIkCTYwiRQYn6W0Y612flr_UNtvC3Aip0b9DfHORGPUag1QoH8yk6SYfarLSsLHwJrmRfJXn2G64aR5M2v4UGOnJOmmhWktXfXwAsBWS0ZweuLI9dlf8m9wAvfBO9Ly68l1581zvjeOoV9t9J3wk40_bRwnoIOA9FjVvE9Wod51xnspN2XwJyWZ5mXPJ3Oj1wbd3_H2bmaVUK7TkqL]--></g></svg></p><p><em><strong>Variante 3</strong></em><br>
+Esquema general</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-IF">IF</span> <span class="token punctuation">[</span>condicion<span class="token punctuation">]</span> <span class="token keyword keyword-THEN">THEN</span>
+    <span class="token punctuation">[</span>sentencia o bloque de sentencias<span class="token punctuation">]</span>
+<span class="token keyword keyword-ELSEIF">ELSEIF</span> <span class="token punctuation">[</span>condicion<span class="token punctuation">]</span> <span class="token keyword keyword-THEN">THEN</span>
+    <span class="token punctuation">[</span>sentencia o bloque de sentencias<span class="token punctuation">]</span>
+<span class="token keyword keyword-ELSE">ELSE</span>
+    <span class="token punctuation">[</span>sentencia o bloque de sentencias<span class="token punctuation">]</span>
+<span class="token keyword keyword-END">END</span> <span class="token keyword keyword-IF">IF</span><span class="token punctuation">;</span>
+</code></pre><p align="center" style="zoom:1" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="ACTIVITY" height="432px" preserveAspectRatio="none" style="width:669px;height:432px;background:#FFFFFF;" version="1.1" viewBox="0 0 669 432" width="669px" zoomAndPan="magnify"><defs></defs><g><ellipse cx="365.1577" cy="20" fill="#222222" rx="10" ry="10" style="stroke:#222222;stroke-width:1;"></ellipse><path d="M379.0173,74 L379.0173,92.706 L359.0173,96.706 L379.0173,100.706 L379.0173,119.412 A0,0 0 0 0 379.0173,119.412 L605.4175,119.412 A0,0 0 0 0 605.4175,119.412 L605.4175,84 L595.4175,74 L379.0173,74 A0,0 0 0 0 379.0173,74" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><path d="M595.4175,74 L595.4175,84 L605.4175,84 L595.4175,74" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="189.8002" x="385.0173" y="92.897">Las sentencias sólo se ejecutan</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="12.22" x="578.1975" y="92.897">SI</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="153.6082" x="385.0173" y="110.603">se cumple la condición A.</text><rect fill="#90EE90" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="135.3088" x="223.7085" y="78.534"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="112.1888" x="236.8285" y="101.362">bloque sentencias 1</text><path d="M353.3747,163.412 L353.3747,182.118 L333.3747,186.118 L353.3747,190.118 L353.3747,208.8241 A0,0 0 0 0 353.3747,208.8241 L627.94,208.8241 A0,0 0 0 0 627.94,208.8241 L627.94,173.412 L617.94,163.412 L353.3747,163.412 A0,0 0 0 0 353.3747,163.412" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><path d="M617.94,163.412 L617.94,173.412 L627.94,173.412 L617.94,163.412" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="202.7612" x="359.3747" y="182.309">Las sentencias sólo se ejecutan si</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="20.917" x="565.5159" y="182.309">NO</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="13.559" x="589.8129" y="182.309">se</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="143.1951" x="359.3747" y="200.0151">cumple la condición A y</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="12.22" x="505.9499" y="200.0151">SÍ</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="91.3901" x="521.5499" y="200.0151">se cumple la B.</text><rect fill="#90EE90" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="132.1888" x="201.1859" y="167.946"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="112.1888" x="211.1859" y="190.7741">bloque sentencias 2</text><polygon fill="#F1F1F1" points="77.0003,50,136.7959,50,148.7959,62,136.7959,74,77.0003,74,65.0003,62,77.0003,50" style="stroke:#181818;stroke-width:0.5;"></polygon><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="59.7956" x="77.0003" y="66.268">condición A</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="8.8769" x="148.7959" y="58.777">Sí</text><polygon fill="#F1F1F1" points="77.5943,139.412,136.2019,139.412,148.2019,151.412,136.2019,163.412,77.5943,163.412,65.5943,151.412,77.5943,139.412" style="stroke:#181818;stroke-width:0.5;"></polygon><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="58.6076" x="77.5943" y="155.68">condition B</text><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="8.8769" x="148.2019" y="148.1891">Sí</text><path d="M315.533,228.8241 L315.533,247.5301 L295.533,251.5301 L315.533,255.5301 L315.533,274.2361 A0,0 0 0 0 315.533,274.2361 L566.9712,274.2361 A0,0 0 0 0 566.9712,274.2361 L566.9712,238.8241 L556.9712,228.8241 L315.533,228.8241 A0,0 0 0 0 315.533,228.8241" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><path d="M556.9712,228.8241 L556.9712,238.8241 L566.9712,238.8241 L556.9712,228.8241" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="202.7612" x="321.533" y="247.7211">Las sentencias sólo se ejecutan si</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="20.917" x="527.6742" y="247.7211">NO</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="3.38" x="548.5912" y="247.7211">&nbsp;</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="182.0522" x="321.533" y="265.4271">se cumple ninguna condición.</text><rect fill="#90EE90" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="132.1888" x="163.3442" y="233.358"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="112.1888" x="173.3442" y="256.1861">bloque sentencias 3</text><polygon fill="#F1F1F1" points="365.1577,294.2361,377.1577,306.2361,365.1577,318.2361,353.1577,306.2361,365.1577,294.2361" style="stroke:#181818;stroke-width:0.5;"></polygon><path d="M10,333.7021 L10,379.1142 A0,0 0 0 0 10,379.1142 L262.9592,379.1142 A0,0 0 0 0 262.9592,379.1142 L262.9592,360.4082 L282.9592,356.4082 L262.9592,352.4082 L262.9592,343.7021 L252.9592,333.7021 L10,333.7021 A0,0 0 0 0 10,333.7021" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><path d="M252.9592,333.7021 L252.9592,343.7021 L262.9592,343.7021 L252.9592,333.7021" fill="#FEFFDD" style="stroke:#181818;stroke-width:0.5;"></path><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="222.8852" x="16" y="352.5992">Este bloque de sentencias se ejecuta</text><text fill="#000000" font-family="sans-serif" font-size="13" font-weight="bold" lengthAdjust="spacing" textLength="52.689" x="16" y="370.3052">siempre</text><text fill="#000000" font-family="sans-serif" font-size="13" lengthAdjust="spacing" textLength="179.2702" x="68.689" y="370.3052">, se cumpla o no la condición.</text><rect fill="#F1F1F1" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="164.397" x="282.9592" y="338.2361"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="144.397" x="292.9592" y="361.0642">bloque sentencias común</text><ellipse cx="365.1577" cy="410.1142" fill="none" rx="11" ry="11" style="stroke:#222222;stroke-width:1;"></ellipse><ellipse cx="365.1577" cy="410.1142" fill="#222222" rx="6" ry="6" style="stroke:#222222;stroke-width:1;"></ellipse><line style="stroke:#181818;stroke-width:1;" x1="148.7959" x2="291.3629" y1="62" y2="62"></line><line style="stroke:#181818;stroke-width:1;" x1="291.3629" x2="291.3629" y1="62" y2="78.534"></line><polygon fill="#181818" points="287.3629,68.534,291.3629,78.534,295.3629,68.534,291.3629,72.534" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="148.2019" x2="267.2803" y1="151.412" y2="151.412"></line><line style="stroke:#181818;stroke-width:1;" x1="267.2803" x2="267.2803" y1="151.412" y2="167.946"></line><polygon fill="#181818" points="263.2803,157.946,267.2803,167.946,271.2803,157.946,267.2803,161.946" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="106.8981" x2="106.8981" y1="74" y2="139.412"></line><polygon fill="#181818" points="102.8981,129.412,106.8981,139.412,110.8981,129.412,106.8981,133.412" style="stroke:#181818;stroke-width:1;"></polygon><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="15.0149" x="106.8981" y="105.974">No</text><line style="stroke:#181818;stroke-width:1;" x1="291.3629" x2="291.3629" y1="114.8781" y2="129.8781"></line><line style="stroke:#181818;stroke-width:1;" x1="291.3629" x2="647.94" y1="129.8781" y2="129.8781"></line><line style="stroke:#181818;stroke-width:1;" x1="647.94" x2="647.94" y1="129.8781" y2="306.2361"></line><line style="stroke:#181818;stroke-width:1;" x1="647.94" x2="377.1577" y1="306.2361" y2="306.2361"></line><polygon fill="#181818" points="387.1577,302.2361,377.1577,306.2361,387.1577,310.2361,383.1577,306.2361" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="267.2803" x2="267.2803" y1="204.2901" y2="219.2901"></line><line style="stroke:#181818;stroke-width:1;" x1="267.2803" x2="647.94" y1="219.2901" y2="219.2901"></line><polygon fill="#181818" points="637.94,215.2901,647.94,219.2901,637.94,223.2901,641.94,219.2901" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="365.1577" x2="365.1577" y1="30" y2="35"></line><line style="stroke:#181818;stroke-width:1;" x1="365.1577" x2="106.8981" y1="35" y2="35"></line><line style="stroke:#181818;stroke-width:1;" x1="106.8981" x2="106.8981" y1="35" y2="50"></line><polygon fill="#181818" points="102.8981,40,106.8981,50,110.8981,40,106.8981,44" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="106.8981" x2="106.8981" y1="163.412" y2="218.358"></line><line style="stroke:#181818;stroke-width:1;" x1="106.8981" x2="229.4386" y1="218.358" y2="218.358"></line><line style="stroke:#181818;stroke-width:1;" x1="229.4386" x2="229.4386" y1="218.358" y2="233.358"></line><polygon fill="#181818" points="225.4386,223.358,229.4386,233.358,233.4386,223.358,229.4386,227.358" style="stroke:#181818;stroke-width:1;"></polygon><text fill="#000000" font-family="sans-serif" font-size="11" lengthAdjust="spacing" textLength="15.0149" x="106.8981" y="197.653">No</text><line style="stroke:#181818;stroke-width:1;" x1="229.4386" x2="229.4386" y1="269.7021" y2="279.2361"></line><line style="stroke:#181818;stroke-width:1;" x1="229.4386" x2="365.1577" y1="279.2361" y2="279.2361"></line><line style="stroke:#181818;stroke-width:1;" x1="365.1577" x2="365.1577" y1="279.2361" y2="294.2361"></line><polygon fill="#181818" points="361.1577,284.2361,365.1577,294.2361,369.1577,284.2361,365.1577,288.2361" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="365.1577" x2="365.1577" y1="318.2361" y2="338.2361"></line><polygon fill="#181818" points="361.1577,328.2361,365.1577,338.2361,369.1577,328.2361,365.1577,332.2361" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="365.1577" x2="365.1577" y1="374.5802" y2="399.1142"></line><polygon fill="#181818" points="361.1577,389.1142,365.1577,399.1142,369.1577,389.1142,365.1577,393.1142" style="stroke:#181818;stroke-width:1;"></polygon><!--SRC=[dT2_JiCm40Rm_PxY44jYeKh01XEL62fLPQZ4RfnBUiWv1_yPU0WUXQaRQruC1r1nHH6Yc_NvvEztFXcyxdgDAT0z-SX6sqMBJY14xIDmYvLnqh3XSIjuKsFSa62r7bzhEBNSRMBdYUGA7wnxIeI1998OrW7Fhq5S9FJJ52npKbo6SMjT3f0UoQIe1PLQBvI279dK3vRGQYohPq3IuFGYL2jN8zb0Erva9pZ_LVSJT_4_NE3iMzqfbLCuxCFdQONnvMEcs65Um2SpJle_T9V7wehl4vOkIMai8Vd0BHoeDguVt-Ip7sv3HdpDD7jZt_MWL63g1qzAdUrMr-Xoq_uV5VqXkk4T]--></g></svg></p><p>Puede haber tantas cláusulas <strong><code>ELSEIF</code></strong> como queramos pero sólo puede haber una cláusula <strong><code>IF</code></strong> y una <strong><code>ELSE</code></strong>.</p>
+<div class="admonition example">
+<p class="admonition-title">Ejemplo 3</p>
+<p><strong>Procedimientos</strong><br>
+En el siguiente ejemplo creamos un procedimiento para mostrar un <strong>color</strong> de forma aleatoria según el valor obtenido con la función <strong><code>RAND()</code></strong> la cual devuelve un número real entre 0 y 1, es decir, obtenemos un número n que cumple 0 ≤ n &lt; 1.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">-- Eliminar el procedimiento si ya existe</span>
+<span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> <span class="token keyword keyword-IF">IF</span> <span class="token keyword keyword-EXISTS">EXISTS</span> colores<span class="token punctuation">;</span>
+
+<span class="token comment">-- Crear el procedimiento</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
+<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> colores<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-BEGIN">BEGIN</span>
+    <span class="token keyword keyword-DECLARE">DECLARE</span> num <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-SET">SET</span> num :<span class="token operator">=</span> RAND<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token keyword keyword-IF">IF</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;</span> <span class="token number">0.25</span><span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
+        <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'verde'</span> <span class="token keyword keyword-AS">AS</span> COLOR<span class="token punctuation">;</span>
+    <span class="token keyword keyword-ELSEIF">ELSEIF</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;</span> <span class="token number">0.50</span><span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
+        <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'amarillo'</span> <span class="token keyword keyword-AS">AS</span> COLOR<span class="token punctuation">;</span>
+    <span class="token keyword keyword-ELSEIF">ELSEIF</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;</span> <span class="token number">0.75</span><span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
+        <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'naranja'</span> <span class="token keyword keyword-AS">AS</span> COLOR<span class="token punctuation">;</span>
+    <span class="token keyword keyword-ELSE">ELSE</span>
+        <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'rojo'</span> <span class="token keyword keyword-AS">AS</span> COLOR<span class="token punctuation">;</span>
+    <span class="token keyword keyword-END">END</span> <span class="token keyword keyword-IF">IF</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-END">END</span> <span class="token comment">//</span>
+
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
+<span class="token comment">-- Llamar al procedimiento</span>
+<span class="token keyword keyword-CALL">CALL</span> colores<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token identifier"><span class="token punctuation">`</span><span class="token punctuation">`</span></span><span class="token punctuation">`</span>     <span class="token keyword keyword-ELSEIF">ELSEIF</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;</span> <span class="token number">0.50</span><span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
+  <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'amarillo'</span> <span class="token keyword keyword-AS">AS</span> COLOR<span class="token punctuation">;</span>
+ <span class="token keyword keyword-ELSEIF">ELSEIF</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;</span> <span class="token number">0.75</span><span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
+  <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'naranja'</span> <span class="token keyword keyword-AS">AS</span> COLOR<span class="token punctuation">;</span>
+ <span class="token keyword keyword-ELSE">ELSE</span>
+  <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'rojo'</span> <span class="token keyword keyword-AS">AS</span> COLOR<span class="token punctuation">;</span>
+ <span class="token keyword keyword-END">END</span> <span class="token keyword keyword-IF">IF</span><span class="token punctuation">;</span>
+
+</code></pre></div>
+<p><span style="color: red; font-weight: bold;">AQUÍ ME HE QUEDADO<br>
+</span></p>
+<p><em><strong>Sentencia CASE</strong></em><br>
+Cuando tenemos varias opciones como en el ejemplo anterior, podemos utilizar también la estructura <strong>CASE</strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CASE">CASE</span> <span class="token punctuation">[</span>variable o expresión<span class="token punctuation">]</span>
+ <span class="token keyword keyword-WHEN">WHEN</span> <span class="token punctuation">[</span>valor<span class="token punctuation">]</span> <span class="token keyword keyword-THEN">THEN</span>
+  <span class="token punctuation">[</span>sentencia o bloque de sentencias<span class="token punctuation">]</span>
+ <span class="token punctuation">[</span><span class="token keyword keyword-WHEN">WHEN</span> <span class="token punctuation">[</span>valor<span class="token punctuation">]</span> <span class="token keyword keyword-THEN">THEN</span>
+  <span class="token punctuation">[</span>sentencia o bloque de sentencias<span class="token punctuation">]</span> <span class="token punctuation">]</span>
+ <span class="token punctuation">[</span><span class="token keyword keyword-ELSE">ELSE</span>
+  <span class="token punctuation">[</span>sentencia o bloque de sentencias<span class="token punctuation">]</span> <span class="token punctuation">]</span>
+<span class="token keyword keyword-END">END</span> <span class="token keyword keyword-CASE">CASE</span><span class="token punctuation">;</span>
+</code></pre><p>O bien</p>
+<pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>CASE
+ WHEN [condicion] THEN
+  [sentencia o bloque de sentencias]
+ [WHEN [condicion] THEN
+  [sentencia o bloque de sentencias] ]
+ [...]
+ [ELSE
+  [sentencia o bloque de sentencias] ]
+END CASE;
+</code></pre><p>Si realizamos el mismo ejemplo con CASE quedaría:</p>
+<p>Ejemplo 2 – SCRIPT con CASE</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Eliminar el procedimiento si ya existe */</span>
+<span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> <span class="token keyword keyword-IF">IF</span> <span class="token keyword keyword-EXISTS">EXISTS</span> ud6ejer<span class="token punctuation">.</span>colorescase<span class="token punctuation">;</span>
+<span class="token comment">/* Crear el procedimiento */</span>
+
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
+<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> ud6ejer<span class="token punctuation">.</span>colorescase<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-BEGIN">BEGIN</span>
+ <span class="token keyword keyword-DECLARE">DECLARE</span> num <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token keyword keyword-SET">SET</span> num :<span class="token operator">=</span> RAND<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+ <span class="token keyword keyword-CASE">CASE</span>
+  <span class="token keyword keyword-WHEN">WHEN</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;</span> <span class="token number">0.25</span><span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
+   <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'verde'</span> <span class="token keyword keyword-AS">AS</span> COLOR<span class="token punctuation">;</span>
+  <span class="token keyword keyword-WHEN">WHEN</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;</span> <span class="token number">0.50</span><span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
+   <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'amarillo'</span> <span class="token keyword keyword-AS">AS</span> COLOR<span class="token punctuation">;</span>
+  <span class="token keyword keyword-WHEN">WHEN</span> <span class="token punctuation">(</span>num <span class="token operator">&lt;</span> <span class="token number">0.75</span><span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
+   <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'naranja'</span> <span class="token keyword keyword-AS">AS</span> COLOR<span class="token punctuation">;</span>
+  <span class="token keyword keyword-ELSE">ELSE</span>
+   <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'rojo'</span> <span class="token keyword keyword-AS">AS</span> COLOR<span class="token punctuation">;</span>
+ <span class="token keyword keyword-END">END</span> <span class="token keyword keyword-CASE">CASE</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-END">END</span> <span class="token comment">//</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
+
+<span class="token comment">/* Llamar al procedimiento */</span>
+<span class="token keyword keyword-CALL">CALL</span> ud6ejer<span class="token punctuation">.</span>colorescase<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p><em><strong>Sentencia WHILE</strong></em><br>
+Otra estructura de control es la de bucles, que consisten en realizar de forma repetida un conjunto de instrucciones. Tenemos varias estructuras para hacer bucles como <strong>REPEAT</strong> o <strong>LOOP</strong>, pero nosotros usaremos <strong>WHILE</strong>.</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-WHILE">WHILE</span> <span class="token punctuation">[</span>condicion<span class="token punctuation">]</span> <span class="token keyword keyword-DO">DO</span>
+ <span class="token punctuation">[</span>sentencia o bloque de sentencias<span class="token punctuation">]</span>
+<span class="token keyword keyword-END">END</span> <span class="token keyword keyword-WHILE">WHILE</span><span class="token punctuation">;</span>
+</code></pre><p>En los bucles debemos que queremos repetir N veces, debemos crear una variable contador e incrementarla cada vez que se ejecuta. Por ejemplo un blucle para ejecutar 10 veces unas instrucciones:</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DECLARE">DECLARE</span> contador <span class="token keyword keyword-INT">INT</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-SET">SET</span> contador :<span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-WHILE">WHILE</span> <span class="token punctuation">(</span>contador <span class="token operator">&lt;=</span> <span class="token number">10</span><span class="token punctuation">)</span> <span class="token keyword keyword-DO">DO</span>
+
+ <span class="token punctuation">[</span>sentencia o bloque de sentencias<span class="token punctuation">]</span>
+
+<span class="token keyword keyword-SET">SET</span> contador :<span class="token operator">=</span> contador <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-END">END</span> <span class="token keyword keyword-WHILE">WHILE</span><span class="token punctuation">;</span>
+</code></pre><p>En el siguiente ejemplo mostramos la suma de los 10 primeros números enteros.</p>
+<p>Ejemplo 3 – SCRIPT con WHILE</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Eliminar el procedimiento si ya existe */</span>
+<span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> <span class="token keyword keyword-IF">IF</span> <span class="token keyword keyword-EXISTS">EXISTS</span> ud6ejer<span class="token punctuation">.</span>sumadieznumeros<span class="token punctuation">;</span>
+
+<span class="token comment">/* Crear el procedimiento */</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
+<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> ud6ejer<span class="token punctuation">.</span>sumadieznumeros<span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-BEGIN">BEGIN</span>
+ <span class="token keyword keyword-DECLARE">DECLARE</span> contador <span class="token keyword keyword-INT">INT</span><span class="token punctuation">;</span>
+ <span class="token keyword keyword-DECLARE">DECLARE</span> resultado <span class="token keyword keyword-INT">INT</span><span class="token punctuation">;</span>
+ <span class="token keyword keyword-SET">SET</span> resultado :<span class="token operator">=</span> <span class="token number">0</span><span class="token punctuation">;</span>
+ <span class="token keyword keyword-SET">SET</span> contador :<span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+ <span class="token keyword keyword-WHILE">WHILE</span> <span class="token punctuation">(</span>contador<span class="token operator">&lt;=</span><span class="token number">10</span><span class="token punctuation">)</span> <span class="token keyword keyword-DO">DO</span>
+  <span class="token keyword keyword-SET">SET</span> resultado :<span class="token operator">=</span> resultado <span class="token operator">+</span> contador<span class="token punctuation">;</span>
+  <span class="token keyword keyword-SET">SET</span> contador :<span class="token operator">=</span> contador <span class="token operator">+</span> <span class="token number">1</span><span class="token punctuation">;</span>
+ <span class="token keyword keyword-END">END</span> <span class="token keyword keyword-WHILE">WHILE</span><span class="token punctuation">;</span>
+ <span class="token keyword keyword-SELECT">SELECT</span> resultado <span class="token keyword keyword-AS">AS</span> <span class="token string">'SUMADIEZNUMEROS'</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-END">END</span> <span class="token comment">//</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
+
+<span class="token comment">/* Llamar al procedimiento */</span>
+<span class="token keyword keyword-CALL">CALL</span> ud6ejer<span class="token punctuation">.</span>sumadieznumeros<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><h3 id="parámetros">Parámetros </h3>
+<p>En muchas ocasiones los procedimientos necesitan recibir valores como parámetros. En MySQL podemos definir estas variables y usarlas dentro del procedimiento. En ejemplo siguiente, si queremos comparar dos cadenas y saber cuál tiene más caracteres, deberemos indicarle al procedimiento qué cadenas comparar.</p>
+<p>Ejemplo 4 – SCRIPT con parámetros</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Eliminar el procedimiento si ya existe */</span>
+<span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> <span class="token keyword keyword-IF">IF</span> <span class="token keyword keyword-EXISTS">EXISTS</span> ud6ejer<span class="token punctuation">.</span>comparacadenas<span class="token punctuation">;</span>
+
+<span class="token comment">/* Crear el procedimiento */</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token comment">//</span>
+<span class="token keyword keyword-CREATE">CREATE</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> ud6ejer<span class="token punctuation">.</span>comparacadenas<span class="token punctuation">(</span>cad1 <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">,</span> cad2 <span class="token keyword keyword-VARCHAR">VARCHAR</span><span class="token punctuation">(</span><span class="token number">500</span><span class="token punctuation">)</span><span class="token punctuation">)</span>
+<span class="token keyword keyword-BEGIN">BEGIN</span>
+ <span class="token keyword keyword-CASE">CASE</span>
+  <span class="token keyword keyword-WHEN">WHEN</span> <span class="token punctuation">(</span>LENGTH<span class="token punctuation">(</span>cad1<span class="token punctuation">)</span><span class="token operator">&gt;</span>LENGTH<span class="token punctuation">(</span>cad2<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
+   <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'La PRIMERA cadena es más larga'</span> <span class="token keyword keyword-AS">AS</span> RESULTADO<span class="token punctuation">;</span>
+  <span class="token keyword keyword-WHEN">WHEN</span> <span class="token punctuation">(</span>LENGTH<span class="token punctuation">(</span>cad1<span class="token punctuation">)</span><span class="token operator">&lt;</span>LENGTH<span class="token punctuation">(</span>cad2<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token keyword keyword-THEN">THEN</span>
+   <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'La SEGUNDA cadena es más larga'</span> <span class="token keyword keyword-AS">AS</span> RESULTADO<span class="token punctuation">;</span>
+  <span class="token keyword keyword-ELSE">ELSE</span>
+   <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'La dos cadenas miden lo mismo'</span> <span class="token keyword keyword-AS">AS</span> RESULTADO<span class="token punctuation">;</span>
+ <span class="token keyword keyword-END">END</span> <span class="token keyword keyword-CASE">CASE</span><span class="token punctuation">;</span>
+<span class="token keyword keyword-END">END</span> <span class="token comment">//</span>
+<span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
+
+<span class="token comment">/* Llamar al procedimiento */</span>
+<span class="token keyword keyword-CALL">CALL</span> ud6ejer<span class="token punctuation">.</span>comparacadenas<span class="token punctuation">(</span><span class="token string">'Mi primera cadena'</span><span class="token punctuation">,</span><span class="token string">'Esta debe ser más larga'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><h2 id="funciones-predefinidas-4-funciones-predefinidas">Funciones predefinidas 4. Funciones predefinidas </h2>
+<p>Una función es un conjunto de líneas de código que realizan una tarea específica, al  igual  que un procedimiento, pero además puede retornar un valor.<br>
+En MySQL existen multitud de funciones predefinidas. Se pueden consultar en la documentación oficial y en otras reconocidas:</p>
+<div class="admonition note">
+<p class="admonition-title">Referencias</p>
+<ul>
+<li><a href="https://www.w3schools.com/sql/sql_ref_mysql.asp">MySQL Oficial – Funciones en MySQL – Web W3SCHOOLS Interactiva</a></li>
+<li><a href="https://dev.mysql.com/doc/refman/5.7/en/functions.html">MySQL Oficial – Funciones en MySQL – Web Oficial en inglés</a></li>
+<li><a href="http://ftp.tcrc.edu.tw/MySQL/doc/refman/5.0/es/functions.html">MySQL Oficial – Funciones en MySQL – Web en español</a></li>
+<li><a href="http://mysql.conclase.net/curso/?cap=011">MySQL Oficial – Funciones en MySQL – Ejemplos</a></li>
+</ul>
+</div>
+<p>Las funciones pueden tomar parámetros que modifiquen su funcionamiento.<br>
+Los procedimiento y las funciones son utilizadas para descomponer grandes problemas en tareas simples y para implementar operaciones que son comúnmente utilizadas durante un programa y de esta manera reducir la cantidad de código.</p>
+<p>Cuando una función es invocada/llamada, se le pasa el control a la misma, y una vez  que esta finaliza devuelve el control al punto desde el cual fue llamada.</p>
+<h3 id="funciones-matemáticas">Funciones matemáticas </h3>
+<p>Las que más vamos a usar son: <strong>ABS, FLOOR, MOD, POW, SQRT, RAND, ROUND, SIGN</strong></p>
+<p><em><strong>Ejemplos de funciones predefinidas</strong></em></p>
+<p><strong>Ejemplo 1</strong> - Valor absoluto de un número entero</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code> <span class="token keyword keyword-SELECT">SELECT</span> ABS<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">17</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: 17</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment"># Resultado: 21</span>
+<span class="token keyword keyword-SELECT">SELECT</span> ABS<span class="token punctuation">(</span><span class="token number">21</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p><strong>Ejemplo 2 -  Parte entera de un número decimal</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> FLOOR<span class="token punctuation">(</span><span class="token number">35.789</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: 35</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> FLOOR<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">35.789</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: -36</p>
+<p><strong>Ejemplo 3 -  Resto de una división entre dos número enteros</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">MOD</span><span class="token punctuation">(</span><span class="token number">15</span><span class="token punctuation">,</span> <span class="token number">4</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: 3</p>
+<p><strong>Ejemplo 4 - Potencia de un número y su exponente</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code> <span class="token keyword keyword-SELECT">SELECT</span> POW<span class="token punctuation">(</span><span class="token number">5</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: 25</p>
+<p><strong>Ejemplo 5 - Raíz cuadrada de un número</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code> <span class="token keyword keyword-SELECT">SELECT</span> SQRT<span class="token punctuation">(</span><span class="token number">64</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: 8</p>
+<p><strong>Ejemplo 6 - Número aleatorio decimal entre 0 y 1</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> RAND<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: 0.601966295951946</p>
+<p><strong>Ejemplo 7 - Redondea un número decimal hasta los decimales que se indiquen</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">ROUND</span><span class="token punctuation">(</span><span class="token number">45.267</span><span class="token punctuation">,</span> <span class="token number">1</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: 45.3</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">ROUND</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">45.267</span><span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: -45.27</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">ROUND</span><span class="token punctuation">(</span><span class="token number">45.267</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: 45</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">ROUND</span><span class="token punctuation">(</span><span class="token number">45.75</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: 46</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">ROUND</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">45.267</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: -45</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token function">ROUND</span><span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">45.67</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: -46</p>
+<p><strong>Ejemplo 8 - Obtiene el signo del número</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> SIGN<span class="token punctuation">(</span><span class="token operator">-</span><span class="token number">45.6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: -1</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> SIGN<span class="token punctuation">(</span><span class="token number">45.6</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: 1</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> SIGN<span class="token punctuation">(</span><span class="token number">0</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+</code></pre><p>Resultado: 0</p>
+<h2 id="funciones-de-cadenas-o-strings">Funciones de cadenas o strings </h2>
+<p>Las que más vamos a usar son: <strong>CONCAT, UPPER, LOWER, LEFT, RIGHT, SUBSTRING, SUBSTRING_INDEX,INSTR, LENGTH, TRIM, REPEAT, REPLACE, REVERSE, STRCMP</strong></p>
+<p>Ejemplo 1 - Concatenar varias cadenas</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> CONCAT<span class="token punctuation">(</span><span class="token string">'Juan '</span><span class="token punctuation">,</span><span class="token string">'López '</span><span class="token punctuation">,</span><span class="token string">'García'</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NOMBRE<span class="token punctuation">;</span>
+</code></pre><p>+-------------------+<br>
+| NOMBRE            |<br>
++-------------------+<br>
+| Juan López García |<br>
++-------------------+</p>
+<p>Ejemplo 2 - Pasar a mayúsculas</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> UPPER<span class="token punctuation">(</span><span class="token string">'Soy alumno de FP'</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> MENSAJE<span class="token punctuation">;</span>
+<span class="token identifier"><span class="token punctuation">`</span><span class="token punctuation">`</span><span class="token punctuation">`</span>sql
+
+ +------------------+
+ | MENSAJE          |
+ +------------------+
+ | SOY ALUMNO DE FP |
+ +------------------+
+ 
+ Ejemplo 2 - Pasar a minúsculas
+``<span class="token punctuation">`</span></span><span class="token keyword keyword-sql">sql</span>
+ <span class="token keyword keyword-SELECT">SELECT</span> LOWER<span class="token punctuation">(</span><span class="token string">'Soy alumno de FP'</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> MENSAJE<span class="token punctuation">;</span>
+</code></pre><p>+------------------+<br>
+| MENSAJE          |<br>
++------------------+<br>
+| soy alumno de fp |<br>
++------------------+</p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code>Ejemplo <span class="token number">3</span> <span class="token operator">-</span> Obtener una parte inicial de la cadena 
+<span class="token keyword keyword-SELECT">SELECT</span> <span class="token keyword keyword-LEFT">LEFT</span><span class="token punctuation">(</span><span class="token string">'Juan López García'</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NOMBRE<span class="token punctuation">;</span>
+</code></pre><p>+--------+<br>
+| NOMBRE |<br>
++--------+<br>
+| Juan   |<br>
++--------+<br>
+/<em>Obtener una parte final de la cadena <em>/<br>
+SELECT RIGHT('Juan López García',6) AS APELLIDO2;<br>
++-----------+<br>
+| APELLIDO2 |<br>
++-----------+<br>
+| García    |<br>
++-----------+<br>
+/</em> Obtener una parte central de la cadena <em>/<br>
+SELECT SUBSTRING('Juan López García',6,5) AS APELLIDO1;<br>
++-----------+<br>
+| APELLIDO1 |<br>
++-----------+<br>
+| López     |<br>
++-----------+<br>
+/</em> Obtener parte de una cadena utilizando la posición de un delimitador</em>/<br>
+SELECT SUBSTRING_INDEX('<a href="http://www.iesdoctorbalmis.com">www.iesdoctorbalmis.com</a>','.',2) AS DOMINIO;<br>
++---------------------+<br>
+| DOMINIO             |<br>
++---------------------+<br>
+| &lt;www.iesdoctorbalmis&gt; |<br>
++---------------------+</p>
+<div class="caso_estudio">
+<p>💡 <strong>Caso de estudio:</strong></p>
+<pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> SUBSTRING_INDEX<span class="token punctuation">(</span><span class="token string">'www.iesdoctorbalmis.com'</span><span class="token punctuation">,</span><span class="token string">'.'</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> DOMINIO<span class="token punctuation">;</span>
+</code></pre><pre data-role="codeBlock" data-info="txt" class="language-txt txt"><code>+---------------------+
+| DOMINIO             |
++---------------------+
+| www.iesdoctorbalmis |
++---------------------+
+</code></pre></div> <!-- fin caso de estudio -->
+<div class="ejercicio">
+<h3 id="white_check_mark-ejercicio">✅ Ejercicio </h3>
+</div> <!-- fin ejercicio -->
+
+      </div>
+      
+      
+    
+    
+    
+    
+    
+    
+  
+    </body></html>
