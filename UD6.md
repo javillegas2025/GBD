@@ -37,6 +37,9 @@ toc:
 1. Introducción
 2. Primeros SCRIPTS
 3. Procedimientos y estructuras de control
+4. Funciones predefinidas
+5. Parámetros de Entrada-Salida
+6. Funciones definidas por el usuario
 
 ## Introducción
 
@@ -322,6 +325,8 @@ Para poder almacenar un conjunto de instrucciones en la propia base de datos pod
 
 La sintaxis más sencilla es la siguiente:
 
+<div class="caso_estudio" style="font-weight:bold">
+
 ```sql
 DELIMITER //
 CREATE PROCEDURE nombre()
@@ -330,6 +335,7 @@ BEGIN
 END //
 DELIMITER ;
 ```
+</div> <!-- fin caso de estudio -->
 
 Antes de comenzar debemos seleccionar la base de datos con la que vamos a trabajar. Por ejemplo para trabajar con la base de datos world ejecutaríamos:
 
@@ -436,11 +442,16 @@ Es la más sencilla de todas. Nos permite ejecutar unas instrucciones u otras se
 ***Variante 1***
 Esquema general
 
+<div class="caso_estudio" style="font-weight:bold">
+
 ```sql
+
 IF [condicion] THEN
     [sentencia o bloque de sentencias]
 END IF;
 ```
+
+</div> <!-- fin caso de estudio -->
 
 ```puml {align="center", style="zoom:1"}
 @startuml
@@ -466,6 +477,8 @@ El rombo equivaldría al **`END IF`**.
 ***Variante 2***
 Esquema general
 
+<div class="caso_estudio" style="font-weight:bold">
+
 ```sql
 IF [condicion] THEN
     [sentencia o bloque de sentencias]
@@ -473,6 +486,8 @@ ELSE
     [sentencia o bloque de sentencias]
 END IF;
 ```
+
+</div> <!-- fin caso de estudio -->
 
 ```puml {align="center", style="zoom:1"}
 @startuml
@@ -502,6 +517,8 @@ stop
 ***Variante 3***
 Esquema general
 
+<div class="caso_estudio" style="font-weight:bold">
+
 ```sql
 IF [condicion] THEN
     [sentencia o bloque de sentencias]
@@ -511,6 +528,8 @@ ELSE
     [sentencia o bloque de sentencias]
 END IF;
 ```
+
+</div> <!-- fin caso de estudio -->
 
 ```puml {align="center", style="zoom:1"}
     @startuml
@@ -547,7 +566,7 @@ stop
 Puede haber tantas cláusulas **`ELSEIF`** como queramos pero sólo puede haber una cláusula **`IF`** y una **`ELSE`**.
 
 !!! Example Ejemplo 3
-    **Procedimientos**
+    **Procedimientos `IF`**
     En el siguiente ejemplo creamos un procedimiento para mostrar un **color** de forma aleatoria según el valor obtenido con la función **`RAND()`** la cual devuelve un número real entre 0 y 1, es decir, obtenemos un número n que cumple 0 ≤ n < 1.
     ```sql
     -- Eliminar el procedimiento si ya existe
@@ -571,160 +590,158 @@ Puede haber tantas cláusulas **`ELSEIF`** como queramos pero sólo puede haber 
     END //
     
     DELIMITER ;
+    
     -- Llamar al procedimiento
     CALL colores();
-    ```     ELSEIF (num < 0.50) THEN
-      SELECT 'amarillo' AS COLOR;
-     ELSEIF (num < 0.75) THEN
-      SELECT 'naranja' AS COLOR;
-     ELSE
-      SELECT 'rojo' AS COLOR;
-     END IF;
-
-<span style="color: red; font-weight: bold;">AQUÍ ME HE QUEDADO
-</span>
+    ```
 
 ***Sentencia CASE***
-Cuando tenemos varias opciones como en el ejemplo anterior, podemos utilizar también la estructura **CASE**.
+Cuando tenemos varias opciones como en el ejemplo anterior, podemos utilizar también la estructura **`CASE`**.
+
+<div class="caso_estudio" style="font-weight:bold">
 
 ```sql
 CASE [variable o expresión]
- WHEN [valor] THEN
-  [sentencia o bloque de sentencias]
- [WHEN [valor] THEN
-  [sentencia o bloque de sentencias] ]
- [ELSE
-  [sentencia o bloque de sentencias] ]
+    WHEN [valor] THEN
+        [sentencia o bloque de sentencias]
+    [WHEN [valor] THEN
+        [sentencia o bloque de sentencias] ]
+    [...]
+    [ELSE
+        [sentencia o bloque de sentencias] ]
 END CASE;
 ```
+
+</div> <!-- fin caso de estudio -->
 
 O bien
 
-```txt
+<div class="caso_estudio" style="font-weight:bold">
+
+```sql
 CASE
- WHEN [condicion] THEN
-  [sentencia o bloque de sentencias]
- [WHEN [condicion] THEN
-  [sentencia o bloque de sentencias] ]
- [...]
- [ELSE
-  [sentencia o bloque de sentencias] ]
+    WHEN [condicion] THEN
+        [sentencia o bloque de sentencias]
+    [WHEN [condicion] THEN
+        [sentencia o bloque de sentencias] ]
+    [...]
+    [ELSE
+        [sentencia o bloque de sentencias] ]
 END CASE;
 ```
 
-Si realizamos el mismo ejemplo con CASE quedaría:
+</div> <!-- fin caso de estudio -->
 
-Ejemplo 2 – SCRIPT con CASE
+Si realizamos el mismo ejemplo con **`CASE`** quedaría:
 
-```sql
-/* Eliminar el procedimiento si ya existe */
-DROP PROCEDURE IF EXISTS ud6ejer.colorescase;
-/* Crear el procedimiento */
+!!! Example Ejemplo 4
+    **Procedimientos `CASE`**
+    Este ejemplo es igual que el ejemplo anterior pero resuelto utilizando la estructura condicional **`CASE`**.
 
-DELIMITER //
-CREATE PROCEDURE ud6ejer.colorescase()
-BEGIN
- DECLARE num DECIMAL(15,2);
- SET num := RAND();
- CASE
-  WHEN (num < 0.25) THEN
-   SELECT 'verde' AS COLOR;
-  WHEN (num < 0.50) THEN
-   SELECT 'amarillo' AS COLOR;
-  WHEN (num < 0.75) THEN
-   SELECT 'naranja' AS COLOR;
-  ELSE
-   SELECT 'rojo' AS COLOR;
- END CASE;
-END //
-DELIMITER ;
-
-/* Llamar al procedimiento */
-CALL ud6ejer.colorescase();
-```
+    ```sql
+    /* Eliminar el procedimiento si ya existe */
+    DROP PROCEDURE IF EXISTS colorescase;
+    /* Crear el procedimiento */
+    
+    DELIMITER //
+    CREATE PROCEDURE colorescase()
+    BEGIN
+        DECLARE num DECIMAL(15,2);
+        SET num := RAND();
+        CASE
+            WHEN (num < 0.25) THEN
+                SELECT 'verde' AS COLOR;
+            WHEN (num < 0.50) THEN
+                SELECT 'amarillo' AS COLOR;
+            WHEN (num < 0.75) THEN
+                SELECT 'naranja' AS COLOR;
+            ELSE
+                SELECT 'rojo' AS COLOR;
+        END CASE;
+    END //
+    DELIMITER ;
+    
+    /* Llamar al procedimiento */
+    CALL colorescase();
+    ```
 
 ***Sentencia WHILE***
-Otra estructura de control es la de bucles, que consisten en realizar de forma repetida un conjunto de instrucciones. Tenemos varias estructuras para hacer bucles como **REPEAT** o **LOOP**, pero nosotros usaremos **WHILE**.
+Otra estructura de control es la de bucles, que consisten en realizar de forma repetida un conjunto de instrucciones. Tenemos varias estructuras para hacer bucles como **`REPEAT`** o **`LOOP`**, pero nosotros usaremos **`WHILE`**.
+
+<div class="caso_estudio" style="font-weight:bold">
 
 ```sql
 WHILE [condicion] DO
- [sentencia o bloque de sentencias]
+    [sentencia o bloque de sentencias]
 END WHILE;
 ```
 
-En los bucles debemos que queremos repetir N veces, debemos crear una variable contador e incrementarla cada vez que se ejecuta. Por ejemplo un blucle para ejecutar 10 veces unas instrucciones:
-
-```sql
-DECLARE contador INT;
-SET contador := 1;
-WHILE (contador <= 10) DO
-
- [sentencia o bloque de sentencias]
-
-SET contador := contador + 1;
-END WHILE;
-```
+</div> <!-- fin caso de estudio -->
 
 En el siguiente ejemplo mostramos la suma de los 10 primeros números enteros.
 
-Ejemplo 3 – SCRIPT con WHILE
+!!! Example Ejemplo 5
+    **Procedimientos `WHILE`**
+    En el siguiente ejemplo mostramos la suma de los 10 primeros números enteros.
 
-```sql
-/* Eliminar el procedimiento si ya existe */
-DROP PROCEDURE IF EXISTS ud6ejer.sumadieznumeros;
-
-/* Crear el procedimiento */
-DELIMITER //
-CREATE PROCEDURE ud6ejer.sumadieznumeros()
-BEGIN
- DECLARE contador INT;
- DECLARE resultado INT;
- SET resultado := 0;
- SET contador := 1;
- WHILE (contador<=10) DO
-  SET resultado := resultado + contador;
-  SET contador := contador + 1;
- END WHILE;
- SELECT resultado AS 'SUMADIEZNUMEROS';
-END //
-DELIMITER ;
-
-/* Llamar al procedimiento */
-CALL ud6ejer.sumadieznumeros();
-```
+    ```sql
+    /* Eliminar el procedimiento si ya existe */
+    DROP PROCEDURE IF EXISTS sumadieznumeros;
+    
+    /* Crear el procedimiento */
+    DELIMITER //
+    CREATE PROCEDURE sumadieznumeros()
+    BEGIN
+        DECLARE contador INT;
+        DECLARE resultado INT;
+        SET resultado := 0;
+        SET contador := 1;
+        WHILE (contador<=10) DO
+            SET resultado := resultado + contador;
+            SET contador := contador + 1;
+        END WHILE;
+        SELECT resultado AS 'SUMADIEZNUMEROS';
+    END //
+    DELIMITER ;
+    
+    /* Llamar al procedimiento */
+    CALL sumadieznumeros();
+    ```
 
 ### Parámetros
 
 En muchas ocasiones los procedimientos necesitan recibir valores como parámetros. En MySQL podemos definir estas variables y usarlas dentro del procedimiento. En ejemplo siguiente, si queremos comparar dos cadenas y saber cuál tiene más caracteres, deberemos indicarle al procedimiento qué cadenas comparar.
 
-Ejemplo 4 – SCRIPT con parámetros
+!!! Example Ejemplo 6
+    **Procedimientos parámetros**
+    Este es un procedimiento al que se le pasan dos cadenas de caracteres como parámetros y muestra por pantalla que cadena tiene más caracteres.
 
-```sql
-/* Eliminar el procedimiento si ya existe */
-DROP PROCEDURE IF EXISTS ud6ejer.comparacadenas;
+    ```sql
+    /* Eliminar el procedimiento si ya existe */
+    DROP PROCEDURE IF EXISTS ud6ejer.comparacadenas;
+    
+    /* Crear el procedimiento */
+    DELIMITER //
+    CREATE PROCEDURE ud6ejer.comparacadenas(cad1 VARCHAR(500), cad2 VARCHAR(500))
+    BEGIN
+        CASE
+        WHEN (LENGTH(cad1)>LENGTH(cad2)) THEN
+            SELECT 'La PRIMERA cadena es más larga' AS RESULTADO;
+        WHEN (LENGTH(cad1)<LENGTH(cad2)) THEN
+            SELECT 'La SEGUNDA cadena es más larga' AS RESULTADO;
+        ELSE
+            SELECT 'La dos cadenas miden lo mismo' AS RESULTADO;
+        END CASE;
+    END //
+    DELIMITER ;
+    
+    /* Llamar al procedimiento */
+    CALL ud6ejer.comparacadenas('Mi primera cadena','Esta debe ser más larga');
+    ```
 
-/* Crear el procedimiento */
-DELIMITER //
-CREATE PROCEDURE ud6ejer.comparacadenas(cad1 VARCHAR(500), cad2 VARCHAR(500))
-BEGIN
- CASE
-  WHEN (LENGTH(cad1)>LENGTH(cad2)) THEN
-   SELECT 'La PRIMERA cadena es más larga' AS RESULTADO;
-  WHEN (LENGTH(cad1)<LENGTH(cad2)) THEN
-   SELECT 'La SEGUNDA cadena es más larga' AS RESULTADO;
-  ELSE
-   SELECT 'La dos cadenas miden lo mismo' AS RESULTADO;
- END CASE;
-END //
-DELIMITER ;
+## Funciones predefinidas
 
-/* Llamar al procedimiento */
-CALL ud6ejer.comparacadenas('Mi primera cadena','Esta debe ser más larga');
-```
-
-## Funciones predefinidas 4. Funciones predefinidas
-
- Una función es un conjunto de líneas de código que realizan una tarea específica, al  igual  que un procedimiento, pero además puede retornar un valor.
+Una función es un conjunto de líneas de código que realizan una tarea específica, al  igual  que un procedimiento, pero además puede retornar un valor.
 En MySQL existen multitud de funciones predefinidas. Se pueden consultar en la documentación oficial y en otras reconocidas:
 
 !!! Note Referencias
@@ -734,10 +751,11 @@ En MySQL existen multitud de funciones predefinidas. Se pueden consultar en la d
     * [MySQL Oficial – Funciones en MySQL – Web en español](http://ftp.tcrc.edu.tw/MySQL/doc/refman/5.0/es/functions.html)
     * [MySQL Oficial – Funciones en MySQL – Ejemplos]( http://mysql.conclase.net/curso/?cap=011)
 
-Las funciones pueden tomar parámetros que modifiquen su funcionamiento.
 Los procedimiento y las funciones son utilizadas para descomponer grandes problemas en tareas simples y para implementar operaciones que son comúnmente utilizadas durante un programa y de esta manera reducir la cantidad de código.
 
 Cuando una función es invocada/llamada, se le pasa el control a la misma, y una vez  que esta finaliza devuelve el control al punto desde el cual fue llamada.
+
+Las funciones pueden tomar parámetros que modifiquen su funcionamiento.
 
 ### Funciones matemáticas
 
@@ -891,6 +909,8 @@ SELECT UPPER('Soy alumno de FP') AS MENSAJE;
  +------------------+
  
  Ejemplo 2 - Pasar a minúsculas
+ ```
+
 ```sql
  SELECT LOWER('Soy alumno de FP') AS MENSAJE;
 ```
@@ -933,6 +953,289 @@ SELECT SUBSTRING_INDEX('www.iesdoctorbalmis.com','.',2) AS DOMINIO;
 | <www.iesdoctorbalmis> |
 +---------------------+
 
+/* Comprobar si una cadena está en otra */
+SELECT INSTR('Juan López García','López') AS POSICION;
++----------+
+| POSICION |
++----------+
+|
+6 |
++----------+
+/* Obtener la longitud de una cadena */
+SELECT LENGTH('Juan López García') AS LONGITUD;
++----------+
+| LONGITUD |
++----------+
+|
+17 |
++----------+
+/* Eliminar de una cadena los espacios al principio y al final*/
+SELECT TRIM('
+Juan López García
+') AS LIMPIO;
++-------------------+
+| LIMPIO
+|
++-------------------+
+| Juan López García |
++-------------------+
+/* Crear una cadena a base de repetir otra */
+SELECT REPEAT('abc',5);
++-----------------+
+| REPEAT('abc',5) |
++-----------------+
+| abcabcabcabcabc |
++-----------------+
+/* Reemplazar parte de una cadena por otros caracteres */
+SELECT REPLACE('SQL Tutorial', 'SQL', 'HTML') AS REEMPLAZADO;
++---------------+
+| REEMPLAZADO
+|
++---------------+
+| HTML Tutorial |
++---------------+
+/* Muestra una cadena de forma inversa */
+SELECT REVERSE('SQL Tutorial') AS INVERSA;
++--------------+
+| INVERSA
+|
++--------------+
+| lairotuT LQS |
++--------------+
+/* Nos dice de dos cadenas cuál va antes en orden alfabético:
+-1 → la primera cadena va antes
+0 → las dos cadenas son iguales
+1 → la segunda cadena va antes
+*/
+SELECT STRCMP('Mi cadena','Mi cadena') AS COMPARACION;
++-------------+
+| COMPARACION |
++-------------+
+|
+0 |
++-------------+
+```
+
+### Funciones de fechas
+Las que más vamos a usar son: CURDATE, CURTIME, NOW, ADDDATE, ADDTIME, DATEDIFF, TIMEDIFF, DAY, MONTH, YEAR, HOUR, MINUTE, SECOND, DAYNAME, DAYOFWEEK, MAKETIME, SEC_TO_TIME, TIME_TO_SEC, FROM_DAYS, TO_DAYS, STR_TO_DATE, DATE_FORMAT
+
+Ejemplos de funciones predefinidas
+
+```sql
+/* Obtener la FECHA actual */
+SELECT CURDATE();
+/* Obtener la HORA actual */
+SELECT CURTIME();
+/* Obtener la FECHA Y HORA actual */
+SELECT NOW();
+/* Añadir días a un FECHA (DATE O DATETIME) */
+SELECT ADDDATE('2018-03-25', 10);
+2018-04-06
+/* Añadir segundos a un TIME o DATETIME */
+SELECT ADDTIME('09:34:21', 45);
+09:35:06
+SELECT ADDTIME('2018-03-25 09:34:21', 45);
+2018-03-25 09:35:06
+/* Diferencia de días entre dos FECHAS */
+SELECT DATEDIFF('2018-03-25', '2018-02-10');
+43
+/* Diferencia de segundos entre dos TIME en formato hora
+SELECT TIMEDIFF('20:00:00','19:30:30');
+00:29:30
+
+/* Obtener el valor del DÍA de una FECHA */
+SELECT DAY('2018-03-25');
+25
+/* Obtener el valor del MES de una FECHA */
+SELECT MONTH('2018-03-25');
+3
+/* Obtener el valor del AÑO de una FECHA */
+SELECT YEAR('2018-03-25');
+2018
+/* Obtener el valor de HORA de un TIME o DATETIME */
+SELECT HOUR('2018-03-25 10:36:15');
+10
+SELECT HOUR('10:36:15');
+10
+/* Obtener el valor de minutos de un TIME o DATETIME */
+SELECT MINUTE('2018-03-25 10:36:15');
+36
+/* Obtener el valor de segundos de un TIME o DATETIME */
+SELECT SECOND('2018-03-25 10:36:15');
+15
+/* Obtener nombre del día de la semana de una FECHA */
+SELECT DAYNAME('2018-03-25 10:36:15');
+Sunday
+/* Obtener el número de día de la semana comenzando en domingo de una FECHA */
+SELECT DAYOFWEEK('2018-03-25 10:36:15');
+1
+/* Obtener el valor de formato hora a partir de los segundos */
+SELECT SEC_TO_TIME(3700);
+01:01:40
+/* Obtener el valor de formato hora a partir de los segundos */
+SELECT TIME_TO_SEC('01:01:40');
+3700
+/* Obtener valor de formato hora a partir de los horas, minutos y segundos */
+SELECT MAKETIME(20, 30, 52);
+20:30:52
+/* Obtener una fecha a partir del número de días */
+SELECT FROM_DAYS(750000);
+2053-06-06
+/* Obtener en días una fecha */
+SELECT TO_DAYS('2018-03-10');
+737128
+/* Obtener una fecha a partir de una cadena y un formato */
+SELECT STR_TO_DATE('12/02/2018','%d/%m/%Y');
+2018-02-12
+/* Obtener a partir de una fecha indicando el formato */
+SELECT DATE_FORMAT('2018-03-15','%Y');
+2018
+```
+
+!!! Note Referencias
+
+    [MySQL Oficial – Funciones matemáticas](http://mysql.conclase.net/curso/?cap=011a#FUN_FECHA)
+    [MySQL Oficial – Funciones en MySQL – Web W3SCHOOLS Interactiva](https://www.w3schools.com/sql/sql_ref_mysql.asp)
+
+### Funciones avanzadas
+
+Las que más vamos a usar son: VERSION, DATABASE, CURRENT_USER, CONVERT, ISNULL, IFNULL, IF, CASE
+
+**Funciones avanzadas para mostrar INFORMACIÓN**
+Ejemplos de funciones predefinidas avanzadas
+
+```sql
+/* Mostrar la versión de MySQL */
+SELECT VERSION();
++-----------------+
+| VERSION()
+|
++-----------------+
+| 10.1.25-MariaDB |
++-----------------+
+/* Mostrar la base de datos seleccionada por defecto */
+USE ud6ejer;
+SELECT DATABASE();
++------------+
+| DATABASE() |
++------------+
+| ud6ejer
+|
++------------+
+/* Mostrar el usuario con el que estamos conectados */
+SELECT CURRENT_USER();
++----------------+
+| CURRENT_USER() |
++----------------+
+| root@localhost |
++----------------+
+```
+
+**Funciones avanzadas para CONVERSIÓN DE VALORES**
+Ejemplos de funciones predefinidas avanzadas
+
+```sql
+/* Convertir cadenas a números */
+SELECT CONVERT('45.7', DECIMAL(10,2));
++--------------------------------+
+| CONVERT('45.7', DECIMAL(10,2)) |
++--------------------------------+
+|
+45.70 |
++--------------------------------+
+/* Convertir números a cadenas*/
+SELECT CONVERT(45.7, CHAR);
++---------------------+
+| CONVERT(45.7, CHAR) |
++---------------------+
+| 45.7
+|
++---------------------+
+/* Comprobar si un valor es NULL */
+SET @num = 10 / 0;
+SELECT @num;
++------+
+| @num |
++------+
+| NULL |
++------+
+SELECT ISNULL(@num);
++--------------+
+| ISNULL(@num) |
++--------------+
+|
+1 |
++--------------+
+SET @num = 10 / 2;
+SELECT ISNULL(@num);
++--------------+
+| ISNULL(@num) |
++--------------+
+|
+0 |
++--------------+
+/* Decidir qué valor mostrar si el resultado es NULL */
+SET @num = 10 / 0;
+SELECT IFNULL(@num, 'Error en división') AS RESULTADO;
++-------------------+
+| RESULTADO
+|
++-------------------+
+| Error en división |
++-------------------+
+SET @num = 10 / 2;
+SELECT IFNULL(@num, 'Error en división') AS RESULTADO;
++-------------+
+| RESULTADO
+|
++-------------+
+| 5.000000000 |
++-------------+
+```
+
+**Funciones avanzadas para PROGRAMACIÓN**
+Ejemplos de funciones predefinidas avanzadas
+
+```sql
+/* Mostrar valores teniendo en cuenta una condición */
+SET @num1 = 25;
+SET @num2 = 30;
+SELECT IF(@num1>@num2, @num1, @num2) AS MAYOR;
++-------+
+| MAYOR |
++-------+
+|
+30 |
++-------+
+/* Mostrar valores teniendo en cuenta varias condiciones */
+SET @temperatura = 30;
+SELECT CASE
+WHEN (@temperatura >= 28) THEN 'Calor'
+WHEN (@temperatura >= 10) AND (@temperatura <28) THEN 'Templado'
+WHEN (@temperatura >= 0) AND (@temperatura <10) THEN 'Frío'
+ELSE 'Bajo cero'
+END AS TEMPERATURA;
++-------------+
+| TEMPERATURA |
++-------------+
+| Calor
+|
++-------------+
+SET @temperatura = 15;
+SELECT CASE
+WHEN (@temperatura >= 28) THEN 'Calor'
+WHEN (@temperatura >= 10) AND (@temperatura <28) THEN 'Templado'
+WHEN (@temperatura >= 0) AND (@temperatura <10) THEN 'Frío'
+ELSE 'Bajo cero'
+END AS TEMPERATURA;
++-------------+
+| TEMPERATURA |
++-------------+
+| Templado
+|
++-------------+
+```
+
 <div class="caso_estudio">
 
 :bulb: **Caso de estudio:**
@@ -956,3 +1259,222 @@ SELECT SUBSTRING_INDEX('www.iesdoctorbalmis.com','.',2) AS DOMINIO;
 ### :white_check_mark: Ejercicio
 
 </div> <!-- fin ejercicio -->
+
+## Parámetros de Entrada-Salida
+
+### Parámetros de funciones y procedimientos
+
+Los parámetros son valores o variables que se pueden pasar a los procedimientos o funciones para que los utilicen en su proceso.
+
+<div class="caso_estudio">
+
+Denominaremos **parámetro-valor**  a la constante que pasamos a un procedimiento o función, es decir, un número, una cadena, una fecha, etc.
+
+En cambio, será **parámetro-variable**  cuando lo que le pasamos al procedimiento o función es una variable.
+
+</div> <!-- fin caso de estudio -->
+
+Por ejemplo, cuando a una función como **`ROUND`** le pasamos parámetros, ésta los usa para devolvernos su resultado:
+
+```text
+mysql> SELECT ROUND(34.78, 0);
++-----------------+
+| ROUND(34.78, 0) |
++-----------------+
+| 35              |
++-----------------+
+```
+
+En el ejemplo anterior utilizamos un parámetro-valor  que es 34.78 al llamar a la función **`ROUND`**.
+
+En el siguiente ejemplo, realizaremos la misma llamada pero utilizando en uno de los parámetros, un parámetro-variable .
+
+```text
+mysql> SET @num := 34.78;
+mysql> SELECT ROUND(@num, 0);
++----------------+
+| ROUND(@num, 0) |
++----------------+
+| 35             |
++----------------+
+```
+
+### Tipos de parámetros
+
+Como hemos visto en el último ejemplo de comparación de cadenas del apartado 3, los procedimientos pueden recibir parámetros y ser utilizados en su propio código como variables internas.
+
+Los parámetros pueden ser de varios tipos:
+
+|Tipo|Significado|Descripción|
+|:---|:----------|:----------|
+|**IN**|De entrada|Se usa el valor de los parámetros, pero estas variables no transforman su valor después del proceso del procedimiento.
+|**OUT**|De salida| Se usa la parámetro-variable para asignarle un valor y que lo mantenga una vez terminado el procedimiento.|
+|**INOUT**|De entrada y salida|Cumple los dos casos anteriores, se usa el valor del parámetro-variable y al modificar su valor lo mantiene una vez terminado el procedimiento.|
+
+!!!Example Ejemplo 1
+    **Párametros valor**
+    Procedimiento, de nombre EUROSP, que recibe un número real como parámetro y retorna el valor redondeando a 2 decimales.
+
+    ```sql
+    /* Eliminar el procedimiento si ya existe */
+    DROP PROCEDURE IF EXISTS eurosp;
+    
+    /* Crear el procedimiento */
+    DELIMITER //
+    CREATE PROCEDURE eurosp(importe DECIMAL(15,2))
+    BEGIN
+        SELECT ROUND(importe, 2) AS EUROS;
+    END//
+    DELIMITER ;
+    
+    /* Llamar al procedimiento */
+    SELECT 25.34 * 17 / 100;
+    CALL eurosp(25.34 * 17 / 100);
+    ```
+
+En el ejemplo anterior usamos un parámetro-valor .
+
+En el código de la función observamos que el parámetro importe mantiene su valor. 
+
+!!!Example Ejemplo 2
+    **Párametros**
+    Llamar al procedimiento anterior con un parámetro-variable.
+
+    ```sql
+    /* Llamar al procedimiento */
+    SET @precio := 25.34*17/100;
+    SELECT @precio;
+    CALL ud6ejer.eurosp(@precio);
+    ```
+Ahora vamos a comprobar qué pasaría si modificamos el valor de un parámetro-valor  dentro del procedimiento.
+
+!!!Example Ejemplo 3
+    **Párametros valor**
+    Procedimiento que calcula el precio de un artículo al aplicarle un descuento. Recibe como parámetro el precio del artículo y muestra el resultado por pantalla.
+
+    ```sql
+    /* Eliminar el procedimiento si ya existe */
+    DROP PROCEDURE IF EXISTS preciodto;
+    
+    /* Crear el procedimiento */
+    DELIMITER //
+    CREATE PROCEDURE preciodto(precio DECIMAL(15,2), dto DECIMAL(5,2))
+    BEGIN
+        SET precio := ROUND(precio-(precio*dto/100),2);
+        SELECT precio AS EUROS;
+    END//
+    DELIMITER ;
+    
+    /* Llamar al procedimiento */
+    SET @artprecio := 112.15;
+    SET @artdto := 10;
+    
+    SELECT @artprecio, @artdto;
+    CALL preciodto(@artprecio,@artdto);
+    SELECT @artprecio, @artdto;
+    ```
+Aunque usemos una variable al llamar al procedimiento y modifiquemos su valor en el interior del procedimiento, al salir del procedimiento la variable continúa con su valor inicial. Esto es así porque los parámetros por defecto son de **tipo entrada (IN**).
+
+Veamos qué pasa si lo cambiamos al tipo INOUT:
+
+!!! Example Ejemplo 4
+    **Párametros variable**
+    El mismo ejemplo que el anterior pero pasando el parámetro precio como de **tipo variable (INOUT)**.
+
+    ```sql
+    /* Eliminar el procedimiento si ya existe */
+    DROP PROCEDURE IF EXISTS preciodto;
+    
+    /* Crear el procedimiento */
+    DELIMITER //
+    CREATE PROCEDURE preciodto(INOUT precio DECIMAL(15,2), dto DECIMAL(5,2))
+    BEGIN
+        SET precio := ROUND(precio-(precio*dto/100),2);
+        SELECT precio AS EUROS;
+    END//
+    DELIMITER ;
+    
+    /* Llamar al procedimiento */
+    SET @artprecio := 112.15;
+    SET @artdto := 10;
+    SELECT @artprecio, @artdto;
+    CALL preciodto(@artprecio,@artdto);
+    SELECT @artprecio, @artdto;
+    ```
+Ahora al llamar al procedimiento y modificar el
+valor de la variable en el interior del procedimiento, resulta que la variable tiene el valor que se le ha asignado dentro del procedimiento. En el ejemplo, la variable *@artprecio* ha cambiado su valor.
+
+!!!Example Ejemplo 5
+    **Párametros IN**
+    Comprueba el valor de la variable *num* después de utilizarse en el procedimiento como parámetro de **tipo IN**.
+
+    ```sql
+    /* Eliminar el procedimiento si ya existe */
+    DROP PROCEDURE IF EXISTS variableIN;
+
+    /* Crear el procedimiento */
+    DELIMITER //
+    CREATE PROCEDURE variableIN(IN num INT)
+    BEGIN
+        SET num = 2 * num;
+        SELECT num AS DENTRO_IN;
+    END//
+    DELIMITER ;
+    
+    /* Llamar al procedimiento */
+    SET @num = 2;
+    CALL variableIN(@num);
+    SELECT @num AS FUERA_IN;
+    ```
+    
+    La ejecución del código muestra **@num** vale 2 después de la llamada al procedimiento y por lo tanto conserva su valor original aunque se halla modificado en el procedimiento.
+
+!!!Example Ejemplo 6
+    **Párametros OUT**
+
+    ```sql
+    /* Eliminar el procedimiento si ya existe */
+    DROP PROCEDURE IF EXISTS variableOUT;
+    
+    /* Crear el procedimiento */
+    DELIMITER //
+    CREATE PROCEDURE variableOUT(OUT num INT)
+    BEGIN
+        SET num = 2 * num;
+        SELECT num AS DENTRO_OUT;
+    END//
+    DELIMITER ;
+    
+    /* Llamar al procedimiento */
+    SET @num = 3;
+    CALL variableOUT(@num);
+    SELECT @num AS FUERA_OUT;
+    ```
+    La ejecución del código muestra que **@num** vale ***NULL*** después de la llamada al procedimiento.
+    Los parámetros de sálida pierden su valor, si tenían alguno, antes de ejecutarse la instrucciones del procedimiento, por lo tanto asignarle a **@num** la multiplicación por 2 da como resulta ***NULL*** puesto que **@num** es ***NULL***. 
+    Además como el tipo de parámetro es OUT el valor asignado dentro del procedimiento es el valor que tendrá la variable cuando se acabe la ejecución del procedimiento. el procedimiento.
+
+!!!Example Ejemplo 7
+    Comprueba el valor de la variable num después de utilizarse en el procedimiento como parámetro de **tipo INOUT**.
+
+    ```sql
+    /* Eliminar el procedimiento si ya existe */
+    DROP PROCEDURE IF EXISTS ud6er.variableINOUT;
+
+    /* Crear el procedimiento */
+    DELIMITER //
+    CREATE PROCEDURE variableINOUT(INOUT num INT)
+    BEGIN
+    SET num = 2 * num;
+    SELECT num AS DENTRO_INOUT;
+    END//
+    DELIMITER ;
+
+    /* Llamar al procedimiento */
+    SET @num = 5;
+    CALL variableINOUT(@num);
+    SELECT @num AS FUERA_INOUT;
+    ```
+
+    La ejecución del código muestra que **@num** vale 10 después de la llamada al procedimiento.
+    Por lo tanto la modificación de la variable **@num** que se ha producido dentro del procedimiento ha persistido cuando este ha acabado.
