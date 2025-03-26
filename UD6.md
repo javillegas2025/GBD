@@ -1478,3 +1478,130 @@ valor de la variable en el interior del procedimiento, resulta que la variable t
 
     La ejecución del código muestra que **@num** vale 10 después de la llamada al procedimiento.
     Por lo tanto la modificación de la variable **@num** que se ha producido dentro del procedimiento ha persistido cuando este ha acabado.
+
+## Funciones definidas por el usuario
+
+<div class="caso_estudio">
+
+Las **funciones** se diferencian de los procedimientos en que nos permiten devolver un valor. Todos los parámetros de una función son de entrada y no es necesario indicar IN a los parámetros.
+
+Las **funciones definidas por el usuario** (User Defined Functions – UDF) funcionan como las predefinidas de MySQL pero las creamos con almacenamiento de programas (Stored Programs).
+
+Para crear una UDF usaremos la sintaxis:
+<b>
+
+```sql
+CREATE FUNCTION nombrefuncion([parámetros])
+RETURNS {VARCHAR|INT|DECIMAL|DATE|...}
+```
+</b>
+</div> <!-- fin caso de estudio -->
+
+!!!Example Ejemplo 1
+    **Funciones definidas por el usuario**
+    Función que recibe una cadena y devuelve la primera letra.
+
+    ```sql
+    /* Eliminar la función si ya existe */
+    DROP FUNCTION IF EXISTS primeraletra;
+    /* Crear la función */
+    
+    DELIMITER //
+    CREATE FUNCTION primeraletra(cadena VARCHAR(100)) RETURNS VARCHAR(1)
+    BEGIN
+        DECLARE cadresul VARCHAR(1);
+        SET cadresul := LEFT(cadena, 1);
+        RETURN cadresul;
+    END//
+    DELIMITER ;
+    
+    /* Llamar a la función */
+    SET @cad = 'Prueba de una función';
+    SET @resul = primeraletra(@cad);
+    SELECT @resul;
+    ```
+> :pushpin: En la versión MySQL 8.0, existe una variable global de sistema que puede impedir la creación de funciones. Si recibimos el error:
+>
+> *This function has none of DETERMINISTIC, NO SQL, or READS SQL DATA in its declaration and binary logging is enabled (you might  want to use the less safe log_bin_trust_function_creators variable)*
+>
+> deberemos cambiar la configuraració de MySQL Server. Para ello editaremos el archivo:
+> **C:\ProgramData\MySQL\MySQL Server 8.0\my.ini**
+y  añadiremos bajo la sección [`mysqld`] la línea siguiente:
+**log_bin_trust_function_creators= 1**
+>
+>Después de grabar tendremos que reiniciar el servicio de MySQL 8.0 y podremos comprobar que ya funciona correctamente.
+
+!!!Example Ejemplo 2
+    **Funciones definidas por el usuario**
+    Función que recibe un número entero y devuelve el siguiente entero.
+
+    ```sql
+
+    /* Eliminar la función si ya existe */
+    DROP FUNCTION IF EXISTS signum;
+
+    /* Crear la función */
+    DELIMITER //
+    CREATE FUNCTION signum(num INT) RETURNS INT
+    BEGIN
+        DECLARE intresul INT;
+        SET intresul := num + 1;
+        RETURN intresul;
+    END//
+    DELIMITER ;
+    
+    /* Llamar a la función */
+    SET @numero = 25;
+    SELECT signum(@numero);
+    SELECT signum(30);
+    ```
+
+Podemos hacer la función anterior con variables de usuario globales en vez de variables de función:
+
+!!!Example Ejemplo 3
+    **Funciones definidas por el usuario**
+    Función que recibe un número entero y devuelve el siguiente entero.
+
+    ```sql
+    /* Eliminar la función si ya existe */
+    DROP FUNCTION IF EXISTS signum;
+
+    /* Crear la función */
+    DELIMITER //
+    CREATE FUNCTION signum(num INT) RETURNS INT
+    BEGIN
+        SET @intresul := num + 1;
+        RETURN @intresul;
+    END//
+    DELIMITER ;
+
+    /* Llamar a la función */
+    SELECT signum(30);
+    SELECT @intresul;
+    ```
+Podemos observar que la variable se ha creado y es global porque mantiene su valor fuera de la función.
+
+!!! Warning
+    Usar variables globales dentro de una función o procedimiento generalmente no se suele utilizar para no dejar valores en memoria y para no interferir en el resultado de diferentes llamadas a la función de forma simultánea.
+
+!!!Example Ejemplo 4
+    **Funciones definidas por el usuario**
+    Función que no recibe ningún parámetro y devuelve el día siguiente al actual.
+
+    ```sql
+    /* Eliminar la función si ya existe */
+    DROP FUNCTION IF EXISTS tomorrow;
+
+    /* Crear la función */
+    DELIMITER //
+    CREATE FUNCTION tomorrow() RETURNS DATE
+    BEGIN
+        DECLARE fecha DATE;
+        SET fecha := ADDDATE(CURDATE(), 1);
+        RETURN fecha;
+    END//
+    DELIMITER ;
+
+    /* Llamar a la función */
+    SELECT tomorrow();
+    ```
