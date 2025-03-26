@@ -2165,3 +2165,271 @@ En estos tres ejemplos el **trigger** se ejecuta después (**`AFTER`**) de la in
     /* Comprobar que el disparador se ha ejecutado */
     SELECT * FROM clientes;
     ```
+***Para crear los valores de campos calculados***
+A continuación vamos a ver un caso un poco más complicado. Vamos a ver como se actualiza el saldo de los clientes del banco cuando se revierten las operaciones que ingresan o detraen dineros de sus cuentas.
+
+<div class="caso_estudio">
+
+:mortar_board: **Caso de estudio**
+
+En nuestra base de datos ***bancaria3*** la tabla **movimientos** se utiliza para registrar los ingresos y cargos que se realizan en las cuentas corrientes de los clientes.
+Es habitual que en algún momento se tenga que revertir o modificar algún movimiento por que se ha efectuado un ingreso o cargo incorrecto. A veces simplemente un cliente quiere cancelar un pedido del que ya ha hecho el pago. Cuando estas rectificaciones se llevan a cabo se tiene que restablecer la cuenta corriente a la cantidad correcta, como si la operación nunca hubiera sucedido.
+
+Vamos a contemplar dos situciones:
+
+* **Cancelar un ingreso o un cargo**: esta operación se traduce en eliminar un movimiento.
+* **Modificar un ingreso o un cargo**: esta operación se traduce en la modificación de un movimiento.
+
+**Cancelar un ingreso o un cargo**
+Cuando se elimina un movimiento lo único que hay que hacer es actualizar el saldo del cliente restándole el importe del movimiento.
+
+> :pushpin: Darse cuenta de que si el movimiento era un ingreso entonces el valor del importe es positivo y al cliente se le había ingresado que no le correspondía y por eso se lo restamos ahora. Sin embargo, si el movimiento era un cargo entonces el importe era negativo y restar un número negativo es igual que sumar su valor absoluto por lo que al cliente se le devoverá la cantidad detraída.
+
+Con esta información es bastante claro que necesitamos crear un trigger con estas características:
+
+* **tiempo**: después (`AFTER`)
+* **evento**: borrar (`DELETE`)
+* **tabla**: movimientos
+* **acción**: hay que restar el importe del movimientoa al saldo del cliente
+
+```sql
+/* Eliminar el disparador si ya existe */
+DROP TRIGGER IF EXISTS movimientos_after_delete;
+
+/* Crear el disparador */
+DELIMITER //
+CREATE TRIGGER movimientos_after_delete
+AFTER DELETE ON movimientos
+FOR EACH ROW 
+BEGIN
+    /* Descontar valor antiguo del movimiento */
+    UPDATE clientes SET saldo = saldo - OLD.importe WHERE dni = OLD.dni;
+END//
+DELIMITER ;
+
+/* Cargar datos */
+INSERT INTO clientes(dni, nombre, saldo) VALUES('21455800','Paco Porras', 1000); 
+INSERT INTO movimientos(dni, concepto, importe) VALUES('21455800','SALDO INICIAL', 1000); 
+SET @id_reg := LAST_INSERT_ID();
+
+/* Mostrar los datos del cliente y sus movimientos antes de la ejecución del trigger */
+SELECT 'ANTES' AS RESULTADO, clientes.* FROM clientes WHERE dni='21455800'; 
+SELECT 'ANTES' AS RESULTADO, movimientos.* FROM movimientos WHERE dni='21455800';
+
+/* Forzar a que se ejecute el disparador */
+DELETE FROM movimientos WHERE id_mov = @id_reg;
+
+    /* Comprobar que el disparador se ha ejecutado */
+SELECT 'DESPUÉS' AS RESULTADO, clientes.* FROM clientes WHERE dni = '21455800'; 
+SELECT 'DESPUÉS' AS RESULTADO, movimientos.* FROM movimientos WHERE dni = '21455800';
+```
+
+**Modificar un ingreso o un cargo**
+Cuando se modifica un movimiento el saldo del cliente se actualiza sumándole la resta del nuevo importe menos el importe anterior.
+
+Con esta información es bastante claro que necesitamos crear un trigger con estas características:
+
+* **tiempo**: después (`AFTER`)
+* **evento**: modificar (`UPDATE`)
+* **tabla**: movimientos
+* **acción**: hay que sumar al saldo del cliente la diferencia entre el nuevo importe y el importe anterior del movimiento
+
+```sql
+/* Eliminar el disparador si ya existe */
+DROP TRIGGER IF EXISTS movimientos_after_update;
+
+/* Crear el disparador */
+DELIMITER //
+CREATE TRIGGER movimientos_after_update
+AFTER UPDATE ON movimientos
+FOR EACH ROW 
+BEGIN
+    DECLARE saldoMovimiento DECIMAL(15,2);
+
+    /* Calcular valor a sumar al saldo */
+    SET saldoMovimiento := NEW.importe - OLD.importe;
+
+    /* Actualizar el saldo del cliente */
+    UPDATE clientes SET saldo = saldoMovimiento WHERE dni = NEW.dni;
+END//
+DELIMITER ;
+
+/* Cargar datos */
+INSERT INTO clientes(dni, nombre, saldo) VALUES('21455200','Laura Palmer', 2000); 
+INSERT INTO movimientos(dni, concepto, importe) VALUES('21455200','SALDO INICIAL', 2000); 
+SET @id_reg := LAST_INSERT_ID();
+
+/* Mostrar los datos del cliente y sus movimientos antes de la ejecución del trigger */
+SELECT 'ANTES' AS RESULTADO, clientes.* FROM clientes WHERE dni = '21455200'; 
+SELECT 'ANTES' AS RESULTADO, movimientos.* FROM movimientos WHERE dni = '21455200';
+
+/* Comprobar que el disparador se ha ejecutado */
+UPDATE movimientos SET importe = 1650 WHERE id_mov = @id_reg;
+
+/* Comprobar */
+SELECT 'DESPUÉS' AS RESULTADO, clientes.* FROM clientes WHERE dni = '21455200'; 
+SELECT 'DESPUÉS' AS RESULTADO, movimientos.* FROM movimientos WHERE dni = '21455200';
+```
+
+</div> <!-- fin caso de estudio -->
+
+## Tablas temporales
+
+En MySQL podemos crear tablas temporales donde guardar los registros procesados.
+La sintaxis para crear una tabla temporal es la misma que para crear una tabla permanente, pero añadiendo **`TEMPORARY`**.
+
+<div class="caso_estudio">
+
+<b>
+
+```sql
+CREATE TEMPORARY TABLE nombreTabla([campos]);
+```
+</b>
+
+</div> <!-- fin caso de estudio -->
+
+En muchas ocasiones también podemos necesitar crear una tabla temporal pero, en vez de realizar instrucciones **`INSERT`** para añadir datos, utilizar un **`SELECT`** de algunas tablas ya existentes.
+
+<div class="caso_estudio">
+
+<b>
+
+```sql
+CREATE TEMPORARY TABLE nombreTabla AS (SELECT...);
+```
+
+</b>
+
+</div> <!-- fin caso de estudio -->
+
+Las tablas temporales se eliminan al desconectar la sesión o bien con la instrucción **`DROP`**.
+
+<div class="caso_estudio">
+
+<b>
+
+```sql
+DROP TEMPORARY TABLE IF EXISTS nombreTabla;
+```
+
+</b>
+
+</div> <!-- fin caso de estudio -->
+
+
+!!!Example Ejemplo 1
+    **Tablas temporales**
+    Desde *Workbench*, en la BD ***World***, crear una tabla temporal denominada **continentes** con los continentes y su población.
+
+    ```sql
+    /* Crear la tabla temporal */
+    CREATE TEMPORARY TABLE continentes AS (
+        SELECT continent, SUM(population) AS population 
+        FROM country 
+        GROUP BY continent
+    );
+    
+    /* Mostrar la tabla temporal creada */
+    SELECT * FROM continentes;
+    
+    /* Comprueba que no aparece en las tablas de la BD */
+    SHOW TABLES;
+    ```
+
+    Cierra *Workbench* y vuelve a entrar y comprueba si todavía existe la tabla temporal **continentes**.
+
+    ```sql
+    /* Mostrar la tabla temporal creada */
+    SELECT * FROM continentes;
+    ```
+
+## Cursores
+
+<div class="caso_estudio">
+
+Un **cursor** es una estructura de control utilizada para el recorrido (y potencial procesamiento) de los registros del resultado de una consulta.
+
+</div> <!-- fin caso de estudio -->
+
+Un cursor se utiliza para el procesamiento individual de las filas devueltas por el sistema gestor de base de datos para una consulta.
+
+Existen sentencias SQL que no requieren del uso de cursores gracias al uso de funciones de agrupación y al **`GROUP BY`**. Pero en ocasiones, hay procesos que requieren de cursores para procesar un conjunto de registros y obtener un resultado que no es posible con una o varias instrucciones **`SELECT`**.
+
+Los cursores sólo pueden usarse en procedimientos o funciones. La estructura que vamos a usar es la siguiente:
+
+<div class="caso_estudio">
+<b>
+
+```sql
+/* CLÁUSULAS DECLARE DEL CURSOR */
+DECLARE terminado INT DEFAULT FALSE; 
+DECLARE cursorSelect CURSOR FOR [instrucción SELECT]; 
+DECLARE CONTINUE HANDLER FOR NOT FOUND SET terminado = TRUE;
+
+/* RECORRER CURSOR */
+OPEN cursorSelect; 
+FETCH cursorSelect INTO [variables]; 
+WHILE (NOT terminado) DO
+    [instrucciones de proceso];
+    FETCH cursorSelect INTO [variables]; 
+END WHILE; 
+CLOSE cursorSelect;
+```
+
+</b>
+
+</div> <!-- fin caso de estudio -->
+
+!!! Example Ejemplo 1
+    **Cursores**
+    Realizar un procedimiento denominado **POBLACIONCONTINENTE** que reciba como parámetros el continente y calcule la población de todos los países de ese continente de la BD ***World***.
+
+    Si el procedimiento está bien programado las siguientes 2 instrucciones son equivalentes:
+
+    ```sql
+    SELECT POBLACIONCONTINENTE('Africa');
+    
+    SELECT SUM(population) FROM country WHERE continent='Africa';
+    ```
+    
+    A continuación se muestra el código del procedimiento con comentarios.
+
+    ```sql
+    /* Eliminar la función si ya existe */
+    DROP FUNCTION IF EXISTS POBLACIONCONTINENTE;
+    
+    DELIMITER //
+    /* Crear la función */
+    CREATE FUNCTION POBLACIONCONTINENTE(pContinente VARCHAR(30)) RETURNS INT
+    BEGIN
+        /* VARIABLES LOCALES */
+        DECLARE resulPoblacion DECIMAL(15,2); 
+        DECLARE tmpPoblacion DECIMAL(15,2);
+    
+        /* DECLARES DEL CURSOR */
+        DECLARE terminado INT DEFAULT FALSE; 
+        DECLARE cursorSelect CURSOR FOR SELECT population FROM country WHERE continent = pContinente; 
+        DECLARE CONTINUE HANDLER FOR NOT FOUND SET terminado = TRUE;
+    
+        /* RECORRER CURSOR */
+        SET resulPoblacion = 0;
+        OPEN cursorSelect; 
+        FETCH cursorSelect INTO tmpPoblacion; 
+        WHILE (NOT terminado) DO
+            SET resulPoblacion = resulPoblacion + tmpPoblacion;
+            FETCH cursorSelect INTO tmpPoblacion; 
+        END WHILE; 
+        CLOSE cursorSelect;
+        
+        /* RESULTADO */
+        RETURN resulPoblacion;
+    END //
+    DELIMITER ;
+    
+    /* Calcular el resultado con la función de agrupación SUM */
+    SELECT SUM(population) FROM country WHERE continent =' Africa';
+    
+    /* Calcular el resultado con la nueva función POBLACIONCONTINENTE */
+    SELECT POBLACIONCONTINENTE('Africa');
+    ```
