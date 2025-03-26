@@ -40,6 +40,7 @@ toc:
 4. Funciones predefinidas
 5. Parámetros de Entrada-Salida
 6. Funciones definidas por el usuario
+7. Procedimientos y funciones con acceso a datos
 
 ## Introducción
 
@@ -1604,4 +1605,562 @@ Podemos observar que la variable se ha creado y es global porque mantiene su val
 
     /* Llamar a la función */
     SELECT tomorrow();
+    ```
+
+## Procedimientos y funciones con acceso a datos
+
+### Acceso a datos
+
+Los procedimientos y funciones suelen acceder a las bases de datos para procesar información. En muchas ocasiones nos permiten generar campos calculados.
+
+Veamos unos ejemplos con la BD de World y algunas funciones predefinidas de control.
+
+!!!Example Ejemplo 1
+    **Funciones predefinidas con acceso a datos**
+    Obtener los países con un campo calculado adicional denominado **GNPInteranual** en las que indicaremos *Crecimiento* si ha aumentado el GNP y *Decrecimiento* en otro caso. (code, name, GNP, GNPOld, **GNPInteranual**).
+
+    ```sql
+    SELECT code, name, GNP, GNPOld, IF(GNP > GNPOld,'Crecimiento', 'Decrecimiento') AS 'GNPInteranual'
+    FROM country
+    WHERE (GNP IS NOT NULL) AND (GNPOld IS NOT NULL);
+    ```
+
+!!!Example Ejemplo 2
+    **Funciones predefinidas con acceso a datos**
+    Obtener los países con el nombre del continente al que pertenecen pero traducido (code, name, continente).
+    ```sql
+    SELECT code, name,
+        (CASE continent
+            WHEN 'Africa' THEN 'África'
+            WHEN 'Antarctica' THEN 'Antártida'
+            WHEN 'Asia' THEN 'Asia'
+            WHEN 'Europe' THEN 'Europa'
+            WHEN 'North America' THEN 'Norteamérica'
+            WHEN 'Oceania' THEN 'Oceanía'
+            WHEN 'South America' THEN 'Sudamérica'
+            ELSE 'n/a'
+        END)
+    AS 'Continente'
+    FROM country;
+    ```
+También hay casos en que las funciones nos permiten realizar procesos de selección, es decir, usarlas en las condiciones de la cláusula **`WHERE`**.
+
+!!!Example Ejemplo 3
+    **Funciones predefinidas con acceso a datos**
+    Obtener los países en los que coincide que el campo **`code2`** son las dos primeras letras del campo **`code`**. Mostrar **`code`**, **`name`** y **`code2`**.
+
+    ```sql
+    SELECT code, code2, name 
+    FROM country 
+    WHERE LEFT(code,2) = code2;
+    ```
+
+### Acceso a datos desde funciones definidas por el usuario
+
+Nuestro objetivo principal será desarrollar funciones que procesen datos contenidos en los campos de las tablas y devuelvan valores.
+
+Veamos algunos ejemplos también con la BD *World*.
+
+!!!Example Ejemplo 4
+    **Procedimientos y funciones con acceso a datos**
+    Realizar una función denominada **CUENTACIUDADES** que reciba como parámetro el código de un país y devuelva el número de ciudades que hay en la BD.
+
+    ```sql
+    /* Eliminar la función si ya existe */
+    DROP FUNCTION IF EXISTS CUENTACIUDADES;
+    
+    /* Crear la función */
+    DELIMITER //
+    CREATE FUNCTION CUENTACIUDADES(pCodePais VARCHAR(3)) RETURNS INT
+    BEGIN
+        DECLARE intCiudades INT;
+        SELECT COUNT(*) INTO intCiudades FROM city WHERE CountryCode = pCodePais;
+        RETURN intCiudades;
+    END//
+    DELIMITER ;
+    
+    /* Llamar a la función: retorna la cantida de ciudades que hau en Argentiba. */
+    SELECT CUENTACIUDADES('ARG');
+    +-----------------------+
+    | CUENTACIUDADES('ARG') |
+    +-----------------------+
+    |                    57 |
+    +-----------------------+
+
+    /* Llamar a la función: retorna la cantidad de ciudades de cada país */
+    SELECT code, name, CUENTACIUDADES(code) AS numciudades FROM country;
+    ```
+!!!Example Ejemplo 5
+    **Procedimientos y funciones con acceso a datos**
+    Realizar una función denominada **NOMBRECIUDAD** que reciba como parámetro el ID de una ciudad y devuelva su nombre. La función nunca debe devolver **`NULL`**, pues en este caso devolverá ''.
+
+    ```sql
+    /* Eliminar la función si ya existe */
+    DROP FUNCTION IF EXISTS NOMBRECIUDAD;
+    
+    /* Crear la función */
+    DELIMITER //
+    CREATE FUNCTION NOMBRECIUDAD(pIdCiudad INT) RETURNS VARCHAR(35)
+    BEGIN
+        DECLARE nCiudad VARCHAR(35);
+        SELECT name INTO nCiudad FROM city WHERE ID = pIdCiudad;
+        IF nCiudad IS NULL THEN 
+            SET nCiudad = '';
+        END IF;
+        RETURN nCiudad;
+    END//
+    DELIMITER ;
+    
+    /* Llamar a la función: retorna Albacete por que 390 es el código de Albacete */
+    SELECT NOMBRECIUDAD(390);
+    +-------------------+
+    | NOMBRECIUDAD(390) |
+    +-------------------+
+    | Albacete          |
+    +-------------------+
+
+    /* Llamar a la función: retorna el código y el nombre de la capital de cada país */
+    SELECT code, name, NOMBRECIUDAD(capital) AS NombreCapital FROM country;
+    ```
+
+### Control de errores
+
+En muchos casos las funciones que definimos generan errores, como el que se produce al insertar un registro por incumplir restricciones.
+
+Para ver un ejemplo crearemos una función para insertar ciudades en la tabla **city** de la BD *World*.
+
+!!!Example Ejemplo 6
+    **Procedimientos y funciones con acceso a datos**
+    Realizar una función denominada **INSERTACIUDAD** que reciba como parámetros el (**`Name`**, **`CountryCode`**, **`District`**,  **`Population`**) de una ciudad y la inserte como un nuevo registro en la tabla city de la BD World. El ID no es necesario porque está declarado como **`AUTO_INCREMENT`**. La función devolverá el ID asignado en el **`INSERT`**.
+
+    ```sql
+    /* Eliminar la función si ya existe */
+    DROP FUNCTION IF EXISTS INSERTACIUDAD;
+
+    /* Crear la función */
+    DELIMITER //
+    CREATE FUNCTION INSERTACIUDAD(pName VARCHAR(35), pCountryCode VARCHAR(3), pDistrict VARCHAR(20), pPopulation INT) RETURNS INT
+    BEGIN
+        DECLARE resul INT;
+        INSERT INTO city(Name, CountryCode, District, Population) 
+        VALUES (pName, pCountryCode, pDistrict, pPopulation);
+        SET resul = LAST_INSERT_ID();
+        RETURN resul;
+    END//
+    DELIMITER ;
+    
+    /* Llamar a la función */
+    SELECT INSERTACIUDAD('Elche','ESP','Valencia',227659);
+    +------------------------------------------------+
+    | INSERTACIUDAD('Elche','ESP','Valencia',227659) |
+    +------------------------------------------------+
+    |                                           4080 |
+    +------------------------------------------------+
+    ```
+
+La ejecución del ejemplo anterior inserta correctamente la ciudad de Elche. ¿Pero qué pasaría si indicamos un código de país que no existe?
+
+```sql
+/* Llamar a la función */
+SELECT INSERTACIUDAD('Elche','XXX','Valencia',227659);
+```
+
+```text
+Error Consulta SQL:
+SELECT INSERTACIUDAD('Elche','XXX','Valencia',227659)
+
+MySQL ha dicho: Documentación
+#1452 - Cannot add or update a child row: a foreign key constraint fails (`world`.`city`, CONSTRAINT `city_ibfk_1` FOREIGN KEY (`CountryCode`) REFERENCES `country` (`Code`))
+```
+
+Como hemos podido observar, cuando se producen errores, perdemos el control del proceso. MySQL permite manejar y controlar los errores mediante el uso de gestor o manejador de errores (**HANDLER**).
+
+<div class="caso_estudio">
+<b>
+
+```sql
+DECLARE EXIT HANDLER FOR SQLEXCEPTION
+BEGIN 
+    [instrucciones]
+END;
+```
+
+</b>
+</div> <!-- fin caso de estudio -->
+
+Cuando se produce un error, MySQL nos indica un código de error (*error code*) y un mensaje. Todos estos códigos están en la documentación oficial.
+Con un manejador de errores hacemos que en caso de error el programa no aborte si no que se pase el control al manejador y se ejecuten las instrucciones que tiene definidas.
+
+!!! Note Referencias
+
+    [MySQL Oficial – Control de Errores en MySQL – Web Oficial en inglés](https://dev.mysql.com/doc/refman/5.7/en/declare-handlerhtml)
+    [MySQL Oficial – Errores en MySQL – Web Oficial en inglés](https:/dev.mysql.com/doc/refman/5.5/en/error-messages-server.html)
+
+***Comprobar los errores***
+Cuando se produce un error en una instrucción SQL, obtendremos un error o warning que se almacenará en la BD de control de errores. Este error podemos consultarlo con la instrucción **`SHOW WARNINGS`**.
+
+!!!Example Ejemplo 7
+    **Control de errores**
+    Eliminar una tabla que no existe y comprobar cual es el error.
+
+    ```sql
+    /* Intentamos eliminar una tabla que no existe */
+    DROP TABLE mitabla;
+    ERROR 1051 (42S02): Tabla 'world.mitabla' desconocida
+    
+    SHOW WARNINGS;
+    +-------+------+-----------------------------------+
+    | Level | Code | Message                           |
+    +-------+------+-----------------------------------+
+    | Error | 1051 | Tabla 'world.mitabla' desconocida |
+    +-------+------+-----------------------------------+
+    ```
+Si deseamos almacenar el código y el mensaje en variables propias usaremos la instrucción **`GET DIAGNOSTICS`**.
+
+!!!Example Ejemplo 8
+    **Control de errores**
+    Eliminar una tabla que no existe y comprobar cual es el error.
+
+    ```sql
+    DROP TABLE mitabla; 
+    ERROR 1051 (42S02): Tabla 'world.mitabla' desconocida
+
+    GET DIAGNOSTICS CONDITION 1 @errcode = RETURNED_SQLSTATE, @errmsg = MESSAGE_TEXT;
+    
+    SELECT @errcode, @errmsg;
+    +----------+-----------------------------------+
+    | @errcode | @errmsg                           |
+    +----------+-----------------------------------+
+    | 42S02    | Tabla 'world.mitabla' desconocida |
+    +----------+-----------------------------------+
+    ```
+Vamos a modificar la función **INSERTACIUDAD** para que controle errores de inserción. La función nos devuelve el ID de la ciudad insertada, pero en caso de error deberá devolver el valor -1.
+
+!!!Example Ejemplo 9
+    **Control de errores**
+    Realizar una función denominada **INSERTACIUDAD** que reciba como parámetros el (**`Name`**, **`CountryCode`**, **`District`**, **`Population`**) de una ciudad y la inserte como un nuevo registro en la tabla **city** de la BD *World*. El ID no es necesario porque está declarado como **`AUTO_INCREMENT`**. La función devolverá el ID asignado en el **`INSERT`**. En caso de error devolverá el valor -1.
+
+    ```sql
+    /* Eliminar la función si ya existe */
+    DROP FUNCTION IF EXISTS INSERTACIUDAD;
+    
+    /* Crear la función */
+    DELIMITER //
+    CREATE FUNCTION INSERTACIUDAD(pName VARCHAR(35), pCountryCode VARCHAR(3), pDistrict VARCHAR(20), pPopulation INT) RETURNS INT
+    BEGIN
+        DECLARE resul INT;
+        
+        DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+        BEGIN 
+            SET resul = -1; 
+            RETURN resul; 
+        END;
+        
+        INSERT INTO city(Name, CountryCode, District, Population) 
+        VALUES (pName, pCountryCode, pDistrict, pPopulation);
+        SET resul = LAST_INSERT_ID();
+        RETURN resul;
+    END//
+    DELIMITER ;
+    
+    /* Llamar a la función */
+    SELECT INSERTACIUDAD('Elche','XXX','Valencia',227659);
+    ```
+Si deseamos realizar un **`PROCEDURE`** donde recojamos el error y mensaje que se haya producido, deberemos usar parámetros-variables de tipo **`OUT`**.
+
+En caso de error devolverá idCiudad tendrá el valor -1. En caso de no haber error, errcode valdrá '00000' y errmsg será ''.
+
+!!!Example Ejemplo 10
+    **Control de errores**
+    Realizar un procedimiento denominado **PROC_INSERTACIUDAD** que reciba como parámetros el (**`Name`**, **`CountryCode`**, **`District`**, **`Population`**) de una ciudad y la inserte como un nuevo registro en la tabla **city** de la BD *World*. El ID no es necesario porque está declarado como **`AUTO_INCREMENT`**. El procedimiento recibirá tres parámetros más para recoger:
+
+    * *idCiudad* → ID de la ciudad asignado en el INSERT
+    * *errcode* → Código de error
+    * *errmsg* → Mensaje de error
+
+    ```sql
+    /* Eliminar el procedimiento si ya existe */
+    DROP PROCEDURE IF EXISTS PROC_INSERTACIUDAD;
+    
+    /* Crear el procedimiento */
+    DELIMITER //
+    CREATE PROCEDURE PROC_INSERTACIUDAD(
+        pName VARCHAR(35), 
+        pCountryCode VARCHAR(3), 
+        pDistrict VARCHAR(20), 
+        pPopulation INT, 
+        OUT idCiudad INT, 
+        OUT errcode varchar(5), 
+        OUT errmsg VARCHAR(100)
+    ) 
+    BEGIN
+        DECLARE EXIT HANDLER FOR SQLEXCEPTION 
+        BEGIN 
+            GET DIAGNOSTICS CONDITION 1 errcode = RETURNED_SQLSTATE, errmsg = MESSAGE_TEXT; 
+            SET idCiudad = -1; 
+        END;
+    
+        SET errcode = '00000'; 
+        SET errmsg = '';
+        INSERT INTO city(Name, CountryCode, District, Population) 
+        VALUES (pName, pCountryCode, pDistrict, pPopulation);
+        SET idCiudad = LAST_INSERT_ID();
+    END//
+    DELIMITER ;
+    
+    /* Llamar al procedimiento */
+    CALL PROC_INSERTACIUDAD('Elche', 'ESP', 'Valencia', 227659, @vID, @vError, @vErrMsg);
+    SELECT @vID, @vError, @vErrMsg;
+    ```
+
+Realizar el proyecto **bancaria 1 (repaso de UD3 y UD5) y bancaria 2 (con procedimientos)**.
+
+## Disparadores
+
+<div class="caso_estudio">
+
+Los **disparadores** o **triggers** son procedimientos especiales que se ejecutan cuando se produce un evento o acción sobre una tabla de la BD.
+
+Los disparadores o triggers no devuelven valores como una función, ni muestran resultados con **`SELECT`**.
+
+</div> <!-- fin caso de estudio -->
+
+Para definir un disparador debemos indicar:
+
+* **evento**: acción que desencadena el disparador (**`INSERT`**, **`UPDATE`** o **`DELETE`**)
+* **tiempo**: antes o después del evento (**`AFTER`** o **`BEFORE`**)
+* **tabla**: indica en qué tabla se produce el evento
+
+Veamos algunos ejemplos de uso:
+
+* **Realizar acciones derivadas del evento** pues podemos realizar otras instrucciones **`INSERT`**, **`UPDATE`** o **`DELETE`** relacionadas.
+* **Para modificar los valores recibidos y grabarlos correctamente** en instrucciones **`INSERT`** o **`UPDATE`**.
+* **Para crear los valores de campos calculados** en instrucciones **`INSERT`** o **`UPDATE`**.
+* **Para checkear valores correcto**s y generar un mensaje en caso de error.
+
+Los valores recibidos en las instrucciones de los disparadores son **`NEW.nombrecampo`** y **`OLD.nombrecampo`**. Dependiendo del tipo de evento podremos usar:
+
+* En **`UPDATE`**: **`NEW.nombrecampo`** para los nuevos valores y **`OLD.nombrecampo`** para los antiguos.
+* En **`INSERT`**: **`NEW.nombrecampo`** pues no tenemos antiguos.
+* En **`DELETE`**: **`OLD.nombrecampo`** pues no tenemos nuevos.
+
+Para los siguientes ejercicios, crearemos una BD denominada ***bancaria3*** con las tablas **clientes** y **movimientos** descritas anteriormente y añadiremos una tabla llamada **logdisparadores** para insertar los valores de los registros procesados con los siguientes campos:
+
+* **`id_reg`**: número entero (`INT`), sin signo (`UNSIGNED`) y rellenado aceros por la izquierda, clave primaria y valor automático (`AUTO_INCREMENT`)
+* **`tabla`**: cadena de 50 caracteres de longitud máxima (`VARCHAR(50)`)
+* **`evento`**: cadena de 20 caracteres de longitud máxima (`VARCHAR(20)`)
+* **`tiempo`**: cadena de 20 caracteres de longitud máxima (`VARCHAR(20)`)
+* **`fechayhora`**: campo que almacene la fecha y hora de ejecución (`DATETIME`)
+* **`valores`**: cadena de 250 caracteres de longitud máxima (`VARCHAR(250)`) para almacenar todos los valores del registro de clientes eliminado. Utilizaremos el carácter **|** entre los diferentes campos como separador.
+
+***Creación de la Base de Datos y Tablas***
+
+<div class="caso_estudio">
+
+```sql
+/* Crear base de datos y seleccionarla */
+CREATE DATABASE IF NOT EXISTS bancaria3 DEFAULT CHARACTER SET 'utf8'; 
+USE bancaria3;
+
+/* Crear tablas*/
+CREATE TABLE clientes(
+    dni INT PRIMARY KEY, 
+    nombre VARCHAR(100) UNIQUE NOT NULL, 
+    saldo DECIMAL(15,2) NOT NULL DEFAULT 0 
+);
+
+CREATE TABLE movimientos(
+    id_mov INT(5) UNSIGNED ZEROFILL AUTO_INCREMENT PRIMARY KEY,
+    dni INT NOT NULL, 
+    concepto VARCHAR(150) NOT NULL DEFAULT '',
+    importe DECIMAL(15,2) NOT NULL DEFAULT 0,
+    FOREIGN KEY(dni) REFERENCES clientes(dni)
+);
+
+CREATE TABLE logdisparadores(
+    id_reg INT(10) UNSIGNED ZEROFILL PRIMARY KEY AUTO_INCREMENT NOT NULL,
+    tabla VARCHAR(50) NOT NULL,
+    evento VARCHAR(20) NOT NULL,
+    tiempo VARCHAR(20) NOT NULL,
+    fechayhora DATETIME NOT NULL,
+    valores VARCHAR(250) NOT NULL
+);
+```
+
+</div> <!-- fin caso de estudio -->
+
+***Triggers que realizan acciones derivadas del evento***
+En los 3 ejemplos siguientes vamos a utilizar la tabla **logdisparadores** como un registro de contabilidad (log) de las operaciones de actualización realizadas sobre la tabla **clientes**.
+
+!!! Example Ejemplo 1
+    **Triggers**
+    Deseamos que si un usuario inserta un registro en la tabla **clientes**, guardemos un LOG en la tabla **logdisparadores** con los valores insertados. Para ello, en la BD ***bancaria3***, tenemos que crear un disparador para la tabla **clientes** que tenga en cuenta:
+
+    * **tiempo**: después (**`AFTER`**)
+    * **evento**: insertar (**`INSERT`**)
+    * **tabla**: clientes
+    * **acción**: guardar un LOG con los datos insertados
+
+    ```sql
+    /* Eliminar el disparador si ya existe */
+    DROP TRIGGER IF EXISTS clientes_after_insert;
+    
+    /* Crear el disparador */
+    DELIMITER //
+    CREATE TRIGGER clientes_after_insert
+    AFTER INSERT ON clientes
+    FOR EACH ROW 
+    BEGIN
+        /* Insertar valores nuevos */
+        INSERT INTO logdisparadores (tabla, evento, tiempo, fechayhora, valores) 
+        VALUES ('CLIENTES', 'INSERT', 'AFTER', NOW(), CONCAT('VALORES NUEVOS|', NEW.dni,'|', NEW.nombre, '|' ,NEW.saldo));
+    END//
+    DELIMITER ;
+    
+    /* Cargar datos y forzar a que se ejecute el disparador*/
+    INSERT INTO clientes(dni, nombre, saldo) VALUES('21456456', 'María González', 200);
+    INSERT INTO clientes(dni, nombre, saldo) VALUES('21456457', 'Mario González', 300);
+    
+    /* Comprobar que el disparador se ha ejecutado */
+    SELECT * FROM logdisparadores;
+    ```
+
+    El trigger se ejecuta dos veces puesto que se hacen dos inserciones en la tabla clientes.
+
+!!! Example Ejemplo 2
+    **Triggers**
+    Deseamos que si un usuario elimina un registro de la tabla **clientes**, guardemos un LOG en la tabla **logdisparadores** con los valores eliminados. Para ello, en la BD ***bancaria3***, tenemos que crear un disparador para la tabla **clientes** que tenga en cuenta:
+
+    * **tiempo**: después (**`AFTER`**)
+    * **evento**: borrar (**`DELETE`**)
+    * **tabla**: clientes
+    * **acción**: guardar un LOG con los datos eliminados
+
+    ```sql
+    /* Eliminar el disparador si ya existe */
+    DROP TRIGGER IF EXISTS clientes_after_delete;
+    
+    /* Crear el disparador */
+    DELIMITER //
+    CREATE TRIGGER clientes_after_delete
+    AFTER DELETE ON clientes
+    FOR EACH ROW 
+    BEGIN
+        /* Insertar valores nuevos */
+        INSERT INTO logdisparadores (tabla, evento, tiempo, fechayhora, valores) 
+        VALUES ('CLIENTES','DELETE','AFTER', NOW(), CONCAT('VALORES ANTIGUOS|', OLD.dni, '|', OLD.nombre, '|', OLD.saldo));
+    END//
+    DELIMITER ;
+
+    /* Forzar a que se ejecute el disparador */
+    DELETE FROM clientes WHERE dni = '21456456';
+    
+    /* Comprobar que el disparador se ha ejecutado */
+    SELECT * FROM logdisparadores;
+    ```
+
+!!! Example Ejemplo 3
+    **Triggers**
+    Deseamos que si un usuario modifica un registro de la tabla **clientes**, guardemos un LOG en la tabla **logdisparadores** con los valores anteriores a la modificación y con los nuevos. Para ello, en la BD ***bancaria3***, tenemos que crear un disparador para la tabla **clientes** que tenga en cuenta:
+
+    * **tiempo**: después (**`AFTER`**)
+    * **evento**: modificar (**`UPDATE`**)
+    * **tabla**: **`clientes`**
+    * **acción**: guardar un LOG con los datos modificados
+   
+    ```sql
+    /* Eliminar el disparador si ya existe */
+    DROP TRIGGER IF EXISTS clientes_after_update;
+    
+    /* Crear el disparador */
+    DELIMITER //
+    CREATE TRIGGER clientes_after_update
+    AFTER UPDATE ON clientes
+    FOR EACH ROW 
+    BEGIN
+        /* Insertar valores antiguos */
+        INSERT INTO logdisparadores (tabla, evento, tiempo, fechayhora, valores) 
+        VALUES ('CLIENTES', 'AFTER', 'UPDATE', NOW(), CONCAT('VALORES ANTIGUOS|', OLD.dni,'|', OLD.nombre, '|', OLD.saldo));
+    
+        /* Insertar valores nuevos */
+        INSERT INTO logdisparadores (tabla, evento, tiempo, fechayhora, valores) 
+        VALUES ('CLIENTES', 'AFTER', 'UPDATE', NOW(), CONCAT('VALORES NUEVOS|', NEW.dni, '|', NEW.nombre, '|', NEW.saldo));
+    END//
+    DELIMITER ;
+
+    /* Forzar a que se ejecute el disparador */
+    UPDATE clientes SET nombre = 'Mario Gonsálvez' WHERE dni = '21456457';
+
+    /* Comprobar que el disparador se ha ejecutado */
+    SELECT * FROM logdisparadores;
+    ```
+
+En estos tres ejemplos el **trigger** se ejecuta después (**`AFTER`**) de la instrucción que lo desencadena. Esto es lógico puesto que sólo tiene que registrar la operación en la tabla de log si no ha habido ningún error.
+
+***Triggers que modifican los valores recibidos y los graba correctamente***
+
+!!!Example Ejemplo 4
+    **Triggers**
+    El siguiente **trigger** intercepta las inserciones en la tabla **clientes** y cambia el valor del nombre proporcionado por el mismo pero en mayúsculas. Para ello, en la BD ***bancaria3***, tenemos que crear un disparador para la tabla **clientes** que tenga en cuenta:
+
+    * **tiempo**: antes (**`BEFORE`**)
+    * **evento**: insertar (**`INSERT`**)
+    * **tabla**: **`clientes`**
+    * **acción**: asegurar que el nombre está completamente mayúsculas
+
+    ```sql
+    /* Eliminar el disparador si ya existe */
+    DROP TRIGGER IF EXISTS clientes_before_insert;
+
+    /* Crear el disparador */
+    DELIMITER //
+    CREATE TRIGGER clientes_before_insert
+    BEFORE INSERT ON clientes
+    FOR EACH ROW 
+    BEGIN
+        /* Cambiar nombre a mayúsculas */
+        SET NEW.nombre = UPPER(NEW.nombre);
+    END//
+    DELIMITER ;
+    
+    /* Forzar a que se ejecute el disparador */
+    INSERT INTO clientes(dni, nombre, saldo) VALUES('21455488', 'Esteban Rodríguez', 350);
+    
+    /* Comprobar que el disparador se ha ejecutado */
+    SELECT * FROM clientes;
+    ```
+
+***Triggers que comprueban que los valores son válidos***
+
+!!!Example Ejemplo 5
+    **Triggers**
+    El siguiente **trigger** intercepta las inserciones en la tabla **clientes** y cambia el nombre del cliente (paso a mayúsculas) sólo si el saldo no es negativo. Para ello, en la BD ***bancaria3***, tenemos que crear un disparador para la tabla **clientes** que tenga en cuenta:
+
+    * **tiempo**: antes (**`BEFORE`**)
+    * **evento**: insertar (**`INSERT`**)
+    * **tabla**: **`clientes`**
+    * **acción**: no permitir valores negativos en el campo saldo
+
+    ```sql
+    /* Eliminar el disparador si ya existe */
+    DROP TRIGGER IF EXISTS clientes_before_insert2;
+    
+    /* Crear el disparador */
+    DELIMITER //
+    CREATE TRIGGER clientes_before_insert2
+    BEFORE INSERT ON clientes
+    FOR EACH ROW 
+    BEGIN
+        /* Comprobar el saldo */
+        IF(NEW.saldo < 0) THEN 
+            SIGNAL SQLSTATE '45000' SET MESSAGE_TEXT = 'El valor del campo SALDO no puede ser negativo'; 
+        END IF;
+    END//
+    DELIMITER ;
+    
+    /* Llamar al disparador */
+    INSERT INTO clientes(dni, nombre, saldo) VALUES('21455466', 'Alejandro Silva', -80);
+    
+    /* Comprobar */
+    SELECT * FROM clientes;
     ```
