@@ -2159,9 +2159,9 @@ En estos tres ejemplos el **trigger** se ejecuta después (**`AFTER`**) de la in
     END//
     DELIMITER ;
     
-    /* Llamar al disparador */
+    /* Forzar a que se ejecute el disparador */
     INSERT INTO clientes(dni, nombre, saldo) VALUES('21455466', 'Alejandro Silva', -80);
     
-    /* Comprobar */
+    /* Comprobar que el disparador se ha ejecutado */
     SELECT * FROM clientes;
     ```
