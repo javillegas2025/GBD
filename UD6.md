@@ -41,6 +41,7 @@ toc:
 5. Parámetros de Entrada-Salida
 6. Funciones definidas por el usuario
 7. Procedimientos y funciones con acceso a datos
+8. Disparadores
 
 ## Introducción
 
@@ -1582,7 +1583,7 @@ Podemos hacer la función anterior con variables de usuario globales en vez de v
     ```
 Podemos observar que la variable se ha creado y es global porque mantiene su valor fuera de la función.
 
-!!! Warning
+!!! Warning Aviso
     Usar variables globales dentro de una función o procedimiento generalmente no se suele utilizar para no dejar valores en memoria y para no interferir en el resultado de diferentes llamadas a la función de forma simultánea.
 
 !!!Example Ejemplo 4
@@ -1613,11 +1614,11 @@ Podemos observar que la variable se ha creado y es global porque mantiene su val
 
 Los procedimientos y funciones suelen acceder a las bases de datos para procesar información. En muchas ocasiones nos permiten generar campos calculados.
 
-Veamos unos ejemplos con la BD de World y algunas funciones predefinidas de control.
+Veamos unos ejemplos con la BD de *World* y algunas funciones predefinidas de control.
 
 !!!Example Ejemplo 1
     **Funciones predefinidas con acceso a datos**
-    Obtener los países con un campo calculado adicional denominado **GNPInteranual** en las que indicaremos *Crecimiento* si ha aumentado el GNP y *Decrecimiento* en otro caso. (code, name, GNP, GNPOld, **GNPInteranual**).
+    Obtener los países con un campo calculado adicional denominado **GNPInteranual** en las que indicaremos *Crecimiento* si ha aumentado el **`GNP`** y *Decrecimiento* en otro caso. (**`code`**, **`name`**, **`GNP`**, **`GNPOld`**, **`GNPInteranual`**).
 
     ```sql
     SELECT code, name, GNP, GNPOld, IF(GNP > GNPOld,'Crecimiento', 'Decrecimiento') AS 'GNPInteranual'
@@ -1627,7 +1628,7 @@ Veamos unos ejemplos con la BD de World y algunas funciones predefinidas de cont
 
 !!!Example Ejemplo 2
     **Funciones predefinidas con acceso a datos**
-    Obtener los países con el nombre del continente al que pertenecen pero traducido (code, name, continente).
+    Obtener los países con el nombre del continente al que pertenecen pero traducido (**`code`**, **`name`**, **`continent`**).
     ```sql
     SELECT code, name,
         (CASE continent
@@ -1652,7 +1653,7 @@ También hay casos en que las funciones nos permiten realizar procesos de selecc
     ```sql
     SELECT code, code2, name 
     FROM country 
-    WHERE LEFT(code,2) = code2;
+    WHERE LEFT(code, 2) = code2;
     ```
 
 ### Acceso a datos desde funciones definidas por el usuario
@@ -1758,7 +1759,7 @@ Para ver un ejemplo crearemos una función para insertar ciudades en la tabla **
     +------------------------------------------------+
     ```
 
-La ejecución del ejemplo anterior inserta correctamente la ciudad de Elche. ¿Pero qué pasaría si indicamos un código de país que no existe?
+La ejecución del ejemplo anterior inserta correctamente la ciudad de *Elche*. ¿Pero qué pasaría si indicamos un código de país que no existe?
 
 ```sql
 /* Llamar a la función */
@@ -1838,7 +1839,7 @@ Vamos a modificar la función **INSERTACIUDAD** para que controle errores de ins
 
 !!!Example Ejemplo 9
     **Control de errores**
-    Realizar una función denominada **INSERTACIUDAD** que reciba como parámetros el (**`Name`**, **`CountryCode`**, **`District`**, **`Population`**) de una ciudad y la inserte como un nuevo registro en la tabla **city** de la BD *World*. El ID no es necesario porque está declarado como **`AUTO_INCREMENT`**. La función devolverá el ID asignado en el **`INSERT`**. En caso de error devolverá el valor -1.
+    Realizar una función denominada **INSERTACIUDAD** que reciba como parámetros el (**`Name`**, **`CountryCode`**, **`District`**, **`Population`**) de una ciudad y la inserte como un nuevo registro en la tabla **city** de la BD ***World***. El ID no es necesario porque está declarado como **`AUTO_INCREMENT`**. La función devolverá el ID asignado en el **`INSERT`**. En caso de error devolverá el valor -1.
 
     ```sql
     /* Eliminar la función si ya existe */
@@ -1868,15 +1869,15 @@ Vamos a modificar la función **INSERTACIUDAD** para que controle errores de ins
     ```
 Si deseamos realizar un **`PROCEDURE`** donde recojamos el error y mensaje que se haya producido, deberemos usar parámetros-variables de tipo **`OUT`**.
 
-En caso de error devolverá idCiudad tendrá el valor -1. En caso de no haber error, errcode valdrá '00000' y errmsg será ''.
-
 !!!Example Ejemplo 10
     **Control de errores**
-    Realizar un procedimiento denominado **PROC_INSERTACIUDAD** que reciba como parámetros el (**`Name`**, **`CountryCode`**, **`District`**, **`Population`**) de una ciudad y la inserte como un nuevo registro en la tabla **city** de la BD *World*. El ID no es necesario porque está declarado como **`AUTO_INCREMENT`**. El procedimiento recibirá tres parámetros más para recoger:
+    Realizar un procedimiento denominado **PROC_INSERTACIUDAD** que reciba como parámetros el (**`Name`**, **`CountryCode`**, **`District`**, **`Population`**) de una ciudad y la inserte como un nuevo registro en la tabla **city** de la BD ***World***. El ID no es necesario porque está declarado como **`AUTO_INCREMENT`**. El procedimiento recibirá tres parámetros más para recoger:
 
-    * *idCiudad* → ID de la ciudad asignado en el INSERT
-    * *errcode* → Código de error
-    * *errmsg* → Mensaje de error
+    * **idCiudad** → ID de la ciudad asignado en el `INSERT`
+    * **errcode** → Código de error
+    * **errmsg** → Mensaje de error
+
+    En caso de error devolverá **idCiudad** tendrá el valor -1. En caso de no haber error, errcode valdrá '00000' y errmsg será ''.
 
     ```sql
     /* Eliminar el procedimiento si ya existe */
