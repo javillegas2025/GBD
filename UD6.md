@@ -2135,7 +2135,7 @@ En estos tres ejemplos el **trigger** se ejecuta después (**`AFTER`**) de la in
 
 !!!Example Ejemplo 5
     **Triggers**
-    El siguiente **trigger** intercepta las inserciones en la tabla **clientes** y cambia el nombre del cliente (paso a mayúsculas) sólo si el saldo no es negativo. Para ello, en la BD ***bancaria3***, tenemos que crear un disparador para la tabla **clientes** que tenga en cuenta:
+    El siguiente **trigger** intercepta las inserciones en la tabla **clientes** y evita que la operación se lleve a cabo si el saldo es negativo. Para ello, en la BD ***bancaria3***, tenemos que crear un disparador para la tabla **clientes** que tenga en cuenta:
 
     * **tiempo**: antes (**`BEFORE`**)
     * **evento**: insertar (**`INSERT`**)
