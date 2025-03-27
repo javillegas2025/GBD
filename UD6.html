@@ -172,18 +172,7 @@
     
       <div class="crossnote markdown-preview  ">
       
-<p>ÍNDICE</p>
-<ol>
-<li>Introducción</li>
-<li>Primeros SCRIPTS</li>
-<li>Procedimientos y estructuras de control</li>
-<li>Funciones predefinidas</li>
-<li>Parámetros de Entrada-Salida</li>
-<li>Funciones definidas por el usuario</li>
-<li>Procedimientos y funciones con acceso a datos</li>
-<li>Disparadores</li>
-</ol>
-<h2 id="introducción">Introducción </h2>
+<h1 id="introducción">Introducción </h1>
 <p>Analizando el mercado actual de Bases de Datos, el uso de los diferentes productos existentes se ha segmentado.</p>
 <table>
 <thead>
@@ -254,8 +243,8 @@ Algunas situaciones en que los procedimientos almacenados pueden ser particularm
 </ul>
 <p>Los procedimientos almacenados pueden mejorar el rendimiento ya que se necesita enviar menos información entre el servidor y el cliente. El inconveniente es que aumenta la carga del servidor de la base de datos ya que la mayoría del trabajo se realiza en la parte del servidor y no en el cliente. Considere esto, si muchas máquinas cliente (como servidores Web) se sirven a sólo uno o pocos servidores de bases de datos.</p>
 <p>Los procedimientos almacenados le permiten tener bibliotecas o funciones en el servidor de base de datos. Esta característica es compartida por los lenguajes de programación modernos que permiten este diseño interno, por ejemplo, usando clases. Usando estas características del lenguaje de programación cliente es beneficioso para el programador incluso fuera del entorno de la base de datos.</p>
-<h2 id="primeros-scripts">Primeros SCRIPTS </h2>
-<h3 id="scripts-en-mysql">SCRIPTS en MySQL </h3>
+<h1 id="primeros-scripts">Primeros SCRIPTS </h1>
+<h2 id="scripts-en-mysql">SCRIPTS en MySQL </h2>
 <p>Comenzaremos por crear nuestro primer script en MySQL con sentencias de <strong>Stored Procedures</strong>.</p>
 <p>Utilizaremos <strong><code>SELECT</code></strong> para mostrar resultados y <strong><code>SET</code></strong> para guardar valores en variables.</p>
 <p>Los scripts de MySQL se puede ejecutar directamente con el programa  <strong><code>mysql.exe</code></strong>.</p>
@@ -288,7 +277,7 @@ Query OK, 0 rows affected (0.00 sec)
 </code></pre></div>
 <p>Los nombres de las variables en los scripts tienen que comenzar con el símbolo <strong>@</strong>.<br>
 Las instrucciones <strong>SET</strong> y <strong>SELECT</strong> pueden ejecutarse también directamente desde el intérprete de comandos.</p>
-<h3 id="comentarios">Comentarios </h3>
+<h2 id="comentarios">Comentarios </h2>
 <p>Los comentarios dentro de los SCRIPTS pueden hacerse de la siguiente manera:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment"># comentario con almohadilla (solo una linea)</span>
 <span class="token comment">-- Comentario con dos guiones (solo una linea)</span>
@@ -298,7 +287,7 @@ Las instrucciones <strong>SET</strong> y <strong>SELECT</strong> pueden ejecutar
   un comentario
   multilinea
 */</span>
-</code></pre><h3 id="variables-definidas-por-el-usuario">Variables definidas por el usuario </h3>
+</code></pre><h2 id="variables-definidas-por-el-usuario">Variables definidas por el usuario </h2>
 <p>Para definir una variable de usuario utilizaremos el carácter <strong>@</strong>. Asignaremos valores con el comando <strong><code>SET</code></strong>:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SET">SET</span> <span class="token variable">@num</span> <span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token variable">@cad</span> <span class="token operator">=</span> <span class="token string">'Hola'</span><span class="token punctuation">;</span>
 <span class="token keyword keyword-SET">SET</span> <span class="token variable">@num</span> :<span class="token operator">=</span> <span class="token number">9</span><span class="token punctuation">,</span> <span class="token variable">@cad</span> :<span class="token operator">=</span> <span class="token string">'Hola'</span><span class="token punctuation">;</span>
@@ -319,7 +308,7 @@ Crear un script que asigne a la variable <strong>numreg</strong> la cantidad de 
 </code></pre></div>
 <p>Para consultar todas las variables creadas por el usuario, podemos consultar la tabla <strong>performance_schema.user_variables_by_thread</strong> a partir de la versión 5.7 de MySQL:</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> performance_schema<span class="token punctuation">.</span>user_variables_by_thread<span class="token punctuation">;</span>
-</code></pre><h3 id="variables-del-sistema">Variables del sistema </h3>
+</code></pre><h2 id="variables-del-sistema">Variables del sistema </h2>
 <p>MySQL tiene muchas variables de sistema que pueden consultarse en <a href="https://dev.mysql.com/doc/refman/8.0/en/server-system-variable-reference.html">https://dev.mysql.com/doc/refman/8.0/en/server-system-variable-reference.html</a> y que podemos consultar con la instrucción <strong><code>SHOW VARIABLES LIKE</code></strong>.</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-SHOW">SHOW</span> VARIABLES <span class="token operator">LIKE</span> <span class="token string">'%'</span><span class="token punctuation">;</span>
 </code></pre><p>Las variables de sistema pueden ser de tipo:</p>
@@ -362,7 +351,7 @@ Crea un <strong>script</strong> que conecte con la base de datos <strong>world</
 C:\Program Files\MySQL\MySQL Server 8.0\bin\mysql&gt; mysql -u root -p
 mysql&gt; source C:/GBD-UD6/b06ejer02.sql;
 </code></pre></div>
-<h4 id="ejecutar-scripts">Ejecutar scripts </h4>
+<h3 id="ejecutar-scripts">Ejecutar scripts </h3>
 <p>La mayoría de scripts los generamos en UTF8 por lo que deberemos cambiar el conjunto de caracteres de la ventana de comandos del CMD.</p>
 <pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>// Cambiar a juego de caracteres en UTF8
 C:\&gt; chcp 65001
@@ -399,8 +388,8 @@ mysql<span class="token operator">&gt;</span> <span class="token keyword keyword
 <p>Ejemplo de forma de conexión.</p>
 <pre data-role="codeBlock" data-info="cmd" class="language-cmd cmd"><code>//Conectarse como root en modo silencioso
 C:\&gt; mysql -u root -p --silent --table
-</code></pre><h2 id="procedimientos-y-estructuras-de-control">Procedimientos y estructuras de control </h2>
-<h3 id="sintaxis-y-estructura">Sintaxis y Estructura </h3>
+</code></pre><h1 id="procedimientos-y-estructuras-de-control">Procedimientos y estructuras de control </h1>
+<h2 id="sintaxis-y-estructura">Sintaxis y Estructura </h2>
 <p>Para poder almacenar un conjunto de instrucciones en la propia base de datos podemos utilizar los procedimientos.</p>
 <p>La sintaxis más sencilla es la siguiente:</p>
 <div class="caso_estudio" style="font-weight:bold">
@@ -433,7 +422,7 @@ Ejecutar el procedimiento <strong>diayhora</strong> creado en el ejemplo anterio
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-CALL">CALL</span> diayhora<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre></div>
 <p>Los procedimientos se asignan a una base de datos. Esto quiere decir que debemos indicar el <strong>SCHEMA</strong> o BASE DE DATOS al crear o eliminar el procedimiento. Podemos usar previamente la selección de base de datos por defecto con el comando <strong><code>USE</code></strong> como en el ejemplo anterior o bien indicarla al crear el procedimiento como se hace en los <strong><code>SELECT</code></strong> de las tablas. Por ejemplo para crear el procedimiento en la base de datos world, independientemente de cual tengamos seleccionada, la cabecera del procedimiento sería: <strong><code>CREATE PROCEDURE world.diayhora()</code></strong>.</p>
-<h4 id="delimiter">DELIMITER </h4>
+<h3 id="delimiter">DELIMITER </h3>
 <p>En la declaración del procedimiento hemos usado delimiter pero, ¿por qué es importante el uso del <strong><code>DELIMITER</code></strong>?.</p>
 <p>Ya sabemos que por defecto MySQL usa como delimitador de fin de instrucción el punto y coma (;) , es decir, cada vez que encuentre punto y como(;) ejecuta hasta ahí. Como en los procedimientos hay varias líneas de códigos y algunas de ellas terminan con este delimitador se ejecutaría solo hasta ahí, lo que ocasionaría un error, y es por esto que es necesario indicarle a MySQL que utilice otro dlimitador que puede ser cualquiera. Ese es el próposito de la cláusula <strong><code>DELIMITER</code></strong>.</p>
 <p>Para nuestro ejemplo usamos <strong>//</strong> pero se podría usar también <strong>$$</strong> o lo que queramos. Al finalizar la creación del procedimiento o función volvemos a cambiarlo por <strong>;</strong></p>
@@ -443,11 +432,11 @@ Ejecutar el procedimiento <strong>diayhora</strong> creado en el ejemplo anterio
     $$
 <span class="token keyword keyword-DELIMITER">DELIMITER</span> <span class="token punctuation">;</span>
 </code></pre></div> <!-- fin caso de estudio -->
-<h4 id="bloques-de-código">Bloques de código </h4>
+<h3 id="bloques-de-código">Bloques de código </h3>
 <p>Para poder agrupar varias instrucciones en bloques utilizaremos: <strong><code>BEGIN ... END</code></strong>.<br>
 En los procedimientos es necesario porque define el espacio de instrucciones que se almacenan.</p>
 <p>Estos bloques de código se usarán más adelante también en estructuras de control como: <strong><code>IF .. THEN .. END IF</code></strong></p>
-<h4 id="redefinir-y-eliminar">Redefinir y Eliminar </h4>
+<h3 id="redefinir-y-eliminar">Redefinir y Eliminar </h3>
 <p>Para eliminar un procedimiento utilizaremos la instrucción <strong><code>DROP PROCEDURE</code></strong>.</p>
 <div class="caso_estudio" style="font-weight:bold">
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> nombreProcedimiento<span class="token punctuation">;</span>
@@ -456,13 +445,13 @@ En los procedimientos es necesario porque define el espacio de instrucciones que
 <div class="caso_estudio" style="font-weight:bold">
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DROP">DROP</span> <span class="token keyword keyword-PROCEDURE">PROCEDURE</span> <span class="token keyword keyword-IF">IF</span> <span class="token keyword keyword-EXISTS">EXISTS</span> nombreProcedimiento<span class="token punctuation">;</span>
 </code></pre></div> <!-- fin caso de estudio -->
-<h3 id="variables-locales-del-procedimiento">Variables locales del procedimiento </h3>
+<h2 id="variables-locales-del-procedimiento">Variables locales del procedimiento </h2>
 <p>Cuando necesitamos variables que usaremos dentro del procedimiento debemos usar la instrucción <strong><code>DECLARE</code></strong> como si lo hiciéramos en la instrucción <strong><code>CREATE TABLE</code></strong>. Las variables sólo serán visibles y accesibles dentro del procedimiento.<br>
 Estas variables no comienzan con el caracter especial @, al contrario de lo que sucede en los scripts.</p>
 <div class="caso_estudio" style="font-weight:bold">
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token keyword keyword-DECLARE">DECLARE</span> nombreVariable tipoVariable <span class="token punctuation">[</span>opciones<span class="token punctuation">]</span><span class="token punctuation">;</span>
 </code></pre></div> <!-- fin caso de estudio -->
-<h4 id="estructuras-de-control">Estructuras de control </h4>
+<h3 id="estructuras-de-control">Estructuras de control </h3>
 <p>Las instrucciones de un procedimiento (o función) se ejecutan secuencialmente empezando por la instrucción que está justo después de la palabra reservada <strong><code>BEGIN</code></strong> y acabando por la que está justo antes de la palabra reservada <strong><code>END</code></strong>. Esta forma de ejcución de instrucciones se llama <strong>secuencial</strong>. El siguiente diagrama representa un bloque de 3 instrucciones que se ejecutan secuencialmente. El punto negro inicial representa el <strong><code>BEGIN</code></strong> y el punto con el aspa el <strong><code>END</code></strong>.</p>
 <p align="center" style="zoom:1" class="puml"><svg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" contentstyletype="text/css" data-diagram-type="ACTIVITY" height="250px" preserveAspectRatio="none" style="width:115px;height:250px;background:#FFFFFF;" version="1.1" viewBox="0 0 115 250" width="115px" zoomAndPan="magnify"><defs></defs><g><ellipse cx="57.6063" cy="20" fill="#222222" rx="10" ry="10" style="stroke:#222222;stroke-width:1;"></ellipse><rect fill="#F1F1F1" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="93.2125" x="11" y="50"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73.2125" x="21" y="72.8281">Instrucción 1</text><rect fill="#F1F1F1" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="93.2125" x="11" y="106.3441"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73.2125" x="21" y="129.1722">Instrucción 2</text><rect fill="#F1F1F1" height="36.3441" rx="12.5" ry="12.5" style="stroke:#181818;stroke-width:0.5;" width="93.2125" x="11" y="162.6882"></rect><text fill="#000000" font-family="sans-serif" font-size="12" lengthAdjust="spacing" textLength="73.2125" x="21" y="185.5163">Instrucción 3</text><ellipse cx="57.6063" cy="229.0323" fill="none" rx="10" ry="10" style="stroke:#222222;stroke-width:1.5;"></ellipse><line style="stroke:#222222;stroke-width:2.5;" x1="51.4191" x2="63.7934" y1="222.8452" y2="235.2195"></line><line style="stroke:#222222;stroke-width:2.5;" x1="63.7934" x2="51.4191" y1="222.8452" y2="235.2195"></line><line style="stroke:#181818;stroke-width:1;" x1="57.6063" x2="57.6063" y1="30" y2="50"></line><polygon fill="#181818" points="53.6063,40,57.6063,50,61.6063,40,57.6063,44" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="57.6063" x2="57.6063" y1="86.3441" y2="106.3441"></line><polygon fill="#181818" points="53.6063,96.3441,57.6063,106.3441,61.6063,96.3441,57.6063,100.3441" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="57.6063" x2="57.6063" y1="142.6882" y2="162.6882"></line><polygon fill="#181818" points="53.6063,152.6882,57.6063,162.6882,61.6063,152.6882,57.6063,156.6882" style="stroke:#181818;stroke-width:1;"></polygon><line style="stroke:#181818;stroke-width:1;" x1="57.6063" x2="57.6063" y1="199.0323" y2="219.0323"></line><polygon fill="#181818" points="53.6063,209.0323,57.6063,219.0323,61.6063,209.0323,57.6063,213.0323" style="stroke:#181818;stroke-width:1;"></polygon><!--SRC=[Kr1GA2v9B2hXKb1GiFBCAoufAarEpZoyEK_1q1fJp0YBc35OB3Kl1G00]--></g></svg></p><p>Las estructuras de control permiten modificar el flujo de ejecución de las instrucciones de un programa.</p>
 <p>No obstante, hay algunas directiva que nos permiten cambiar el orden secuencial de ejecución de instrucciones. A estas directivas comunmente se les llama estructuras de control. Las estructuras de control se pueden englobar en dos categorías:</p>
@@ -470,7 +459,7 @@ Estas variables no comienzan con el caracter especial @, al contrario de lo que 
 <li><strong>Estructuras de control condicionales</strong>: en función de una condición se ejecutan un bloque de instrucciones u otro (o ninguno).</li>
 <li><strong>Estructuras de control de repetición</strong>: permiten que un bloque de instrucciones se ejecuta un cierto o número de veces o mientras se cumpla una condición.</li>
 </ul>
-<h4 id="estructuras-de-control-condicionales">Estructuras de control condicionales </h4>
+<h3 id="estructuras-de-control-condicionales">Estructuras de control condicionales </h3>
 <p><strong>Sentencia IF</strong><br>
 Es la más sencilla de todas. Nos permite ejecutar unas instrucciones u otras según una condición. Hay 3 variantes:</p>
 <p><em><strong>Variante 1</strong></em><br>
@@ -587,6 +576,7 @@ Este ejemplo es igual que el ejemplo anterior pero resuelto utilizando la estruc
 <span class="token comment">/* Llamar al procedimiento */</span>
 <span class="token keyword keyword-CALL">CALL</span> colorescase<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre></div>
+<h3 id="estructuras-de-control-de-repetición">Estructuras de control de repetición </h3>
 <p><em><strong>Sentencia WHILE</strong></em><br>
 Otra estructura de control es la de bucles, que consisten en realizar de forma repetida un conjunto de instrucciones. Tenemos varias estructuras para hacer bucles como <strong><code>REPEAT</code></strong> o <strong><code>LOOP</code></strong>, pero nosotros usaremos <strong><code>WHILE</code></strong>.</p>
 <div class="caso_estudio" style="font-weight:bold">
@@ -621,7 +611,7 @@ En el siguiente ejemplo mostramos la suma de los 10 primeros números enteros.</
 <span class="token comment">/* Llamar al procedimiento */</span>
 <span class="token keyword keyword-CALL">CALL</span> sumadieznumeros<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre></div>
-<h3 id="parámetros">Parámetros </h3>
+<h2 id="parámetros">Parámetros </h2>
 <p>En muchas ocasiones los procedimientos necesitan recibir valores como parámetros. En MySQL podemos definir estas variables y usarlas dentro del procedimiento. En ejemplo siguiente, si queremos comparar dos cadenas y saber cuál tiene más caracteres, deberemos indicarle al procedimiento qué cadenas comparar.</p>
 <div class="admonition example">
 <p class="admonition-title">Ejemplo 6</p>
@@ -648,7 +638,7 @@ Este es un procedimiento al que se le pasan dos cadenas de caracteres como pará
 <span class="token comment">/* Llamar al procedimiento */</span>
 <span class="token keyword keyword-CALL">CALL</span> comparacadenas<span class="token punctuation">(</span><span class="token string">'Mi primera cadena'</span><span class="token punctuation">,</span><span class="token string">'Esta debe ser más larga'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre></div>
-<h2 id="funciones-predefinidas">Funciones predefinidas </h2>
+<h1 id="funciones-predefinidas">Funciones predefinidas </h1>
 <p>Una función es un conjunto de líneas de código que realizan una tarea específica, al  igual  que un procedimiento, pero además puede retornar un valor.<br>
 En MySQL existen multitud de funciones predefinidas. Se pueden consultar en la documentación oficial y en otras reconocidas:</p>
 <div class="admonition note">
@@ -663,7 +653,7 @@ En MySQL existen multitud de funciones predefinidas. Se pueden consultar en la d
 <p>Los procedimiento y las funciones son utilizadas para descomponer grandes problemas en tareas simples y para implementar operaciones que son comúnmente utilizadas durante un programa y de esta manera reducir la cantidad de código.</p>
 <p>Cuando una función es invocada/llamada, se le pasa el control a la misma, y una vez  que esta finaliza devuelve el control al punto desde el cual fue llamada.</p>
 <p>Las funciones pueden tomar parámetros que modifiquen su funcionamiento.</p>
-<h3 id="funciones-matemáticas">Funciones matemáticas </h3>
+<h2 id="funciones-matemáticas">Funciones matemáticas </h2>
 <p>Las que más vamos a usar son: <strong>ABS, FLOOR, MOD, POW, SQRT, RAND, ROUND</strong> y <strong>SIGN</strong>.</p>
 <p>La siguiente tabla describe la sintaxis y qué hace cada función.</p>
 <table>
@@ -984,7 +974,7 @@ SELECT STRCMP('Mi cadena','Mi cadena') AS COMPARACION;<br>
 |<br>
 0 |<br>
 +-------------+</p>
-<pre data-role="codeBlock" data-info="" class="language-text"><code>### Funciones de fechas {#funciones-de-fechas }
+<pre data-role="codeBlock" data-info="" class="language-text"><code>## Funciones de fechas {#funciones-de-fechas }
 Las que más vamos a usar son: CURDATE, CURTIME, NOW, ADDDATE, ADDTIME, DATEDIFF, TIMEDIFF, DAY, MONTH, YEAR, HOUR, MINUTE, SECOND, DAYNAME, DAYOFWEEK, MAKETIME, SEC_TO_TIME, TIME_TO_SEC, FROM_DAYS, TO_DAYS, STR_TO_DATE, DATE_FORMAT
 
 Ejemplos de funciones predefinidas
@@ -1063,10 +1053,10 @@ SELECT DATE_FORMAT('2018-03-15','%Y');
 <p><a href="http://mysql.conclase.net/curso/?cap=011a#FUN_FECHA">MySQL Oficial – Funciones matemáticas</a><br>
 <a href="https://www.w3schools.com/sql/sql_ref_mysql.asp">MySQL Oficial – Funciones en MySQL – Web W3SCHOOLS Interactiva</a></p>
 </div>
-<h3 id="funciones-avanzadas">Funciones avanzadas </h3>
+<h2 id="funciones-avanzadas">Funciones avanzadas </h2>
 <p>Las que más vamos a usar son: VERSION, DATABASE, CURRENT_USER, CONVERT, ISNULL, IFNULL, IF, CASE</p>
-<p><strong>Funciones avanzadas para mostrar INFORMACIÓN</strong><br>
-Ejemplos de funciones predefinidas avanzadas</p>
+<h3 id="funciones-avanzadas-para-mostrar-información">Funciones avanzadas para mostrar INFORMACIÓN </h3>
+<p>Ejemplos de funciones predefinidas avanzadas</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Mostrar la versión de MySQL */</span>
 <span class="token keyword keyword-SELECT">SELECT</span> VERSION<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token operator">+</span><span class="token comment">-----------------+</span>
@@ -1091,8 +1081,8 @@ Ejemplos de funciones predefinidas avanzadas</p>
 <span class="token operator">+</span><span class="token comment">----------------+</span>
 <span class="token operator">|</span> root<span class="token variable">@localhost</span> <span class="token operator">|</span>
 <span class="token operator">+</span><span class="token comment">----------------+</span>
-</code></pre><p><strong>Funciones avanzadas para CONVERSIÓN DE VALORES</strong><br>
-Ejemplos de funciones predefinidas avanzadas</p>
+</code></pre><h3 id="funciones-avanzadas-para-conversión-de-valores">Funciones avanzadas para CONVERSIÓN DE VALORES </h3>
+<p>Ejemplos de funciones predefinidas avanzadas</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Convertir cadenas a números */</span>
 <span class="token keyword keyword-SELECT">SELECT</span> <span class="token keyword keyword-CONVERT">CONVERT</span><span class="token punctuation">(</span><span class="token string">'45.7'</span><span class="token punctuation">,</span> <span class="token keyword keyword-DECIMAL">DECIMAL</span><span class="token punctuation">(</span><span class="token number">10</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 <span class="token operator">+</span><span class="token comment">--------------------------------+</span>
@@ -1149,8 +1139,8 @@ Ejemplos de funciones predefinidas avanzadas</p>
 <span class="token operator">+</span><span class="token comment">-------------+</span>
 <span class="token operator">|</span> <span class="token number">5.000000000</span> <span class="token operator">|</span>
 <span class="token operator">+</span><span class="token comment">-------------+</span>
-</code></pre><p><strong>Funciones avanzadas para PROGRAMACIÓN</strong><br>
-Ejemplos de funciones predefinidas avanzadas</p>
+</code></pre><h3 id="funciones-avanzadas-para-programación">Funciones avanzadas para PROGRAMACIÓN </h3>
+<p>Ejemplos de funciones predefinidas avanzadas</p>
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Mostrar valores teniendo en cuenta una condición */</span>
 <span class="token keyword keyword-SET">SET</span> <span class="token variable">@num1</span> <span class="token operator">=</span> <span class="token number">25</span><span class="token punctuation">;</span>
 <span class="token keyword keyword-SET">SET</span> <span class="token variable">@num2</span> <span class="token operator">=</span> <span class="token number">30</span><span class="token punctuation">;</span>
@@ -1200,8 +1190,8 @@ Ejemplos de funciones predefinidas avanzadas</p>
 <div class="ejercicio">
 <h3 id="white_check_mark-ejercicio">✅ Ejercicio </h3>
 </div> <!-- fin ejercicio -->
-<h2 id="parámetros-de-entrada-salida">Parámetros de Entrada-Salida </h2>
-<h3 id="parámetros-de-funciones-y-procedimientos">Parámetros de funciones y procedimientos </h3>
+<h1 id="parámetros-de-entrada-salida">Parámetros de Entrada-Salida </h1>
+<h2 id="parámetros-de-funciones-y-procedimientos">Parámetros de funciones y procedimientos </h2>
 <p>Los parámetros son valores o variables que se pueden pasar a los procedimientos o funciones para que los utilicen en su proceso.</p>
 <div class="caso_estudio">
 <p>Denominaremos <strong>parámetro-valor</strong>  a la constante que pasamos a un procedimiento o función, es decir, un número, una cadena, una fecha, etc.</p>
@@ -1223,7 +1213,7 @@ mysql&gt; SELECT ROUND(@num, 0);
 +----------------+
 | 35             |
 +----------------+
-</code></pre><h3 id="tipos-de-parámetros">Tipos de parámetros </h3>
+</code></pre><h2 id="tipos-de-parámetros">Tipos de parámetros </h2>
 <p>Como hemos visto en el último ejemplo de comparación de cadenas del apartado 3, los procedimientos pueden recibir parámetros y ser utilizados en su propio código como variables internas.</p>
 <p>Los parámetros pueden ser de varios tipos:</p>
 <table>
@@ -1401,7 +1391,7 @@ Además como el tipo de parámetro es OUT el valor asignado dentro del procedimi
 </code></pre><p>La ejecución del código muestra que <strong>@num</strong> vale 10 después de la llamada al procedimiento.<br>
 Por lo tanto la modificación de la variable <strong>@num</strong> que se ha producido dentro del procedimiento ha persistido cuando este ha acabado.</p>
 </div>
-<h2 id="funciones-definidas-por-el-usuario">Funciones definidas por el usuario </h2>
+<h1 id="funciones-definidas-por-el-usuario">Funciones definidas por el usuario </h1>
 <div class="caso_estudio">
 <p>Las <strong>funciones</strong> se diferencian de los procedimientos en que nos permiten devolver un valor. Todos los parámetros de una función son de entrada y no es necesario indicar IN a los parámetros.</p>
 <p>Las <strong>funciones definidas por el usuario</strong> (User Defined Functions – UDF) funcionan como las predefinidas de MySQL pero las creamos con almacenamiento de programas (Stored Programs).</p>
@@ -1510,8 +1500,8 @@ Función que no recibe ningún parámetro y devuelve el día siguiente al actual
 <span class="token comment">/* Llamar a la función */</span>
 <span class="token keyword keyword-SELECT">SELECT</span> tomorrow<span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
 </code></pre></div>
-<h2 id="procedimientos-y-funciones-con-acceso-a-datos">Procedimientos y funciones con acceso a datos </h2>
-<h3 id="acceso-a-datos">Acceso a datos </h3>
+<h1 id="procedimientos-y-funciones-con-acceso-a-datos">Procedimientos y funciones con acceso a datos </h1>
+<h2 id="acceso-a-datos">Acceso a datos </h2>
 <p>Los procedimientos y funciones suelen acceder a las bases de datos para procesar información. En muchas ocasiones nos permiten generar campos calculados.</p>
 <p>Veamos unos ejemplos con la BD de <em>World</em> y algunas funciones predefinidas de control.</p>
 <div class="admonition example">
@@ -1549,7 +1539,7 @@ Obtener los países en los que coincide que el campo <strong><code>code2</code><
 <span class="token keyword keyword-FROM">FROM</span> country 
 <span class="token keyword keyword-WHERE">WHERE</span> <span class="token keyword keyword-LEFT">LEFT</span><span class="token punctuation">(</span>code<span class="token punctuation">,</span> <span class="token number">2</span><span class="token punctuation">)</span> <span class="token operator">=</span> code2<span class="token punctuation">;</span>
 </code></pre></div>
-<h3 id="acceso-a-datos-desde-funciones-definidas-por-el-usuario">Acceso a datos desde funciones definidas por el usuario </h3>
+<h2 id="acceso-a-datos-desde-funciones-definidas-por-el-usuario">Acceso a datos desde funciones definidas por el usuario </h2>
 <p>Nuestro objetivo principal será desarrollar funciones que procesen datos contenidos en los campos de las tablas y devuelvan valores.</p>
 <p>Veamos algunos ejemplos también con la BD <em>World</em>.</p>
 <div class="admonition example">
@@ -1611,7 +1601,7 @@ Realizar una función denominada <strong>NOMBRECIUDAD</strong> que reciba como p
 <span class="token comment">/* Llamar a la función: retorna el código y el nombre de la capital de cada país */</span>
 <span class="token keyword keyword-SELECT">SELECT</span> code<span class="token punctuation">,</span> name<span class="token punctuation">,</span> NOMBRECIUDAD<span class="token punctuation">(</span>capital<span class="token punctuation">)</span> <span class="token keyword keyword-AS">AS</span> NombreCapital <span class="token keyword keyword-FROM">FROM</span> country<span class="token punctuation">;</span>
 </code></pre></div>
-<h3 id="control-de-errores">Control de errores </h3>
+<h2 id="control-de-errores">Control de errores </h2>
 <p>En muchos casos las funciones que definimos generan errores, como el que se produce al insertar un registro por incumplir restricciones.</p>
 <p>Para ver un ejemplo crearemos una función para insertar ciudades en la tabla <strong>city</strong> de la BD <em>World</em>.</p>
 <div class="admonition example">
@@ -1665,8 +1655,8 @@ Con un manejador de errores hacemos que en caso de error el programa no aborte s
 <p><a href="https://dev.mysql.com/doc/refman/5.7/en/declare-handlerhtml">MySQL Oficial – Control de Errores en MySQL – Web Oficial en inglés</a><br>
 <a href="https:/dev.mysql.com/doc/refman/5.5/en/error-messages-server.html">MySQL Oficial – Errores en MySQL – Web Oficial en inglés</a></p>
 </div>
-<p><em><strong>Comprobar los errores</strong></em><br>
-Cuando se produce un error en una instrucción SQL, obtendremos un error o warning que se almacenará en la BD de control de errores. Este error podemos consultarlo con la instrucción <strong><code>SHOW WARNINGS</code></strong>.</p>
+<h3 id="comprobar-los-errores">Comprobar los errores </h3>
+<p>Cuando se produce un error en una instrucción SQL, obtendremos un error o warning que se almacenará en la BD de control de errores. Este error podemos consultarlo con la instrucción <strong><code>SHOW WARNINGS</code></strong>.</p>
 <div class="admonition example">
 <p class="admonition-title">Ejemplo 7</p>
 <p><strong>Control de errores</strong><br>
@@ -1774,7 +1764,7 @@ Realizar un procedimiento denominado <strong>PROC_INSERTACIUDAD</strong> que rec
 <span class="token keyword keyword-SELECT">SELECT</span> <span class="token variable">@vID</span><span class="token punctuation">,</span> <span class="token variable">@vError</span><span class="token punctuation">,</span> <span class="token variable">@vErrMsg</span><span class="token punctuation">;</span>
 </code></pre></div>
 <p>Realizar el proyecto <strong>bancaria 1 (repaso de UD3 y UD5) y bancaria 2 (con procedimientos)</strong>.</p>
-<h2 id="disparadores">Disparadores </h2>
+<h1 id="disparadores">Disparadores </h1>
 <div class="caso_estudio">
 <p>Los <strong>disparadores</strong> o <strong>triggers</strong> son procedimientos especiales que se ejecutan cuando se produce un evento o acción sobre una tabla de la BD.</p>
 <p>Los disparadores o triggers no devuelven valores como una función, ni muestran resultados con <strong><code>SELECT</code></strong>.</p>
@@ -2003,7 +1993,7 @@ BEFORE <span class="token keyword keyword-INSERT">INSERT</span> <span class="tok
 <span class="token comment">/* Comprobar que el disparador se ha ejecutado */</span>
 <span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> clientes<span class="token punctuation">;</span>
 </code></pre></div>
-<p><em><strong>Para crear los valores de campos calculados</strong></em><br>
+<p><em><strong>Triggers para crear los valores de campos calculados</strong></em><br>
 A continuación vamos a ver un caso un poco más complicado. Vamos a ver como se actualiza el saldo de los clientes del banco cuando se revierten las operaciones que ingresan o detraen dineros de sus cuentas.</p>
 <div class="caso_estudio">
 <p>🎓 <strong>Caso de estudio</strong></p>
@@ -2052,7 +2042,7 @@ Cuando se elimina un movimiento lo único que hay que hacer es actualizar el sal
 <span class="token comment">/* Forzar a que se ejecute el disparador */</span>
 <span class="token keyword keyword-DELETE">DELETE</span> <span class="token keyword keyword-FROM">FROM</span> movimientos <span class="token keyword keyword-WHERE">WHERE</span> id_mov <span class="token operator">=</span> <span class="token variable">@id_reg</span><span class="token punctuation">;</span>
 
-    <span class="token comment">/* Comprobar que el disparador se ha ejecutado */</span>
+<span class="token comment">/* Comprobar que el disparador se ha ejecutado */</span>
 <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'DESPUÉS'</span> <span class="token keyword keyword-AS">AS</span> RESULTADO<span class="token punctuation">,</span> clientes<span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> clientes <span class="token keyword keyword-WHERE">WHERE</span> dni <span class="token operator">=</span> <span class="token string">'21455800'</span><span class="token punctuation">;</span> 
 <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'DESPUÉS'</span> <span class="token keyword keyword-AS">AS</span> RESULTADO<span class="token punctuation">,</span> movimientos<span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> movimientos <span class="token keyword keyword-WHERE">WHERE</span> dni <span class="token operator">=</span> <span class="token string">'21455800'</span><span class="token punctuation">;</span>
 </code></pre><p><strong>Modificar un ingreso o un cargo</strong><br>
@@ -2099,7 +2089,7 @@ Cuando se modifica un movimiento el saldo del cliente se actualiza sumándole la
 <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'DESPUÉS'</span> <span class="token keyword keyword-AS">AS</span> RESULTADO<span class="token punctuation">,</span> clientes<span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> clientes <span class="token keyword keyword-WHERE">WHERE</span> dni <span class="token operator">=</span> <span class="token string">'21455200'</span><span class="token punctuation">;</span> 
 <span class="token keyword keyword-SELECT">SELECT</span> <span class="token string">'DESPUÉS'</span> <span class="token keyword keyword-AS">AS</span> RESULTADO<span class="token punctuation">,</span> movimientos<span class="token punctuation">.</span><span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> movimientos <span class="token keyword keyword-WHERE">WHERE</span> dni <span class="token operator">=</span> <span class="token string">'21455200'</span><span class="token punctuation">;</span>
 </code></pre></div> <!-- fin caso de estudio -->
-<h2 id="tablas-temporales">Tablas temporales </h2>
+<h1 id="tablas-temporales">Tablas temporales </h1>
 <p>En MySQL podemos crear tablas temporales donde guardar los registros procesados.<br>
 La sintaxis para crear una tabla temporal es la misma que para crear una tabla permanente, pero añadiendo <strong><code>TEMPORARY</code></strong>.</p>
 <div class="caso_estudio">
@@ -2139,7 +2129,7 @@ Desde <em>Workbench</em>, en la BD <em><strong>World</strong></em>, crear una ta
 <pre data-role="codeBlock" data-info="sql" class="language-sql sql"><code><span class="token comment">/* Mostrar la tabla temporal creada */</span>
 <span class="token keyword keyword-SELECT">SELECT</span> <span class="token operator">*</span> <span class="token keyword keyword-FROM">FROM</span> continentes<span class="token punctuation">;</span>
 </code></pre></div>
-<h2 id="cursores">Cursores </h2>
+<h1 id="cursores">Cursores </h1>
 <div class="caso_estudio">
 <p>Un <strong>cursor</strong> es una estructura de control utilizada para el recorrido (y potencial procesamiento) de los registros del resultado de una consulta.</p>
 </div> <!-- fin caso de estudio -->

@@ -32,18 +32,7 @@ toc:
     ordered: false
 ---
 
-ÍNDICE
-
-1. Introducción
-2. Primeros SCRIPTS
-3. Procedimientos y estructuras de control
-4. Funciones predefinidas
-5. Parámetros de Entrada-Salida
-6. Funciones definidas por el usuario
-7. Procedimientos y funciones con acceso a datos
-8. Disparadores
-
-## Introducción
+# Introducción
 
 Analizando el mercado actual de Bases de Datos, el uso de los diferentes productos existentes se ha segmentado.
 
@@ -111,9 +100,9 @@ Los procedimientos almacenados pueden mejorar el rendimiento ya que se necesita 
 
 Los procedimientos almacenados le permiten tener bibliotecas o funciones en el servidor de base de datos. Esta característica es compartida por los lenguajes de programación modernos que permiten este diseño interno, por ejemplo, usando clases. Usando estas características del lenguaje de programación cliente es beneficioso para el programador incluso fuera del entorno de la base de datos.
 
-## Primeros SCRIPTS
+# Primeros SCRIPTS
 
-### SCRIPTS en MySQL
+## SCRIPTS en MySQL
 
 Comenzaremos por crear nuestro primer script en MySQL con sentencias de **Stored Procedures**.
 
@@ -160,7 +149,7 @@ Para conectarnos como root hacemos:
 Los nombres de las variables en los scripts tienen que comenzar con el símbolo **@**.
 Las instrucciones **SET** y **SELECT** pueden ejecutarse también directamente desde el intérprete de comandos.
 
-### Comentarios
+## Comentarios
 
 Los comentarios dentro de los SCRIPTS pueden hacerse de la siguiente manera:
 
@@ -175,7 +164,7 @@ Los comentarios dentro de los SCRIPTS pueden hacerse de la siguiente manera:
 */
 ```
 
-### Variables definidas por el usuario
+## Variables definidas por el usuario
 
 Para definir una variable de usuario utilizaremos el carácter **@**. Asignaremos valores con el comando **`SET`**:
 
@@ -215,7 +204,7 @@ Para consultar todas las variables creadas por el usuario, podemos consultar la 
 SELECT * FROM performance_schema.user_variables_by_thread;
 ```
 
-### Variables del sistema
+## Variables del sistema
 
 MySQL tiene muchas variables de sistema que pueden consultarse en <https://dev.mysql.com/doc/refman/8.0/en/server-system-variable-reference.html> y que podemos consultar con la instrucción **`SHOW VARIABLES LIKE`**.
 
@@ -284,7 +273,7 @@ ERROR 1064 (42000): Algo está equivocado en su sintax cerca
     mysql> source C:/GBD-UD6/b06ejer02.sql;
     ```
     
-#### Ejecutar scripts
+### Ejecutar scripts
 
 La mayoría de scripts los generamos en UTF8 por lo que deberemos cambiar el conjunto de caracteres de la ventana de comandos del CMD.
 
@@ -319,9 +308,9 @@ Ejemplo de forma de conexión.
 C:\> mysql -u root -p --silent --table
 ```
 
-## Procedimientos y estructuras de control
+# Procedimientos y estructuras de control
 
-### Sintaxis y Estructura
+## Sintaxis y Estructura
 
 Para poder almacenar un conjunto de instrucciones en la propia base de datos podemos utilizar los procedimientos.
 
@@ -370,7 +359,7 @@ Para llamar al procedimiento se utiliza el comando **`CALL`**.
 
 Los procedimientos se asignan a una base de datos. Esto quiere decir que debemos indicar el **SCHEMA** o BASE DE DATOS al crear o eliminar el procedimiento. Podemos usar previamente la selección de base de datos por defecto con el comando **`USE`** como en el ejemplo anterior o bien indicarla al crear el procedimiento como se hace en los **`SELECT`** de las tablas. Por ejemplo para crear el procedimiento en la base de datos world, independientemente de cual tengamos seleccionada, la cabecera del procedimiento sería: **`CREATE PROCEDURE world.diayhora()`**.
 
-#### DELIMITER
+### DELIMITER
 
 En la declaración del procedimiento hemos usado delimiter pero, ¿por qué es importante el uso del **`DELIMITER`**?.
 
@@ -388,14 +377,14 @@ DELIMITER ;
 ```
 </div> <!-- fin caso de estudio -->
 
-#### Bloques de código
+### Bloques de código
 
 Para poder agrupar varias instrucciones en bloques utilizaremos: **`BEGIN ... END`**.
 En los procedimientos es necesario porque define el espacio de instrucciones que se almacenan.
 
 Estos bloques de código se usarán más adelante también en estructuras de control como: **`IF .. THEN .. END IF`**
 
-#### Redefinir y Eliminar
+### Redefinir y Eliminar
 
 Para eliminar un procedimiento utilizaremos la instrucción **`DROP PROCEDURE`**.
 
@@ -417,7 +406,7 @@ DROP PROCEDURE IF EXISTS nombreProcedimiento;
 
 </div> <!-- fin caso de estudio -->
 
-### Variables locales del procedimiento
+## Variables locales del procedimiento
 
 Cuando necesitamos variables que usaremos dentro del procedimiento debemos usar la instrucción **`DECLARE`** como si lo hiciéramos en la instrucción **`CREATE TABLE`**. Las variables sólo serán visibles y accesibles dentro del procedimiento.
 Estas variables no comienzan con el caracter especial @, al contrario de lo que sucede en los scripts.
@@ -430,7 +419,7 @@ DECLARE nombreVariable tipoVariable [opciones];
 
 </div> <!-- fin caso de estudio -->
 
-#### Estructuras de control
+### Estructuras de control
 
 Las instrucciones de un procedimiento (o función) se ejecutan secuencialmente empezando por la instrucción que está justo después de la palabra reservada **`BEGIN`** y acabando por la que está justo antes de la palabra reservada **`END`**. Esta forma de ejcución de instrucciones se llama **secuencial**. El siguiente diagrama representa un bloque de 3 instrucciones que se ejecutan secuencialmente. El punto negro inicial representa el **`BEGIN`** y el punto con el aspa el **`END`**.
 
@@ -451,7 +440,7 @@ No obstante, hay algunas directiva que nos permiten cambiar el orden secuencial 
 * **Estructuras de control condicionales**: en función de una condición se ejecutan un bloque de instrucciones u otro (o ninguno).
 * **Estructuras de control de repetición**: permiten que un bloque de instrucciones se ejecuta un cierto o número de veces o mientras se cumpla una condición.
 
-#### Estructuras de control condicionales
+### Estructuras de control condicionales
 
 **Sentencia IF**
 Es la más sencilla de todas. Nos permite ejecutar unas instrucciones u otras según una condición. Hay 3 variantes:
@@ -579,7 +568,7 @@ end note
 stop
 @enduml
 ```
-    
+
 Puede haber tantas cláusulas **`ELSEIF`** como queramos pero sólo puede haber una cláusula **`IF`** y una **`ELSE`**.
 
 !!! Example Ejemplo 3
@@ -684,6 +673,8 @@ Si realizamos el mismo ejemplo con **`CASE`** quedaría:
     CALL colorescase();
     ```
 
+### Estructuras de control de repetición
+
 ***Sentencia WHILE***
 Otra estructura de control es la de bucles, que consisten en realizar de forma repetida un conjunto de instrucciones. Tenemos varias estructuras para hacer bucles como **`REPEAT`** o **`LOOP`**, pero nosotros usaremos **`WHILE`**.
 
@@ -747,7 +738,7 @@ En el siguiente ejemplo mostramos la suma de los 10 primeros números enteros.
     CALL sumadieznumeros();
     ```
 
-### Parámetros
+## Parámetros
 
 En muchas ocasiones los procedimientos necesitan recibir valores como parámetros. En MySQL podemos definir estas variables y usarlas dentro del procedimiento. En ejemplo siguiente, si queremos comparar dos cadenas y saber cuál tiene más caracteres, deberemos indicarle al procedimiento qué cadenas comparar.
 
@@ -778,7 +769,7 @@ En muchas ocasiones los procedimientos necesitan recibir valores como parámetro
     CALL comparacadenas('Mi primera cadena','Esta debe ser más larga');
     ```
 
-## Funciones predefinidas
+# Funciones predefinidas
 
 Una función es un conjunto de líneas de código que realizan una tarea específica, al  igual  que un procedimiento, pero además puede retornar un valor.
 En MySQL existen multitud de funciones predefinidas. Se pueden consultar en la documentación oficial y en otras reconocidas:
@@ -796,7 +787,7 @@ Cuando una función es invocada/llamada, se le pasa el control a la misma, y una
 
 Las funciones pueden tomar parámetros que modifiquen su funcionamiento.
 
-### Funciones matemáticas
+## Funciones matemáticas
 
 Las que más vamos a usar son: **ABS, FLOOR, MOD, POW, SQRT, RAND, ROUND** y **SIGN**.
 
@@ -1110,7 +1101,7 @@ SELECT STRCMP('Mi cadena','Mi cadena') AS COMPARACION;
 +-------------+
 ```
 
-### Funciones de fechas
+## Funciones de fechas
 Las que más vamos a usar son: CURDATE, CURTIME, NOW, ADDDATE, ADDTIME, DATEDIFF, TIMEDIFF, DAY, MONTH, YEAR, HOUR, MINUTE, SECOND, DAYNAME, DAYOFWEEK, MAKETIME, SEC_TO_TIME, TIME_TO_SEC, FROM_DAYS, TO_DAYS, STR_TO_DATE, DATE_FORMAT
 
 Ejemplos de funciones predefinidas
@@ -1191,11 +1182,12 @@ SELECT DATE_FORMAT('2018-03-15','%Y');
     [MySQL Oficial – Funciones matemáticas](http://mysql.conclase.net/curso/?cap=011a#FUN_FECHA)
     [MySQL Oficial – Funciones en MySQL – Web W3SCHOOLS Interactiva](https://www.w3schools.com/sql/sql_ref_mysql.asp)
 
-### Funciones avanzadas
+## Funciones avanzadas
 
 Las que más vamos a usar son: VERSION, DATABASE, CURRENT_USER, CONVERT, ISNULL, IFNULL, IF, CASE
 
-**Funciones avanzadas para mostrar INFORMACIÓN**
+### Funciones avanzadas para mostrar INFORMACIÓN
+
 Ejemplos de funciones predefinidas avanzadas
 
 ```sql
@@ -1225,7 +1217,8 @@ SELECT CURRENT_USER();
 +----------------+
 ```
 
-**Funciones avanzadas para CONVERSIÓN DE VALORES**
+### Funciones avanzadas para CONVERSIÓN DE VALORES
+
 Ejemplos de funciones predefinidas avanzadas
 
 ```sql
@@ -1287,7 +1280,8 @@ SELECT IFNULL(@num, 'Error en división') AS RESULTADO;
 +-------------+
 ```
 
-**Funciones avanzadas para PROGRAMACIÓN**
+### Funciones avanzadas para PROGRAMACIÓN
+
 Ejemplos de funciones predefinidas avanzadas
 
 ```sql
@@ -1354,9 +1348,9 @@ SELECT SUBSTRING_INDEX('www.iesdoctorbalmis.com','.',2) AS DOMINIO;
 
 </div> <!-- fin ejercicio -->
 
-## Parámetros de Entrada-Salida
+# Parámetros de Entrada-Salida
 
-### Parámetros de funciones y procedimientos
+## Parámetros de funciones y procedimientos
 
 Los parámetros son valores o variables que se pueden pasar a los procedimientos o funciones para que los utilicen en su proceso.
 
@@ -1393,7 +1387,7 @@ mysql> SELECT ROUND(@num, 0);
 +----------------+
 ```
 
-### Tipos de parámetros
+## Tipos de parámetros
 
 Como hemos visto en el último ejemplo de comparación de cadenas del apartado 3, los procedimientos pueden recibir parámetros y ser utilizados en su propio código como variables internas.
 
@@ -1573,7 +1567,7 @@ valor de la variable en el interior del procedimiento, resulta que la variable t
     La ejecución del código muestra que **@num** vale 10 después de la llamada al procedimiento.
     Por lo tanto la modificación de la variable **@num** que se ha producido dentro del procedimiento ha persistido cuando este ha acabado.
 
-## Funciones definidas por el usuario
+# Funciones definidas por el usuario
 
 <div class="caso_estudio">
 
@@ -1700,9 +1694,9 @@ Podemos observar que la variable se ha creado y es global porque mantiene su val
     SELECT tomorrow();
     ```
 
-## Procedimientos y funciones con acceso a datos
+# Procedimientos y funciones con acceso a datos
 
-### Acceso a datos
+## Acceso a datos
 
 Los procedimientos y funciones suelen acceder a las bases de datos para procesar información. En muchas ocasiones nos permiten generar campos calculados.
 
@@ -1748,7 +1742,7 @@ También hay casos en que las funciones nos permiten realizar procesos de selecc
     WHERE LEFT(code, 2) = code2;
     ```
 
-### Acceso a datos desde funciones definidas por el usuario
+## Acceso a datos desde funciones definidas por el usuario
 
 Nuestro objetivo principal será desarrollar funciones que procesen datos contenidos en los campos de las tablas y devuelvan valores.
 
@@ -1816,7 +1810,7 @@ Veamos algunos ejemplos también con la BD *World*.
     SELECT code, name, NOMBRECIUDAD(capital) AS NombreCapital FROM country;
     ```
 
-### Control de errores
+## Control de errores
 
 En muchos casos las funciones que definimos generan errores, como el que se produce al insertar un registro por incumplir restricciones.
 
@@ -1889,7 +1883,8 @@ Con un manejador de errores hacemos que en caso de error el programa no aborte s
     [MySQL Oficial – Control de Errores en MySQL – Web Oficial en inglés](https://dev.mysql.com/doc/refman/5.7/en/declare-handlerhtml)
     [MySQL Oficial – Errores en MySQL – Web Oficial en inglés](https:/dev.mysql.com/doc/refman/5.5/en/error-messages-server.html)
 
-***Comprobar los errores***
+### Comprobar los errores
+
 Cuando se produce un error en una instrucción SQL, obtendremos un error o warning que se almacenará en la BD de control de errores. Este error podemos consultarlo con la instrucción **`SHOW WARNINGS`**.
 
 !!!Example Ejemplo 7
@@ -2008,7 +2003,7 @@ Si deseamos realizar un **`PROCEDURE`** donde recojamos el error y mensaje que s
 
 Realizar el proyecto **bancaria 1 (repaso de UD3 y UD5) y bancaria 2 (con procedimientos)**.
 
-## Disparadores
+# Disparadores
 
 <div class="caso_estudio">
 
@@ -2257,7 +2252,7 @@ En estos tres ejemplos el **trigger** se ejecuta después (**`AFTER`**) de la in
     /* Comprobar que el disparador se ha ejecutado */
     SELECT * FROM clientes;
     ```
-***Para crear los valores de campos calculados***
+***Triggers para crear los valores de campos calculados***
 A continuación vamos a ver un caso un poco más complicado. Vamos a ver como se actualiza el saldo de los clientes del banco cuando se revierten las operaciones que ingresan o detraen dineros de sus cuentas.
 
 <div class="caso_estudio">
@@ -2311,7 +2306,7 @@ SELECT 'ANTES' AS RESULTADO, movimientos.* FROM movimientos WHERE dni='21455800'
 /* Forzar a que se ejecute el disparador */
 DELETE FROM movimientos WHERE id_mov = @id_reg;
 
-    /* Comprobar que el disparador se ha ejecutado */
+/* Comprobar que el disparador se ha ejecutado */
 SELECT 'DESPUÉS' AS RESULTADO, clientes.* FROM clientes WHERE dni = '21455800'; 
 SELECT 'DESPUÉS' AS RESULTADO, movimientos.* FROM movimientos WHERE dni = '21455800';
 ```
@@ -2365,7 +2360,7 @@ SELECT 'DESPUÉS' AS RESULTADO, movimientos.* FROM movimientos WHERE dni = '2145
 
 </div> <!-- fin caso de estudio -->
 
-## Tablas temporales
+# Tablas temporales
 
 En MySQL podemos crear tablas temporales donde guardar los registros procesados.
 La sintaxis para crear una tabla temporal es la misma que para crear una tabla permanente, pero añadiendo **`TEMPORARY`**.
@@ -2436,7 +2431,7 @@ DROP TEMPORARY TABLE IF EXISTS nombreTabla;
     SELECT * FROM continentes;
     ```
 
-## Cursores
+# Cursores
 
 <div class="caso_estudio">
 
