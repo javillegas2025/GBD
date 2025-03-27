@@ -901,81 +901,78 @@ A continuación vamos a ver algunos ejemplos de utilización de estas funciones.
     ```
     
     En los ejemplos vemos que podemos calcular potencias con bases y exponentes de cualquier signo sean enteros o reales.
-    Cuando la base es negativa puede producirse un error como en el último ejemplo. La función POW(-4, 0.5) realmente es la raíz cuadrada de -4, y la raíz cuadarda de un número negativo no exixte.
+    Cuando la base es negativa puede producirse un error como en el último ejemplo. La instrucción **`POW(-4, 0.5)`** realmente calcula raíz cuadrada de -4, y la raíz cuadarda de un número negativo no exixte.
     
-**Ejemplo 5 - Raíz cuadrada de un número**
+!!! Example Ejemplo 5
+    **Raíz cuadrada de un número**
 
-```sql
- SELECT SQRT(64);
-```
+    ```sql
+    -- Salida: 8
+     SELECT SQRT(64);
+    
+    -- Salida: 8 (otra forma alternativa de calcular la raíz cuadrada)
+     SELECT POW(64, 1/2);
+    ```
+    Entre la potencia y la raíz cuadrada hay la siguiente equivalencia: $ x ^ {0.5} = x ^ {1/2} = \sqrt {x} $.
+    
+!!! Example Ejemplo 6
+    **Número aleatorio real**
 
-Resultado: 8
+    ```sql
+    -- Salida: x ∈ [0, 1)
+    SELECT RAND();
+    
+    -- Salida: x ∈ [0, 5)
+    SELECT 5 * RAND();
+     ```
+    La función **`RAND`** genera un número real aleatorio $ x \in [0, 1) $. En el segundo ejemplo, al multiplicar la función por 5 obtenemos un número real aleatorio $ x \in [0, 5) $.
+    
+!!! Example Ejemplo 7
+    **Redondear un número decimal hasta los decimales que se indiquen**
 
-**Ejemplo 6 - Número aleatorio decimal entre 0 y 1**
+    ```sql
+    -- Resultado: 45.3
+    SELECT ROUND(45.267, 1);
 
- ```sql
-SELECT RAND();
- ```
+    -- Resultado: -45.27
+    SELECT ROUND(-45.267, 2);
+    
+    -- Resultado: 45
+    SELECT ROUND(45.267);
+    
+    -- Resultado: 46
+    SELECT ROUND(45.75);
+    
+    -- Resultado: -45
+    SELECT ROUND(-45.267);
+    
+    -- Resultado: -46
+    SELECT ROUND(-45.67);
+    
+    -- Resultado: 5.2
+    SELECT ROUND(5.15, 1);
+    
+    -- Resultado: -5.2
+    SELECT ROUND(-5.15, 1);
+    ```
 
-Resultado: 0.601966295951946
+Según la definición, la función **`ROUND`** retorna el número, con la precisión especificada, más cercano al número dado.
+En el primer ejemplo retorna 45.3 por que 45.267 está más cerca de 45.3 que de 45.2.
+Los dos últimos casos son especiales por que el número está a igual distancia de dos números con la precisión dada. Por ejemplo, 5.15 está a igual distancia de 5.1 que de 5.2 y -5.15 está a igual distancia de -5.1 y -5.2. En estos casos se coge el de su derecha para los números positivos y el de su izquierda para números negativos.
 
-**Ejemplo 7 - Redondea un número decimal hasta los decimales que se indiquen**
+!!! Example Ejemplo 8
+    **Obtiene el signo del número**
 
-```sql
-SELECT ROUND(45.267, 1);
-```
-
-Resultado: 45.3
-
-```sql
-SELECT ROUND(-45.267, 2);
-```
-
-Resultado: -45.27
-
-```sql
-SELECT ROUND(45.267);
-```
-
-Resultado: 45
-
-```sql
-SELECT ROUND(45.75);
-```
-
-Resultado: 46
-
-```sql
-SELECT ROUND(-45.267);
-```
-
-Resultado: -45
-
-```sql
-SELECT ROUND(-45.67);
-```
-
-Resultado: -46
-
-**Ejemplo 8 - Obtiene el signo del número**
-
-```sql
-SELECT SIGN(-45.6);
-```
-
-Resultado: -1
-
-```sql
-SELECT SIGN(45.6);
-```
-
-Resultado: 1
-
-```sql
-SELECT SIGN(0);
-```
-
-Resultado: 0
+    ```sql
+    -- Salida: -1
+    SELECT SIGN(-45.6);
+    
+    -- Salida: 1
+    SELECT SIGN(45.6);
+    
+    -- Salida: 0
+    SELECT SIGN(0);
+    ```
 
 ## Funciones de cadenas o strings
 
