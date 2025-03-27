@@ -378,12 +378,15 @@ Ya sabemos que por defecto MySQL usa como delimitador de fin de instrucción el 
 
 Para nuestro ejemplo usamos **//** pero se podría usar también **$$** o lo que queramos. Al finalizar la creación del procedimiento o función volvemos a cambiarlo por **;**
 
+<div class="caso_estudio" style="font-weight:bold">
+
 ```sql
 DELIMITER $$
     ...
     $$
 DELIMITER ;
 ```
+</div> <!-- fin caso de estudio -->
 
 #### Bloques de código
 
@@ -396,24 +399,36 @@ Estos bloques de código se usarán más adelante también en estructuras de con
 
 Para eliminar un procedimiento utilizaremos la instrucción **`DROP PROCEDURE`**.
 
+<div class="caso_estudio" style="font-weight:bold">
+
 ```sql
 DROP PROCEDURE nombreProcedimiento;
 ```
 
+</div> <!-- fin caso de estudio -->
+
 Si queremos redefinir un procedimiento, para evitar que si no existe muestre un error lo haremos utilizando la cláusula **`IF EXISTS`**.
+
+<div class="caso_estudio" style="font-weight:bold">
 
 ```sql
 DROP PROCEDURE IF EXISTS nombreProcedimiento;
 ```
+
+</div> <!-- fin caso de estudio -->
 
 ### Variables locales del procedimiento
 
 Cuando necesitamos variables que usaremos dentro del procedimiento debemos usar la instrucción **`DECLARE`** como si lo hiciéramos en la instrucción **`CREATE TABLE`**. Las variables sólo serán visibles y accesibles dentro del procedimiento.
 Estas variables no comienzan con el caracter especial @, al contrario de lo que sucede en los scripts.
 
+<div class="caso_estudio" style="font-weight:bold">
+
 ```sql
 DECLARE nombreVariable tipoVariable [opciones];
 ```
+
+</div> <!-- fin caso de estudio -->
 
 #### Estructuras de control
 
@@ -458,7 +473,7 @@ END IF;
 ```puml {align="center", style="zoom:1"}
 @startuml
 start
-if (condición) then (Sí)
+if (condición) then (**Sí**)
 #lightgreen:bloque sentencias 1;
 note
 Este bloque de sentencias sólo se
@@ -494,13 +509,13 @@ END IF;
 ```puml {align="center", style="zoom:1"}
 @startuml
 start
-if (condición) then (Sí)
+if (condición) then (**Sí**)
 #lightgreen:bloque sentencias 1;
 note
 Este bloque de sentencias sólo se
 ejecuta **SI** se cumple la condición.
 end note
-else (No)
+else (**No**)
 #lightgreen:bloque sentencias 2;
 note right
 Este bloque de sentencias sólo se
@@ -537,19 +552,19 @@ END IF;
     @startuml
 !pragma useVerticalIf on
 start
-if (condición A) then (Sí)
+if (condición A) then (**Sí**)
 #lightgreen: bloque sentencias 1;
 note right
 Las sentencias sólo se ejecutan **SI**
 se cumple la condición A.
 end note
-(No) elseif (condition B) then (Sí)
+(**No**) elseif (condition B) then (**Sí**)
 #lightgreen:bloque sentencias 2;
 note right
 Las sentencias sólo se ejecutan si **NO** se
 cumple la condición A y **SÍ** se cumple la B.
 end note
-else (No)
+else (**No**)
 #lightgreen:bloque sentencias 3;
 note right
 Las sentencias sólo se ejecutan si **NO** 
@@ -634,6 +649,8 @@ END CASE;
 
 </div> <!-- fin caso de estudio -->
 
+Los diagramas de flujo de la estructura **`CASE`** son similares a los de la estructura **`IF`** (variante 3).
+
 Si realizamos el mismo ejemplo con **`CASE`** quedaría:
 
 !!! Example Ejemplo 4
@@ -679,6 +696,26 @@ END WHILE;
 ```
 
 </div> <!-- fin caso de estudio -->
+
+```puml
+@startuml
+start
+while (condición) is (**Sí**)
+note right
+Las sentencias **mientras** se cumpla la condición.
+end note
+
+#lightgreen:bloque sentencias;
+endwhile (**No**)
+:bloque sentencias común;
+note
+Este bloque de sentencias se ejecuta
+**siempre**, se cumplan o no la condición del bucle.
+end note
+stop
+
+@enduml
+```
 
 En el siguiente ejemplo mostramos la suma de los 10 primeros números enteros.
 
