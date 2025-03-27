@@ -549,7 +549,7 @@ END IF;
 </div> <!-- fin caso de estudio -->
 
 ```puml {align="center", style="zoom:1"}
-    @startuml
+@startuml
 !pragma useVerticalIf on
 start
 if (condición A) then (**Sí**)
@@ -697,7 +697,7 @@ END WHILE;
 
 </div> <!-- fin caso de estudio -->
 
-```puml
+```puml {align="center", style="zoom:1"}
 @startuml
 start
 while (condición) is (**Sí**)
