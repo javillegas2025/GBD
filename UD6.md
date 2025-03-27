@@ -701,11 +701,11 @@ END WHILE;
 @startuml
 start
 while (condición) is (**Sí**)
-note right
-Las sentencias **mientras** se cumpla la condición.
-end note
-
 #lightgreen:bloque sentencias;
+note right
+Este bloque de sentencias se ejecuta
+**mientras** se cumpla la condición.
+end note
 endwhile (**No**)
 :bloque sentencias común;
 note
@@ -735,7 +735,7 @@ En el siguiente ejemplo mostramos la suma de los 10 primeros números enteros.
         DECLARE resultado INT;
         SET resultado := 0;
         SET contador := 1;
-        WHILE (contador<=10) DO
+        WHILE (contador <= 10) DO
             SET resultado := resultado + contador;
             SET contador := contador + 1;
         END WHILE;
@@ -757,16 +757,16 @@ En muchas ocasiones los procedimientos necesitan recibir valores como parámetro
 
     ```sql
     /* Eliminar el procedimiento si ya existe */
-    DROP PROCEDURE IF EXISTS ud6ejer.comparacadenas;
+    DROP PROCEDURE IF EXISTS comparacadenas;
     
     /* Crear el procedimiento */
     DELIMITER //
-    CREATE PROCEDURE ud6ejer.comparacadenas(cad1 VARCHAR(500), cad2 VARCHAR(500))
+    CREATE PROCEDURE comparacadenas(cad1 VARCHAR(500), cad2 VARCHAR(500))
     BEGIN
         CASE
-        WHEN (LENGTH(cad1)>LENGTH(cad2)) THEN
+        WHEN (LENGTH(cad1) > LENGTH(cad2)) THEN
             SELECT 'La PRIMERA cadena es más larga' AS RESULTADO;
-        WHEN (LENGTH(cad1)<LENGTH(cad2)) THEN
+        WHEN (LENGTH(cad1) < LENGTH(cad2)) THEN
             SELECT 'La SEGUNDA cadena es más larga' AS RESULTADO;
         ELSE
             SELECT 'La dos cadenas miden lo mismo' AS RESULTADO;
@@ -775,7 +775,7 @@ En muchas ocasiones los procedimientos necesitan recibir valores como parámetro
     DELIMITER ;
     
     /* Llamar al procedimiento */
-    CALL ud6ejer.comparacadenas('Mi primera cadena','Esta debe ser más larga');
+    CALL comparacadenas('Mi primera cadena','Esta debe ser más larga');
     ```
 
 ## Funciones predefinidas
@@ -798,53 +798,111 @@ Las funciones pueden tomar parámetros que modifiquen su funcionamiento.
 
 ### Funciones matemáticas
 
-Las que más vamos a usar son: **ABS, FLOOR, MOD, POW, SQRT, RAND, ROUND, SIGN**
+Las que más vamos a usar son: **ABS, FLOOR, MOD, POW, SQRT, RAND, ROUND** y **SIGN**.
 
-***Ejemplos de funciones predefinidas***
+La siguiente tabla describe la sintaxis y qué hace cada función.
 
-**Ejemplo 1** - Valor absoluto de un número entero
+|Función|Descripción|
+|:------|:----------|
+|**ABS(x)**|Retorna el valor absoluto de *x*. El valor absoluto de un número positivo es el mismo número y el de un número negativo es el número cambiado de signo.|
+|**FLOOR(x)**|Retorna la parte entera de *x*. Si representamos los números en la recta real, la parte entera es el entero más próximo a la izquierda del número.|
+|**MOD(x, y)**| Retorna el resto de la división entera de *x* entre *y*.|
+|**POW(x, y)**| Retorna $ x^y $.|
+|**SQRT(x)**| Retorna la raíz cuadrada de *x*; o sea $ \sqrt {x} $.|
+|**RAND()**| Genera un número aleatorio real entre 0 y 1 ($ x \in [0, 1) $).|
+|**ROUND(x, d)** **ROUND(x)**|Redondea el número *x* con *d* decimales. Si no se pasa el parámetro *d* redondea al entero más cercano. Si representamos x en la recta real, la función ROUND devuelve el número más cercano con la precisión especificada.|
+|**SIGN(x)**|Retorna 1 si *x* es positivo, -1 si *x* es negativo y 0 si *x* es igual a 0.|
 
-```sql
- SELECT ABS(-17);
-```
+A continuación vamos a ver algunos ejemplos de utilización de estas funciones.
 
-Resultado: 17
+!!! Example Ejemplo 1
+    **Valor absoluto de un número**
 
-```sql
-# Resultado: 21
-SELECT ABS(21);
-```
+    ```sql
+    -- Salida: 17
+    SELECT ABS(-17);
+    
+    -- Salida: 25.15
+     SELECT ABS(25.15);
+    ```
+    
+    Vemos que podemos calcular el valor absoluto de cualquier número sea real o entero.
 
-**Ejemplo 2 -  Parte entera de un número decimal**
+!!! Example Ejemplo 2
+    **Parte entera de un número**
 
-```sql
-SELECT FLOOR(35.789);
-```
+    ```sql
+     -- Salida: 35
+    SELECT FLOOR(35.789);
+    
+     -- Salida: 12
+    SELECT FLOOR(12.2);
+    
+    -- Salida: -36
+     SELECT FLOOR(-35.789);
 
-Resultado: 35
+    -- Salida: -13
+     SELECT FLOOR(-12.2);
+    ```
+    
+    El cálculo de la parte entera para los números positivos es basatante evidente. Para los números negativos el resultado puede parecer un poco chocante, pero si nos atenemos a la definición se entiende el por qué, por ejemplo, la parte entera de -12.2 es -13.
 
-```sql
-SELECT FLOOR(-35.789);
-```
+!!! Example Ejemplo 3
+    **Resto de una división entre dos número enteros**
 
-Resultado: -36
+    ```sql
+    -- Salida: 3
+    SELECT MOD(15, 4);
+    
+    -- Salida: 0
+    SELECT MOD(42, 6);
+    
+    -- Salida: -4
+    SELECT MOD(-18, 7);
+    ```
+    
+    El resto de la división entera siempre será menor que el divisor. Por ejemplo, si el divisor es 4 entoces los restos posibles son 0, 1, 2 y 3.
+    Cuando el dividendo o el divisor es negativo entonces el resto de la división es negativo.
+    
+!!! Example Ejemplo 4
+    **Ejemplo 4 - Potencia de un número**
 
-**Ejemplo 3 -  Resto de una división entre dos número enteros**
-
-```sql
-SELECT MOD(15, 4);
-```
-
-Resultado: 3
-
-**Ejemplo 4 - Potencia de un número y su exponente**
-
-```sql
- SELECT POW(5, 2);
-```
-
- Resultado: 25
-
+    ```sql
+    -- Salida: 8
+    select POW(2, 3);
+    
+    -- Salida: -8
+    select POW(-2, 3);
+    
+    -- Salida: 0.25
+    select POW(-2, -2);
+    
+    -- Salida: 0.125
+    select POW(2, -3);
+    
+    -- Salida: 28.196099999999994
+    select POW(5.31, 2);
+    
+    -- Salida: 3428.0987096370227
+    select POW(5.31, 4.8753);
+    
+    -- Salida: 0.0002917068861491106
+    select POW(5.31, -4.8753);
+    
+    -- Salida: 9.192037038104349
+    select POW(7, 1.14);
+    
+    -- Salida: -0.00667907679209098
+    select POW(-5.31, -3);
+    
+    -- Salida: Error - #1690 - DOUBLE value is out of range in 'pow(-4,0.5)'
+    select POW(-4, 0.5);
+    
+    ```
+    
+    En los ejemplos vemos que podemos calcular potencias con bases y exponentes de cualquier signo sean enteros o reales.
+    Cuando la base es negativa puede producirse un error como en el último ejemplo. La función POW(-4, 0.5) realmente es la raíz cuadrada de -4, y la raíz cuadarda de un número negativo no exixte.
+    
 **Ejemplo 5 - Raíz cuadrada de un número**
 
 ```sql
