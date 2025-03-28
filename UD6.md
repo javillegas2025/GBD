@@ -32,7 +32,9 @@ toc:
     ordered: false
 ---
 
-# Introducción
+[TOC]
+
+## Introducción
 
 Analizando el mercado actual de Bases de Datos, el uso de los diferentes productos existentes se ha segmentado.
 
@@ -98,11 +100,11 @@ Algunas situaciones en que los procedimientos almacenados pueden ser particularm
 
 Los procedimientos almacenados pueden mejorar el rendimiento ya que se necesita enviar menos información entre el servidor y el cliente. El inconveniente es que aumenta la carga del servidor de la base de datos ya que la mayoría del trabajo se realiza en la parte del servidor y no en el cliente. Considere esto, si muchas máquinas cliente (como servidores Web) se sirven a sólo uno o pocos servidores de bases de datos.
 
-Los procedimientos almacenados le permiten tener bibliotecas o funciones en el servidor de base de datos. Esta característica es compartida por los lenguajes de programación modernos que permiten este diseño interno, por ejemplo, usando clases. Usando estas características del lenguaje de programación cliente es beneficioso para el programador incluso fuera del entorno de la base de datos.
+Los procedimientos almacenados le permiten tener bibliotecas o funciones en el servidor de base de datos. Esta carácterística es compartida por los lenguajes de programación modernos que permiten este diseño interno, por ejemplo, usando clases. Usando estas carácterísticas del lenguaje de programación cliente es beneficioso para el programador incluso fuera del entorno de la base de datos.
 
-# Primeros SCRIPTS
+## Primeros SCRIPTS
 
-## SCRIPTS en MySQL
+### SCRIPTS en MySQL
 
 Comenzaremos por crear nuestro primer script en MySQL con sentencias de **Stored Procedures**.
 
@@ -147,9 +149,9 @@ Para conectarnos como root hacemos:
     ```
 
 Los nombres de las variables en los scripts tienen que comenzar con el símbolo **@**.
-Las instrucciones **SET** y **SELECT** pueden ejecutarse también directamente desde el intérprete de comandos.
+Las instrucciones **`SET`** y **`SELECT`** pueden ejecutarse también directamente desde el intérprete de comandos.
 
-## Comentarios
+### Comentarios
 
 Los comentarios dentro de los SCRIPTS pueden hacerse de la siguiente manera:
 
@@ -164,7 +166,7 @@ Los comentarios dentro de los SCRIPTS pueden hacerse de la siguiente manera:
 */
 ```
 
-## Variables definidas por el usuario
+### Variables definidas por el usuario
 
 Para definir una variable de usuario utilizaremos el carácter **@**. Asignaremos valores con el comando **`SET`**:
 
@@ -204,7 +206,7 @@ Para consultar todas las variables creadas por el usuario, podemos consultar la 
 SELECT * FROM performance_schema.user_variables_by_thread;
 ```
 
-## Variables del sistema
+### Variables del sistema
 
 MySQL tiene muchas variables de sistema que pueden consultarse en <https://dev.mysql.com/doc/refman/8.0/en/server-system-variable-reference.html> y que podemos consultar con la instrucción **`SHOW VARIABLES LIKE`**.
 
@@ -273,23 +275,23 @@ ERROR 1064 (42000): Algo está equivocado en su sintax cerca
     mysql> source C:/GBD-UD6/b06ejer02.sql;
     ```
     
-### Ejecutar scripts
+#### Ejecutar scripts
 
-La mayoría de scripts los generamos en UTF8 por lo que deberemos cambiar el conjunto de caracteres de la ventana de comandos del CMD.
+La mayoría de scripts los generamos en UTF8 por lo que deberemos cambiar el conjunto de carácteres de la ventana de comandos del CMD.
 
 ```cmd
-// Cambiar a juego de caracteres en UTF8
+// Cambiar a juego de carácteres en UTF8
 C:\> chcp 65001
-// Cambiar a juego de caracteres en ANSI West European Latin
+// Cambiar a juego de carácteres en ANSI West European Latin
 C:\> chcp 1252
 ```
 
-Para cambiar en timepo real el juego de caracteres en el resultado de los **`SELECT`** en MySQL, podemos utilizar el comando ****`SET NAMES`****.
+Para cambiar en timepo real el juego de carácteres en el resultado de los **`SELECT`** en MySQL, podemos utilizar el comando ****`SET NAMES`****.
 
 ```sql
-// Cambiar a juego de caracteres en UTF8
+// Cambiar a juego de carácteres en UTF8
 mysql> SET NAMES 'utf8';
-// Cambiar a juego de caracteres en ANSI West European Latin
+// Cambiar a juego de carácteres en ANSI West European Latin
 mysql> SET NAMES 'latin1';
 ```
 
@@ -308,9 +310,9 @@ Ejemplo de forma de conexión.
 C:\> mysql -u root -p --silent --table
 ```
 
-# Procedimientos y estructuras de control
+## Procedimientos y estructuras de control
 
-## Sintaxis y Estructura
+### Sintaxis y Estructura
 
 Para poder almacenar un conjunto de instrucciones en la propia base de datos podemos utilizar los procedimientos.
 
@@ -339,6 +341,7 @@ Si por ejemplo deseamos un procedimiento que muestre el día y hora sería:
 !!! Example Ejemplo 1
     **Procedimientos**
     Realizar un procedimiento que calcule el día y la hora actual y la muestre por pantalla.
+
     ```sql
     DELIMITER //
     CREATE PROCEDURE diayhora()
@@ -359,7 +362,7 @@ Para llamar al procedimiento se utiliza el comando **`CALL`**.
 
 Los procedimientos se asignan a una base de datos. Esto quiere decir que debemos indicar el **SCHEMA** o BASE DE DATOS al crear o eliminar el procedimiento. Podemos usar previamente la selección de base de datos por defecto con el comando **`USE`** como en el ejemplo anterior o bien indicarla al crear el procedimiento como se hace en los **`SELECT`** de las tablas. Por ejemplo para crear el procedimiento en la base de datos world, independientemente de cual tengamos seleccionada, la cabecera del procedimiento sería: **`CREATE PROCEDURE world.diayhora()`**.
 
-### DELIMITER
+#### DELIMITER
 
 En la declaración del procedimiento hemos usado delimiter pero, ¿por qué es importante el uso del **`DELIMITER`**?.
 
@@ -377,14 +380,14 @@ DELIMITER ;
 ```
 </div> <!-- fin caso de estudio -->
 
-### Bloques de código
+#### Bloques de código
 
 Para poder agrupar varias instrucciones en bloques utilizaremos: **`BEGIN ... END`**.
 En los procedimientos es necesario porque define el espacio de instrucciones que se almacenan.
 
 Estos bloques de código se usarán más adelante también en estructuras de control como: **`IF .. THEN .. END IF`**
 
-### Redefinir y Eliminar
+#### Redefinir y Eliminar
 
 Para eliminar un procedimiento utilizaremos la instrucción **`DROP PROCEDURE`**.
 
@@ -406,10 +409,10 @@ DROP PROCEDURE IF EXISTS nombreProcedimiento;
 
 </div> <!-- fin caso de estudio -->
 
-## Variables locales del procedimiento
+### Variables locales del procedimiento
 
 Cuando necesitamos variables que usaremos dentro del procedimiento debemos usar la instrucción **`DECLARE`** como si lo hiciéramos en la instrucción **`CREATE TABLE`**. Las variables sólo serán visibles y accesibles dentro del procedimiento.
-Estas variables no comienzan con el caracter especial @, al contrario de lo que sucede en los scripts.
+Estas variables no comienzan con el carácter especial @, al contrario de lo que sucede en los scripts.
 
 <div class="caso_estudio" style="font-weight:bold">
 
@@ -440,7 +443,7 @@ No obstante, hay algunas directiva que nos permiten cambiar el orden secuencial 
 * **Estructuras de control condicionales**: en función de una condición se ejecutan un bloque de instrucciones u otro (o ninguno).
 * **Estructuras de control de repetición**: permiten que un bloque de instrucciones se ejecuta un cierto o número de veces o mientras se cumpla una condición.
 
-### Estructuras de control condicionales
+#### Estructuras de control condicionales
 
 **Sentencia IF**
 Es la más sencilla de todas. Nos permite ejecutar unas instrucciones u otras según una condición. Hay 3 variantes:
@@ -574,6 +577,7 @@ Puede haber tantas cláusulas **`ELSEIF`** como queramos pero sólo puede haber 
 !!! Example Ejemplo 3
     **Procedimientos `IF`**
     En el siguiente ejemplo creamos un procedimiento para mostrar un **color** de forma aleatoria según el valor obtenido con la función **`RAND()`** la cual devuelve un número real entre 0 y 1, es decir, obtenemos un número n que cumple 0 ≤ n < 1.
+
     ```sql
     -- Eliminar el procedimiento si ya existe
     DROP PROCEDURE IF EXISTS colores;
@@ -601,7 +605,7 @@ Puede haber tantas cláusulas **`ELSEIF`** como queramos pero sólo puede haber 
     CALL colores();
     ```
 
-***Sentencia CASE***
+**Sentencia CASE**
 Cuando tenemos varias opciones como en el ejemplo anterior, podemos utilizar también la estructura **`CASE`**.
 
 <div class="caso_estudio" style="font-weight:bold">
@@ -638,7 +642,7 @@ END CASE;
 
 </div> <!-- fin caso de estudio -->
 
-Los diagramas de flujo de la estructura **`CASE`** son similares a los de la estructura **`IF`** (variante 3).
+Los diagramas de flujo de la estructura **`CASE`** son iguales a los de la estructura **`IF`** (variante 3).
 
 Si realizamos el mismo ejemplo con **`CASE`** quedaría:
 
@@ -673,9 +677,9 @@ Si realizamos el mismo ejemplo con **`CASE`** quedaría:
     CALL colorescase();
     ```
 
-### Estructuras de control de repetición
+#### Estructuras de control de repetición
 
-***Sentencia WHILE***
+**Sentencia WHILE**
 Otra estructura de control es la de bucles, que consisten en realizar de forma repetida un conjunto de instrucciones. Tenemos varias estructuras para hacer bucles como **`REPEAT`** o **`LOOP`**, pero nosotros usaremos **`WHILE`**.
 
 <div class="caso_estudio" style="font-weight:bold">
@@ -738,13 +742,13 @@ En el siguiente ejemplo mostramos la suma de los 10 primeros números enteros.
     CALL sumadieznumeros();
     ```
 
-## Parámetros
+### Parámetros
 
-En muchas ocasiones los procedimientos necesitan recibir valores como parámetros. En MySQL podemos definir estas variables y usarlas dentro del procedimiento. En ejemplo siguiente, si queremos comparar dos cadenas y saber cuál tiene más caracteres, deberemos indicarle al procedimiento qué cadenas comparar.
+En muchas ocasiones los procedimientos necesitan recibir valores como parámetros. En MySQL podemos definir estas variables y usarlas dentro del procedimiento. En ejemplo siguiente, si queremos comparar dos cadenas y saber cuál tiene más carácteres, deberemos indicarle al procedimiento qué cadenas comparar.
 
 !!! Example Ejemplo 6
     **Procedimientos parámetros**
-    Este es un procedimiento al que se le pasan dos cadenas de caracteres como parámetros y muestra por pantalla que cadena tiene más caracteres.
+    Este es un procedimiento al que se le pasan dos cadenas de carácteres como parámetros y muestra por pantalla que cadena tiene más carácteres.
 
     ```sql
     /* Eliminar el procedimiento si ya existe */
@@ -769,7 +773,7 @@ En muchas ocasiones los procedimientos necesitan recibir valores como parámetro
     CALL comparacadenas('Mi primera cadena','Esta debe ser más larga');
     ```
 
-# Funciones predefinidas
+## Funciones predefinidas
 
 Una función es un conjunto de líneas de código que realizan una tarea específica, al  igual  que un procedimiento, pero además puede retornar un valor.
 En MySQL existen multitud de funciones predefinidas. Se pueden consultar en la documentación oficial y en otras reconocidas:
@@ -787,7 +791,7 @@ Cuando una función es invocada/llamada, se le pasa el control a la misma, y una
 
 Las funciones pueden tomar parámetros que modifiquen su funcionamiento.
 
-## Funciones matemáticas
+### Funciones matemáticas
 
 Las que más vamos a usar son: **ABS, FLOOR, MOD, POW, SQRT, RAND, ROUND** y **SIGN**.
 
@@ -915,11 +919,12 @@ A continuación vamos a ver algunos ejemplos de utilización de estas funciones.
     
     -- Salida: x ∈ [0, 5)
     SELECT 5 * RAND();
-     ```
+    ```
+    
     La función **`RAND`** genera un número real aleatorio $ x \in [0, 1) $. En el segundo ejemplo, al multiplicar la función por 5 obtenemos un número real aleatorio $ x \in [0, 5) $.
     
 !!! Example Ejemplo 7
-    **Redondear un número decimal hasta los decimales que se indiquen**
+    **Redondear un número real hasta los decimales que se indiquen**
 
     ```sql
     -- Resultado: 45.3
@@ -947,10 +952,10 @@ A continuación vamos a ver algunos ejemplos de utilización de estas funciones.
     SELECT ROUND(-5.15, 1);
     ```
 
-Según la definición, la función **`ROUND`** retorna el número, con la precisión especificada, más cercano al número dado.
-En el primer ejemplo retorna 45.3 por que 45.267 está más cerca de 45.3 que de 45.2.
-Los dos últimos casos son especiales por que el número está a igual distancia de dos números con la precisión dada. Por ejemplo, 5.15 está a igual distancia de 5.1 que de 5.2 y -5.15 está a igual distancia de -5.1 y -5.2. En estos casos se coge el de su derecha para los números positivos y el de su izquierda para números negativos.
-
+    Según la definición, la función **`ROUND`** retorna el número, con la precisión especificada, más cercano al número dado.
+    En el primer ejemplo retorna 45.3 por que 45.267 está más cerca de 45.3 que de 45.2.
+    Los dos últimos casos son especiales por que el número está a igual distancia de dos números con la precisión dada. Por ejemplo, 5.15 está a igual distancia de 5.1 que de 5.2 y -5.15 está a igual distancia de -5.1 y -5.2. En estos casos se coge el de su derecha para los números positivos y el de su izquierda para números negativos.
+    
 !!! Example Ejemplo 8
     **Obtiene el signo del número**
 
@@ -964,393 +969,708 @@ Los dos últimos casos son especiales por que el número está a igual distancia
     -- Salida: 0
     SELECT SIGN(0);
     ```
-
-## Funciones de cadenas o strings
-
-Las que más vamos a usar son: **CONCAT, UPPER, LOWER, LEFT, RIGHT, SUBSTRING, SUBSTRING_INDEX,INSTR, LENGTH, TRIM, REPEAT, REPLACE, REVERSE, STRCMP**
-
-Ejemplo 1 - Concatenar varias cadenas
-
-```sql
-SELECT CONCAT('Juan ','López ','García') AS NOMBRE;
-```
-
- +-------------------+
- | NOMBRE            |
- +-------------------+
- | Juan López García |
- +-------------------+
-
-Ejemplo 2 - Pasar a mayúsculas
-
-```sql
-SELECT UPPER('Soy alumno de FP') AS MENSAJE;
-```sql
-
- +------------------+
- | MENSAJE          |
- +------------------+
- | SOY ALUMNO DE FP |
- +------------------+
- 
- Ejemplo 2 - Pasar a minúsculas
- ```
-
-```sql
- SELECT LOWER('Soy alumno de FP') AS MENSAJE;
-```
-
- +------------------+
- | MENSAJE          |
- +------------------+
- | soy alumno de fp |
- +------------------+
-
-```sql
-Ejemplo 3 - Obtener una parte inicial de la cadena 
-SELECT LEFT('Juan López García',4) AS NOMBRE;
-```
-
-+--------+
-| NOMBRE |
-+--------+
-| Juan   |
-+--------+
-/*Obtener una parte final de la cadena */
-SELECT RIGHT('Juan López García',6) AS APELLIDO2;
-+-----------+
-| APELLIDO2 |
-+-----------+
-| García    |
-+-----------+
-/* Obtener una parte central de la cadena */
-SELECT SUBSTRING('Juan López García',6,5) AS APELLIDO1;
-+-----------+
-| APELLIDO1 |
-+-----------+
-| López     |
-+-----------+
-/* Obtener parte de una cadena utilizando la posición de un delimitador*/
-SELECT SUBSTRING_INDEX('www.iesdoctorbalmis.com','.',2) AS DOMINIO;
-+---------------------+
-| DOMINIO             |
-+---------------------+
-| <www.iesdoctorbalmis> |
-+---------------------+
-
-/* Comprobar si una cadena está en otra */
-SELECT INSTR('Juan López García','López') AS POSICION;
-+----------+
-| POSICION |
-+----------+
-|
-6 |
-+----------+
-/* Obtener la longitud de una cadena */
-SELECT LENGTH('Juan López García') AS LONGITUD;
-+----------+
-| LONGITUD |
-+----------+
-|
-17 |
-+----------+
-/* Eliminar de una cadena los espacios al principio y al final*/
-SELECT TRIM('
-Juan López García
-') AS LIMPIO;
-+-------------------+
-| LIMPIO
-|
-+-------------------+
-| Juan López García |
-+-------------------+
-/* Crear una cadena a base de repetir otra */
-SELECT REPEAT('abc',5);
-+-----------------+
-| REPEAT('abc',5) |
-+-----------------+
-| abcabcabcabcabc |
-+-----------------+
-/* Reemplazar parte de una cadena por otros caracteres */
-SELECT REPLACE('SQL Tutorial', 'SQL', 'HTML') AS REEMPLAZADO;
-+---------------+
-| REEMPLAZADO
-|
-+---------------+
-| HTML Tutorial |
-+---------------+
-/* Muestra una cadena de forma inversa */
-SELECT REVERSE('SQL Tutorial') AS INVERSA;
-+--------------+
-| INVERSA
-|
-+--------------+
-| lairotuT LQS |
-+--------------+
-/* Nos dice de dos cadenas cuál va antes en orden alfabético:
--1 → la primera cadena va antes
-0 → las dos cadenas son iguales
-1 → la segunda cadena va antes
-*/
-SELECT STRCMP('Mi cadena','Mi cadena') AS COMPARACION;
-+-------------+
-| COMPARACION |
-+-------------+
-|
-0 |
-+-------------+
-```
-
-## Funciones de fechas
-Las que más vamos a usar son: CURDATE, CURTIME, NOW, ADDDATE, ADDTIME, DATEDIFF, TIMEDIFF, DAY, MONTH, YEAR, HOUR, MINUTE, SECOND, DAYNAME, DAYOFWEEK, MAKETIME, SEC_TO_TIME, TIME_TO_SEC, FROM_DAYS, TO_DAYS, STR_TO_DATE, DATE_FORMAT
-
-Ejemplos de funciones predefinidas
-
-```sql
-/* Obtener la FECHA actual */
-SELECT CURDATE();
-/* Obtener la HORA actual */
-SELECT CURTIME();
-/* Obtener la FECHA Y HORA actual */
-SELECT NOW();
-/* Añadir días a un FECHA (DATE O DATETIME) */
-SELECT ADDDATE('2018-03-25', 10);
-2018-04-06
-/* Añadir segundos a un TIME o DATETIME */
-SELECT ADDTIME('09:34:21', 45);
-09:35:06
-SELECT ADDTIME('2018-03-25 09:34:21', 45);
-2018-03-25 09:35:06
-/* Diferencia de días entre dos FECHAS */
-SELECT DATEDIFF('2018-03-25', '2018-02-10');
-43
-/* Diferencia de segundos entre dos TIME en formato hora
-SELECT TIMEDIFF('20:00:00','19:30:30');
-00:29:30
-
-/* Obtener el valor del DÍA de una FECHA */
-SELECT DAY('2018-03-25');
-25
-/* Obtener el valor del MES de una FECHA */
-SELECT MONTH('2018-03-25');
-3
-/* Obtener el valor del AÑO de una FECHA */
-SELECT YEAR('2018-03-25');
-2018
-/* Obtener el valor de HORA de un TIME o DATETIME */
-SELECT HOUR('2018-03-25 10:36:15');
-10
-SELECT HOUR('10:36:15');
-10
-/* Obtener el valor de minutos de un TIME o DATETIME */
-SELECT MINUTE('2018-03-25 10:36:15');
-36
-/* Obtener el valor de segundos de un TIME o DATETIME */
-SELECT SECOND('2018-03-25 10:36:15');
-15
-/* Obtener nombre del día de la semana de una FECHA */
-SELECT DAYNAME('2018-03-25 10:36:15');
-Sunday
-/* Obtener el número de día de la semana comenzando en domingo de una FECHA */
-SELECT DAYOFWEEK('2018-03-25 10:36:15');
-1
-/* Obtener el valor de formato hora a partir de los segundos */
-SELECT SEC_TO_TIME(3700);
-01:01:40
-/* Obtener el valor de formato hora a partir de los segundos */
-SELECT TIME_TO_SEC('01:01:40');
-3700
-/* Obtener valor de formato hora a partir de los horas, minutos y segundos */
-SELECT MAKETIME(20, 30, 52);
-20:30:52
-/* Obtener una fecha a partir del número de días */
-SELECT FROM_DAYS(750000);
-2053-06-06
-/* Obtener en días una fecha */
-SELECT TO_DAYS('2018-03-10');
-737128
-/* Obtener una fecha a partir de una cadena y un formato */
-SELECT STR_TO_DATE('12/02/2018','%d/%m/%Y');
-2018-02-12
-/* Obtener a partir de una fecha indicando el formato */
-SELECT DATE_FORMAT('2018-03-15','%Y');
-2018
-```
+Para mayor información podéis consultar la información de las referencias.
 
 !!! Note Referencias
 
-    [MySQL Oficial – Funciones matemáticas](http://mysql.conclase.net/curso/?cap=011a#FUN_FECHA)
-    [MySQL Oficial – Funciones en MySQL – Web W3SCHOOLS Interactiva](https://www.w3schools.com/sql/sql_ref_mysql.asp)
+    * [MySQL – Funciones matemáticas - Con Clase](http://mysql.conclase.net/curso/?cap=011#FUN_MATEMATICAS)
+    * [MySQL – Funciones en MySQL – Web W3SCHOOLS Interactiva](https://www.w3schools.com/sql/sql_ref_mysql.asp)
+  
+### Funciones de cadenas o strings
 
-## Funciones avanzadas
+Las que más vamos a usar son: **CONCAT, UPPER, LOWER, LEFT, RIGHT, SUBSTRING, SUBSTRING_INDEX,INSTR, LENGTH, TRIM, REPEAT, REPLACE, REVERSE** y **STRCMP**.
 
-Las que más vamos a usar son: VERSION, DATABASE, CURRENT_USER, CONVERT, ISNULL, IFNULL, IF, CASE
+La siguiente tabla describe la sintaxis y qué hace cada función.
 
-### Funciones avanzadas para mostrar INFORMACIÓN
+|Función|Descripción|
+|:------|:----------|
+|**CONCAT(c1, c2, ...)**|Retorna una cadena con la concatenación de todas las cadenas que se pasan como parámetro (*c1*, *c2*, ...).|
+|**UPPER(c)**|Retorna la cadena resultatnte de pasar la cadena *c* a mayúsculas. La función UCASE es equivalente a esta.|
+|**LOWER(c)**|Retorna la cadena resultatnte de pasar la cadena *c* a minúsculas. La función LCASE es equivalente a esta.|
+|**LEFT(c, k)**|Retorna el prefijo de la cadena *c* de *k* carácteres.|
+|**RIGHT(c, k)**|Retorna el sufijo de la cadena *c* de *k* carácteres.|
+|**SUBSTRING(c, k, l)**|Retorna la subcadena *c* cuto primer carácter comienza en la posició *k* y tiene *l* carácteres. Si no se especifica el tercer parámetro se coge la subcadena que comienza en la posición *k* hasta el final.|
+|**SUBSTRING_INDEX(c, pt, k)**|Hay que distinguir 2 casos en función de si *k* es positivo o negativo. Si *k* es positivo entonces se busca, comenzando por la izquierda, la k-ésima aparición  del patrón en la cadena *c* y retorna la cadena que está a su izquierda. Si *k* es negativo entonces se busca, comenzando por la derecha, la $ \left \| k \right \| $-ésima aparición  del patrón en la cadena *c* y retorna la cadena que está a su derecha.|
+|**INSTR(c, c2)**|Comprueba si la cadena *c2* está contenida en *c*. Si está contenida retorna la posición de donde empieza la cadena *c2* en *c*, si no retorna 0.|
+|**LENTGTH(c)**|Retorna la cantidad de carácteres de la cadena *c*.|
+|**TRIM(c)**|Retorna la cadena una cadena como *c* pero donde se han eliminado los espacios en blanco (espacio, tabulador o salta de línea) del principio y del final de *c*.|
+|**REPEAT(c, k)**|Retorna la cadena resultante de concatenar *c* consigo mismo *k* veces.|
+|**REPLACE(c, cb, cr)**|Retorna la cadena resultante de sustituir todas las apariciones de la cadena *cb* en *c* por la cadena *cr*.|
+|**REVERSE(c)**|Invierte una cadena de carácteres. Retorna una cadena igual a la cadena *c* pero empezando por el último carácter y acabando por el primero.|
+|**STRCMP(c1, c2)**|Retorna -1, 0 ó 1 si la cadena *c1* es menor, igual o mayor que *c2* sgún el orden llexicográfico.|
 
-Ejemplos de funciones predefinidas avanzadas
+> :pushpin: **Orden lexicográfico**
+> Para comparar 2 cadenas de carácteres se comienza por el primer de carácter de ambas cadenas y mientras los carácteres sean iguales se pasa al siguiente hasta que los carácteres de la misma posición sean diferentes o se llegue al final de una de las cadenas. Si hemos encontrado 2 carácteres diferentes entonces la cadena mayor es la correspondiente a la que tenga un carácter con mayor valor ascii (o unicode). Si se ha llegado al final de una de las cadenas entonces la mayor es la otra. Si ambas cadenas son de la misma longitud y tienen los mismos carácteres entoces son iguales.
 
-```sql
-/* Mostrar la versión de MySQL */
-SELECT VERSION();
-+-----------------+
-| VERSION()
-|
-+-----------------+
-| 10.1.25-MariaDB |
-+-----------------+
-/* Mostrar la base de datos seleccionada por defecto */
-USE ud6ejer;
-SELECT DATABASE();
-+------------+
-| DATABASE() |
-+------------+
-| ud6ejer
-|
-+------------+
-/* Mostrar el usuario con el que estamos conectados */
-SELECT CURRENT_USER();
-+----------------+
-| CURRENT_USER() |
-+----------------+
-| root@localhost |
-+----------------+
-```
+A continuación vamos a ver algunos ejemplos de utilización de estas funciones.
 
-### Funciones avanzadas para CONVERSIÓN DE VALORES
+!!! Example Ejemplo 1
+    **Concatenar varias cadenas**
 
-Ejemplos de funciones predefinidas avanzadas
+    ```sql
+    SELECT CONCAT('Juan ','López ','García') AS NOMBRE;
+    /*
+    +--------------------+
+     | NOMBRE            |
+     +-------------------+
+     | Juan López García |
+     +-------------------+
+    */
+    ```
 
-```sql
-/* Convertir cadenas a números */
-SELECT CONVERT('45.7', DECIMAL(10,2));
-+--------------------------------+
-| CONVERT('45.7', DECIMAL(10,2)) |
-+--------------------------------+
-|
-45.70 |
-+--------------------------------+
-/* Convertir números a cadenas*/
-SELECT CONVERT(45.7, CHAR);
-+---------------------+
-| CONVERT(45.7, CHAR) |
-+---------------------+
-| 45.7
-|
-+---------------------+
-/* Comprobar si un valor es NULL */
-SET @num = 10 / 0;
-SELECT @num;
-+------+
-| @num |
-+------+
-| NULL |
-+------+
-SELECT ISNULL(@num);
-+--------------+
-| ISNULL(@num) |
-+--------------+
-|
-1 |
-+--------------+
-SET @num = 10 / 2;
-SELECT ISNULL(@num);
-+--------------+
-| ISNULL(@num) |
-+--------------+
-|
-0 |
-+--------------+
-/* Decidir qué valor mostrar si el resultado es NULL */
-SET @num = 10 / 0;
-SELECT IFNULL(@num, 'Error en división') AS RESULTADO;
-+-------------------+
-| RESULTADO
-|
-+-------------------+
-| Error en división |
-+-------------------+
-SET @num = 10 / 2;
-SELECT IFNULL(@num, 'Error en división') AS RESULTADO;
-+-------------+
-| RESULTADO
-|
-+-------------+
-| 5.000000000 |
-+-------------+
-```
+!!! Example Ejemplo 2
+    **Pasar a mayúsculas/minúsculas**
 
-### Funciones avanzadas para PROGRAMACIÓN
+    ```sql
+    -- Pasar a mayúsculas.
+    SELECT UPPER('Soy alumno de FP') AS MENSAJE;
+    /*
+    +------------------+
+    | MENSAJE          |
+    +------------------+
+    | SOY ALUMNO DE FP |
+    +------------------+
+    */
 
-Ejemplos de funciones predefinidas avanzadas
+    -- Pasar a minúsculas.
+    SELECT LOWER('Soy alumno de FP') AS MENSAJE;
+    /*
+    +------------------+
+    | MENSAJE          |
+    +------------------+
+    | soy alumno de fp |
+    +------------------+
+    */
+    ```
 
-```sql
-/* Mostrar valores teniendo en cuenta una condición */
-SET @num1 = 25;
-SET @num2 = 30;
-SELECT IF(@num1>@num2, @num1, @num2) AS MAYOR;
-+-------+
-| MAYOR |
-+-------+
-|
-30 |
-+-------+
-/* Mostrar valores teniendo en cuenta varias condiciones */
-SET @temperatura = 30;
-SELECT CASE
-WHEN (@temperatura >= 28) THEN 'Calor'
-WHEN (@temperatura >= 10) AND (@temperatura <28) THEN 'Templado'
-WHEN (@temperatura >= 0) AND (@temperatura <10) THEN 'Frío'
-ELSE 'Bajo cero'
-END AS TEMPERATURA;
-+-------------+
-| TEMPERATURA |
-+-------------+
-| Calor
-|
-+-------------+
-SET @temperatura = 15;
-SELECT CASE
-WHEN (@temperatura >= 28) THEN 'Calor'
-WHEN (@temperatura >= 10) AND (@temperatura <28) THEN 'Templado'
-WHEN (@temperatura >= 0) AND (@temperatura <10) THEN 'Frío'
-ELSE 'Bajo cero'
-END AS TEMPERATURA;
-+-------------+
-| TEMPERATURA |
-+-------------+
-| Templado
-|
-+-------------+
-```
+!!! Example Ejemplo 3
+    **Prefijos y sufijos**
+    El primer ejemplo obtiene el nombre de la persona y el segundo su segundo apellido.
 
-<div class="caso_estudio">
+    ```sql
+    -- Cuatro primeros carécteres.
+    SELECT LEFT('Juan López García', 4) AS NOMBRE;
+    /*
+    +--------+
+    | NOMBRE |
+    +--------+
+    | Juan   |
+    +--------+
+    */
+    
+    -- Seis últimos carécteres.
+    SELECT RIGHT('Juan López García', 6) AS APELLIDO2;
+    /*
+    +-----------+
+    | APELLIDO2 |
+    +-----------+
+    | García    |
+    +-----------+
+    */
+    ```
 
-:bulb: **Caso de estudio:**
+!!! Example Ejemplo 4
+    **Subcadenas con `SUBSTRING`**
+    El primer ejemplo obtiene el primer apellido de la persona y el segundo sus apellidos.
 
-```sql
-SELECT SUBSTRING_INDEX('www.iesdoctorbalmis.com','.',2) AS DOMINIO;
-```
+    ```sql
+    /* Obtener subcadena de 5 carácteres que comienza en la posición 6 */
+    SELECT SUBSTRING('Juan López García', 6, 5) AS APELLIDO1;
+    /*
+    +-----------+
+    | APELLIDOS |
+    +-----------+
+    | López     |
+    +-----------+
+    */
+    
+    /* Obtener subcadena que comienza en la posición 6 hasta el final */
+    SELECT SUBSTRING('Juan López García', 6) AS APELLIDOS;
+    /*
+    +-----------------+
+    | APELLIDO1       |
+    +-----------------+
+    | López García    |
+    +-----------------+
+    */
+    ```
 
-```txt
-+---------------------+
-| DOMINIO             |
-+---------------------+
-| www.iesdoctorbalmis |
-+---------------------+
-```
+!!! Example Ejemplo 5
+    **Subcadenas con `SUBSTRING_INDEX`**
+    El primer ejemplo obtiene el nombre de la máquina a partir del nombre FQDN.
+    El segundo obtiene el nombre del dominio a partir del nombre FQDN.
 
-</div> <!-- fin caso de estudio -->
+    ```sql
+    SELECT SUBSTRING_INDEX('www.iesdoctorbalmis.com', '.' , 1) AS MAQUINA;
+    /*
+    +----------+
+    | MAQUINA  |
+    +----------+
+    | www      |
+    +----------+
+    */
+    
+    SELECT SUBSTRING_INDEX('www.iesdoctorbalmis.com', '.' , -2) AS DOMINIO;
+    /*
+    +----------------------+
+    | DOMINIO              |
+    +----------------------+
+    | iesdoctorbalmis.com  |
+    +----------------------+
+    */
+    ```
+!!! Example Ejemplo 6
+    **Posición de una cadena dentro de otra**
 
-<div class="ejercicio">
+    ```sql
+    SELECT INSTR('Juan López García','López') AS POSICION;
+    /*
+    +----------+
+    | POSICION |
+    +----------+
+    |        6 |
+    +----------+
+    */
+    
+    SELECT INSTR('Juan López García','Martínez') AS POSICION;
+    /*
+    +----------+
+    | POSICION |
+    +----------+
+    |        0 |
+    +----------+
+    */
+    ```
 
-### :white_check_mark: Ejercicio
+!!! Example Ejemplo 7
+    **Número de carácteres de una cadena**
 
-</div> <!-- fin ejercicio -->
+    ```sql
+    /* Obtener la longitud de una cadena */
+    SELECT LENGTH('Juan López García') AS LONGITUD;
+    /*
+    +----------+
+    | LONGITUD |
+    +----------+
+    |       17 |
+    +----------+
+    */
+    ```
 
-# Parámetros de Entrada-Salida
+!!! Example Ejemplo 8
+    **Eliminar espacios en blanco por delante y por detrás**
 
-## Parámetros de funciones y procedimientos
+    ```sql
+    SELECT '    Juan López García      ' AS SUCIO, TRIM('    Juan López García      ') AS LIMPIO;
+    /*
+    +----------------------------+-------------------+
+    | SUCIO                      | LIMPIO            |
+    +----------------------------+-------------------+
+    |     Juan López García      | Juan López García |
+    +----------------------------+-------------------+
+    */
+    ```
+
+!!! Example Ejemplo 9
+    **Concatenar cadena consigo mismo**
+
+    ```sql
+    SELECT REPEAT('abc',5);
+    /*
+    +-----------------+
+    | REPEAT('abc',5) |
+    +-----------------+
+    | abcabcabcabcabc |
+    +-----------------+
+    */
+    ```
+
+!!! Example Ejemplo 10
+    **Reemplazo de subcadenas**
+
+    ```sql
+    SELECT REPLACE('SQL Tutorial', 'SQL', 'HTML') AS REEMPLAZADO;
+    /*
+    +---------------+
+    | REEMPLAZADO   |
+    +---------------+
+    | HTML Tutorial |
+    +---------------+
+    */
+    
+    SELECT REPLACE('Subcadena: una cadena dentro de otra Cadena', 'cadena', 'CADENA') AS REEMPLAZADO;
+    /*
+    +---------------------------------------------+
+    | REEMPLAZADO                                 |
+    +---------------------------------------------+
+    | SubCADENA: una CADENA dentro de otra Cadena |
+    +---------------------------------------------+
+    */
+    ```
+
+!!! Example Ejemplo 11
+    **Invertir cadenas**
+
+    ```sql
+    SELECT REVERSE('SQL Tutorial') AS INVERSA;
+    /*
+    +--------------+
+    | INVERSA      |
+    +--------------+
+    | lairotuT LQS |
+    +--------------+
+    */
+    ```
+
+!!! Example Ejemplo 12
+    **Comparar cadenas**
+    De los diferentes casos del ejemplo se deduce que no se hace distinción entre minúsculas y mayúsculas ni entre letras con tilde y sin tilde.
+
+    ```sql
+    -- Perro > Gato
+    SELECT STRCMP('Perro','Gato') AS COMPARACION;
+    /*
+    +-------------+
+    | COMPARACION |
+    +-------------+
+    |           1 |
+    +-------------+
+    */
+    
+    -- Gato < Loro
+    SELECT STRCMP('Gato','Loro') AS COMPARACION;
+    /*
+    +-------------+
+    | COMPARACION |
+    +-------------+
+    |          -1 |
+    +-------------+
+    */
+    
+    -- Perro = Perro
+    SELECT STRCMP('Perro','Perro') AS COMPARACION;
+    /*
+    +-------------+
+    | COMPARACION |
+    +-------------+
+    |           0 |
+    +-------------+
+    */
+    
+    -- perro = Perro
+    SELECT STRCMP('perro','Perro') AS COMPARACION;
+    /*
+    +-------------+
+    | COMPARACION |
+    +-------------+
+    |           0 |
+    +-------------+
+    */
+    
+    -- Gato Montés > Gato
+    SELECT STRCMP('Gato Montés','Gato') AS COMPARACION;
+    /*
+    +-------------+
+    | COMPARACION |
+    +-------------+
+    |           1 |
+    +-------------+
+    */
+    
+    -- Águila > Aguila
+    SELECT STRCMP('Águila','Aguila') AS COMPARACION;
+    /*
+    +-------------+
+    | COMPARACION |
+    +-------------+
+    |           0 |
+    +-------------+
+    */
+    ```
+Para mayor información podéis consultar la información de las referencias.
+
+!!! Note Referencias
+
+    * [MySQL – Funciones de cadenas de carácteres - Con Clase](http://mysql.conclase.net/curso/?cap=011#FUN_CADENAS)
+    * [MySQL – Funciones en MySQL – Web W3SCHOOLS Interactiva](https://www.w3schools.com/sql/sql_ref_mysql.asp)
+
+### Funciones de fechas
+
+Las que más vamos a usar son: **CURDATE, CURTIME, NOW, ADDDATE, ADDTIME, DATEDIFF, TIMEDIFF, DAY, MONTH, YEAR, DAYOFWEEK, DAYNAME, HOUR, MINUTE, SECOND, SEC_TO_TIME, TIME_TO_SEC, MAKETIME, STR_TO_DATE** y **DATE_FORMAT**.
+
+La siguiente tabla describe la sintaxis y qué hace cada función.
+
+|Función|Descripción|
+|:------|:----------|
+|**CURDATE()**|Retorna la fecha actual.|
+|**CURTIME()**|Retorna la hora actual.|
+|**NOW()**|Retorna la fecha y la hora actual.|
+|**ADDDATE(f, d)**|Dada una fecha *f* retorna la fecha resultante de sumarle *d* días (positivos o negativos).|
+|**ADDTIME(t, s)**|Retorna el tiempo resultatnte de sumarle al tiempo *t* *s* segundos.|
+|**DATEDIFF(f1, f2)**|Retorna los días que hay entre las fechas *f1* y *f2* (*f1* - *f2*).|
+|**TIMEDIFF(t1, t2)**|Retorna los segundos entre los instantes de tiempo *t1* y *t2*.|
+|**DAY(f)**|Retorna el día del més correspondiente a la fecha *f*.|
+|**MONTH(f)**|Retorna el número de més correspondiente a la fecha *f*.|
+|**YEAR(f)**|Retorna el año correspondiente a la fecha *f*.|
+|**DAYOFWEEK(f)**|Retorna el número de día de la semana correspondiente a la fecha *f* (el día 1 es el domingo).|
+|**DAYNAME(f)**|Retorna el día de la semana correspondiente a la fecha *f* (en inglés).|
+|**HOUR(t)**|Retorna la hora correspondiente al instante de tiempo *t*.|
+|**MINUTE(t)**|Retorna los minutos correspondientes al instante de tiempo *t*.|
+|**SECOND(t)**|Retorna los segundos correspondientes al instante de tiempo *t*.|
+|**SEC_TO_TIME(s)**|Retorna el instante de tiempo correpondiente a los segundos *s*.|
+|**TIME_TO_SEC(t)**|Retorna los segundos correpondientes al instante de tiempo *t*.|
+|**MAKETIME(h, m, s)**|Retorna un instante de tiempo a partir de las horas *h*, minutos *m* y segundos *s*.|
+|**STR_TO_DATE(cf, ff)**|Retorna una fecha a partir de la cadena *cf* y una cadena de formato de fecha *ff*.|
+|**DATE_FORMAT(f, ff)**|Retorna una cadena que representa la fecha *f* (o parte de ella) según las indicaciones del patrón de fecha *ff*.|
+
+!!! Example Ejemplo 1
+    **Fechas y horas actuales**
+  
+    ```sql
+    -- Obtener la FECHA actual
+    SELECT CURDATE();
+    -- Obtener la HORA actual
+    SELECT CURTIME();
+    -- Obtener la FECHA Y HORA actual
+    SELECT NOW();
+    ```
+
+!!! Example Ejemplo 2
+    **Añadir días a fechas y segundos a tiempo**
+    Podemos ver como se pueden obtener fechas posteriores o anteriores. La función tiene en cuenta los días de cada més y también si el año es bisiesto o no.
+
+    ```sql
+    /* Añadir días a un FECHA (DATE O DATETIME) */
+    -- Salida: 2018-04-06
+    SELECT ADDDATE('2018-03-25', 10);
+    -- Salida: 2020-02-29
+    SELECT ADDDATE('2020-03-25', -25);
+    -- Salida: 2021-02-28
+    SELECT ADDDATE('2021-03-25', -25);
+    
+    /* Añadir segundos a un TIME o DATETIME */
+    -- Salida: 09:35:06
+    SELECT ADDTIME('09:34:21', 45);
+    -- Salida: 09:33:36
+    SELECT ADDTIME('09:34:21', -45);
+    
+    /* Añadir segundos a un DATETIME */
+    -- Salida: 2018-03-25 09:35:06
+    SELECT ADDTIME('2018-03-25 09:34:21', 45);
+    -- Salida: 2019-05-16 01:34:21
+    SELECT ADDTIME('2018-03-25 09:34:21', 100000000);
+    -- Salida: 2017-02-01 17:34:21
+    SELECT ADDTIME('2018-03-25 09:34:21', -100000000);
+    ```
+
+!!! Example Ejemplo 3
+    **Diferencia de días entre fechas y de segundos entre tiempos**
+    Si la primera fecha es anterior a la segunda el resultado es negativo. Análogamente con los tiempos.
+
+    ```sql
+    /* Diferencia de días entre dos FECHAS */
+    -- Salida: 43
+    SELECT DATEDIFF('2018-03-25', '2018-02-10');
+    -- Salida: -43
+    SELECT DATEDIFF('2018-02-10', '2018-03-25');
+    
+    /* Diferencia de segundos entre dos TIEMPOS en formato hh:mm:ss */
+    -- Salida: 00:29:30
+    SELECT TIMEDIFF('20:00:00','19:30:30');
+    -- Salida: -00:29:30
+    SELECT TIMEDIFF('19:30:30', '20:00:00');
+    ```
+
+!!! Example Ejemplo 4
+    **Datos relacionados con las fechas**
+
+    ```sql
+    /* Obtener el valor del DÍA de una FECHA */
+    -- Salida: 25
+    SELECT DAY('2018-03-25');
+    
+    /* Obtener el valor del MES de una FECHA */
+    -- Salida: 3
+    SELECT MONTH('2018-03-25');
+    
+    /* Obtener el valor del AÑO de una FECHA */
+    -- Salida: 2018
+    SELECT YEAR('2018-03-25');
+    
+    /* Obtener el número de día de la semana de una FECHA */
+    -- Salida: 1 (1 <--> Domingo)
+    SELECT DAYOFWEEK('2018-03-25 10:36:15');
+    
+    /* Obtener nombre del día de la semana de una FECHA */
+    -- Salida: Sunday
+    SELECT DAYNAME('2018-03-25 10:36:15');
+    ```
+
+!!! Example Ejemplo 5
+    **Datos relacionados con los tiempos**
+
+    ```sql
+    /* Obtener el valor de HORA de un TIME o DATETIME */
+    -- Salida: 10
+    SELECT HOUR('10:36:15');
+    -- Salida: 10
+    SELECT HOUR('2018-03-25 10:36:15');
+    
+    /* Obtener el valor de minutos de un TIME o DATETIME */
+    -- Salida: 36
+    SELECT MINUTE('10:36:15');
+    /* Obtener el valor de segundos de un TIME o DATETIME */
+    -- Salida: 15
+    SELECT SECOND('10:36:15');
+    ```
+
+!!! Example Ejemplo 6
+    **Conversión segundos/tiempo y tiempo/segundos**
+
+    ```sql
+    /* Obtener el valor de formato hh:mm:ss a partir de los segundos */
+    -- Salida: 01:01:40
+    SELECT SEC_TO_TIME(3700);
+    
+    /* Obtener los segundos a partir del tiempo (hh:mm:ss) */
+    -- Salida: 3700
+    SELECT TIME_TO_SEC('01:01:40');
+    ```
+
+!!! Example Ejemplo 7
+    **Crear tiempo a partir de horas, minutos y segundos**
+    Los segundos y minutos tienen que estar entre 0 y 59. De no ser así retorna **`NULL`**.
+
+    ```sql
+    /* Obtener tiempo en formato hh:mm:ss a partir de las horas, minutos y segundos */
+    -- Salida: 20:30:52
+    SELECT MAKETIME(20, 30, 52);
+    -- Salida: NULL
+    SELECT MAKETIME(20, 62, 52);
+    ```
+
+!!! Example Ejemplo 7
+    **Trabajando con formatos de fechas**
+    El formato de fecha sirve para indicarle a MySQL como debe interpretar los elementos de una fecha para crear una cadena que representa una fecha o para crear una fecha a partir de una cadena.
+    Con **`%<letra>`** indicamos una propiedad de la fecha. Por ejemplo **`%d`** es el día del mes, **%`m`** el número de mes y **`%Y`** el año con 4 dígitos (**`%y`** serían las 2 últimas cifras del año). Para mayor información mirar las referéncias.
+
+    ```sql
+    /* Obtener una fecha a partir de una cadena y un formato de fecha */
+    -- Salida: 2018-02-12
+    SELECT STR_TO_DATE('12/02/2018','%d/%m/%Y');
+    
+    /* Obtener una representación de una fecha con el formato utilizado en España */
+    -- Salida: 15/03/2018
+    SELECT DATE_FORMAT('2018-03-15','%d/%m/%Y');
+    ```
+
+Para profundizar en las funciones de tratamiento de fechas consultar:
+
+!!! Note Referencias
+
+    [MySQL – Funciones de fechas - ConClase](http://mysql.conclase.net/curso/?cap=011a#FUN_FECHA)
+    [MySQL – Funciones en MySQL – Web W3SCHOOLS Interactiva](https://www.w3schools.com/sql/sql_ref_mysql.asp)
+
+### Funciones avanzadas
+
+Las que más vamos a usar son: **VERSION, DATABASE, CURRENT_USER, CONVERT, ISNULL, IFNULL, IF** y **CASE**.
+
+#### Funciones avanzadas para mostrar INFORMACIÓN
+
+|Función|Descripción|
+|:------|:----------|
+|**VERSION()**|Retorna la versión de MySQL.|
+|**DATABASE()**|Retorna la base de datos seleccionada.|
+|**CURRENT_USER()**|Retorna el usuario con el que estoy conectado a la base de datos.|
+
+!!! Example Ejemplo 1
+    **Ejemplos de funciones predefinidas avanzadas**
+
+    ```sql
+    /* Mostrar la versión de MySQL */
+    SELECT VERSION();
+    /*
+    +-----------------+
+    | VERSION()       |
+    +-----------------+
+    | 10.4.32-MariaDB |
+    +-----------------+
+    */
+
+    /* Mostrar la base de datos seleccionada por defecto */
+    USE world;
+    SELECT DATABASE();
+    /*
+    +------------+
+    | DATABASE() |
+    +------------+
+    | world      |
+    +------------+
+    */
+
+    /* Mostrar el usuario con el que estamos conectados */
+    SELECT CURRENT_USER();
+    /*
+    +----------------+
+    | CURRENT_USER() |
+    +----------------+
+    | root@localhost |
+    +----------------+
+    */
+    ```
+
+#### Funciones avanzadas para CONVERSIÓN DE VALORES
+
+|Función|Descripción|
+|:------|:----------|
+|**CONVERT(parm, tp)**|Retorna el resultado de la conversión del valor *parm* al tipo especificado en *tp*.|
+|**ISNULL(var)**|Retorna 1 si la variable *var* tiene un valor asignado y 0 si no tiene ninguno.|
+|**IFNULL(parm, msg)**|Si *parm* es **`NULL`** retorna msg si no retorna *parm*|
+
+!!! Example Ejemplo 2
+    **Ejemplos de funciones predefinidas avanzadas**
+
+    ```sql
+    /* Convertir cadenas de carácteres a números */
+    SELECT CONVERT('45.7', DECIMAL(10,2));
+    /*
+    +--------------------------------+
+    | CONVERT('45.7', DECIMAL(10,2)) |
+    +--------------------------------+
+    |                          45.70 |
+    +--------------------------------+
+    */
+    
+    /* Convertir números a cadenas*/
+    SELECT CONVERT(45.7, CHAR);
+    /*
+    +---------------------+
+    | CONVERT(45.7, CHAR) |
+    +---------------------+
+    |                45.7 |
+    +---------------------+
+    */
+    
+    /* Comprobar si un valor es NULL */
+    SET @num = 10 / 0;
+    SELECT @num;
+    /*
+    +------+
+    | @num |
+    +------+
+    | NULL |
+    +------+
+    */
+    
+    SELECT ISNULL(@num);
+    /*
+    +--------------+
+    | ISNULL(@num) |
+    +--------------+
+    |            1 |
+    +--------------+
+    */
+    
+    SET @num = 10 / 2;
+    SELECT ISNULL(@num);
+    /*
+    +--------------+
+    | ISNULL(@num) |
+    +--------------+
+    |            0 |
+    +--------------+
+    */
+    
+    /* Decidir qué valor mostrar si el resultado es NULL */
+    SET @num = 10 / 0;
+    SELECT IFNULL(@num, 'Error en división') AS RESULTADO;
+    /*
+    +-------------------+
+    | RESULTADO         |
+    +-------------------+
+    | Error en división |
+    +-------------------+
+    */
+    
+    SET @num = 10 / 2;
+    SELECT IFNULL(@num, 'Error en división') AS RESULTADO;
+    /*
+    +-------------+
+    | RESULTADO   |
+    +-------------+
+    | 5.000000000 |
+    +-------------+
+    */
+    ```
+
+#### Funciones avanzadas para PROGRAMACIÓN
+
+La función **IF(condicion, p1, p2)**  retorna p1 si se cumple la condición y p2 si no se cumple.
+
+El constructo:
+**CASE
+   WHEN condicion1 THEN c1
+   . . .
+   WHEN condicionN THEN cN
+   ELSE cE
+END**
+retorna *c1* si se cumple *condicion1*, *c2* si se cumple *condicion2*, . . . , *cN* si se cumple *condicionN* y *cE* si no se cumple ninguna condición de las cláusulas **`WHEN`**.
+
+!!! Example Ejemplo 3
+    **Ejemplos de funciones predefinidas avanzadas**
+
+    ```sql
+    /* Mostrar valores teniendo en cuenta una condición */
+    SET @num1 = 25;
+    SET @num2 = 30;
+    SELECT IF(@num1>@num2, @num1, @num2) AS MAYOR;
+    /*
+    +-------+
+    | MAYOR |
+    +-------+
+    |    30 |
+    +-------+
+    */
+    
+    /* Mostrar valores teniendo en cuenta varias condiciones */
+    SET @temperatura = 30;
+    SELECT CASE
+    WHEN (@temperatura >= 28) THEN 'Calor'
+    WHEN (@temperatura >= 10) AND (@temperatura <28) THEN 'Templado'
+    WHEN (@temperatura >= 0) AND (@temperatura <10) THEN 'Frío'
+    ELSE 'Bajo cero'
+    END AS TEMPERATURA;
+    /*
+    +-------------+
+    | TEMPERATURA |
+    +-------------+
+    | Calor       |
+    +-------------+
+    */
+    
+    SET @temperatura = 15;
+    SELECT CASE
+    WHEN (@temperatura >= 28) THEN 'Calor'
+    WHEN (@temperatura >= 10) AND (@temperatura <28) THEN 'Templado'
+    WHEN (@temperatura >= 0) AND (@temperatura <10) THEN 'Frío'
+    ELSE 'Bajo cero'
+    END AS TEMPERATURA;
+    /*
+    +-------------+
+    | TEMPERATURA |
+    +-------------+
+    | Templado    |
+    +-------------+
+    */
+    ```
+
+!!! Note Referencias
+
+    [MySQL – Funciones en MySQL – Web W3SCHOOLS Interactiva](https://www.w3schools.com/sql/sql_ref_mysql.asp)
+
+## Parámetros de Entrada-Salida
+
+### Parámetros de funciones y procedimientos
 
 Los parámetros son valores o variables que se pueden pasar a los procedimientos o funciones para que los utilicen en su proceso.
 
@@ -1387,7 +1707,7 @@ mysql> SELECT ROUND(@num, 0);
 +----------------+
 ```
 
-## Tipos de parámetros
+#### Tipos de parámetros
 
 Como hemos visto en el último ejemplo de comparación de cadenas del apartado 3, los procedimientos pueden recibir parámetros y ser utilizados en su propio código como variables internas.
 
@@ -1567,7 +1887,7 @@ valor de la variable en el interior del procedimiento, resulta que la variable t
     La ejecución del código muestra que **@num** vale 10 después de la llamada al procedimiento.
     Por lo tanto la modificación de la variable **@num** que se ha producido dentro del procedimiento ha persistido cuando este ha acabado.
 
-# Funciones definidas por el usuario
+## Funciones definidas por el usuario
 
 <div class="caso_estudio">
 
@@ -1694,9 +2014,9 @@ Podemos observar que la variable se ha creado y es global porque mantiene su val
     SELECT tomorrow();
     ```
 
-# Procedimientos y funciones con acceso a datos
+## Procedimientos y funciones con acceso a datos
 
-## Acceso a datos
+### Acceso a datos
 
 Los procedimientos y funciones suelen acceder a las bases de datos para procesar información. En muchas ocasiones nos permiten generar campos calculados.
 
@@ -1742,7 +2062,7 @@ También hay casos en que las funciones nos permiten realizar procesos de selecc
     WHERE LEFT(code, 2) = code2;
     ```
 
-## Acceso a datos desde funciones definidas por el usuario
+### Acceso a datos desde funciones definidas por el usuario
 
 Nuestro objetivo principal será desarrollar funciones que procesen datos contenidos en los campos de las tablas y devuelvan valores.
 
@@ -1768,11 +2088,13 @@ Veamos algunos ejemplos también con la BD *World*.
     
     /* Llamar a la función: retorna la cantida de ciudades que hau en Argentiba. */
     SELECT CUENTACIUDADES('ARG');
+    /*
     +-----------------------+
     | CUENTACIUDADES('ARG') |
     +-----------------------+
     |                    57 |
     +-----------------------+
+    */
 
     /* Llamar a la función: retorna la cantidad de ciudades de cada país */
     SELECT code, name, CUENTACIUDADES(code) AS numciudades FROM country;
@@ -1800,17 +2122,19 @@ Veamos algunos ejemplos también con la BD *World*.
     
     /* Llamar a la función: retorna Albacete por que 390 es el código de Albacete */
     SELECT NOMBRECIUDAD(390);
+    /*
     +-------------------+
     | NOMBRECIUDAD(390) |
     +-------------------+
     | Albacete          |
     +-------------------+
+    */
 
     /* Llamar a la función: retorna el código y el nombre de la capital de cada país */
     SELECT code, name, NOMBRECIUDAD(capital) AS NombreCapital FROM country;
     ```
 
-## Control de errores
+### Control de errores
 
 En muchos casos las funciones que definimos generan errores, como el que se produce al insertar un registro por incumplir restricciones.
 
@@ -1838,11 +2162,13 @@ Para ver un ejemplo crearemos una función para insertar ciudades en la tabla **
     
     /* Llamar a la función */
     SELECT INSERTACIUDAD('Elche','ESP','Valencia',227659);
+    /*
     +------------------------------------------------+
     | INSERTACIUDAD('Elche','ESP','Valencia',227659) |
     +------------------------------------------------+
     |                                           4080 |
     +------------------------------------------------+
+    */
     ```
 
 La ejecución del ejemplo anterior inserta correctamente la ciudad de *Elche*. ¿Pero qué pasaría si indicamos un código de país que no existe?
@@ -1897,11 +2223,13 @@ Cuando se produce un error en una instrucción SQL, obtendremos un error o warni
     ERROR 1051 (42S02): Tabla 'world.mitabla' desconocida
     
     SHOW WARNINGS;
+    /*
     +-------+------+-----------------------------------+
     | Level | Code | Message                           |
     +-------+------+-----------------------------------+
     | Error | 1051 | Tabla 'world.mitabla' desconocida |
     +-------+------+-----------------------------------+
+    */
     ```
 Si deseamos almacenar el código y el mensaje en variables propias usaremos la instrucción **`GET DIAGNOSTICS`**.
 
@@ -1916,11 +2244,13 @@ Si deseamos almacenar el código y el mensaje en variables propias usaremos la i
     GET DIAGNOSTICS CONDITION 1 @errcode = RETURNED_SQLSTATE, @errmsg = MESSAGE_TEXT;
     
     SELECT @errcode, @errmsg;
+    /*
     +----------+-----------------------------------+
     | @errcode | @errmsg                           |
     +----------+-----------------------------------+
     | 42S02    | Tabla 'world.mitabla' desconocida |
     +----------+-----------------------------------+
+    */
     ```
 Vamos a modificar la función **INSERTACIUDAD** para que controle errores de inserción. La función nos devuelve el ID de la ciudad insertada, pero en caso de error deberá devolver el valor -1.
 
@@ -2003,7 +2333,7 @@ Si deseamos realizar un **`PROCEDURE`** donde recojamos el error y mensaje que s
 
 Realizar el proyecto **bancaria 1 (repaso de UD3 y UD5) y bancaria 2 (con procedimientos)**.
 
-# Disparadores
+## Disparadores
 
 <div class="caso_estudio">
 
@@ -2035,11 +2365,11 @@ Los valores recibidos en las instrucciones de los disparadores son **`NEW.nombre
 Para los siguientes ejercicios, crearemos una BD denominada ***bancaria3*** con las tablas **clientes** y **movimientos** descritas anteriormente y añadiremos una tabla llamada **logdisparadores** para insertar los valores de los registros procesados con los siguientes campos:
 
 * **`id_reg`**: número entero (`INT`), sin signo (`UNSIGNED`) y rellenado aceros por la izquierda, clave primaria y valor automático (`AUTO_INCREMENT`)
-* **`tabla`**: cadena de 50 caracteres de longitud máxima (`VARCHAR(50)`)
-* **`evento`**: cadena de 20 caracteres de longitud máxima (`VARCHAR(20)`)
-* **`tiempo`**: cadena de 20 caracteres de longitud máxima (`VARCHAR(20)`)
+* **`tabla`**: cadena de 50 carácteres de longitud máxima (`VARCHAR(50)`)
+* **`evento`**: cadena de 20 carácteres de longitud máxima (`VARCHAR(20)`)
+* **`tiempo`**: cadena de 20 carácteres de longitud máxima (`VARCHAR(20)`)
 * **`fechayhora`**: campo que almacene la fecha y hora de ejecución (`DATETIME`)
-* **`valores`**: cadena de 250 caracteres de longitud máxima (`VARCHAR(250)`) para almacenar todos los valores del registro de clientes eliminado. Utilizaremos el carácter **|** entre los diferentes campos como separador.
+* **`valores`**: cadena de 250 carácteres de longitud máxima (`VARCHAR(250)`) para almacenar todos los valores del registro de clientes eliminado. Utilizaremos el carácter **|** entre los diferentes campos como separador.
 
 ***Creación de la Base de Datos y Tablas***
 
@@ -2077,7 +2407,8 @@ CREATE TABLE logdisparadores(
 
 </div> <!-- fin caso de estudio -->
 
-***Triggers que realizan acciones derivadas del evento***
+### Triggers que realizan acciones derivadas del evento
+
 En los 3 ejemplos siguientes vamos a utilizar la tabla **logdisparadores** como un registro de contabilidad (log) de las operaciones de actualización realizadas sobre la tabla **clientes**.
 
 !!! Example Ejemplo 1
@@ -2185,7 +2516,7 @@ En los 3 ejemplos siguientes vamos a utilizar la tabla **logdisparadores** como 
 
 En estos tres ejemplos el **trigger** se ejecuta después (**`AFTER`**) de la instrucción que lo desencadena. Esto es lógico puesto que sólo tiene que registrar la operación en la tabla de log si no ha habido ningún error.
 
-***Triggers que modifican los valores recibidos y los graba correctamente***
+### Triggers que modifican los valores recibidos y los graba correctamente
 
 !!!Example Ejemplo 4
     **Triggers**
@@ -2218,7 +2549,7 @@ En estos tres ejemplos el **trigger** se ejecuta después (**`AFTER`**) de la in
     SELECT * FROM clientes;
     ```
 
-***Triggers que comprueban que los valores son válidos***
+### Triggers que comprueban que los valores son válidos
 
 !!!Example Ejemplo 5
     **Triggers**
@@ -2272,7 +2603,7 @@ Cuando se elimina un movimiento lo único que hay que hacer es actualizar el sal
 
 > :pushpin: Darse cuenta de que si el movimiento era un ingreso entonces el valor del importe es positivo y al cliente se le había ingresado que no le correspondía y por eso se lo restamos ahora. Sin embargo, si el movimiento era un cargo entonces el importe era negativo y restar un número negativo es igual que sumar su valor absoluto por lo que al cliente se le devoverá la cantidad detraída.
 
-Con esta información es bastante claro que necesitamos crear un trigger con estas características:
+Con esta información es bastante claro que necesitamos crear un trigger con estas carácterísticas:
 
 * **tiempo**: después (`AFTER`)
 * **evento**: borrar (`DELETE`)
@@ -2314,7 +2645,7 @@ SELECT 'DESPUÉS' AS RESULTADO, movimientos.* FROM movimientos WHERE dni = '2145
 **Modificar un ingreso o un cargo**
 Cuando se modifica un movimiento el saldo del cliente se actualiza sumándole la resta del nuevo importe menos el importe anterior.
 
-Con esta información es bastante claro que necesitamos crear un trigger con estas características:
+Con esta información es bastante claro que necesitamos crear un trigger con estas carácterísticas:
 
 * **tiempo**: después (`AFTER`)
 * **evento**: modificar (`UPDATE`)
@@ -2360,7 +2691,7 @@ SELECT 'DESPUÉS' AS RESULTADO, movimientos.* FROM movimientos WHERE dni = '2145
 
 </div> <!-- fin caso de estudio -->
 
-# Tablas temporales
+## Tablas temporales
 
 En MySQL podemos crear tablas temporales donde guardar los registros procesados.
 La sintaxis para crear una tabla temporal es la misma que para crear una tabla permanente, pero añadiendo **`TEMPORARY`**.
@@ -2404,7 +2735,6 @@ DROP TEMPORARY TABLE IF EXISTS nombreTabla;
 
 </div> <!-- fin caso de estudio -->
 
-
 !!!Example Ejemplo 1
     **Tablas temporales**
     Desde *Workbench*, en la BD ***World***, crear una tabla temporal denominada **continentes** con los continentes y su población.
@@ -2431,7 +2761,7 @@ DROP TEMPORARY TABLE IF EXISTS nombreTabla;
     SELECT * FROM continentes;
     ```
 
-# Cursores
+## Cursores
 
 <div class="caso_estudio">
 
