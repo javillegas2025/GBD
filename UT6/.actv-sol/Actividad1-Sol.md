@@ -79,9 +79,7 @@ WHERE peso >
 
 ```sql
 -- Máximo peso de los jugadores españoles
-SELECT MAX(peso) INTO @mxPesoSP
-FROM jugadores
-WHERE procedencia = 'Spain';
+SELECT MAX(peso) INTO @mxPesoSP FROM jugadores WHERE procedencia = 'Spain';
 
 -- Solución simple del ejercicio usando la variable anterior
 SELECT nombre, peso FROM jugadores WHERE peso > @mxPesoSP;
