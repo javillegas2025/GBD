@@ -36,7 +36,7 @@ toc:
 
 ## Scripts con variables
 
-Partiendo de las consultas con subconsultas sobre la BD nba, realizad scripts en SQL utilizando variables para almacenar el resultado de las subconsultas. Utilizaremos la base de datos de la NBA en todos los ejercicios.
+Realizad los siguientes scripts en SQL utilizando variables para almacenar el resultado de las subconsultas. Utilizaremos la base de datos de la NBA en todos los ejercicios.
 
 !!! Example Ejemplo
     Jugador (o jugadores) de mayor peso de la NBA (**`Nombre`**).
