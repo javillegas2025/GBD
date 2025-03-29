@@ -61,7 +61,8 @@ Un cliente realiza peticiones a otro programa, el servidor, quien le da respuest
 Cuando utilizamos un navegado en Internet y accedemos a un servidor mediante una dirección web, utilizamos el protocolo **HTTP** o **HTTPS** para enviar información del cliente al servidor y viceversa.
 
 Tanto cliente como servidor ejecutan código y por lo tanto, procesan las instrucciones de programas y aplicaciones, y para ello se utilizan diferentes lenguajes de programación. A continuación se muestran algunos ejemplos:
-![Imagen 6.1.1](./.img/6.1.1.png)
+
+![Imagen 6.1.1](./UT6/.img/6.1.1.png)
 
 Puedes consultar el **Tiobe Index** de los lenguajes de programación más usados en: <https://www.tiobe.com/tiobe-index/>
 
